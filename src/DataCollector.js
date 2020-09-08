@@ -58,6 +58,8 @@ module.exports = class DataCollector {
         //TODO need to make this cater for multiple report files, as we are getting an array but software report only expects one currently
         // could adopt the merging approach that codeql-action uses when doing upload-report
 
+        console.log(`Sarif Reports: ${results[0]}`);
+
         return new SoftwareReport({
           report: results[0][0],
           dependencies: results[1],
