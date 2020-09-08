@@ -16,4 +16,4 @@ jobs:
         uses: ./
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          sarifReportsDir: ./samples/java/basic
+          sarifReportDir: ./samples/java/basic
