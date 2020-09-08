@@ -1,0 +1,607 @@
+{
+  "data": {
+    "repository": {
+      "vulnerabilityAlerts": {
+        "totalCount": 16,
+        "pageInfo": {
+          "hasNextPage": false,
+          "endCursor": "Y3Vyc29yOnYyOpHOFkH69w=="
+        },
+        "nodes": [
+          {
+            "id": "MDI4OlJlcG9zaXRvcnlWdWxuZXJhYmlsaXR5QWxlcnQzNzM0MjI3NDY=",
+            "createdAt": "2020-09-05T14:05:42Z",
+            "dismisser": null,
+            "dismissedAt": null,
+            "dismissReason": null,
+            "vulnerableManifestFilename": "package-lock.json",
+            "vulnerableRequirements": "= 4.2.1",
+            "vulnerableManifestPath": "docs/package-lock.json",
+            "securityVulnerability": {
+              "package": {
+                "ecosystem": "NPM",
+                "name": "bootstrap"
+              },
+              "severity": "MODERATE",
+              "vulnerableVersionRange": ">= 4.0.0, < 4.3.1"
+            },
+            "securityAdvisory": {
+              "databaseId": 1276,
+              "id": "MDE2OlNlY3VyaXR5QWR2aXNvcnlHSFNBLXdoNzctM3g0bS00cTln",
+              "summary": "Moderate severity vulnerability that affects bootstrap and bootstrap-sass",
+              "severity": "MODERATE",
+              "description": "In Bootstrap 4 before 4.3.1 and Bootstrap 3 before 3.4.1, XSS is possible in the tooltip or popover data-template attribute. For more information, see: https://blog.getbootstrap.com/2019/02/13/bootstrap-4-3-1-and-3-4-1/",
+              "ghsaId": "GHSA-wh77-3x4m-4q9g",
+              "identifiers": [
+                {
+                  "type": "GHSA",
+                  "value": "GHSA-wh77-3x4m-4q9g"
+                },
+                {
+                  "type": "CVE",
+                  "value": "CVE-2019-8331"
+                }
+              ],
+              "permalink": "https://github.com/advisories/GHSA-wh77-3x4m-4q9g",
+              "publishedAt": "2019-02-22T20:54:27Z"
+            }
+          },
+          {
+            "id": "MDI4OlJlcG9zaXRvcnlWdWxuZXJhYmlsaXR5QWxlcnQzNzM0MjI3Njc=",
+            "createdAt": "2020-09-05T14:05:42Z",
+            "dismisser": null,
+            "dismissedAt": null,
+            "dismissReason": null,
+            "vulnerableManifestFilename": "package-lock.json",
+            "vulnerableRequirements": "= 0.17.1",
+            "vulnerableManifestPath": "docs/package-lock.json",
+            "securityVulnerability": {
+              "package": {
+                "ecosystem": "NPM",
+                "name": "axios"
+              },
+              "severity": "MODERATE",
+              "vulnerableVersionRange": "<= 0.18.0"
+            },
+            "securityAdvisory": {
+              "databaseId": 1398,
+              "id": "MDE2OlNlY3VyaXR5QWR2aXNvcnlHSFNBLTQyeHctMnh2Yy1xeDht",
+              "summary": "Denial of Service in axios",
+              "severity": "MODERATE",
+              "description": "Versions of `axios` prior to 0.18.1 are vulnerable to Denial of Service. If a request exceeds the `maxContentLength` property, the package prints an error but does not stop the request. This may cause high CPU usage and lead to Denial of Service.\n\n\n## Recommendation\n\nUpgrade to 0.18.1 or later.",
+              "ghsaId": "GHSA-42xw-2xvc-qx8m",
+              "identifiers": [
+                {
+                  "type": "GHSA",
+                  "value": "GHSA-42xw-2xvc-qx8m"
+                },
+                {
+                  "type": "CVE",
+                  "value": "CVE-2019-10742"
+                }
+              ],
+              "permalink": "https://github.com/advisories/GHSA-42xw-2xvc-qx8m",
+              "publishedAt": "2019-05-29T18:04:45Z"
+            }
+          },
+          {
+            "id": "MDI4OlJlcG9zaXRvcnlWdWxuZXJhYmlsaXR5QWxlcnQzNzM0MjI3NzU=",
+            "createdAt": "2020-09-05T14:05:43Z",
+            "dismisser": null,
+            "dismissedAt": null,
+            "dismissReason": null,
+            "vulnerableManifestFilename": "package-lock.json",
+            "vulnerableRequirements": "= 2.2.1",
+            "vulnerableManifestPath": "docs/package-lock.json",
+            "securityVulnerability": {
+              "package": {
+                "ecosystem": "NPM",
+                "name": "tar"
+              },
+              "severity": "HIGH",
+              "vulnerableVersionRange": "< 2.2.2"
+            },
+            "securityAdvisory": {
+              "databaseId": 1383,
+              "id": "MDE2OlNlY3VyaXR5QWR2aXNvcnlHSFNBLWo0NG0tcW02cC1ocDdt",
+              "summary": "Arbitrary File Overwrite in tar",
+              "severity": "HIGH",
+              "description": "Versions of `tar` prior to 4.4.2 for 4.x and 2.2.2 for 2.x are vulnerable to Arbitrary File Overwrite. Extracting tarballs containing a hardlink to a file that already exists in the system, and a file that matches the hardlink will overwrite the system's file with the contents of the extracted file.\n\n\n## Recommendation\n\nFor tar 4.x, upgrade to version 4.4.2 or later.\nFor tar 2.x, upgrade to version 2.2.2 or later.",
+              "ghsaId": "GHSA-j44m-qm6p-hp7m",
+              "identifiers": [
+                {
+                  "type": "GHSA",
+                  "value": "GHSA-j44m-qm6p-hp7m"
+                },
+                {
+                  "type": "CVE",
+                  "value": "CVE-2018-20834"
+                }
+              ],
+              "permalink": "https://github.com/advisories/GHSA-j44m-qm6p-hp7m",
+              "publishedAt": "2019-05-01T18:37:31Z"
+            }
+          },
+          {
+            "id": "MDI4OlJlcG9zaXRvcnlWdWxuZXJhYmlsaXR5QWxlcnQzNzM0MjI3ODI=",
+            "createdAt": "2020-09-05T14:05:43Z",
+            "dismisser": null,
+            "dismissedAt": null,
+            "dismissReason": null,
+            "vulnerableManifestFilename": "package-lock.json",
+            "vulnerableRequirements": "= 1.0.11",
+            "vulnerableManifestPath": "docs/package-lock.json",
+            "securityVulnerability": {
+              "package": {
+                "ecosystem": "NPM",
+                "name": "fstream"
+              },
+              "severity": "HIGH",
+              "vulnerableVersionRange": "< 1.0.12"
+            },
+            "securityAdvisory": {
+              "databaseId": 1431,
+              "id": "MDE2OlNlY3VyaXR5QWR2aXNvcnlHSFNBLXhmN3ctcjQ1My1tNTZj",
+              "summary": "Arbitrary File Overwrite in fstream",
+              "severity": "HIGH",
+              "description": "Versions of `fstream` prior to 1.0.12 are vulnerable to Arbitrary File Overwrite. Extracting tarballs containing a hardlink to a file that already exists in the system and a file that matches the hardlink will overwrite the system's file with the contents of the extracted file. The `fstream.DirWriter()` function is vulnerable.\n\n\n## Recommendation\n\nUpgrade to version 1.0.12 or later.",
+              "ghsaId": "GHSA-xf7w-r453-m56c",
+              "identifiers": [
+                {
+                  "type": "GHSA",
+                  "value": "GHSA-xf7w-r453-m56c"
+                },
+                {
+                  "type": "CVE",
+                  "value": "CVE-2019-13173"
+                }
+              ],
+              "permalink": "https://github.com/advisories/GHSA-xf7w-r453-m56c",
+              "publishedAt": "2019-05-30T17:19:34Z"
+            }
+          },
+          {
+            "id": "MDI4OlJlcG9zaXRvcnlWdWxuZXJhYmlsaXR5QWxlcnQzNzM0MjI3ODg=",
+            "createdAt": "2020-09-05T14:05:43Z",
+            "dismisser": null,
+            "dismissedAt": null,
+            "dismissReason": null,
+            "vulnerableManifestFilename": "package-lock.json",
+            "vulnerableRequirements": "= 4.17.11",
+            "vulnerableManifestPath": "docs/package-lock.json",
+            "securityVulnerability": {
+              "package": {
+                "ecosystem": "NPM",
+                "name": "lodash"
+              },
+              "severity": "HIGH",
+              "vulnerableVersionRange": "< 4.17.12"
+            },
+            "securityAdvisory": {
+              "databaseId": 1579,
+              "id": "MDE2OlNlY3VyaXR5QWR2aXNvcnlHSFNBLWpmODUtY3BjcC1qNjk1",
+              "summary": "Prototype Pollution in lodash",
+              "severity": "HIGH",
+              "description": "Versions of `lodash` before 4.17.12 are vulnerable to Prototype Pollution.  The function `defaultsDeep` allows a malicious user to modify the prototype of `Object` via `{constructor: {prototype: {...}}}` causing the addition or modification of an existing property that will exist on all objects.\n\n\n\n\n## Recommendation\n\nUpdate to version 4.17.12 or later.",
+              "ghsaId": "GHSA-jf85-cpcp-j695",
+              "identifiers": [
+                {
+                  "type": "GHSA",
+                  "value": "GHSA-jf85-cpcp-j695"
+                },
+                {
+                  "type": "CVE",
+                  "value": "CVE-2019-10744"
+                }
+              ],
+              "permalink": "https://github.com/advisories/GHSA-jf85-cpcp-j695",
+              "publishedAt": "2019-07-10T19:45:23Z"
+            }
+          },
+          {
+            "id": "MDI4OlJlcG9zaXRvcnlWdWxuZXJhYmlsaXR5QWxlcnQzNzM0MjI3OTM=",
+            "createdAt": "2020-09-05T14:05:43Z",
+            "dismisser": null,
+            "dismissedAt": null,
+            "dismissReason": null,
+            "vulnerableManifestFilename": "package-lock.json",
+            "vulnerableRequirements": "= 4.4.0",
+            "vulnerableManifestPath": "docs/package-lock.json",
+            "securityVulnerability": {
+              "package": {
+                "ecosystem": "NPM",
+                "name": "lodash.template"
+              },
+              "severity": "HIGH",
+              "vulnerableVersionRange": "< 4.5.0"
+            },
+            "securityAdvisory": {
+              "databaseId": 1579,
+              "id": "MDE2OlNlY3VyaXR5QWR2aXNvcnlHSFNBLWpmODUtY3BjcC1qNjk1",
+              "summary": "Prototype Pollution in lodash",
+              "severity": "HIGH",
+              "description": "Versions of `lodash` before 4.17.12 are vulnerable to Prototype Pollution.  The function `defaultsDeep` allows a malicious user to modify the prototype of `Object` via `{constructor: {prototype: {...}}}` causing the addition or modification of an existing property that will exist on all objects.\n\n\n\n\n## Recommendation\n\nUpdate to version 4.17.12 or later.",
+              "ghsaId": "GHSA-jf85-cpcp-j695",
+              "identifiers": [
+                {
+                  "type": "GHSA",
+                  "value": "GHSA-jf85-cpcp-j695"
+                },
+                {
+                  "type": "CVE",
+                  "value": "CVE-2019-10744"
+                }
+              ],
+              "permalink": "https://github.com/advisories/GHSA-jf85-cpcp-j695",
+              "publishedAt": "2019-07-10T19:45:23Z"
+            }
+          },
+          {
+            "id": "MDI4OlJlcG9zaXRvcnlWdWxuZXJhYmlsaXR5QWxlcnQzNzM0MjI3OTc=",
+            "createdAt": "2020-09-05T14:05:43Z",
+            "dismisser": null,
+            "dismissedAt": null,
+            "dismissReason": null,
+            "vulnerableManifestFilename": "package-lock.json",
+            "vulnerableRequirements": "= 4.6.1",
+            "vulnerableManifestPath": "docs/package-lock.json",
+            "securityVulnerability": {
+              "package": {
+                "ecosystem": "NPM",
+                "name": "lodash.mergewith"
+              },
+              "severity": "HIGH",
+              "vulnerableVersionRange": "< 4.6.2"
+            },
+            "securityAdvisory": {
+              "databaseId": 1579,
+              "id": "MDE2OlNlY3VyaXR5QWR2aXNvcnlHSFNBLWpmODUtY3BjcC1qNjk1",
+              "summary": "Prototype Pollution in lodash",
+              "severity": "HIGH",
+              "description": "Versions of `lodash` before 4.17.12 are vulnerable to Prototype Pollution.  The function `defaultsDeep` allows a malicious user to modify the prototype of `Object` via `{constructor: {prototype: {...}}}` causing the addition or modification of an existing property that will exist on all objects.\n\n\n\n\n## Recommendation\n\nUpdate to version 4.17.12 or later.",
+              "ghsaId": "GHSA-jf85-cpcp-j695",
+              "identifiers": [
+                {
+                  "type": "GHSA",
+                  "value": "GHSA-jf85-cpcp-j695"
+                },
+                {
+                  "type": "CVE",
+                  "value": "CVE-2019-10744"
+                }
+              ],
+              "permalink": "https://github.com/advisories/GHSA-jf85-cpcp-j695",
+              "publishedAt": "2019-07-10T19:45:23Z"
+            }
+          },
+          {
+            "id": "MDI4OlJlcG9zaXRvcnlWdWxuZXJhYmlsaXR5QWxlcnQzNzM0MjI4MDg=",
+            "createdAt": "2020-09-05T14:05:43Z",
+            "dismisser": null,
+            "dismissedAt": null,
+            "dismissReason": null,
+            "vulnerableManifestFilename": "package-lock.json",
+            "vulnerableRequirements": "= 1.3.1",
+            "vulnerableManifestPath": "docs/package-lock.json",
+            "securityVulnerability": {
+              "package": {
+                "ecosystem": "NPM",
+                "name": "mixin-deep"
+              },
+              "severity": "HIGH",
+              "vulnerableVersionRange": "< 1.3.2"
+            },
+            "securityAdvisory": {
+              "databaseId": 1657,
+              "id": "MDE2OlNlY3VyaXR5QWR2aXNvcnlHSFNBLWZoamYtODN3Zy1yMmo5",
+              "summary": "Prototype Pollution in mixin-deep",
+              "severity": "HIGH",
+              "description": "Versions of `mixin-deep` prior to 2.0.1 or 1.3.2 are vulnerable to Prototype Pollution. The `mixinDeep` function fails to validate which Object properties it updates. This allows attackers to modify the prototype of Object, causing the addition or modification of an existing property on all objects.\n\n\n\n\n## Recommendation\n\nIf you are using `mixin-deep` 2.x, upgrade to version 2.0.1 or later.\nIf you are using `mixin-deep` 1.x, upgrade to version 1.3.2 or later.",
+              "ghsaId": "GHSA-fhjf-83wg-r2j9",
+              "identifiers": [
+                {
+                  "type": "GHSA",
+                  "value": "GHSA-fhjf-83wg-r2j9"
+                },
+                {
+                  "type": "CVE",
+                  "value": "CVE-2019-10746"
+                }
+              ],
+              "permalink": "https://github.com/advisories/GHSA-fhjf-83wg-r2j9",
+              "publishedAt": "2019-08-27T17:42:33Z"
+            }
+          },
+          {
+            "id": "MDI4OlJlcG9zaXRvcnlWdWxuZXJhYmlsaXR5QWxlcnQzNzM0MjI4MTI=",
+            "createdAt": "2020-09-05T14:05:43Z",
+            "dismisser": null,
+            "dismissedAt": null,
+            "dismissReason": null,
+            "vulnerableManifestFilename": "package-lock.json",
+            "vulnerableRequirements": "= 2.0.0",
+            "vulnerableManifestPath": "docs/package-lock.json",
+            "securityVulnerability": {
+              "package": {
+                "ecosystem": "NPM",
+                "name": "set-value"
+              },
+              "severity": "HIGH",
+              "vulnerableVersionRange": "< 2.0.1"
+            },
+            "securityAdvisory": {
+              "databaseId": 1658,
+              "id": "MDE2OlNlY3VyaXR5QWR2aXNvcnlHSFNBLTRnODgtZnBwci01M3Bw",
+              "summary": "Prototype Pollution in set-value",
+              "severity": "HIGH",
+              "description": "Versions of `set-value` prior to 3.0.1 or 2.0.1 are vulnerable to Prototype Pollution. The `set` function fails to validate which Object properties it updates. This allows attackers to modify the prototype of Object, causing the addition or modification of an existing property on all objects.\n\n\n\n\n## Recommendation\n\nIf you are using `set-value` 3.x, upgrade to version 3.0.1 or later.\nIf you are using `set-value` 2.x, upgrade to version 2.0.1 or later.\n",
+              "ghsaId": "GHSA-4g88-fppr-53pp",
+              "identifiers": [
+                {
+                  "type": "GHSA",
+                  "value": "GHSA-4g88-fppr-53pp"
+                },
+                {
+                  "type": "CVE",
+                  "value": "CVE-2019-10747"
+                }
+              ],
+              "permalink": "https://github.com/advisories/GHSA-4g88-fppr-53pp",
+              "publishedAt": "2019-08-27T17:43:33Z"
+            }
+          },
+          {
+            "id": "MDI4OlJlcG9zaXRvcnlWdWxuZXJhYmlsaXR5QWxlcnQzNzM0MjI4MTc=",
+            "createdAt": "2020-09-05T14:05:43Z",
+            "dismisser": null,
+            "dismissedAt": null,
+            "dismissReason": null,
+            "vulnerableManifestFilename": "package-lock.json",
+            "vulnerableRequirements": "= 6.0.2",
+            "vulnerableManifestPath": "docs/package-lock.json",
+            "securityVulnerability": {
+              "package": {
+                "ecosystem": "NPM",
+                "name": "kind-of"
+              },
+              "severity": "LOW",
+              "vulnerableVersionRange": ">= 6.0.0, < 6.0.3"
+            },
+            "securityAdvisory": {
+              "databaseId": 2015,
+              "id": "MDE2OlNlY3VyaXR5QWR2aXNvcnlHSFNBLTZjOGYtcXBoZy1xamdw",
+              "summary": "Validation Bypass in kind-of",
+              "severity": "LOW",
+              "description": "Versions of `kind-of` 6.x prior to 6.0.3 are vulnerable to a Validation Bypass. A maliciously crafted object can alter the result of the type check, allowing attackers to bypass the type checking validation. \n\n\n## Recommendation\n\nUpgrade to versions 6.0.3 or later.",
+              "ghsaId": "GHSA-6c8f-qphg-qjgp",
+              "identifiers": [
+                {
+                  "type": "GHSA",
+                  "value": "GHSA-6c8f-qphg-qjgp"
+                },
+                {
+                  "type": "CVE",
+                  "value": "CVE-2019-20149"
+                }
+              ],
+              "permalink": "https://github.com/advisories/GHSA-6c8f-qphg-qjgp",
+              "publishedAt": "2020-03-31T15:59:54Z"
+            }
+          },
+          {
+            "id": "MDI4OlJlcG9zaXRvcnlWdWxuZXJhYmlsaXR5QWxlcnQzNzM0MjI4MjM=",
+            "createdAt": "2020-09-05T14:05:43Z",
+            "dismisser": null,
+            "dismissedAt": null,
+            "dismissReason": null,
+            "vulnerableManifestFilename": "package-lock.json",
+            "vulnerableRequirements": "= 1.2.0",
+            "vulnerableManifestPath": "docs/package-lock.json",
+            "securityVulnerability": {
+              "package": {
+                "ecosystem": "NPM",
+                "name": "minimist"
+              },
+              "severity": "LOW",
+              "vulnerableVersionRange": ">= 1.0.0, < 1.2.3"
+            },
+            "securityAdvisory": {
+              "databaseId": 2026,
+              "id": "MDE2OlNlY3VyaXR5QWR2aXNvcnlHSFNBLXZoOTUtcm1nci02dzRt",
+              "summary": "Prototype Pollution in minimist",
+              "severity": "LOW",
+              "description": "Affected versions of `minimist` are vulnerable to prototype pollution. Arguments are not properly sanitized, allowing an attacker to modify the prototype of `Object`, causing the addition or modification of an existing property that will exist on all objects.  \nParsing the argument `--__proto__.y=Polluted` adds a `y` property with value `Polluted` to all objects. The argument `--__proto__=Polluted` raises and uncaught error and crashes the application.  \nThis is exploitable if attackers have control over the arguments being passed to `minimist`.\n\n\n\n## Recommendation\n\nUpgrade to versions 0.2.1, 1.2.3 or later.",
+              "ghsaId": "GHSA-vh95-rmgr-6w4m",
+              "identifiers": [
+                {
+                  "type": "GHSA",
+                  "value": "GHSA-vh95-rmgr-6w4m"
+                },
+                {
+                  "type": "CVE",
+                  "value": "CVE-2020-7598"
+                }
+              ],
+              "permalink": "https://github.com/advisories/GHSA-vh95-rmgr-6w4m",
+              "publishedAt": "2020-04-03T21:48:32Z"
+            }
+          },
+          {
+            "id": "MDI4OlJlcG9zaXRvcnlWdWxuZXJhYmlsaXR5QWxlcnQzNzM0MjI4MzU=",
+            "createdAt": "2020-09-05T14:05:43Z",
+            "dismisser": null,
+            "dismissedAt": null,
+            "dismissReason": null,
+            "vulnerableManifestFilename": "package-lock.json",
+            "vulnerableRequirements": "= 4.17.11",
+            "vulnerableManifestPath": "docs/package-lock.json",
+            "securityVulnerability": {
+              "package": {
+                "ecosystem": "NPM",
+                "name": "lodash"
+              },
+              "severity": "LOW",
+              "vulnerableVersionRange": "< 4.17.19"
+            },
+            "securityAdvisory": {
+              "databaseId": 2232,
+              "id": "MDE2OlNlY3VyaXR5QWR2aXNvcnlHSFNBLXA2bWMtbTQ2OC04M2d3",
+              "summary": "Prototype Pollution in lodash",
+              "severity": "LOW",
+              "description": "Versions of lodash prior to 4.17.19 are vulnerable to Prototype Pollution. The function zipObjectDeep allows a malicious user to modify the prototype of Object if the property identifiers are user-supplied. Being affected by this issue requires zipping objects based on user-provided property arrays.\n\nThis vulnerability causes the addition or modification of an existing property that will exist on all objects and may lead to Denial of Service or Code Execution under specific circumstances.",
+              "ghsaId": "GHSA-p6mc-m468-83gw",
+              "identifiers": [
+                {
+                  "type": "GHSA",
+                  "value": "GHSA-p6mc-m468-83gw"
+                },
+                {
+                  "type": "CVE",
+                  "value": "CVE-2020-8203"
+                }
+              ],
+              "permalink": "https://github.com/advisories/GHSA-p6mc-m468-83gw",
+              "publishedAt": "2020-07-15T19:15:48Z"
+            }
+          },
+          {
+            "id": "MDI4OlJlcG9zaXRvcnlWdWxuZXJhYmlsaXR5QWxlcnQzNzM0MjI4MzY=",
+            "createdAt": "2020-09-05T14:05:44Z",
+            "dismisser": null,
+            "dismissedAt": null,
+            "dismissReason": null,
+            "vulnerableManifestFilename": "package-lock.json",
+            "vulnerableRequirements": "= 4.11.0",
+            "vulnerableManifestPath": "docs/package-lock.json",
+            "securityVulnerability": {
+              "package": {
+                "ecosystem": "NPM",
+                "name": "node-sass"
+              },
+              "severity": "LOW",
+              "vulnerableVersionRange": ">= 3.3.0, < 4.13.1"
+            },
+            "securityAdvisory": {
+              "databaseId": 2655,
+              "id": "MDE2OlNlY3VyaXR5QWR2aXNvcnlHSFNBLTl2NjItMjRjci01OGN4",
+              "summary": "Denial of Service in node-sass",
+              "severity": "LOW",
+              "description": "Affected versions of `node-sass` are vulnerable to Denial of Service (DoS). Crafted objects passed to the `renderSync` function may trigger C++ assertions in `CustomImporterBridge::get_importer_entry` and `CustomImporterBridge::post_process_return_value` that crash the Node process. This may allow attackers to crash the system's running Node process and lead to Denial of Service.\n\n\n## Recommendation\n\nUpgrade to version 4.13.1 or later",
+              "ghsaId": "GHSA-9v62-24cr-58cx",
+              "identifiers": [
+                {
+                  "type": "GHSA",
+                  "value": "GHSA-9v62-24cr-58cx"
+                }
+              ],
+              "permalink": "https://github.com/advisories/GHSA-9v62-24cr-58cx",
+              "publishedAt": "2020-09-03T15:27:25Z"
+            }
+          },
+          {
+            "id": "MDI4OlJlcG9zaXRvcnlWdWxuZXJhYmlsaXR5QWxlcnQzNzM0MjI4Mzc=",
+            "createdAt": "2020-09-05T14:05:44Z",
+            "dismisser": null,
+            "dismissedAt": null,
+            "dismissReason": null,
+            "vulnerableManifestFilename": "package-lock.json",
+            "vulnerableRequirements": "= 4.6.1",
+            "vulnerableManifestPath": "docs/package-lock.json",
+            "securityVulnerability": {
+              "package": {
+                "ecosystem": "NPM",
+                "name": "lodash.mergewith"
+              },
+              "severity": "HIGH",
+              "vulnerableVersionRange": "< 4.6.2"
+            },
+            "securityAdvisory": {
+              "databaseId": 2726,
+              "id": "MDE2OlNlY3VyaXR5QWR2aXNvcnlHSFNBLTc3OWYtd2d4Zy1xcjhm",
+              "summary": "Prototype Pollution in lodash.mergewith",
+              "severity": "HIGH",
+              "description": "Versions of `lodash.mergewith` before 4.6.2 are vulnerable to prototype pollution. The function `mergeWith` may allow a malicious user to modify the prototype of `Object` via `{constructor: {prototype: {...}}}` causing the addition or modification of an existing property that will exist on all objects.\n\n\n\n\n## Recommendation\n\nUpdate to version 4.6.2 or later.",
+              "ghsaId": "GHSA-779f-wgxg-qr8f",
+              "identifiers": [
+                {
+                  "type": "GHSA",
+                  "value": "GHSA-779f-wgxg-qr8f"
+                }
+              ],
+              "permalink": "https://github.com/advisories/GHSA-779f-wgxg-qr8f",
+              "publishedAt": "2020-09-03T18:10:22Z"
+            }
+          },
+          {
+            "id": "MDI4OlJlcG9zaXRvcnlWdWxuZXJhYmlsaXR5QWxlcnQzNzM0MjI4Mzg=",
+            "createdAt": "2020-09-05T14:05:44Z",
+            "dismisser": null,
+            "dismissedAt": null,
+            "dismissReason": null,
+            "vulnerableManifestFilename": "package-lock.json",
+            "vulnerableRequirements": "= 1.15.2",
+            "vulnerableManifestPath": "docs/package-lock.json",
+            "securityVulnerability": {
+              "package": {
+                "ecosystem": "NPM",
+                "name": "http-proxy"
+              },
+              "severity": "HIGH",
+              "vulnerableVersionRange": "< 1.18.1"
+            },
+            "securityAdvisory": {
+              "databaseId": 3040,
+              "id": "MDE2OlNlY3VyaXR5QWR2aXNvcnlHSFNBLTZ4MzMtcHc3cC1obXBx",
+              "summary": "Denial of Service in http-proxy",
+              "severity": "HIGH",
+              "description": "Versions of `http-proxy` prior to 1.18.1 are vulnerable to Denial of Service. An HTTP request with a long body triggers an `ERR_HTTP_HEADERS_SENT` unhandled exception that crashes the proxy server. This is only possible when the proxy server sets headers in the proxy request using the `proxyReq.setHeader` function.   \n\nFor a proxy server running on `http://localhost:3000`, the following curl request triggers the unhandled exception:  \n```curl -XPOST http://localhost:3000 -d \"$(python -c 'print(\"x\"*1025)')\"```\n\n\n## Recommendation\n\nUpgrade to version 1.18.1 or later",
+              "ghsaId": "GHSA-6x33-pw7p-hmpq",
+              "identifiers": [
+                {
+                  "type": "GHSA",
+                  "value": "GHSA-6x33-pw7p-hmpq"
+                }
+              ],
+              "permalink": "https://github.com/advisories/GHSA-6x33-pw7p-hmpq",
+              "publishedAt": "2020-09-04T17:59:49Z"
+            }
+          },
+          {
+            "id": "MDI4OlJlcG9zaXRvcnlWdWxuZXJhYmlsaXR5QWxlcnQzNzM0MjI4Mzk=",
+            "createdAt": "2020-09-05T14:05:44Z",
+            "dismisser": null,
+            "dismissedAt": null,
+            "dismissReason": null,
+            "vulnerableManifestFilename": "package-lock.json",
+            "vulnerableRequirements": "= 4.2.1",
+            "vulnerableManifestPath": "docs/package-lock.json",
+            "securityVulnerability": {
+              "package": {
+                "ecosystem": "NPM",
+                "name": "yargs-parser"
+              },
+              "severity": "LOW",
+              "vulnerableVersionRange": "< 13.1.2"
+            },
+            "securityAdvisory": {
+              "databaseId": 3048,
+              "id": "MDE2OlNlY3VyaXR5QWR2aXNvcnlHSFNBLXA5cGMtMjk5cC12eGdw",
+              "summary": "Prototype Pollution in yargs-parser",
+              "severity": "LOW",
+              "description": "Affected versions of `yargs-parser` are vulnerable to prototype pollution. Arguments are not properly sanitized, allowing an attacker to modify the prototype of `Object`, causing the addition or modification of an existing property that will exist on all objects.  \nParsing the argument `--foo.__proto__.bar baz'` adds a `bar` property with value `baz` to all objects. This is only exploitable if attackers have control over the arguments being passed to `yargs-parser`.\n\n\n\n## Recommendation\n\nUpgrade to versions 13.1.2, 15.0.1, 18.1.1 or later.",
+              "ghsaId": "GHSA-p9pc-299p-vxgp",
+              "identifiers": [
+                {
+                  "type": "GHSA",
+                  "value": "GHSA-p9pc-299p-vxgp"
+                }
+              ],
+              "permalink": "https://github.com/advisories/GHSA-p9pc-299p-vxgp",
+              "publishedAt": "2020-09-04T18:00:54Z"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

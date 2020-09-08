@@ -1,0 +1,718 @@
+{
+  "version": "2.1.0",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "CodeQL",
+          "organization": "GitHub",
+          "semanticVersion": "2.2.5",
+          "rules": [
+            {
+              "id": "cpp/new-free-mismatch",
+              "name": "cpp/new-free-mismatch",
+              "shortDescription": {
+                "text": "Mismatching new/free or malloc/delete"
+              },
+              "fullDescription": {
+                "text": "An object that was allocated with 'malloc' or 'new' is being freed using a mismatching 'free' or 'delete'."
+              },
+              "defaultConfiguration": {},
+              "properties": {
+                "tags": [
+                  "reliability",
+                  "security",
+                  "external/cwe/cwe-401"
+                ],
+                "kind": "problem",
+                "precision": "high",
+                "name": "Mismatching new/free or malloc/delete",
+                "description": "An object that was allocated with 'malloc' or 'new' is being freed using a mismatching 'free' or 'delete'.",
+                "id": "cpp/new-free-mismatch",
+                "problem.severity": "warning"
+              }
+            },
+            {
+              "id": "cpp/alloca-in-loop",
+              "name": "cpp/alloca-in-loop",
+              "shortDescription": {
+                "text": "Call to alloca in a loop"
+              },
+              "fullDescription": {
+                "text": "Using alloca in a loop can lead to a stack overflow"
+              },
+              "defaultConfiguration": {},
+              "properties": {
+                "tags": [
+                  "reliability",
+                  "correctness",
+                  "security",
+                  "external/cwe/cwe-770"
+                ],
+                "kind": "problem",
+                "precision": "high",
+                "name": "Call to alloca in a loop",
+                "description": "Using alloca in a loop can lead to a stack overflow",
+                "id": "cpp/alloca-in-loop",
+                "problem.severity": "warning"
+              }
+            },
+            {
+              "id": "cpp/pointer-overflow-check",
+              "name": "cpp/pointer-overflow-check",
+              "shortDescription": {
+                "text": "Pointer overflow check"
+              },
+              "fullDescription": {
+                "text": "Adding a value to a pointer to check if it overflows relies on undefined behavior and may lead to memory corruption."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "properties": {
+                "tags": [
+                  "reliability",
+                  "security"
+                ],
+                "kind": "problem",
+                "precision": "high",
+                "name": "Pointer overflow check",
+                "description": "Adding a value to a pointer to check if it overflows relies\n              on undefined behavior and may lead to memory corruption.",
+                "id": "cpp/pointer-overflow-check",
+                "problem.severity": "error"
+              }
+            },
+            {
+              "id": "cpp/overflowing-snprintf",
+              "name": "cpp/overflowing-snprintf",
+              "shortDescription": {
+                "text": "Potentially overflowing call to snprintf"
+              },
+              "fullDescription": {
+                "text": "Using the return value from snprintf without proper checks can cause overflow."
+              },
+              "defaultConfiguration": {},
+              "properties": {
+                "tags": [
+                  "reliability",
+                  "correctness",
+                  "security"
+                ],
+                "kind": "problem",
+                "precision": "high",
+                "name": "Potentially overflowing call to snprintf",
+                "description": "Using the return value from snprintf without proper checks can cause overflow.",
+                "id": "cpp/overflowing-snprintf",
+                "problem.severity": "warning"
+              }
+            },
+            {
+              "id": "cpp/wrong-number-format-arguments",
+              "name": "cpp/wrong-number-format-arguments",
+              "shortDescription": {
+                "text": "Too few arguments to formatting function"
+              },
+              "fullDescription": {
+                "text": "Calling a printf-like function with too few arguments can be a source of security issues."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "properties": {
+                "tags": [
+                  "reliability",
+                  "correctness",
+                  "security",
+                  "external/cwe/cwe-685"
+                ],
+                "kind": "problem",
+                "precision": "high",
+                "name": "Too few arguments to formatting function",
+                "description": "Calling a printf-like function with too few arguments can be\n              a source of security issues.",
+                "id": "cpp/wrong-number-format-arguments",
+                "problem.severity": "error"
+              }
+            },
+            {
+              "id": "cpp/wrong-type-format-argument",
+              "name": "cpp/wrong-type-format-argument",
+              "shortDescription": {
+                "text": "Wrong type of arguments to formatting function"
+              },
+              "fullDescription": {
+                "text": "Calling a printf-like function with the wrong type of arguments causes unpredictable behavior."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "properties": {
+                "tags": [
+                  "reliability",
+                  "correctness",
+                  "security",
+                  "external/cwe/cwe-686"
+                ],
+                "kind": "problem",
+                "precision": "high",
+                "name": "Wrong type of arguments to formatting function",
+                "description": "Calling a printf-like function with the wrong type of arguments causes unpredictable\n              behavior.",
+                "id": "cpp/wrong-type-format-argument",
+                "problem.severity": "error"
+              }
+            },
+            {
+              "id": "cpp/upcast-array-pointer-arithmetic",
+              "name": "cpp/upcast-array-pointer-arithmetic",
+              "shortDescription": {
+                "text": "Upcast array used in pointer arithmetic"
+              },
+              "fullDescription": {
+                "text": "An array with elements of a derived struct type is cast to a pointer to the base type of the struct. If pointer arithmetic or an array dereference is done on the resulting pointer, it will use the width of the base type, leading to misaligned reads."
+              },
+              "defaultConfiguration": {},
+              "properties": {
+                "tags": [
+                  "correctness",
+                  "reliability",
+                  "security",
+                  "external/cwe/cwe-119",
+                  "external/cwe/cwe-843"
+                ],
+                "kind": "path-problem",
+                "precision": "high",
+                "name": "Upcast array used in pointer arithmetic",
+                "description": "An array with elements of a derived struct type is cast to a\n              pointer to the base type of the struct. If pointer arithmetic or\n              an array dereference is done on the resulting pointer, it will\n              use the width of the base type, leading to misaligned reads.",
+                "id": "cpp/upcast-array-pointer-arithmetic",
+                "problem.severity": "warning"
+              }
+            },
+            {
+              "id": "cpp/too-few-arguments",
+              "name": "cpp/too-few-arguments",
+              "shortDescription": {
+                "text": "Call to function with fewer arguments than declared parameters"
+              },
+              "fullDescription": {
+                "text": "A function call is passing fewer arguments than the number of declared parameters of the function. This may indicate that the code does not follow the author's intent. It is also a vulnerability, since the function is likely to operate on undefined data."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "properties": {
+                "tags": [
+                  "correctness",
+                  "maintainability",
+                  "security"
+                ],
+                "kind": "problem",
+                "precision": "very-high",
+                "name": "Call to function with fewer arguments than declared parameters",
+                "description": "A function call is passing fewer arguments than the number of\n              declared parameters of the function. This may indicate\n              that the code does not follow the author's intent. It is also\n              a vulnerability, since the function is likely to operate on\n              undefined data.",
+                "id": "cpp/too-few-arguments",
+                "problem.severity": "error"
+              }
+            },
+            {
+              "id": "cpp/integer-multiplication-cast-to-long",
+              "name": "cpp/integer-multiplication-cast-to-long",
+              "shortDescription": {
+                "text": "Multiplication result converted to larger type"
+              },
+              "fullDescription": {
+                "text": "A multiplication result that is converted to a larger type can be a sign that the result can overflow the type converted from."
+              },
+              "defaultConfiguration": {},
+              "properties": {
+                "tags": [
+                  "reliability",
+                  "security",
+                  "correctness",
+                  "types",
+                  "external/cwe/cwe-190",
+                  "external/cwe/cwe-192",
+                  "external/cwe/cwe-197",
+                  "external/cwe/cwe-681"
+                ],
+                "kind": "problem",
+                "precision": "high",
+                "name": "Multiplication result converted to larger type",
+                "description": "A multiplication result that is converted to a larger type can\n              be a sign that the result can overflow the type converted from.",
+                "id": "cpp/integer-multiplication-cast-to-long",
+                "problem.severity": "warning"
+              }
+            },
+            {
+              "id": "cpp/signed-overflow-check",
+              "name": "cpp/signed-overflow-check",
+              "shortDescription": {
+                "text": "Signed overflow check"
+              },
+              "fullDescription": {
+                "text": "Testing for overflow by adding a value to a variable to see if it \"wraps around\" works only for unsigned integer values."
+              },
+              "defaultConfiguration": {},
+              "properties": {
+                "tags": [
+                  "correctness",
+                  "security"
+                ],
+                "kind": "problem",
+                "precision": "high",
+                "name": "Signed overflow check",
+                "description": "Testing for overflow by adding a value to a variable\n              to see if it \"wraps around\" works only for\n              unsigned integer values.",
+                "id": "cpp/signed-overflow-check",
+                "problem.severity": "warning"
+              }
+            },
+            {
+              "id": "cpp/bad-addition-overflow-check",
+              "name": "cpp/bad-addition-overflow-check",
+              "shortDescription": {
+                "text": "Bad check for overflow of integer addition"
+              },
+              "fullDescription": {
+                "text": "Checking for overflow of integer addition by comparing against one of the arguments of the addition does not work when the result of the addition is automatically promoted to a larger type."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "properties": {
+                "tags": [
+                  "reliability",
+                  "correctness",
+                  "security",
+                  "external/cwe/cwe-190",
+                  "external/cwe/cwe-192"
+                ],
+                "kind": "problem",
+                "precision": "very-high",
+                "name": "Bad check for overflow of integer addition",
+                "description": "Checking for overflow of integer addition by comparing\n              against one of the arguments of the addition does not work\n              when the result of the addition is automatically promoted\n              to a larger type.",
+                "id": "cpp/bad-addition-overflow-check",
+                "problem.severity": "error"
+              }
+            },
+            {
+              "id": "cpp/no-space-for-terminator",
+              "name": "cpp/no-space-for-terminator",
+              "shortDescription": {
+                "text": "No space for zero terminator"
+              },
+              "fullDescription": {
+                "text": "Allocating a buffer using 'malloc' without ensuring that there is always space for the entire string and a zero terminator can cause a buffer overrun."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "properties": {
+                "tags": [
+                  "reliability",
+                  "security",
+                  "external/cwe/cwe-131",
+                  "external/cwe/cwe-120",
+                  "external/cwe/cwe-122"
+                ],
+                "kind": "problem",
+                "precision": "high",
+                "name": "No space for zero terminator",
+                "description": "Allocating a buffer using 'malloc' without ensuring that\n              there is always space for the entire string and a zero\n              terminator can cause a buffer overrun.",
+                "id": "cpp/no-space-for-terminator",
+                "problem.severity": "error"
+              }
+            },
+            {
+              "id": "cpp/sql-injection",
+              "name": "cpp/sql-injection",
+              "shortDescription": {
+                "text": "Uncontrolled data in SQL query"
+              },
+              "fullDescription": {
+                "text": "Including user-supplied data in a SQL query without neutralizing special elements can make code vulnerable to SQL Injection."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "properties": {
+                "tags": [
+                  "security",
+                  "external/cwe/cwe-089"
+                ],
+                "kind": "path-problem",
+                "precision": "high",
+                "name": "Uncontrolled data in SQL query",
+                "description": "Including user-supplied data in a SQL query without\n              neutralizing special elements can make code vulnerable\n              to SQL Injection.",
+                "id": "cpp/sql-injection",
+                "problem.severity": "error"
+              }
+            },
+            {
+              "id": "cpp/dangerous-function-overflow",
+              "name": "cpp/dangerous-function-overflow",
+              "shortDescription": {
+                "text": "Use of dangerous function"
+              },
+              "fullDescription": {
+                "text": "Use of a standard library function that does not guard against buffer overflow."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "properties": {
+                "tags": [
+                  "reliability",
+                  "security",
+                  "external/cwe/cwe-242"
+                ],
+                "kind": "problem",
+                "precision": "very-high",
+                "name": "Use of dangerous function",
+                "description": "Use of a standard library function that does not guard against buffer overflow.",
+                "id": "cpp/dangerous-function-overflow",
+                "problem.severity": "error"
+              }
+            },
+            {
+              "id": "cpp/dangerous-cin",
+              "name": "cpp/dangerous-cin",
+              "shortDescription": {
+                "text": "Dangerous use of 'cin'"
+              },
+              "fullDescription": {
+                "text": "Using `cin` without specifying the length of the input may be dangerous."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "properties": {
+                "tags": [
+                  "reliability",
+                  "security",
+                  "external/cwe/cwe-676"
+                ],
+                "kind": "problem",
+                "precision": "high",
+                "name": "Dangerous use of 'cin'",
+                "description": "Using `cin` without specifying the length of the input\n              may be dangerous.",
+                "id": "cpp/dangerous-cin",
+                "problem.severity": "error"
+              }
+            },
+            {
+              "id": "cpp/potentially-dangerous-function",
+              "name": "cpp/potentially-dangerous-function",
+              "shortDescription": {
+                "text": "Use of potentially dangerous function"
+              },
+              "fullDescription": {
+                "text": "Use of a standard library function that is not thread-safe."
+              },
+              "defaultConfiguration": {},
+              "properties": {
+                "tags": [
+                  "reliability",
+                  "security",
+                  "external/cwe/cwe-676"
+                ],
+                "kind": "problem",
+                "precision": "high",
+                "name": "Use of potentially dangerous function",
+                "description": "Use of a standard library function that is not thread-safe.",
+                "id": "cpp/potentially-dangerous-function",
+                "problem.severity": "warning"
+              }
+            },
+            {
+              "id": "cpp/badly-bounded-write",
+              "name": "cpp/badly-bounded-write",
+              "shortDescription": {
+                "text": "Badly bounded write"
+              },
+              "fullDescription": {
+                "text": "Buffer write operations with a length parameter that does not match the size of the destination buffer may overflow."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "properties": {
+                "tags": [
+                  "reliability",
+                  "security",
+                  "external/cwe/cwe-120",
+                  "external/cwe/cwe-787",
+                  "external/cwe/cwe-805"
+                ],
+                "kind": "problem",
+                "precision": "high",
+                "name": "Badly bounded write",
+                "description": "Buffer write operations with a length parameter that\n              does not match the size of the destination buffer may\n              overflow.",
+                "id": "cpp/badly-bounded-write",
+                "problem.severity": "error"
+              }
+            },
+            {
+              "id": "cpp/openssl-heartbleed",
+              "name": "cpp/openssl-heartbleed",
+              "shortDescription": {
+                "text": "Use of a version of OpenSSL with Heartbleed"
+              },
+              "fullDescription": {
+                "text": "Using an old version of OpenSSL can allow remote attackers to retrieve portions of memory."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "properties": {
+                "tags": [
+                  "security",
+                  "external/cwe/cwe-327",
+                  "external/cwe/cwe-788"
+                ],
+                "kind": "problem",
+                "precision": "very-high",
+                "name": "Use of a version of OpenSSL with Heartbleed",
+                "description": "Using an old version of OpenSSL can allow remote\n              attackers to retrieve portions of memory.",
+                "id": "cpp/openssl-heartbleed",
+                "problem.severity": "error"
+              }
+            },
+            {
+              "id": "cpp/suspicious-add-sizeof",
+              "name": "cpp/suspicious-add-sizeof",
+              "shortDescription": {
+                "text": "Suspicious add with sizeof"
+              },
+              "fullDescription": {
+                "text": "Explicitly scaled pointer arithmetic expressions can cause buffer overflow conditions if the offset is also implicitly scaled."
+              },
+              "defaultConfiguration": {},
+              "properties": {
+                "tags": [
+                  "security",
+                  "external/cwe/cwe-468"
+                ],
+                "kind": "problem",
+                "precision": "high",
+                "name": "Suspicious add with sizeof",
+                "description": "Explicitly scaled pointer arithmetic expressions\n              can cause buffer overflow conditions if the offset is also\n              implicitly scaled.",
+                "id": "cpp/suspicious-add-sizeof",
+                "problem.severity": "warning"
+              }
+            },
+            {
+              "id": "cpp/cgi-xss",
+              "name": "cpp/cgi-xss",
+              "shortDescription": {
+                "text": "CGI script vulnerable to cross-site scripting"
+              },
+              "fullDescription": {
+                "text": "Writing user input directly to a web page allows for a cross-site scripting vulnerability."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "properties": {
+                "tags": [
+                  "security",
+                  "external/cwe/cwe-079"
+                ],
+                "kind": "path-problem",
+                "precision": "high",
+                "name": "CGI script vulnerable to cross-site scripting",
+                "description": "Writing user input directly to a web page\n              allows for a cross-site scripting vulnerability.",
+                "id": "cpp/cgi-xss",
+                "problem.severity": "error"
+              }
+            },
+            {
+              "id": "cpp/tainted-format-string",
+              "name": "cpp/tainted-format-string",
+              "shortDescription": {
+                "text": "Uncontrolled format string"
+              },
+              "fullDescription": {
+                "text": "Using externally-controlled format strings in printf-style functions can lead to buffer overflows or data representation problems."
+              },
+              "defaultConfiguration": {},
+              "properties": {
+                "tags": [
+                  "reliability",
+                  "security",
+                  "external/cwe/cwe-134"
+                ],
+                "kind": "path-problem",
+                "precision": "high",
+                "name": "Uncontrolled format string",
+                "description": "Using externally-controlled format strings in\n              printf-style functions can lead to buffer overflows\n              or data representation problems.",
+                "id": "cpp/tainted-format-string",
+                "problem.severity": "warning"
+              }
+            },
+            {
+              "id": "cpp/tainted-format-string-through-global",
+              "name": "cpp/tainted-format-string-through-global",
+              "shortDescription": {
+                "text": "Uncontrolled format string (through global variable)"
+              },
+              "fullDescription": {
+                "text": "Using externally-controlled format strings in printf-style functions can lead to buffer overflows or data representation problems."
+              },
+              "defaultConfiguration": {},
+              "properties": {
+                "tags": [
+                  "reliability",
+                  "security",
+                  "external/cwe/cwe-134"
+                ],
+                "kind": "path-problem",
+                "precision": "high",
+                "name": "Uncontrolled format string (through global variable)",
+                "description": "Using externally-controlled format strings in\n              printf-style functions can lead to buffer overflows\n              or data representation problems.",
+                "id": "cpp/tainted-format-string-through-global",
+                "problem.severity": "warning"
+              }
+            },
+            {
+              "id": "cpp/hresult-boolean-conversion",
+              "name": "cpp/hresult-boolean-conversion",
+              "shortDescription": {
+                "text": "Cast between HRESULT and a Boolean type"
+              },
+              "fullDescription": {
+                "text": "Casting an HRESULT to/from a Boolean type and then using it in a test expression will yield an incorrect result because success (S_OK) in HRESULT is indicated by a value of 0."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "properties": {
+                "tags": [
+                  "security",
+                  "external/cwe/cwe-253",
+                  "external/microsoft/C6214",
+                  "external/microsoft/C6215",
+                  "external/microsoft/C6216",
+                  "external/microsoft/C6217",
+                  "external/microsoft/C6230"
+                ],
+                "kind": "problem",
+                "precision": "high",
+                "name": "Cast between HRESULT and a Boolean type",
+                "description": "Casting an HRESULT to/from a Boolean type and then using it in a test expression will yield an incorrect result because success (S_OK) in HRESULT is indicated by a value of 0.",
+                "id": "cpp/hresult-boolean-conversion",
+                "problem.severity": "error"
+              }
+            },
+            {
+              "id": "cpp/comparison-with-wider-type",
+              "name": "cpp/comparison-with-wider-type",
+              "shortDescription": {
+                "text": "Comparison of narrow type with wide type in loop condition"
+              },
+              "fullDescription": {
+                "text": "Comparisons between types of different widths in a loop condition can cause the loop to behave unexpectedly."
+              },
+              "defaultConfiguration": {},
+              "properties": {
+                "tags": [
+                  "reliability",
+                  "security",
+                  "external/cwe/cwe-190",
+                  "external/cwe/cwe-197",
+                  "external/cwe/cwe-835"
+                ],
+                "kind": "problem",
+                "precision": "high",
+                "name": "Comparison of narrow type with wide type in loop condition",
+                "description": "Comparisons between types of different widths in a loop\n              condition can cause the loop to behave unexpectedly.",
+                "id": "cpp/comparison-with-wider-type",
+                "problem.severity": "warning"
+              }
+            },
+            {
+              "id": "cpp/uncontrolled-allocation-size",
+              "name": "cpp/uncontrolled-allocation-size",
+              "shortDescription": {
+                "text": "Overflow in uncontrolled allocation size"
+              },
+              "fullDescription": {
+                "text": "Allocating memory with a size controlled by an external user can result in integer overflow."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "properties": {
+                "tags": [
+                  "reliability",
+                  "security",
+                  "external/cwe/cwe-190"
+                ],
+                "kind": "path-problem",
+                "precision": "high",
+                "name": "Overflow in uncontrolled allocation size",
+                "description": "Allocating memory with a size controlled by an external\n              user can result in integer overflow.",
+                "id": "cpp/uncontrolled-allocation-size",
+                "problem.severity": "error"
+              }
+            },
+            {
+              "id": "cpp/incorrect-string-type-conversion",
+              "name": "cpp/incorrect-string-type-conversion",
+              "shortDescription": {
+                "text": "Cast from char* to wchar_t*"
+              },
+              "fullDescription": {
+                "text": "Casting a byte string to a wide-character string is likely to yield a string that is incorrectly terminated or aligned. This can lead to undefined behavior, including buffer overruns."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "properties": {
+                "tags": [
+                  "security",
+                  "external/cwe/cwe-704",
+                  "external/microsoft/c/c6276"
+                ],
+                "kind": "problem",
+                "precision": "high",
+                "name": "Cast from char* to wchar_t*",
+                "description": "Casting a byte string to a wide-character string is likely\n              to yield a string that is incorrectly terminated or aligned.\n              This can lead to undefined behavior, including buffer overruns.",
+                "id": "cpp/incorrect-string-type-conversion",
+                "problem.severity": "error"
+              }
+            },
+            {
+              "id": "cpp/unsafe-dacl-security-descriptor",
+              "name": "cpp/unsafe-dacl-security-descriptor",
+              "shortDescription": {
+                "text": "Setting a DACL to NULL in a SECURITY_DESCRIPTOR"
+              },
+              "fullDescription": {
+                "text": "Setting a DACL to NULL in a SECURITY_DESCRIPTOR will result in an unprotected object. If the DACL that belongs to the security descriptor of an object is set to NULL, a null DACL is created. A null DACL grants full access to any user who requests it; normal security checking is not performed with respect to the object."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "properties": {
+                "tags": [
+                  "security",
+                  "external/cwe/cwe-732",
+                  "external/microsoft/C6248"
+                ],
+                "kind": "problem",
+                "precision": "high",
+                "name": "Setting a DACL to NULL in a SECURITY_DESCRIPTOR",
+                "description": "Setting a DACL to NULL in a SECURITY_DESCRIPTOR will result in an unprotected object.\n              If the DACL that belongs to the security descriptor of an object is set to NULL, a null DACL is created.\n              A null DACL grants full access to any user who requests it;\n              normal security checking is not performed with respect to the object.",
+                "id": "cpp/unsafe-dacl-security-descriptor",
+                "problem.severity": "error"
+              }
+            }
+          ]
+        }
+      },
+      "results": [],
+      "columnKind": "utf16CodeUnits",
+      "properties": {
+        "semmle.formatSpecifier": "sarif-latest"
+      }
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+name: GitHub Security Report Generator
+description: Generates a software quality report for a repository
+author: Peter Murray
+
+inputs:
+  token:
+    description: GitHub Access Token with permissions for Dependencies and Security API access on the repository.
+    required: true
+
+  sarifReportDir:
+    description: The CodeQL output directory for SARIF report(s).
+    required: true
+    default: ../results
+
+
