@@ -1617,11 +1617,14 @@ module.exports = class SarifReportFinder {
       throw new Error(`Path does not exist: ${dir}`);
     }
 
+    console.log(`Processing: ${dir}`);
     if (fs.lstatSync(dir).isDirectory()) {
+      console.log(`  is a directory`);
       const files = fs.readdirSync(dir) // TODO use promises here
         .filter(f => f.endsWith('.sarif'))
         .map(f => path.resolve(dir, f));
 
+      console.log(`Matched Files: ${JSON.stringify(files)}`);
       if (files) {
         files.forEach(f => {
           promises.push(loadFileContents(f).then(report => {return {file: f, payload: report}}));
@@ -1629,7 +1632,11 @@ module.exports = class SarifReportFinder {
       }
     }
 
-    return Promise.all(promises);
+    if (promises.length > 0) {
+      return Promise.all(promises);
+    } else {
+      return Promise.resolve([]);
+    }
   }
 }
 
@@ -1650,6 +1657,11 @@ function loadFileContents(file) {
         })
     });
 }
+
+const tester = new module.exports('./samples/java/basic');
+tester.getSarifFiles().then(results => {
+  console.log(JSON.stringify(results, null, 2));
+});
 
 /***/ }),
 
