@@ -16,7 +16,8 @@ jobs:
         run: |
           ls -l
           ls -l ./samples
-          ls -l ./samples/basic
+          ls -l ./samples/java
+          ls -l ./samples/java/basic
           
       - name: Invoke Action
         uses: ./
