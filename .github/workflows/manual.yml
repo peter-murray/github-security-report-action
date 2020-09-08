@@ -15,5 +15,5 @@ jobs:
       - name: Invoke Action
         uses: ./
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.SECURITY_TOKEN }}
           sarifReportDir: ./samples/java/basic
