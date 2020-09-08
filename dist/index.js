@@ -1617,14 +1617,16 @@ module.exports = class SarifReportFinder {
       throw new Error(`Path does not exist: ${dir}`);
     }
 
-    // TODO use promises here
     if (fs.lstatSync(dir).isDirectory()) {
-      fs.readdirSync(dir)
+      const files = fs.readdirSync(dir) // TODO use promises here
         .filter(f => f.endsWith('.sarif'))
-        .map(f => path.resolve(dir, f))
-        .forEach(f => {
+        .map(f => path.resolve(dir, f));
+
+      if (files) {
+        files.forEach(f => {
           promises.push(loadFileContents(f).then(report => {return {file: f, payload: report}}));
         });
+      }
     }
 
     return Promise.all(promises);
@@ -4568,9 +4570,9 @@ function getRules(report) {
   let sarifRules = null;
 
   //TODO could error on unknown version
-  if (report.version === '2.1.0') {
+  if (report.version === '2.1.0' && report.runs) {
     report.runs.forEach(run => {
-      if (run.tool.driver.name === 'CodeQL') { //TODO ould support other tools
+      if (run.tool.driver.name === 'CodeQL') { //TODO could support other tools
         sarifRules = run.tool.driver.rules;
       }
     });
@@ -5023,13 +5025,13 @@ module.exports = class SoftwareReport {
     this._sarifReport = data.report;
 
     this._dependencies = {
-      vulnerabilities: data.vulnerabilities,
-      dependencies: data.dependencies,
+      vulnerabilities: data.vulnerabilities || [],
+      dependencies: data.dependencies || [],
     };
 
     this._codeScanning = {
-      open: data.openScans,
-      closed: data.closedScans,
+      open: data.openScans || [],
+      closed: data.closedScans || [],
     };
   }
 
@@ -5189,37 +5191,39 @@ module.exports = class SoftwareReport {
       , result = {}
     ;
 
-    open['CodeQL'].forEach(codeScan => {
-      const severity = codeScan.rule_severity
-        , matchedRule = rules[codeScan.rule_id]
+    if (open['CodeQL']) {
+      open['CodeQL'].forEach(codeScan => {
+        const severity = codeScan.rule_severity
+          , matchedRule = rules[codeScan.rule_id]
         ;
 
-      const summary = {
-        tool: codeScan.tool,
-        name: codeScan.rule_description,
-        open: codeScan.open,
-        created: codeScan.created_at,
-        url: codeScan.url,
-        rule: {
-          id: codeScan.rule_id,
+        const summary = {
+          tool: codeScan.tool,
+          name: codeScan.rule_description,
+          open: codeScan.open,
+          created: codeScan.created_at,
+          url: codeScan.url,
+          rule: {
+            id: codeScan.rule_id,
+          }
         }
-      }
 
-      if (matchedRule) {
-        summary.rule.details = {
-          name: matchedRule.name,
-          shortDescription: matchedRule.shortDescription,
-          description: matchedRule.description,
-          tags: matchedRule.tags,
-          cwes: matchedRule.cwes,
+        if (matchedRule) {
+          summary.rule.details = {
+            name: matchedRule.name,
+            shortDescription: matchedRule.shortDescription,
+            description: matchedRule.description,
+            tags: matchedRule.tags,
+            cwes: matchedRule.cwes,
+          }
         }
-      }
 
-      if (!result[severity]) {
-        result[severity] = [];
-      }
-      result[severity].push(summary);
-    });
+        if (!result[severity]) {
+          result[severity] = [];
+        }
+        result[severity].push(summary);
+      });
+    }
 
     return result;
   }

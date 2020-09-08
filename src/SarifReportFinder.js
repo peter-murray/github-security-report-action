@@ -18,14 +18,16 @@ module.exports = class SarifReportFinder {
       throw new Error(`Path does not exist: ${dir}`);
     }
 
-    // TODO use promises here
     if (fs.lstatSync(dir).isDirectory()) {
-      fs.readdirSync(dir)
+      const files = fs.readdirSync(dir) // TODO use promises here
         .filter(f => f.endsWith('.sarif'))
-        .map(f => path.resolve(dir, f))
-        .forEach(f => {
+        .map(f => path.resolve(dir, f));
+
+      if (files) {
+        files.forEach(f => {
           promises.push(loadFileContents(f).then(report => {return {file: f, payload: report}}));
         });
+      }
     }
 
     return Promise.all(promises);

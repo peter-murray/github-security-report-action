@@ -25,9 +25,9 @@ function getRules(report) {
   let sarifRules = null;
 
   //TODO could error on unknown version
-  if (report.version === '2.1.0') {
+  if (report.version === '2.1.0' && report.runs) {
     report.runs.forEach(run => {
-      if (run.tool.driver.name === 'CodeQL') { //TODO ould support other tools
+      if (run.tool.driver.name === 'CodeQL') { //TODO could support other tools
         sarifRules = run.tool.driver.rules;
       }
     });
