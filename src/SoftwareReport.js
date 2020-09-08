@@ -50,7 +50,8 @@ module.exports = class SoftwareReport {
   }
 
   get sarifReport() {
-    return this._sarifReport;
+    //TODO This is currently a {file: payload:} object as there can be mutiple reports but this class does nto cater for it
+    return this._sarifReport.payload;
   }
 
   getPayload() {
