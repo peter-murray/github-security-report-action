@@ -1658,11 +1658,6 @@ function loadFileContents(file) {
     });
 }
 
-const tester = new module.exports('./samples/java/basic');
-tester.getSarifFiles().then(results => {
-  console.log(JSON.stringify(results, null, 2));
-});
-
 /***/ }),
 
 /***/ 448:
