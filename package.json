@@ -4,6 +4,7 @@
   "description": "Generates a report from GitHub CodeQL and Dependency information",
   "main": "index.js",
   "scripts": {
+    "build": "ncc build index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -13,5 +14,8 @@
     "@actions/core": "^1.2.4",
     "@actions/github": "^4.0.0",
     "handlebars": "^4.7.6"
+  },
+  "devDependencies": {
+    "@zeit/ncc": "^0.22.3"
   }
 }
