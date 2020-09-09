@@ -14,7 +14,8 @@
     "@actions/core": "^1.2.4",
     "@actions/github": "^4.0.0",
     "html-pdf": "^2.2.0",
-    "nunjucks": "^3.2.2"
+    "nunjucks": "^3.2.2",
+    "puppeteer": "^5.2.1"
   },
   "devDependencies": {
     "@zeit/ncc": "^0.22.3"
