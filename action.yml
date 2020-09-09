@@ -12,6 +12,11 @@ inputs:
     required: true
     default: ../results
 
+  outputDir:
+    description: The output directory for the generated report(s).
+    required: true
+    default:
+
 runs:
   using: node12
   main: dist/index.js

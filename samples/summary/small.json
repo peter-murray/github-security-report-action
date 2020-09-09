@@ -1,0 +1,107 @@
+{
+  "dependencies": {
+    "deps": {
+      "manifests": {
+        "processed": [],
+        "unprocessed": []
+      },
+      "totalDependencies": 0,
+      "dependencies": {}
+    },
+    "vulnerabilities": {
+      "CRITICAL": [],
+      "HIGH": [],
+      "LOW": [],
+      "MODERATE": []
+    }
+  },
+  "codeScanning": {
+    "cwes": [
+      "cwe-022",
+      "cwe-023",
+      "cwe-036",
+      "cwe-073",
+      "cwe-078",
+      "cwe-079",
+      "cwe-088",
+      "cwe-089",
+      "cwe-090",
+      "cwe-113",
+      "cwe-129",
+      "cwe-134",
+      "cwe-190"
+    ],
+    "rules": [
+      {
+        "name": "java/unsafe-deserialization",
+        "severity": "error",
+        "precision": "high",
+        "kind": "path-problem",
+        "shortDescription": "Deserialization of user-controlled data",
+        "description": "Deserializing user-controlled data may allow attackers to execute arbitrary code.",
+        "tags": [
+          "security",
+          "external/cwe/cwe-502"
+        ],
+        "cwe": [
+          "cwe-502"
+        ]
+      },
+      {
+        "name": "java/call-to-object-tostring",
+        "severity": "recommendation",
+        "precision": "high",
+        "kind": "problem",
+        "shortDescription": "Use of default toString()",
+        "description": "Calling the default implementation of 'toString' returns a value that is unlikely to be what you expect.",
+        "tags": [
+          "reliability",
+          "maintainability"
+        ],
+        "cwe": []
+      },
+      {
+        "name": "java/constant-comparison",
+        "severity": "warning",
+        "precision": "very-high",
+        "kind": "problem",
+        "shortDescription": "Useless comparison test",
+        "description": "A comparison operation that always evaluates to true or always evaluates to false may indicate faulty logic and may result in dead code.",
+        "tags": [
+          "correctness",
+          "logic",
+          "external/cwe/cwe-570",
+          "external/cwe/cwe-571"
+        ],
+        "cwe": [
+          "cwe-570",
+          "cwe-571"
+        ]
+      }
+    ],
+    "open": {
+      "warning": [
+        {
+          "tool": "CodeQL",
+          "name": "Unsafe use of getResource",
+          "open": true,
+          "created": "2020-09-04T13:39:16Z",
+          "url": "https://api.github.com/repos/octodemo/demo-octopus/code-scanning/alerts/55",
+          "rule": {
+            "id": "java/unsafe-get-resource",
+            "details": {
+              "name": "java/unsafe-get-resource",
+              "shortDescription": "Unsafe use of getResource",
+              "description": "Calling 'this.getClass().getResource()' may yield unexpected results if called from a subclass in another package.",
+              "tags": [
+                "reliability",
+                "maintainability"
+              ],
+              "cwes": []
+            }
+          }
+        }
+      ]
+    }
+  }
+}

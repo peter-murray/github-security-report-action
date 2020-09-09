@@ -1,6 +1,6 @@
 const fs = require('fs')
   , path = require('path')
-  ,  nunjucks = require('nunjucks')
+  , nunjucks = require('nunjucks')
   ;
 
 module.exports = class ReportTemplate {

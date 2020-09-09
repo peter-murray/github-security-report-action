@@ -163,7 +163,7 @@ module.exports = class SoftwareReport {
       });
     }
 
-    return {rules: result};
+    return result;
   }
 
   getCodeScanSummary() {
