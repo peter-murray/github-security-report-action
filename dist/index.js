@@ -1147,7 +1147,7 @@ class GraphQL {
       {accept: 'application/vnd.github.hawkgirl-preview+json'}
     );
 
-    console.log(JSON.stringify(data, null, 2));
+    // console.log(JSON.stringify(data, null, 2));
     return data.map(node => { return new DependencySet(node.node); });
   }
 
