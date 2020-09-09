@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <mate charest="utf-8" />
+  <title>GitHub Advanced Security Summary</title>
+</head>
+
+<body>
+<h1>GitHub Advanced Security Summary</h1>
+
+<h2>Software Composition Analysis (SCA)</h2>
+
+<p>Number of Dependencies: {{dependencies.deps.totalDependencies}}</p>
+
+<h3>SCA Dependency Vulnerability Summary:</h3>
+<p>
+  <ul>
+    <li>Critical: {{dependencies.vulnerabilities.CRITICAL.length}}</li>
+    <li>High: {{dependencies.vulnerabilities.HIGH.length}}</li>
+    <li>Moderate: {{dependencies.vulnerabilities.MODERATE.length}}</li>
+    <li>Low: {{dependencies.vulnerabilities.LOW.length}}</li>
+  </ul>
+</p>
+
+<h2>Code Scaning</h2>
+<p>
+  Total CWE Vulnerabilities Checked: {{codeScanning.cwes.length}}
+<!--  <ul>-->
+  <div>
+    {{#each codeScanning.cwes}}
+      <strong>{{this}}</strong>
+    {{/each}}
+  </div>
+<!--  </ul>-->
+</p>
+
+<h3>Open Violations</h3>
+<ul>
+  <li>Errors: {{codeScanning.open.error.length}}</li>
+  <li>Warnings: {{codeScanning.open.warning.length}}</li>
+</ul>
+
+<h4>Errors</h4>
+<table>
+  <tr>
+    <th>Tool</th>
+    <th>Name</th>
+    <th>Created</th>
+    <th>Tags</th>
+    <th>CWE</th>
+    <th>Link</th>
+  </tr>
+  {{#each codeScanning.open.error}}
+  <tr>
+    <td>{{this.tool}}</td>
+    <td>{{this.name}}</td>
+    <td>{{this.created}}</td>
+    <td>{{this.rule.details.tags}}</td>
+    <td>{{this.rule.details.cwes}}</td>
+    <td>{{this.url}}</td>
+  </tr>
+  {{/each}}
+</table>
+
+<h4>Warnings</h4>
+<table>
+  <tr>
+    <th>Tool</th>
+    <th>Name</th>
+    <th>Created</th>
+    <th>Tags</th>
+    <th>CWE</th>
+    <th>Link</th>
+  </tr>
+  {{#each codeScanning.open.warning}}
+  <tr>
+    <td>{{this.tool}}</td>
+    <td>{{this.name}}</td>
+    <td>{{this.created}}</td>
+    <td>{{this.rule.tags}}</td>
+    <td>{{this.rule.cwes}}</td>
+    <td>{{this.url}}</td>
+  </tr>
+  {{/each}}
+</table>
+
+<h2>Dependencies Detail</h2>
+
+<h3>Vulnerabilities</h3>
+
+{{#if dependencies.vulnerabilities.CRITICAL.length}}
+<h4>Critical</h4>
+<table>
+  <tr>
+    <td>Package</td>
+    <td>Ecosystem</td>
+    <td>Version</td>
+    <td>Manifest</td>
+    <td>Severity</td>
+    <td>Advisory Id</td>
+    <td>Advisory Summary</td>
+  </tr>
+  {{#each dependencies.vulnerabilities.CRITICAL}}
+  <tr>
+    <td>{{this._data.securityVulnerability.package.name}}</td>
+    <td>{{this._data.securityVulnerability.package.ecosystem}}</td>
+    <td>{{this._data.vulnerableRequirements}}</td>
+    <td>{{this._data.vulnerableManifestPath}}</td>
+    <td>{{this._data.securityVulnerability.severity}}</td>
+    <td>{{this._data.securityAdvisory.ghsaId}}</td>
+    <td>{{this._data.securityAdvisory.summary}}</td>
+  </tr>
+  {{/each}}
+</table>
+{{/if}}
+
+{{#if dependencies.vulnerabilities.HIGH.length}}
+<h4>High</h4>
+<table>
+  <tr>
+    <td>Package</td>
+    <td>Ecosystem</td>
+    <td>Version</td>
+    <td>Manifest</td>
+    <td>Severity</td>
+    <td>Advisory Id</td>
+    <td>Advisory Summary</td>
+  </tr>
+  {{#each dependencies.vulnerabilities.HIGH}}
+  <tr>
+    <td>{{this._data.securityVulnerability.package.name}}</td>
+    <td>{{this._data.securityVulnerability.package.ecosystem}}</td>
+    <td>{{this._data.vulnerableRequirements}}</td>
+    <td>{{this._data.vulnerableManifestPath}}</td>
+    <td>{{this._data.securityVulnerability.severity}}</td>
+    <td>{{this._data.securityAdvisory.ghsaId}}</td>
+    <td>{{this._data.securityAdvisory.summary}}</td>
+  </tr>
+  {{/each}}
+</table>
+{{/if}}
+
+{{#if dependencies.vulnerabilities.LOW.length}}
+<h4>Low</h4>
+<table>
+  <tr>
+    <td>Package</td>
+    <td>Ecosystem</td>
+    <td>Version</td>
+    <td>Manifest</td>
+    <td>Severity</td>
+    <td>Advisory Id</td>
+    <td>Advisory Summary</td>
+  </tr>
+  {{#each dependencies.vulnerabilities.LOW}}
+  <tr>
+    <td>{{this._data.securityVulnerability.package.name}}</td>
+    <td>{{this._data.securityVulnerability.package.ecosystem}}</td>
+    <td>{{this._data.vulnerableRequirements}}</td>
+    <td>{{this._data.vulnerableManifestPath}}</td>
+    <td>{{this._data.securityVulnerability.severity}}</td>
+    <td>{{this._data.securityAdvisory.ghsaId}}</td>
+    <td>{{this._data.securityAdvisory.summary}}</td>
+  </tr>
+  {{/each}}
+</table>
+{{/if}}
+
+{{#if dependencies.vulnerabilities.MODERATE.length}}
+<h4>Moderate</h4>
+<table>
+  <tr>
+    <td>Package</td>
+    <td>Ecosystem</td>
+    <td>Version</td>
+    <td>Manifest</td>
+    <td>Severity</td>
+    <td>Advisory Id</td>
+    <td>Advisory Summary</td>
+  </tr>
+  {{#each dependencies.vulnerabilities.MODERATE}}
+  <tr>
+    <td>{{this._data.securityVulnerability.package.name}}</td>
+    <td>{{this._data.securityVulnerability.package.ecosystem}}</td>
+    <td>{{this._data.vulnerableRequirements}}</td>
+    <td>{{this._data.vulnerableManifestPath}}</td>
+    <td>{{this._data.securityVulnerability.severity}}</td>
+    <td>{{this._data.securityAdvisory.ghsaId}}</td>
+    <td>{{this._data.securityAdvisory.summary}}</td>
+  </tr>
+  {{/each}}
+</table>
+{{/if}}
+
+<h3>Detected Dependencies</h3>
+<p>
+  Maven Dependencies:
+<table>
+  <tr></tr>
+  {{#each dependencies.deps.dependencies.maven}}
+  <tr>
+    <td>{{this.name}}</td>
+    <td>{{this.version}}</td>
+  </tr>
+  {{/each}}
+</table>
+</p>
+<p>
+  NPM Dependencies:
+<table>
+  <tr></tr>
+  {{#each dependencies.deps.dependencies.npm}}
+  <tr>
+    <td>{{this.name}}</td>
+    <td>{{this.version}}</td>
+  </tr>
+  {{/each}}
+</table>
+</p>
+
+</body>
+</html>
