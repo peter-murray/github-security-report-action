@@ -2221,7 +2221,8 @@ exports.watch = watch;
 /***/ 104:
 /***/ (function(__unusedmodule, __unusedexports, __webpack_require__) {
 
-const core = __webpack_require__(470)
+const path = __webpack_require__(622)
+  , core = __webpack_require__(470)
   , github = __webpack_require__(469)
   , DataCollector = __webpack_require__(129)
   , ReportTemplate = __webpack_require__(881)

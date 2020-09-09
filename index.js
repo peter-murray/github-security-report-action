@@ -1,4 +1,5 @@
-const core = require('@actions/core')
+const path = require('path')
+  , core = require('@actions/core')
   , github = require('@actions/github')
   , DataCollector = require('./src/DataCollector')
   , ReportTemplate = require('./src/ReportTemplate')
