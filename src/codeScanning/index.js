@@ -1,5 +1,7 @@
 'use strict';
 
+const CodeScanningResult = require('./CodeScanningAlert')
+
 module.exports.create = octokit => {
   return new GitHubCodeScanning(octokit);
 }
@@ -32,11 +34,13 @@ function getCodeScanning(octokit, owner, repo, state) {
       const results = {};
 
       alerts.data.forEach(scan => {
-        const tool = scan.tool;
+        const tool = scan.tool.name;
+
         if (!results[tool]) {
           results[tool] = [];
         }
-        results[tool].push(scan);
+
+        results[tool].push(new CodeScanningResult(scan));
       });
 
       return results;

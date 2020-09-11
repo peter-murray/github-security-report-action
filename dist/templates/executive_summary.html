@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <mate charest="utf-8"/>
+  <title>GitHub Advanced Security - Executive Summary</title>
+
+  <style type="text/css">
+      html, body {
+          font-family: Arial;
+      }
+
+      .reportHeader {
+          display: flex;
+          flex-direction: column;
+      }
+
+      .headerRow {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+      }
+
+      .reportTitleRow {
+          border-bottom: 3px solid #0366d6;
+          padding-bottom: 5px;
+      }
+
+      .reportTitle {
+          /*color: #e1e4e8;*/
+          font-size: 32pt;
+          font-weight: bold;
+          color: #0366d6;
+          text-transform: uppercase;
+          margin-bottom: unset;
+      }
+
+      .githubLogo {
+          height: 30px;
+      }
+
+      .reportType {
+          font-size: small;
+      }
+
+
+      .appHeader {
+        padding-top: 10px;
+      }
+
+      .appHeaderName {
+          font-weight: bold;
+          margin-bottom: 15px;
+      }
+
+      .dependencies {
+
+      }
+
+
+      .reportDetail {
+          display: flex;
+          flex-direction: column;
+      }
+
+      .reportDetailColumn {
+
+      }
+
+
+
+      #codeScanningRules {
+          display: flex;
+          flex-direction: row;
+      }
+
+      .rule {
+          display: flex;
+          flex-direction: column;
+          padding: 1.5em;
+      }
+
+      .ruleHeader {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+
+          padding: 5px;
+
+          background-color: black;
+          color: white;
+          border-bottom: 1px solid black;
+
+          font-size: 110%;
+      }
+
+      .ruleDetail {
+
+      }
+
+      .ruleName {
+          font-style: italic;
+          font-weight: bold;
+      }
+
+      .ruleSeverity {
+          text-transform: uppercase;
+          /*flex-grow: 1;*/
+      }
+
+      .ruleSeverity.error {
+          color: red;
+      }
+
+      .ruleSeverity.warning {
+          color: yellow;
+      }
+
+      .ruleSeverity.recommendation {
+          color: green;
+      }
+
+      .summaryBox {
+          border: 2px solid #0366d6;
+      }
+  </style>
+</head>
+
+<body>
+
+<div class="reportHeader">
+  <div class="headerRow">
+    <img class="githubLogo" src="https://github.githubassets.com/images/modules/logos_page/GitHub-Logo.png">
+    <div class="reportType">
+      <div>GitHub Advanced Security - Executive Summary</div>
+      <div>Prepared Sep 10, 2020</div>
+    </div>
+  </div>
+
+  <div class="headerRow reportTitleRow">
+    <h1 class="reportTitle">Executive Summary</h1>
+  </div>
+</div>
+
+<div class="appHeader">
+  <div class="appHeaderName">Repository: octodemo/test-repo</div>
+</div>
+
+<div class="reportDetail">
+
+  <div class="reportDetailColumn">
+<!--    {% if codeScanning and codeScaning.rules %}-->
+    <div class="summaryBox">
+      <div class="summaryBoxHeader">Code Scanning Status</div>
+      <div class="summaryBoxContent">
+        <div class="summaryBoxRow">
+          Open: 0
+        </div>
+      </div>
+    </div>
+<!--    {% endif %}-->
+  </div>
+
+  <div class="reportDetailColumn">
+
+  </div>
+</div>
+
+<!--{% if codeScanning and codeScaning.rules %}-->
+<!--{% if codeScanning.rules %}-->
+<!--<h2>Code Scanning Rules Applied</h2>-->
+<!--<div id="codeScanningRules">-->
+<!--  {% for rule in codeScanning.rules %}-->
+<!--  <div class="rule">-->
+<!--    <div class="ruleHeader">-->
+<!--      <span class="ruleName">{{ rule.name }}</span>-->
+<!--      <span class="ruleSeverity {{ rule.severity}}">{{ rule.severity }}</span>-->
+<!--    </div>-->
+<!--    <div class="ruleDetail">-->
+<!--      <p>{{ rule.description }}</p>-->
+<!--      <p>Tags: {{ rule.tags | join(' ') }}</p>-->
+<!--      <p>CWE: {{ rule.cwe | join(' ') }}</p>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--  {% endfor %}-->
+<!--</div>-->
+<!--{% endif %}-->
+<!--{% endif %}-->
+
+
+
+
+
+
+
+<!--{% if dependencies %}-->
+<!--{% if dependencies.deps %}-->
+<!--<div class="dependencies">-->
+<!--  <h2>Software Composition Analysis (SCA)</h2>-->
+<!--  <p>Number of Dependencies: {{dependencies.deps.totalDependencies}}</p>-->
+<!--</div>-->
+
+<!--<div>-->
+<!--  <h3>Dependency Vulnerabilities</h3>-->
+
+<!--  {% if dependencies.vulnerabilities %}-->
+<!--  <table>-->
+<!--    <tr>-->
+<!--      <td>Critical</td>-->
+<!--      <td>{{ dependencies.vulnerabilities.CRITICAL | length }}</td>-->
+<!--    </tr>-->
+<!--    <tr>-->
+<!--      <td>High</td>-->
+<!--      <td>{{ dependencies.vulnerabilities.HIGH | length }}</td>-->
+<!--    </tr>-->
+<!--    <tr>-->
+<!--      <td>Moderate</td>-->
+<!--      <td>{{ dependencies.vulnerabilities.MODERATE | length }}</td>-->
+<!--    </tr>-->
+<!--    <tr>-->
+<!--      <td>Low</td>-->
+<!--      <td>{{ dependencies.vulnerabilities.LOW | length }}</td>-->
+<!--    </tr>-->
+<!--  </table>-->
+<!--  {% else %}-->
+<!--  <strong>None identified.</strong>-->
+<!--  {% endif %}-->
+<!--</div>-->
+
+<!--{% if dependencies.deps.manifests and dependencies.deps.manifests.processed | length > 0 and-->
+<!--dependencies.deps.manifests.unprocessed.length > 0 %}-->
+<!--<div>-->
+<!--  <h3>Dependency Sources</h3>-->
+<!--  {% if dependencies.deps.manifests.processed | length > 0 %}-->
+<!--  <h4>Processed</h4>-->
+<!--  <ul>-->
+<!--    {% for manfest in dependencies.deps.manifests.processed %}-->
+<!--    <li>{{ manfest.path }}/{{ manfest.filename }}</li>-->
+<!--    {% endfor %}-->
+<!--  </ul>-->
+<!--  {% endif %}-->
+
+<!--  {% if dependencies.deps.manifests.unprocessed | length > 0 %}-->
+<!--  <h4>Identified but not processed</h4>-->
+<!--  <ul>-->
+<!--    {% for manfest in dependencies.deps.manifests.unprocessed %}-->
+<!--    <li>{{ manfest.path }}/{{ manfest.filename }}</li>-->
+<!--    {% endfor %}-->
+<!--  </ul>-->
+<!--  {% endif %}-->
+<!--</div>-->
+<!--{% endif %}-->
+<!--{% endif %}-->
+<!--{% endif %}-->
+
+<!--{% if codeScanning %}-->
+<!--{% if codeScanning.rules %}-->
+<!--<h2>Code Scanning Rules Applied</h2>-->
+<!--<div id="codeScanningRules">-->
+<!--  {% for rule in codeScanning.rules %}-->
+<!--  <div class="rule">-->
+<!--    <div class="ruleHeader">-->
+<!--      <span class="ruleName">{{ rule.name }}</span>-->
+<!--      <span class="ruleSeverity {{ rule.severity}}">{{ rule.severity }}</span>-->
+<!--    </div>-->
+<!--    <div class="ruleDetail">-->
+<!--      <p>{{ rule.description }}</p>-->
+<!--      <p>Tags: {{ rule.tags | join(' ') }}</p>-->
+<!--      <p>CWE: {{ rule.cwe | join(' ') }}</p>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--  {% endfor %}-->
+<!--</div>-->
+<!--{% endif %}-->
+<!--{% endif %}-->
+
+</body>
+</html>

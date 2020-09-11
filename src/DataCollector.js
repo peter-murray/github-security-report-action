@@ -1,76 +1,65 @@
-const SarifReportFinder = require('./SarifReportFinder')
-  , githubVulnerabilities = require('./githubDependencies')
-  , githubCodeScanning = require('./githubCodeScanning')
-  , SoftwareReport = require('./SoftwareReport')
+const SarifReportFinder = require('./codeScanning/sarif/SarifReportFinder')
+  , githubDependencies = require('./dependencies')
+  , githubCodeScanning = require('./codeScanning')
+  , ReportData = require('./ReportData')
   ;
 
 module.exports = class DataCollector {
 
-  constructor(github, context) {
-    if (!github) {
-      throw new Error('A github octokit client needs to be provided');
+  constructor(octokit, context) {
+    if (!octokit) {
+      throw new Error('A GitHub Octokit client needs to be provided');
     }
-    this._github = github;
+    this._octokit = octokit;
 
     if (!context) {
       throw new Error('A GitHub Actions context is required');
     }
     this._context = context;
-
-    // if (! isSpecified(organization)) {
-    //   throw new Error('GitHub Organization name must be provided');
-    // }
-    // this._orgnaization = organization;
-    //
-    // if (! isSpecified(repository)) {
-    //   throw new Error('GitHub Repoisotry name must be provided');
-    // }
-    // this._repository = repository;
   }
 
-  get githubClient () {
-    return this._github;
+  get githubClient() {
+    return this._octokit;
   }
 
-  get repo () {
+  get repo() {
     return this._context.repo.repo;
   }
 
-  get org () {
+  get org() {
     return this._context.repo.owner;
   }
 
-  generateSoftwareReport(sarifDir) {
-    const sarifFinder = new SarifReportFinder(sarifDir)
-      , vulnerabilities = githubVulnerabilities.create(this.githubClient)
+  getPayload(sarifReportDir) {
+    const sarifFinder = new SarifReportFinder(sarifReportDir)
+      , dependencies = githubDependencies.create(this.githubClient)
       , codeScanning = githubCodeScanning.create(this.githubClient)
     ;
 
-    //TODO we can and should configure the report to optionally load some of this data
     return Promise.all([
-      sarifFinder.getSarifFiles(),
-      vulnerabilities.getAllDependencies(this.org, this.repo),
-      vulnerabilities.getAllVulnerabilities(this.org, this.repo),
-      codeScanning.getOpenCodeScanningAlerts(this.org, this.repo),
-      codeScanning.getClosedCodeScanningAlerts(this.org, this.repo),
-    ])
-      .then(results => {
-        //TODO need to make this cater for multiple report files, as we are getting an array but software report only expects one currently
-        // could adopt the merging approach that codeql-action uses when doing upload-report
+      sarifFinder.getSarifFiles().then(sarif => {
+        return {sarifReports: sarif};
+      }),
+      dependencies.getAllDependencies(this.org, this.repo).then(deps => {
+        return {dependencies: deps};
+      }),
+      dependencies.getAllVulnerabilities(this.org, this.repo).then(vulns => {
+        return {vulnerabilities: vulns};
+      }),
+      codeScanning.getOpenCodeScanningAlerts(this.org, this.repo).then(open => {
+        return {codeScanningOpen: open};
+      }),
+      codeScanning.getClosedCodeScanningAlerts(this.org, this.repo).then(closed => {
+        return {codeScanningClosed: closed};
+      }),
+    ]).then(results => {
+      const data = {};
 
-        // console.log(`Sarif Reports: ${JSON.stringify(results[0][0])}`);
-        return new SoftwareReport({
-          report: results[0][0],
-          dependencies: results[1],
-          vulnerabilities: results[2],
-          openScans: results[3],
-          closedScans: results[4],
-        });
+      results.forEach(result => {
+        Object.assign(data, result);
       });
+
+      return new ReportData(data);
+    });
   }
 }
-
-function isSpecified(value) {
-  return !!value && `${value}`.trim().length > 0;
-}
-

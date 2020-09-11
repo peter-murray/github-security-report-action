@@ -2118,7 +2118,36 @@ module.exports = from;
 
 /***/ }),
 /* 43 */,
-/* 44 */,
+/* 44 */
+/***/ (function(module) {
+
+"use strict";
+
+
+module.exports = class Dependency {
+
+  constructor(data) {
+    this._data = data;
+  }
+
+  get name() {
+    return this.data.packageName;
+  }
+
+  get packageType() {
+    return this.data.packageManager;
+  }
+
+  get version() {
+    return this.data.requirements;
+  }
+
+  get data() {
+    return this._data;
+  }
+}
+
+/***/ }),
 /* 45 */,
 /* 46 */,
 /* 47 */,
@@ -2234,189 +2263,38 @@ exports.paperFormats = {
 /* 65 */,
 /* 66 */,
 /* 67 */,
-/* 68 */,
-/* 69 */,
-/* 70 */
+/* 68 */
 /***/ (function(module, __unusedexports, __webpack_require__) {
 
-const Vulnerability = __webpack_require__(875)
-  , DependencySet = __webpack_require__(602)
+const fs = __webpack_require__(747)
+  , path = __webpack_require__(622)
+  , nunjucks = __webpack_require__(565)
   ;
 
-const QUERY_SECURITY_VULNERABILITIES = `
-query users($organizationName: String!, $repositoryName: String!, $cursor: String) {
+module.exports = class ReportTemplate {
 
-  repository(owner: $organizationName, name: $repositoryName) {
-    vulnerabilityAlerts(first: 100, after: $cursor) {
-      totalCount
-      pageInfo {
-        hasNextPage
-        endCursor
-      }
-      nodes {
-        id
-        createdAt
-        dismisser {
-          login
-          name
-        }
-        dismissedAt
-        dismissReason
-        vulnerableManifestFilename
-        vulnerableRequirements
-        vulnerableManifestPath
-        securityVulnerability{
-          package {
-            ecosystem
-            name
-          }
-          severity
-          vulnerableVersionRange
-        }
-        securityAdvisory{
-          databaseId
-          id
-          summary
-          severity
-          description
-          ghsaId
-          identifiers {
-            type
-            value
-          }
-          permalink
-          publishedAt
-        }
-      }
+  constructor(templatesDir) {
+    if (!templatesDir) {
+      templatesDir = __webpack_require__.ab + "templates";
     }
-  }
-}
-`;
 
-const QUERY_DEPENDENCY_GRAPH = `
-query ($organizationName: String!, $repositoryName: String!, $cursor: String){
-  repository(owner: $organizationName name: $repositoryName) {
-    name
-    dependencyGraphManifests(first: 100, after: $cursor) {
-      pageInfo {
-        hasNextPage
-        endCursor
-      }
-      totalCount
-      edges {
-        node {
-          filename
-          dependenciesCount
-          blobPath
-          exceedsMaxSize
-          parseable
-          dependencies{
-            edges {
-              node {
-                packageName
-                packageManager
-                requirements
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-}
-`
-
-module.exports.create = (octokit) => {
-  return new GraphQL(octokit)
-}
-
-class GraphQL {
-
-  constructor(octokit) {
-    this._octokit = octokit;
+    this._renderer = nunjucks.configure(__webpack_require__.ab + "templates", {autoescape: true})
   }
 
-  get octokit() {
-    return this._octokit;
+  get renderer() {
+    return this._renderer;
   }
 
-  async getAllVulnerabilities(org, repo) {
-    const data = await this.getPaginatedQuery(
-      QUERY_SECURITY_VULNERABILITIES,
-      {organizationName: org, repositoryName: repo},
-      'repository.vulnerabilityAlerts.pageInfo',
-      data => { return data.repository.vulnerabilityAlerts.nodes }
-    );
-
-    return data.map(val => {return new Vulnerability(val)});
+  render(data, template) {
+    const content = this.renderer.render(template, data);
+    console.log(content);
+    return content;
   }
-
-  async getAllDependencies(org, repo) {
-    const data = await this.getPaginatedQuery(
-      QUERY_DEPENDENCY_GRAPH,
-      {organizationName: org, repositoryName: repo},
-      'repository.dependencyGraphManifests.pageInfo',
-      data => { return data.repository.dependencyGraphManifests.edges },
-      {accept: 'application/vnd.github.hawkgirl-preview+json'}
-    );
-
-    // console.log(JSON.stringify(data, null, 2));
-    return data.map(node => { return new DependencySet(node.node); });
-  }
-
-  async getPaginatedQuery(query, parameters, pageInfoPath, extractResultsFn, headers) {
-    const octokit = this.octokit
-      , results = []
-      , queryParameters = Object.assign({cursor: null}, parameters)
-    ;
-
-    let hasNextPage = false;
-    do {
-      const graphqlParameters = buildGraphQLParameters(query, parameters, headers)
-        , queryResult = await octokit.graphql(graphqlParameters)
-      ;
-
-      const extracted = extractResultsFn(queryResult)
-      results.push(...extracted);
-
-      const pageInfo = getObject(queryResult, ...pageInfoPath.split('.'));
-      hasNextPage = pageInfo ? pageInfo.hasNextPage : false;
-      if (hasNextPage) {
-        queryParameters.cursor = pageInfo.endCursor;
-      }
-    } while (hasNextPage)
-
-    return results;
-  }
-}
-
-function buildGraphQLParameters(query, parameters, headers) {
-  const result = {
-    ...(parameters || {}),
-    query: query,
-  };
-
-  if (headers) {
-    result.headers = headers;
-  }
-
-  return result;
-}
-
-function getObject(target, ...path) {
-  if (target !== null && target !== undefined) {
-    const value = target[path[0]];
-
-    if (path.length > 1) {
-      return getObject(value, ...path.slice(1));
-    } else {
-      return value;
-    }
-  }
-  return null;
 }
 
 /***/ }),
+/* 69 */,
+/* 70 */,
 /* 71 */,
 /* 72 */
 /***/ (function(module) {
@@ -2434,7 +2312,64 @@ module.exports.default = pTry;
 
 
 /***/ }),
-/* 73 */,
+/* 73 */
+/***/ (function(module, __unusedexports, __webpack_require__) {
+
+"use strict";
+
+
+const CodeScanningRule = __webpack_require__(888);
+
+module.exports = class SarifReport {
+
+  constructor(data) {
+    this._data = data;
+    this._rules = getRules(data) || [];
+  }
+
+  get rules() {
+    return this._rules;
+  }
+
+  get cweList() {
+    const result = this.rules.reduce((cwes, rule) => {
+      return cwes.concat(rule.cwes)
+    }, []);
+    return unique(result).sort();
+  }
+}
+
+function getRules(report) {
+  let sarifRules = null;
+
+  //TODO could error on unknown version
+  if (report.version === '2.1.0' && report.runs) {
+    report.runs.forEach(run => {
+      if (run.tool.driver.name === 'CodeQL') { //TODO could support other tools
+        sarifRules = run.tool.driver.rules;
+      }
+    });
+  }
+
+  return getAppliedRuleDetails(sarifRules);
+}
+
+function getAppliedRuleDetails(sarifRules) {
+  if (sarifRules) {
+    return sarifRules.map(rule => {
+      return new CodeScanningRule(rule)
+    });
+  }
+  return null;
+}
+
+function unique(array) {
+  return array.filter((val, idx, self) => {
+    return self.indexOf(val) === idx
+  });
+}
+
+/***/ }),
 /* 74 */,
 /* 75 */,
 /* 76 */,
@@ -4795,8 +4730,8 @@ const path = __webpack_require__(622)
   , core = __webpack_require__(470)
   , github = __webpack_require__(469)
   , DataCollector = __webpack_require__(129)
-  , ReportTemplate = __webpack_require__(881)
-  , pdfWriter = __webpack_require__(595)
+  , ReportTemplate = __webpack_require__(68)
+  , pdfWriter = __webpack_require__(434)
   ;
 
 async function run() {
@@ -4808,13 +4743,14 @@ async function run() {
 
   try {
     const collector = new DataCollector(octokit, github.context)
-      , report = await collector.generateSoftwareReport(sarifReportDir)
+      , reportData = await collector.getPayload(sarifReportDir)
       , reportTemplate = new ReportTemplate() //TODO add support to set a different directory
     ;
 
-    //TODO outputting this to console for testing, needs to be converted into a report
-    // console.log(JSON.stringify(report.getPayload(), null, 2));
-    const html = reportTemplate.render(report.getPayload(), 'summary.html');
+    //TODO outputting this to console for testing, needs to be converted into a reportData
+    // console.log(JSON.stringify(reportData.getPayload(), null, 2));
+
+    const html = reportTemplate.render(reportData, 'summary.html');
     const result = await pdfWriter.save(html, path.join(outputDir, 'summary.pdf'));
     console.log(JSON.stringify(result));
   } catch (err) {
@@ -7567,82 +7503,71 @@ exports.getApiBaseUrl = getApiBaseUrl;
 /* 129 */
 /***/ (function(module, __unusedexports, __webpack_require__) {
 
-const SarifReportFinder = __webpack_require__(439)
-  , githubVulnerabilities = __webpack_require__(70)
-  , githubCodeScanning = __webpack_require__(620)
-  , SoftwareReport = __webpack_require__(797)
+const SarifReportFinder = __webpack_require__(795)
+  , githubDependencies = __webpack_require__(965)
+  , githubCodeScanning = __webpack_require__(711)
+  , ReportData = __webpack_require__(922)
   ;
 
 module.exports = class DataCollector {
 
-  constructor(github, context) {
-    if (!github) {
-      throw new Error('A github octokit client needs to be provided');
+  constructor(octokit, context) {
+    if (!octokit) {
+      throw new Error('A GitHub Octokit client needs to be provided');
     }
-    this._github = github;
+    this._octokit = octokit;
 
     if (!context) {
       throw new Error('A GitHub Actions context is required');
     }
     this._context = context;
-
-    // if (! isSpecified(organization)) {
-    //   throw new Error('GitHub Organization name must be provided');
-    // }
-    // this._orgnaization = organization;
-    //
-    // if (! isSpecified(repository)) {
-    //   throw new Error('GitHub Repoisotry name must be provided');
-    // }
-    // this._repository = repository;
   }
 
-  get githubClient () {
-    return this._github;
+  get githubClient() {
+    return this._octokit;
   }
 
-  get repo () {
+  get repo() {
     return this._context.repo.repo;
   }
 
-  get org () {
+  get org() {
     return this._context.repo.owner;
   }
 
-  generateSoftwareReport(sarifDir) {
-    const sarifFinder = new SarifReportFinder(sarifDir)
-      , vulnerabilities = githubVulnerabilities.create(this.githubClient)
+  getPayload(sarifReportDir) {
+    const sarifFinder = new SarifReportFinder(sarifReportDir)
+      , dependencies = githubDependencies.create(this.githubClient)
       , codeScanning = githubCodeScanning.create(this.githubClient)
     ;
 
-    //TODO we can and should configure the report to optionally load some of this data
     return Promise.all([
-      sarifFinder.getSarifFiles(),
-      vulnerabilities.getAllDependencies(this.org, this.repo),
-      vulnerabilities.getAllVulnerabilities(this.org, this.repo),
-      codeScanning.getOpenCodeScanningAlerts(this.org, this.repo),
-      codeScanning.getClosedCodeScanningAlerts(this.org, this.repo),
-    ])
-      .then(results => {
-        //TODO need to make this cater for multiple report files, as we are getting an array but software report only expects one currently
-        // could adopt the merging approach that codeql-action uses when doing upload-report
+      sarifFinder.getSarifFiles().then(sarif => {
+        return {sarifReports: sarif};
+      }),
+      dependencies.getAllDependencies(this.org, this.repo).then(deps => {
+        return {dependencies: deps};
+      }),
+      dependencies.getAllVulnerabilities(this.org, this.repo).then(vulns => {
+        return {vulnerabilities: vulns};
+      }),
+      codeScanning.getOpenCodeScanningAlerts(this.org, this.repo).then(open => {
+        return {codeScanningOpen: open};
+      }),
+      codeScanning.getClosedCodeScanningAlerts(this.org, this.repo).then(closed => {
+        return {codeScanningClosed: closed};
+      }),
+    ]).then(results => {
+      const data = {};
 
-        // console.log(`Sarif Reports: ${JSON.stringify(results[0][0])}`);
-        return new SoftwareReport({
-          report: results[0][0],
-          dependencies: results[1],
-          vulnerabilities: results[2],
-          openScans: results[3],
-          closedScans: results[4],
-        });
+      results.forEach(result => {
+        Object.assign(data, result);
       });
+
+      return new ReportData(data);
+    });
   }
 }
-
-function isSpecified(value) {
-  return !!value && `${value}`.trim().length > 0;
-}
-
 
 
 /***/ }),
@@ -17863,7 +17788,7 @@ var stream = __webpack_require__(794);
 var Readable = stream.Readable;
 var Writable = stream.Writable;
 var PassThrough = stream.PassThrough;
-var Pend = __webpack_require__(965);
+var Pend = __webpack_require__(880);
 var EventEmitter = __webpack_require__(614).EventEmitter;
 
 exports.createFromBuffer = createFromBuffer;
@@ -23266,7 +23191,7 @@ module.exports = (ast, options = {}) => {
  */
 
 if (typeof process === 'undefined' || process.type === 'renderer' || process.browser === true || process.__nwjs) {
-	module.exports = __webpack_require__(434);
+	module.exports = __webpack_require__(615);
 } else {
 	module.exports = __webpack_require__(310);
 }
@@ -25972,79 +25897,7 @@ module.exports = __webpack_require__(141);
 /***/ }),
 /* 414 */,
 /* 415 */,
-/* 416 */
-/***/ (function(module) {
-
-const CWE_REGEX = /external\/cwe\/(cwe-.*)/;
-
-module.exports = class CodeScanningRule {
-
-  constructor(sarifRule) {
-    this._sarifRule = sarifRule;
-    this._cwes = getCWEs(sarifRule.properties.tags);
-  }
-
-  get id() {
-    return this._sarif.id;
-  }
-
-  get name() {
-    return this._sarif.name;
-  }
-
-  get shortDescription() {
-    return this._sarif.shortDescription.text;
-  }
-
-  get description() {
-    return this._sarif.fullDescription.text;
-  }
-
-  get tags() {
-    return this._sarif.properties.tags;
-  }
-
-  get cwes() {
-    return this._cwes;
-  }
-
-  get severity() {
-    return this._sarif.properties['problem.severity'];
-  }
-
-  get precision() {
-    return this._sarif.properties.precision;
-  }
-
-  get kind() {
-    return this._sarif.properties.kind;
-  }
-
-  get defaultConfigurationLevel() {
-    return this._sarif.defaultConfiguration.level;
-  }
-
-  get _sarif() {
-    return this._sarifRule;
-  }
-}
-
-function getCWEs(tags) {
-  const cwes = [];
-
-  if (tags) {
-    tags.forEach(tag => {
-      const match = CWE_REGEX.exec(tag);
-      if (match) {
-        cwes.push(match[1]);
-      }
-    });
-  }
-
-  return cwes.sort();
-}
-
-/***/ }),
+/* 416 */,
 /* 417 */
 /***/ (function(module, __unusedexports, __webpack_require__) {
 
@@ -26652,273 +26505,33 @@ function simpleEnd(buf) {
 /***/ }),
 /* 433 */,
 /* 434 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __unusedexports, __webpack_require__) {
 
-/* eslint-env browser */
+const puppeteer = __webpack_require__(658);
 
-/**
- * This is the web browser implementation of `debug()`.
- */
+module.exports.save = (html, file) => {
 
-exports.log = log;
-exports.formatArgs = formatArgs;
-exports.save = save;
-exports.load = load;
-exports.useColors = useColors;
-exports.storage = localstorage();
-
-/**
- * Colors.
- */
-
-exports.colors = [
-	'#0000CC',
-	'#0000FF',
-	'#0033CC',
-	'#0033FF',
-	'#0066CC',
-	'#0066FF',
-	'#0099CC',
-	'#0099FF',
-	'#00CC00',
-	'#00CC33',
-	'#00CC66',
-	'#00CC99',
-	'#00CCCC',
-	'#00CCFF',
-	'#3300CC',
-	'#3300FF',
-	'#3333CC',
-	'#3333FF',
-	'#3366CC',
-	'#3366FF',
-	'#3399CC',
-	'#3399FF',
-	'#33CC00',
-	'#33CC33',
-	'#33CC66',
-	'#33CC99',
-	'#33CCCC',
-	'#33CCFF',
-	'#6600CC',
-	'#6600FF',
-	'#6633CC',
-	'#6633FF',
-	'#66CC00',
-	'#66CC33',
-	'#9900CC',
-	'#9900FF',
-	'#9933CC',
-	'#9933FF',
-	'#99CC00',
-	'#99CC33',
-	'#CC0000',
-	'#CC0033',
-	'#CC0066',
-	'#CC0099',
-	'#CC00CC',
-	'#CC00FF',
-	'#CC3300',
-	'#CC3333',
-	'#CC3366',
-	'#CC3399',
-	'#CC33CC',
-	'#CC33FF',
-	'#CC6600',
-	'#CC6633',
-	'#CC9900',
-	'#CC9933',
-	'#CCCC00',
-	'#CCCC33',
-	'#FF0000',
-	'#FF0033',
-	'#FF0066',
-	'#FF0099',
-	'#FF00CC',
-	'#FF00FF',
-	'#FF3300',
-	'#FF3333',
-	'#FF3366',
-	'#FF3399',
-	'#FF33CC',
-	'#FF33FF',
-	'#FF6600',
-	'#FF6633',
-	'#FF9900',
-	'#FF9933',
-	'#FFCC00',
-	'#FFCC33'
-];
-
-/**
- * Currently only WebKit-based Web Inspectors, Firefox >= v31,
- * and the Firebug extension (any Firefox version) are known
- * to support "%c" CSS customizations.
- *
- * TODO: add a `localStorage` variable to explicitly enable/disable colors
- */
-
-// eslint-disable-next-line complexity
-function useColors() {
-	// NB: In an Electron preload script, document will be defined but not fully
-	// initialized. Since we know we're in Chrome, we'll just detect this case
-	// explicitly
-	if (typeof window !== 'undefined' && window.process && (window.process.type === 'renderer' || window.process.__nwjs)) {
-		return true;
-	}
-
-	// Internet Explorer and Edge do not support colors.
-	if (typeof navigator !== 'undefined' && navigator.userAgent && navigator.userAgent.toLowerCase().match(/(edge|trident)\/(\d+)/)) {
-		return false;
-	}
-
-	// Is webkit? http://stackoverflow.com/a/16459606/376773
-	// document is undefined in react-native: https://github.com/facebook/react-native/pull/1632
-	return (typeof document !== 'undefined' && document.documentElement && document.documentElement.style && document.documentElement.style.WebkitAppearance) ||
-		// Is firebug? http://stackoverflow.com/a/398120/376773
-		(typeof window !== 'undefined' && window.console && (window.console.firebug || (window.console.exception && window.console.table))) ||
-		// Is firefox >= v31?
-		// https://developer.mozilla.org/en-US/docs/Tools/Web_Console#Styling_messages
-		(typeof navigator !== 'undefined' && navigator.userAgent && navigator.userAgent.toLowerCase().match(/firefox\/(\d+)/) && parseInt(RegExp.$1, 10) >= 31) ||
-		// Double check webkit in userAgent just in case we are in a worker
-		(typeof navigator !== 'undefined' && navigator.userAgent && navigator.userAgent.toLowerCase().match(/applewebkit\/(\d+)/));
+  const fetcher = puppeteer.createBrowserFetcher();
+  return fetcher.download('782078')//TODO need to store and inject this
+    .then(revisionInfo => {
+      return puppeteer.launch({executablePath: revisionInfo.executablePath})
+        .then(browser => {
+          return browser.newPage()
+            .then(page => {
+              return page.setContent(html)
+                .then(() => {
+                  return page.pdf({path: file, format: 'A4'})
+                });
+            })
+            .then(() => {
+              return browser.close();
+            });
+        })
+        .then(() => {
+          return file;
+        });
+    });
 }
-
-/**
- * Colorize log arguments if enabled.
- *
- * @api public
- */
-
-function formatArgs(args) {
-	args[0] = (this.useColors ? '%c' : '') +
-		this.namespace +
-		(this.useColors ? ' %c' : ' ') +
-		args[0] +
-		(this.useColors ? '%c ' : ' ') +
-		'+' + module.exports.humanize(this.diff);
-
-	if (!this.useColors) {
-		return;
-	}
-
-	const c = 'color: ' + this.color;
-	args.splice(1, 0, c, 'color: inherit');
-
-	// The final "%c" is somewhat tricky, because there could be other
-	// arguments passed either before or after the %c, so we need to
-	// figure out the correct index to insert the CSS into
-	let index = 0;
-	let lastC = 0;
-	args[0].replace(/%[a-zA-Z%]/g, match => {
-		if (match === '%%') {
-			return;
-		}
-		index++;
-		if (match === '%c') {
-			// We only are interested in the *last* %c
-			// (the user may have provided their own)
-			lastC = index;
-		}
-	});
-
-	args.splice(lastC, 0, c);
-}
-
-/**
- * Invokes `console.log()` when available.
- * No-op when `console.log` is not a "function".
- *
- * @api public
- */
-function log(...args) {
-	// This hackery is required for IE8/9, where
-	// the `console.log` function doesn't have 'apply'
-	return typeof console === 'object' &&
-		console.log &&
-		console.log(...args);
-}
-
-/**
- * Save `namespaces`.
- *
- * @param {String} namespaces
- * @api private
- */
-function save(namespaces) {
-	try {
-		if (namespaces) {
-			exports.storage.setItem('debug', namespaces);
-		} else {
-			exports.storage.removeItem('debug');
-		}
-	} catch (error) {
-		// Swallow
-		// XXX (@Qix-) should we be logging these?
-	}
-}
-
-/**
- * Load `namespaces`.
- *
- * @return {String} returns the previously persisted debug modes
- * @api private
- */
-function load() {
-	let r;
-	try {
-		r = exports.storage.getItem('debug');
-	} catch (error) {
-		// Swallow
-		// XXX (@Qix-) should we be logging these?
-	}
-
-	// If debug isn't set in LS, and we're in Electron, try to load $DEBUG
-	if (!r && typeof process !== 'undefined' && 'env' in process) {
-		r = process.env.DEBUG;
-	}
-
-	return r;
-}
-
-/**
- * Localstorage attempts to return the localstorage.
- *
- * This is necessary because safari throws
- * when a user disables cookies/localstorage
- * and you attempt to access it.
- *
- * @return {LocalStorage}
- * @api private
- */
-
-function localstorage() {
-	try {
-		// TVMLKit (Apple TV JS Runtime) does not have a window object, just localStorage in the global context
-		// The Browser also has localStorage in the global context.
-		return localStorage;
-	} catch (error) {
-		// Swallow
-		// XXX (@Qix-) should we be logging these?
-	}
-}
-
-module.exports = __webpack_require__(467)(exports);
-
-const {formatters} = module.exports;
-
-/**
- * Map %j to `JSON.stringify()`, since no Web Inspectors do that by default.
- */
-
-formatters.j = function (v) {
-	try {
-		return JSON.stringify(v);
-	} catch (error) {
-		return '[UnexpectedJSONParseError]: ' + error.message;
-	}
-};
-
 
 /***/ }),
 /* 435 */
@@ -27203,71 +26816,7 @@ function () {
 }();
 
 /***/ }),
-/* 439 */
-/***/ (function(module, __unusedexports, __webpack_require__) {
-
-const fs = __webpack_require__(747)
-  , path = __webpack_require__(622)
-  , SarifReport = __webpack_require__(588)
-  ;
-
-module.exports = class SarifReportFinder {
-
-  constructor(dir) {
-    this._dir = dir;
-  }
-
-  getSarifFiles() {
-    const dir = this._dir
-      , promises = []
-      ;
-
-    if (!fs.existsSync(dir)) {
-      throw new Error(`Path does not exist: ${dir}`);
-    }
-
-    console.log(`Processing: ${dir}`);
-    if (fs.lstatSync(dir).isDirectory()) {
-      console.log(`  is a directory`);
-      const files = fs.readdirSync(dir) // TODO use promises here
-        .filter(f => f.endsWith('.sarif'))
-        .map(f => path.resolve(dir, f));
-
-      console.log(`Matched Files: ${JSON.stringify(files)}`);
-      if (files) {
-        files.forEach(f => {
-          promises.push(loadFileContents(f).then(report => {return {file: f, payload: report}}));
-        });
-      }
-    }
-
-    if (promises.length > 0) {
-      return Promise.all(promises);
-    } else {
-      return Promise.resolve([]);
-    }
-  }
-}
-
-function loadFileContents(file) {
-  return fs.promises.open(file)
-    .then(fileHandle => {
-      return fileHandle.readFile()
-        .then(content => {
-          fileHandle.close();
-          try {
-            return JSON.parse(content.toString('utf8'));
-          } catch (err) {
-            throw new Error(`Failed ro parse JSON contents of SARIF file ${file}: ${err}`);
-          }
-        })
-        .then(data => {
-          return new SarifReport(data);
-        })
-    });
-}
-
-/***/ }),
+/* 439 */,
 /* 440 */,
 /* 441 */
 /***/ (function(module, __unusedexports, __webpack_require__) {
@@ -27613,7 +27162,61 @@ module.exports = new Mime(__webpack_require__(343), __webpack_require__(983));
 
 
 /***/ }),
-/* 445 */,
+/* 445 */
+/***/ (function(module, __unusedexports, __webpack_require__) {
+
+"use strict";
+
+
+const Dependency = __webpack_require__(44)
+
+module.exports = class DependencySet {
+
+  constructor(data) {
+    this._data = data;
+  }
+
+  get filename() {
+    return this.data.filename;
+  }
+
+  get count() {
+    return this.data.dependenciesCount || 0;
+  }
+
+  get path() {
+    return this.data.blobPath;
+  }
+
+  get isValid() {
+    return this.parsable && !this.exceededMaxSize;
+  }
+
+  get parsable() {
+    return this.data.parseable;
+  }
+
+  get exceededMaxSize() {
+    return this.data.exceedsMaxSize;
+  }
+
+  get dependencies() {
+    const deps = this.data.dependencies.edges;
+
+    if (deps) {
+      // console.log(JSON.stringify(deps));
+      // console.log(JSON.stringify(deps[0], null, 2))
+      return deps.map(dep => { return new Dependency(dep.node)} );
+    }
+    return [];
+  }
+
+  get data() {
+    return this._data;
+  }
+}
+
+/***/ }),
 /* 446 */,
 /* 447 */,
 /* 448 */
@@ -30571,7 +30174,7 @@ exports.FetchError = FetchError;
 const path = __webpack_require__(622);
 const fs = __webpack_require__(747);
 const {promisify} = __webpack_require__(669);
-const pLocate = __webpack_require__(922);
+const pLocate = __webpack_require__(597);
 
 const fsStat = promisify(fs.stat);
 const fsLStat = promisify(fs.lstat);
@@ -32984,7 +32587,7 @@ Writable.prototype._destroy = function (err, cb) {
  * Released under the MIT License.
  */
 
-var isExtglob = __webpack_require__(888);
+var isExtglob = __webpack_require__(999);
 var chars = { '{': '}', '(': ')', '[': ']'};
 var strictRegex = /\\(.)|(^!|\*|[\].+)]\?|\[[^\\\]]+\]|\{[^\\}]+\}|\(\?[:!=][^\\)]+\)|\([^|]+\|[^\\)]+\))/;
 var relaxedRegex = /\\(.)|(^!|[*?{}()[\]]|\(\?)/;
@@ -35032,7 +34635,78 @@ exports.Target = Target;
 
 /***/ }),
 /* 518 */,
-/* 519 */,
+/* 519 */
+/***/ (function(module) {
+
+
+module.exports = class CodeScanningAlert {
+
+  constructor(data) {
+    this._data = data;
+  }
+
+  get id() {
+    return this._data.number;
+  }
+
+  get url() {
+    return this._data.html_url;
+  }
+
+  get created() {
+    return this._data.created_at;
+  }
+
+  get dismissed() {
+    if (this._data.dismissed_at) {
+      return {
+        at: this._data.dismissed_at,
+        reason: this._data.dismissed_reason,
+        by: {
+          login: this._data.dismissed_by.login,
+          type: this._data.dismissed_by.type,
+          id: this._data.dismissed_by.id,
+          avatar: this._data.dismissed_at.avatar_url,
+          url: this._data.dismissed_at.html_url,
+        },
+      }
+    }
+    return null;
+  }
+
+  get severity() {
+    return this.rule ? this.rule.severity : null;
+  }
+
+  get state() {
+    return this._data.state;
+  }
+
+  get rule() {
+    if (this._data.rule) {
+      return this._data.rule
+    }
+    return null;
+  }
+
+  get ruleId() {
+    return this.rule ? this.rule.id : null;
+  }
+
+  get ruleDescription() {
+    return this.rule ? this.rule.description : null;
+  }
+
+  get toolName() {
+    return this._data.tool ? this._data.tool.name : null;
+  }
+
+  get toolVersion() {
+    return this._data.tool ? this._data.tool.version : null;
+  }
+}
+
+/***/ }),
 /* 520 */
 /***/ (function(module, __unusedexports, __webpack_require__) {
 
@@ -38626,186 +38300,79 @@ module.exports = __webpack_require__(794);
 /* 585 */,
 /* 586 */,
 /* 587 */,
-/* 588 */
-/***/ (function(module, __unusedexports, __webpack_require__) {
-
-"use strict";
-
-
-const CodeScanningRule = __webpack_require__(416);
-
-module.exports = class SarifReport {
-
-  constructor(data) {
-    this._data = data;
-    this._rules = getRules(data) || [];
-  }
-
-  get rules() {
-    return this._rules;
-  }
-
-  get cweList() {
-    const result = this.rules.reduce((cwes, rule) => {
-      return cwes.concat(rule.cwes)
-    }, []);
-    return unique(result).sort();
-  }
-}
-
-function getRules(report) {
-  let sarifRules = null;
-
-  //TODO could error on unknown version
-  if (report.version === '2.1.0' && report.runs) {
-    report.runs.forEach(run => {
-      if (run.tool.driver.name === 'CodeQL') { //TODO could support other tools
-        sarifRules = run.tool.driver.rules;
-      }
-    });
-  }
-
-  return getAppliedRuleDetails(sarifRules);
-}
-
-function getAppliedRuleDetails(sarifRules) {
-  if (sarifRules) {
-    return sarifRules.map(rule => {
-      return new CodeScanningRule(rule)
-    });
-  }
-  return null;
-}
-
-function unique(array) {
-  return array.filter((val, idx, self) => {
-    return self.indexOf(val) === idx
-  });
-}
-
-/***/ }),
+/* 588 */,
 /* 589 */,
 /* 590 */,
 /* 591 */,
 /* 592 */,
 /* 593 */,
 /* 594 */,
-/* 595 */
-/***/ (function(module, __unusedexports, __webpack_require__) {
-
-const path = __webpack_require__(622)
-  , os = __webpack_require__(87)
-  , puppeteer = __webpack_require__(658)
-  ;
-
-module.exports.save = (html, file) => {
-
-  const fetcher = puppeteer.createBrowserFetcher();
-  return fetcher.download('782078')
-    .then(revisionInfo => {
-      return puppeteer.launch({executablePath: revisionInfo.executablePath})
-        .then(browser => {
-          return browser.newPage()
-            .then(page => {
-              return page.setContent(html)
-                .then(() => {
-                  return page.pdf({path: file, format: 'A4'})
-                });
-            })
-            .then(() => {
-              return browser.close();
-            });
-        })
-        .then(() => {
-          return file;
-        });
-    });
-}
-
-// module.exports.save = (html, file) => {
-//   return new Promise((resolve, reject) => {
-//     pdf.create(html, getOptions()).toFile(file, (err, res) => {
-//       if (err) {
-//         reject(err);
-//       } else {
-//         resolve(res);
-//       }
-//     })
-//   });
-// }
-//
-// function getOptions() {
-//   const isWindows = os.platform() === 'win32'
-//     , executableName = isWindows ? 'phantomjs.exe' : 'phantomjs'
-//   ;
-//
-//   return {
-//     phantomPath: path.join(__dirname, '..', 'phantomjs', os.platform(), 'bin', executableName)
-//   };
-// }
-
-/***/ }),
+/* 595 */,
 /* 596 */,
-/* 597 */,
-/* 598 */,
-/* 599 */,
-/* 600 */,
-/* 601 */,
-/* 602 */
+/* 597 */
 /***/ (function(module, __unusedexports, __webpack_require__) {
 
 "use strict";
 
+const pLimit = __webpack_require__(158);
 
-const Dependency = __webpack_require__(902)
-
-module.exports = class DependencySet {
-
-  constructor(data) {
-    this._data = data;
-  }
-
-  get filename() {
-    return this.data.filename;
-  }
-
-  get count() {
-    return this.data.dependenciesCount || 0;
-  }
-
-  get path() {
-    return this.data.blobPath;
-  }
-
-  get isValid() {
-    return this.parsable && !this.exceededMaxSize;
-  }
-
-  get parsable() {
-    return this.data.parseable;
-  }
-
-  get exceededMaxSize() {
-    return this.data.exceedsMaxSize;
-  }
-
-  get dependencies() {
-    const deps = this.data.dependencies.edges;
-
-    if (deps) {
-      // console.log(JSON.stringify(deps));
-      // console.log(JSON.stringify(deps[0], null, 2))
-      return deps.map(dep => { return new Dependency(dep.node)} );
-    }
-    return [];
-  }
-
-  get data() {
-    return this._data;
-  }
+class EndError extends Error {
+	constructor(value) {
+		super();
+		this.value = value;
+	}
 }
 
+// The input can also be a promise, so we await it
+const testElement = async (element, tester) => tester(await element);
+
+// The input can also be a promise, so we `Promise.all()` them both
+const finder = async element => {
+	const values = await Promise.all(element);
+	if (values[1] === true) {
+		throw new EndError(values[0]);
+	}
+
+	return false;
+};
+
+const pLocate = async (iterable, tester, options) => {
+	options = {
+		concurrency: Infinity,
+		preserveOrder: true,
+		...options
+	};
+
+	const limit = pLimit(options.concurrency);
+
+	// Start all the promises concurrently with optional limit
+	const items = [...iterable].map(element => [element, limit(testElement, element, tester)]);
+
+	// Check the promises either serially or concurrently
+	const checkLimit = pLimit(options.preserveOrder ? 1 : Infinity);
+
+	try {
+		await Promise.all(items.map(element => checkLimit(finder, element)));
+	} catch (error) {
+		if (error instanceof EndError) {
+			return error.value;
+		}
+
+		throw error;
+	}
+};
+
+module.exports = pLocate;
+// TODO: Remove this for the next major release
+module.exports.default = pLocate;
+
+
 /***/ }),
+/* 598 */,
+/* 599 */,
+/* 600 */,
+/* 601 */,
+/* 602 */,
 /* 603 */,
 /* 604 */,
 /* 605 */
@@ -39305,7 +38872,276 @@ function abortHandshake(socket, code, message, headers) {
 module.exports = require("events");
 
 /***/ }),
-/* 615 */,
+/* 615 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* eslint-env browser */
+
+/**
+ * This is the web browser implementation of `debug()`.
+ */
+
+exports.log = log;
+exports.formatArgs = formatArgs;
+exports.save = save;
+exports.load = load;
+exports.useColors = useColors;
+exports.storage = localstorage();
+
+/**
+ * Colors.
+ */
+
+exports.colors = [
+	'#0000CC',
+	'#0000FF',
+	'#0033CC',
+	'#0033FF',
+	'#0066CC',
+	'#0066FF',
+	'#0099CC',
+	'#0099FF',
+	'#00CC00',
+	'#00CC33',
+	'#00CC66',
+	'#00CC99',
+	'#00CCCC',
+	'#00CCFF',
+	'#3300CC',
+	'#3300FF',
+	'#3333CC',
+	'#3333FF',
+	'#3366CC',
+	'#3366FF',
+	'#3399CC',
+	'#3399FF',
+	'#33CC00',
+	'#33CC33',
+	'#33CC66',
+	'#33CC99',
+	'#33CCCC',
+	'#33CCFF',
+	'#6600CC',
+	'#6600FF',
+	'#6633CC',
+	'#6633FF',
+	'#66CC00',
+	'#66CC33',
+	'#9900CC',
+	'#9900FF',
+	'#9933CC',
+	'#9933FF',
+	'#99CC00',
+	'#99CC33',
+	'#CC0000',
+	'#CC0033',
+	'#CC0066',
+	'#CC0099',
+	'#CC00CC',
+	'#CC00FF',
+	'#CC3300',
+	'#CC3333',
+	'#CC3366',
+	'#CC3399',
+	'#CC33CC',
+	'#CC33FF',
+	'#CC6600',
+	'#CC6633',
+	'#CC9900',
+	'#CC9933',
+	'#CCCC00',
+	'#CCCC33',
+	'#FF0000',
+	'#FF0033',
+	'#FF0066',
+	'#FF0099',
+	'#FF00CC',
+	'#FF00FF',
+	'#FF3300',
+	'#FF3333',
+	'#FF3366',
+	'#FF3399',
+	'#FF33CC',
+	'#FF33FF',
+	'#FF6600',
+	'#FF6633',
+	'#FF9900',
+	'#FF9933',
+	'#FFCC00',
+	'#FFCC33'
+];
+
+/**
+ * Currently only WebKit-based Web Inspectors, Firefox >= v31,
+ * and the Firebug extension (any Firefox version) are known
+ * to support "%c" CSS customizations.
+ *
+ * TODO: add a `localStorage` variable to explicitly enable/disable colors
+ */
+
+// eslint-disable-next-line complexity
+function useColors() {
+	// NB: In an Electron preload script, document will be defined but not fully
+	// initialized. Since we know we're in Chrome, we'll just detect this case
+	// explicitly
+	if (typeof window !== 'undefined' && window.process && (window.process.type === 'renderer' || window.process.__nwjs)) {
+		return true;
+	}
+
+	// Internet Explorer and Edge do not support colors.
+	if (typeof navigator !== 'undefined' && navigator.userAgent && navigator.userAgent.toLowerCase().match(/(edge|trident)\/(\d+)/)) {
+		return false;
+	}
+
+	// Is webkit? http://stackoverflow.com/a/16459606/376773
+	// document is undefined in react-native: https://github.com/facebook/react-native/pull/1632
+	return (typeof document !== 'undefined' && document.documentElement && document.documentElement.style && document.documentElement.style.WebkitAppearance) ||
+		// Is firebug? http://stackoverflow.com/a/398120/376773
+		(typeof window !== 'undefined' && window.console && (window.console.firebug || (window.console.exception && window.console.table))) ||
+		// Is firefox >= v31?
+		// https://developer.mozilla.org/en-US/docs/Tools/Web_Console#Styling_messages
+		(typeof navigator !== 'undefined' && navigator.userAgent && navigator.userAgent.toLowerCase().match(/firefox\/(\d+)/) && parseInt(RegExp.$1, 10) >= 31) ||
+		// Double check webkit in userAgent just in case we are in a worker
+		(typeof navigator !== 'undefined' && navigator.userAgent && navigator.userAgent.toLowerCase().match(/applewebkit\/(\d+)/));
+}
+
+/**
+ * Colorize log arguments if enabled.
+ *
+ * @api public
+ */
+
+function formatArgs(args) {
+	args[0] = (this.useColors ? '%c' : '') +
+		this.namespace +
+		(this.useColors ? ' %c' : ' ') +
+		args[0] +
+		(this.useColors ? '%c ' : ' ') +
+		'+' + module.exports.humanize(this.diff);
+
+	if (!this.useColors) {
+		return;
+	}
+
+	const c = 'color: ' + this.color;
+	args.splice(1, 0, c, 'color: inherit');
+
+	// The final "%c" is somewhat tricky, because there could be other
+	// arguments passed either before or after the %c, so we need to
+	// figure out the correct index to insert the CSS into
+	let index = 0;
+	let lastC = 0;
+	args[0].replace(/%[a-zA-Z%]/g, match => {
+		if (match === '%%') {
+			return;
+		}
+		index++;
+		if (match === '%c') {
+			// We only are interested in the *last* %c
+			// (the user may have provided their own)
+			lastC = index;
+		}
+	});
+
+	args.splice(lastC, 0, c);
+}
+
+/**
+ * Invokes `console.log()` when available.
+ * No-op when `console.log` is not a "function".
+ *
+ * @api public
+ */
+function log(...args) {
+	// This hackery is required for IE8/9, where
+	// the `console.log` function doesn't have 'apply'
+	return typeof console === 'object' &&
+		console.log &&
+		console.log(...args);
+}
+
+/**
+ * Save `namespaces`.
+ *
+ * @param {String} namespaces
+ * @api private
+ */
+function save(namespaces) {
+	try {
+		if (namespaces) {
+			exports.storage.setItem('debug', namespaces);
+		} else {
+			exports.storage.removeItem('debug');
+		}
+	} catch (error) {
+		// Swallow
+		// XXX (@Qix-) should we be logging these?
+	}
+}
+
+/**
+ * Load `namespaces`.
+ *
+ * @return {String} returns the previously persisted debug modes
+ * @api private
+ */
+function load() {
+	let r;
+	try {
+		r = exports.storage.getItem('debug');
+	} catch (error) {
+		// Swallow
+		// XXX (@Qix-) should we be logging these?
+	}
+
+	// If debug isn't set in LS, and we're in Electron, try to load $DEBUG
+	if (!r && typeof process !== 'undefined' && 'env' in process) {
+		r = process.env.DEBUG;
+	}
+
+	return r;
+}
+
+/**
+ * Localstorage attempts to return the localstorage.
+ *
+ * This is necessary because safari throws
+ * when a user disables cookies/localstorage
+ * and you attempt to access it.
+ *
+ * @return {LocalStorage}
+ * @api private
+ */
+
+function localstorage() {
+	try {
+		// TVMLKit (Apple TV JS Runtime) does not have a window object, just localStorage in the global context
+		// The Browser also has localStorage in the global context.
+		return localStorage;
+	} catch (error) {
+		// Swallow
+		// XXX (@Qix-) should we be logging these?
+	}
+}
+
+module.exports = __webpack_require__(467)(exports);
+
+const {formatters} = module.exports;
+
+/**
+ * Map %j to `JSON.stringify()`, since no Web Inspectors do that by default.
+ */
+
+formatters.j = function (v) {
+	try {
+		return JSON.stringify(v);
+	} catch (error) {
+		return '[UnexpectedJSONParseError]: ' + error.message;
+	}
+};
+
+
+/***/ }),
 /* 616 */,
 /* 617 */,
 /* 618 */,
@@ -39315,56 +39151,7 @@ module.exports = require("events");
 module.exports = require("constants");
 
 /***/ }),
-/* 620 */
-/***/ (function(module) {
-
-"use strict";
-
-
-module.exports.create = octokit => {
-  return new GitHubCodeScanning(octokit);
-}
-
-class GitHubCodeScanning {
-
-  constructor(octokit) {
-    this._octokit = octokit;
-  }
-
-  getOpenCodeScanningAlerts(owner, repo) {
-    return getCodeScanning(this.octokit, owner, repo, 'open');
-  }
-
-  getClosedCodeScanningAlerts(owner, repo) {
-    return getCodeScanning(this.octokit, owner, repo, 'closed');
-  }
-
-  get octokit() {
-    return this._octokit;
-  }
-}
-
-function getCodeScanning(octokit, owner, repo, state) {
-  return  octokit.codeScanning.listAlertsForRepo({
-      owner: owner,
-      repo: repo,
-      state: state
-    }).then(alerts => {
-      const results = {};
-
-      alerts.data.forEach(scan => {
-        const tool = scan.tool;
-        if (!results[tool]) {
-          results[tool] = [];
-        }
-        results[tool].push(scan);
-      });
-
-      return results;
-    });
-}
-
-/***/ }),
+/* 620 */,
 /* 621 */
 /***/ (function(module) {
 
@@ -40344,7 +40131,68 @@ module.exports = require(__webpack_require__.ab + "fsevents.node")
 
 /***/ }),
 /* 655 */,
-/* 656 */,
+/* 656 */
+/***/ (function(module) {
+
+module.exports = class Vulnerability {
+
+  constructor(data) {
+    this._data = data;
+  }
+
+  get created() {
+    return this.data.createdAt;
+  }
+
+  get isDismissed() {
+    return !!this.data.dismisser;
+  }
+
+  get dismissedBy() {
+    return {
+      user: {
+        login: this.data.dismisser.login,
+        name: this.data.dismisser.name
+      },
+      reason: this.data.dissmissReason,
+      at: this.data.dismissedAt,
+    };
+  }
+
+  get severity() {
+    return this.data.securityVulnerability.severity;
+  }
+
+  get vulnerability() {
+    return Object.assign({}, this.data.securityVulnerability);
+  }
+
+  get advisory() {
+    return Object.assign({}, this.data.securityAdvisory);
+  }
+
+  get source() {
+    return {
+      manifest: this.data.vulnerableManifestFilename,
+      version: this.data.vulnerableRequirements,
+      path: this.data.vulnerableManifestPath
+    };
+  }
+
+  get publishedAt() {
+    return this.data.publishedAt;
+  }
+
+  get link() {
+    return this.data.permalink;
+  }
+
+  get data() {
+    return this._data;
+  }
+}
+
+/***/ }),
 /* 657 */,
 /* 658 */
 /***/ (function(module, __unusedexports, __webpack_require__) {
@@ -43154,7 +43002,60 @@ exports.WebWorker = WebWorker;
 /* 708 */,
 /* 709 */,
 /* 710 */,
-/* 711 */,
+/* 711 */
+/***/ (function(module, __unusedexports, __webpack_require__) {
+
+"use strict";
+
+
+const CodeScanningResult = __webpack_require__(519)
+
+module.exports.create = octokit => {
+  return new GitHubCodeScanning(octokit);
+}
+
+class GitHubCodeScanning {
+
+  constructor(octokit) {
+    this._octokit = octokit;
+  }
+
+  getOpenCodeScanningAlerts(owner, repo) {
+    return getCodeScanning(this.octokit, owner, repo, 'open');
+  }
+
+  getClosedCodeScanningAlerts(owner, repo) {
+    return getCodeScanning(this.octokit, owner, repo, 'closed');
+  }
+
+  get octokit() {
+    return this._octokit;
+  }
+}
+
+function getCodeScanning(octokit, owner, repo, state) {
+  return  octokit.codeScanning.listAlertsForRepo({
+      owner: owner,
+      repo: repo,
+      state: state
+    }).then(alerts => {
+      const results = {};
+
+      alerts.data.forEach(scan => {
+        const tool = scan.tool.name;
+
+        if (!results[tool]) {
+          results[tool] = [];
+        }
+
+        results[tool].push(new CodeScanningResult(scan));
+      });
+
+      return results;
+    });
+}
+
+/***/ }),
 /* 712 */,
 /* 713 */,
 /* 714 */,
@@ -46903,7 +46804,71 @@ module.exports = toRegexRange;
 module.exports = require("stream");
 
 /***/ }),
-/* 795 */,
+/* 795 */
+/***/ (function(module, __unusedexports, __webpack_require__) {
+
+const fs = __webpack_require__(747)
+  , path = __webpack_require__(622)
+  , SarifReport = __webpack_require__(73)
+  ;
+
+module.exports = class SarifReportFinder {
+
+  constructor(dir) {
+    this._dir = dir;
+  }
+
+  getSarifFiles() {
+    const dir = this._dir
+      , promises = []
+      ;
+
+    if (!fs.existsSync(dir)) {
+      throw new Error(`Path does not exist: ${dir}`);
+    }
+
+    console.log(`Processing: ${dir}`);
+    if (fs.lstatSync(dir).isDirectory()) {
+      console.log(`  is a directory`);
+      const files = fs.readdirSync(dir) // TODO use promises here
+        .filter(f => f.endsWith('.sarif'))
+        .map(f => path.resolve(dir, f));
+
+      console.log(`Matched Files: ${JSON.stringify(files)}`);
+      if (files) {
+        files.forEach(f => {
+          promises.push(loadFileContents(f).then(report => {return {file: f, payload: report}}));
+        });
+      }
+    }
+
+    if (promises.length > 0) {
+      return Promise.all(promises);
+    } else {
+      return Promise.resolve([]);
+    }
+  }
+}
+
+function loadFileContents(file) {
+  return fs.promises.open(file)
+    .then(fileHandle => {
+      return fileHandle.readFile()
+        .then(content => {
+          fileHandle.close();
+          try {
+            return JSON.parse(content.toString('utf8'));
+          } catch (err) {
+            throw new Error(`Failed ro parse JSON contents of SARIF file ${file}: ${err}`);
+          }
+        })
+        .then(data => {
+          return new SarifReport(data);
+        })
+    });
+}
+
+/***/ }),
 /* 796 */
 /***/ (function(__unusedmodule, exports) {
 
@@ -46929,222 +46894,7 @@ exports.getUserAgent = getUserAgent;
 
 
 /***/ }),
-/* 797 */
-/***/ (function(module) {
-
-
-module.exports = class SoftwareReport {
-
-  constructor(data) {
-    this._sarifReport = data.report;
-
-    this._dependencies = {
-      vulnerabilities: data.vulnerabilities || [],
-      dependencies: data.dependencies || [],
-    };
-
-    this._codeScanning = {
-      open: data.openScans || [],
-      closed: data.closedScans || [],
-    };
-  }
-
-  get vulnerabilities() {
-    return this._dependencies.vulnerabilities;
-  }
-
-  get dependencies() {
-    return this._dependencies.dependencies;
-  }
-
-  get openVulnerabilities() {
-    return this.vulnerabilities.filter(vuln => {return !vuln.isDismissed});
-  }
-
-  get openScanResults() {
-    return this._codeScanning.open;
-  }
-
-  get closedScanResults() {
-    return this._codeScanning.closed;
-  }
-
-  get codeScanningRules() {
-    const result = {}
-      , rules = this.sarifReport.rules
-      ;
-
-    if (rules) {
-      rules.forEach(rule => {
-        result[rule.id] = rule;
-      });
-    }
-
-    return result;
-  }
-
-  get sarifReport() {
-    //TODO This is currently a {file: payload:} object as there can be mutiple reports but this class does nto cater for it
-    return this._sarifReport.payload;
-  }
-
-  getPayload() {
-    return {
-      dependencies: {
-        deps: this.getDependencySummary(),
-        vulnerabilities: this.getThirdPartyComponentSummary()
-      },
-      codeScanning: {
-        cwes: this.sarifReport.cweList,
-        rules: this.getRulesSummary(),
-        open: this.getCodeScanSummary(),
-      }
-    }
-  }
-
-  // getAllCWEs() {
-  //   const cwes = this.sarifReport.cweList;
-  //
-  //   return {
-  //     cwes: cwes
-  //   };
-  // }
-
-  getDependencySummary() {
-    const unprocessed= []
-      , processed = []
-      , dependencies = {}
-    ;
-
-    let totalDeps = 0;
-
-    this.dependencies.forEach(depSet => {
-      totalDeps += depSet.count;
-
-      const manifest = {
-        filename: depSet.filename,
-        path: depSet.path
-      };
-
-      if (depSet.isValid) {
-        processed.push(manifest);
-      } else {
-        unprocessed.push(manifest);
-      }
-
-      const identifiedDeps = depSet.dependencies;
-      if (identifiedDeps) {
-        identifiedDeps.forEach(dep => {
-          const type = dep.packageType.toLowerCase();
-
-          if (! dependencies[type]) {
-            dependencies[type] = [];
-          }
-
-          dependencies[type].push({
-            name: dep.name,
-            type: dep.packageType,
-            version: dep.version,
-          })
-        })
-      }
-    });
-
-    return {
-      manifests: {
-        processed: processed,
-        unprocessed: unprocessed,
-      },
-      totalDependencies: totalDeps,
-      dependencies: dependencies
-    };
-  }
-
-  getThirdPartyComponentSummary() {
-    const result = {
-      'CRITICAL': [],
-      'HIGH': [],
-      'LOW': [],
-      'MODERATE': [],
-    }
-
-    // Obtain third party artifacts ranked by severity
-    this.openVulnerabilities.forEach(vulnerability => {
-      result[vulnerability.severity].push(vulnerability);
-    });
-
-    return result;
-  }
-
-  getRulesSummary() {
-    const rules = this.codeScanningRules
-      , result = []
-      ;
-
-    if (rules) {
-      Object.values(rules).forEach(rule => {
-        result.push({
-          name: rule.name,
-          //TODO maybe id?
-          severity: rule.severity,
-          precision: rule.precision,
-          kind: rule.kind,
-          shortDescription: rule.shortDescription,
-          description: rule.description,
-          tags: rule.tags, //.join(', '),
-          cwe: rule.cwes, //.join(', '),
-        });
-      });
-    }
-
-    return result;
-  }
-
-  getCodeScanSummary() {
-    const open = this.openScanResults
-      , rules = this.codeScanningRules
-      , result = {}
-    ;
-
-    if (open['CodeQL']) {
-      open['CodeQL'].forEach(codeScan => {
-        const severity = codeScan.rule_severity
-          , matchedRule = rules[codeScan.rule_id]
-        ;
-
-        const summary = {
-          tool: codeScan.tool,
-          name: codeScan.rule_description,
-          open: codeScan.open,
-          created: codeScan.created_at,
-          url: codeScan.url,
-          rule: {
-            id: codeScan.rule_id,
-          }
-        }
-
-        if (matchedRule) {
-          summary.rule.details = {
-            name: matchedRule.name,
-            shortDescription: matchedRule.shortDescription,
-            description: matchedRule.description,
-            tags: matchedRule.tags,
-            cwes: matchedRule.cwes,
-          }
-        }
-
-        if (!result[severity]) {
-          result[severity] = [];
-        }
-        result[severity].push(summary);
-      });
-    }
-
-    return result;
-  }
-}
-
-/***/ }),
+/* 797 */,
 /* 798 */,
 /* 799 */
 /***/ (function(module) {
@@ -51675,102 +51425,73 @@ module.exports.sync = cwd => {
 /* 872 */,
 /* 873 */,
 /* 874 */,
-/* 875 */
-/***/ (function(module) {
-
-module.exports = class Vulnerability {
-
-  constructor(data) {
-    this._data = data;
-  }
-
-  get created() {
-    return this.data.createdAt;
-  }
-
-  get isDismissed() {
-    return !!this.data.dismisser;
-  }
-
-  get dismissedBy() {
-    return {
-      user: {
-        login: this.data.dismisser.login,
-        name: this.data.dismisser.name
-      },
-      reason: this.data.dissmissReason,
-      at: this.data.dismissedAt,
-    };
-  }
-
-  get severity() {
-    return this.data.securityVulnerability.severity;
-  }
-
-  get vulnerability() {
-    return Object.assign({}, this.data.securityVulnerability);
-  }
-
-  get advisory() {
-    return Object.assign({}, this.data.securityAdvisory);
-  }
-
-  get source() {
-    return {
-      manifest: this.data.vulnerableManifestFilename,
-      version: this.data.vulnerableRequirements,
-      path: this.data.vulnerableManifestPath
-    };
-  }
-
-  get publishedAt() {
-    return this.data.publishedAt;
-  }
-
-  get link() {
-    return this.data.permalink;
-  }
-
-  get data() {
-    return this._data;
-  }
-}
-
-/***/ }),
+/* 875 */,
 /* 876 */,
 /* 877 */,
 /* 878 */,
 /* 879 */,
-/* 880 */,
-/* 881 */
-/***/ (function(module, __unusedexports, __webpack_require__) {
+/* 880 */
+/***/ (function(module) {
 
-const fs = __webpack_require__(747)
-  , path = __webpack_require__(622)
-  , nunjucks = __webpack_require__(565)
-  ;
+module.exports = Pend;
 
-module.exports = class ReportTemplate {
+function Pend() {
+  this.pending = 0;
+  this.max = Infinity;
+  this.listeners = [];
+  this.waiting = [];
+  this.error = null;
+}
 
-  constructor(templatesDir) {
-    if (!templatesDir) {
-      templatesDir = __webpack_require__.ab + "templates";
+Pend.prototype.go = function(fn) {
+  if (this.pending < this.max) {
+    pendGo(this, fn);
+  } else {
+    this.waiting.push(fn);
+  }
+};
+
+Pend.prototype.wait = function(cb) {
+  if (this.pending === 0) {
+    cb(this.error);
+  } else {
+    this.listeners.push(cb);
+  }
+};
+
+Pend.prototype.hold = function() {
+  return pendHold(this);
+};
+
+function pendHold(self) {
+  self.pending += 1;
+  var called = false;
+  return onCb;
+  function onCb(err) {
+    if (called) throw new Error("callback called twice");
+    called = true;
+    self.error = self.error || err;
+    self.pending -= 1;
+    if (self.waiting.length > 0 && self.pending < self.max) {
+      pendGo(self, self.waiting.shift());
+    } else if (self.pending === 0) {
+      var listeners = self.listeners;
+      self.listeners = [];
+      listeners.forEach(cbListener);
     }
-    this._renderer = nunjucks.configure(__webpack_require__.ab + "templates", {autoescape: true})
   }
-
-  get renderer() {
-    return this._renderer;
-  }
-
-  render(data, template) {
-    const content = this.renderer.render(template, data);
-    console.log(content);
-    return content;
+  function cbListener(listener) {
+    listener(self.error);
   }
 }
 
+function pendGo(self, fn) {
+  fn(pendHold(self));
+}
+
+
 /***/ }),
+/* 881 */,
 /* 882 */,
 /* 883 */,
 /* 884 */,
@@ -51780,27 +51501,74 @@ module.exports = class ReportTemplate {
 /* 888 */
 /***/ (function(module) {
 
-/*!
- * is-extglob <https://github.com/jonschlinkert/is-extglob>
- *
- * Copyright (c) 2014-2016, Jon Schlinkert.
- * Licensed under the MIT License.
- */
+const CWE_REGEX = /external\/cwe\/(cwe-.*)/;
 
-module.exports = function isExtglob(str) {
-  if (typeof str !== 'string' || str === '') {
-    return false;
+module.exports = class CodeScanningRule {
+
+  constructor(sarifRule) {
+    this._sarifRule = sarifRule;
+    this._cwes = getCWEs(sarifRule.properties.tags);
   }
 
-  var match;
-  while ((match = /(\\).|([@?!+*]\(.*\))/g.exec(str))) {
-    if (match[2]) return true;
-    str = str.slice(match.index + match[0].length);
+  get id() {
+    return this._sarif.id;
   }
 
-  return false;
-};
+  get name() {
+    return this._sarif.name;
+  }
 
+  get shortDescription() {
+    return this._sarif.shortDescription.text;
+  }
+
+  get description() {
+    return this._sarif.fullDescription.text;
+  }
+
+  get tags() {
+    return this._sarif.properties.tags;
+  }
+
+  get cwes() {
+    return this._cwes;
+  }
+
+  get severity() {
+    return this._sarif.properties['problem.severity'];
+  }
+
+  get precision() {
+    return this._sarif.properties.precision;
+  }
+
+  get kind() {
+    return this._sarif.properties.kind;
+  }
+
+  get defaultConfigurationLevel() {
+    return this._sarif.defaultConfiguration.level;
+  }
+
+  get _sarif() {
+    return this._sarifRule;
+  }
+}
+
+function getCWEs(tags) {
+  const cwes = [];
+
+  if (tags) {
+    tags.forEach(tag => {
+      const match = CWE_REGEX.exec(tag);
+      if (match) {
+        cwes.push(match[1]);
+      }
+    });
+  }
+
+  return cwes.sort();
+}
 
 /***/ }),
 /* 889 */,
@@ -52611,36 +52379,7 @@ exports.withCustomRequest = withCustomRequest;
 /* 899 */,
 /* 900 */,
 /* 901 */,
-/* 902 */
-/***/ (function(module) {
-
-"use strict";
-
-
-module.exports = class Dependency {
-
-  constructor(data) {
-    this._data = data;
-  }
-
-  get name() {
-    return this.data.packageName;
-  }
-
-  get packageType() {
-    return this.data.packageManager;
-  }
-
-  get version() {
-    return this.data.requirements;
-  }
-
-  get data() {
-    return this._data;
-  }
-}
-
-/***/ }),
+/* 902 */,
 /* 903 */
 /***/ (function(__unusedmodule, exports) {
 
@@ -52937,62 +52676,274 @@ module.exports = __webpack_require__(669).deprecate;
 /* 920 */,
 /* 921 */,
 /* 922 */
-/***/ (function(module, __unusedexports, __webpack_require__) {
+/***/ (function(module) {
 
-"use strict";
 
-const pLimit = __webpack_require__(158);
+module.exports = class ReportData {
 
-class EndError extends Error {
-	constructor(value) {
-		super();
-		this.value = value;
-	}
+  constructor(data) {
+    this._data = data || {};
+  }
+
+  get vulnerabilities() {
+    return this._data.vulnerabilities || [];
+  }
+
+  get dependencies() {
+    return this._data.dependencies || [];
+  }
+
+  get openDependencyVulnerabilities() {
+    return this.vulnerabilities.filter(vuln => {return !vuln.isDismissed});
+  }
+
+  get closedDependencyVulnerabilities() {
+    return this.vulnerabilities.filter(vuln => {return vuln.isDismissed});
+  }
+
+  get openCodeScanResults() {
+    return this._data.codeScanningOpen || {}; // {tool: []}
+  }
+
+  get closedCodeScanResults() {
+    return this._data.codeScanningClosed || {};
+  }
+
+  get sarifReports() {
+    return this._data.sarifReports || [];
+  }
+
+  get codeScanningRules() {
+    const result = {};
+
+    this.sarifReports.forEach(report => {
+      // Each report is an object of {file, payload} keys
+      const rules = report.payload.rules;
+
+      if (rules) {
+        rules.forEach(rule => {
+          result[rule.id] = rule;
+        });
+      }
+    });
+
+    return result;
+  }
+
+  getJSONPayload() {
+    return {
+      sca: {
+        dependencies: this.getDependencySummary(),
+        vulnerabilities: this.getVulnerabilitiesBySeverity(),
+      },
+      scanning: {
+        rules: this.getAppliedCodeScanningRules(),
+        cwe: this.getCWECoverage(),
+        results: this.getCodeScanSummary(),
+      }
+    }
+  }
+
+  getCWECoverage() {
+    const rules = this.getAppliedCodeScanningRules();
+
+    if (rules) {
+      const result = {};
+
+      rules.forEach(rule => {
+        const cwes = rule.cwes;
+
+        cwes.forEach(cwe => {
+          if (! result[cwe]) {
+            result[cwe] = [];
+          }
+
+          result[cwe].push(rule);
+        });
+      });
+
+      return {
+        cweToRules: result,
+        cwes: Object.keys(result)
+      };
+    }
+
+    return {};
+  }
+
+
+  getDependencySummary() {
+    const unprocessed= []
+      , processed = []
+      , dependencies = {}
+    ;
+
+    let totalDeps = 0;
+
+    this.dependencies.forEach(depSet => {
+      totalDeps += depSet.count;
+
+      const manifest = {
+        filename: depSet.filename,
+        path: depSet.path
+      };
+
+      if (depSet.isValid) {
+        processed.push(manifest);
+      } else {
+        unprocessed.push(manifest);
+      }
+
+      const identifiedDeps = depSet.dependencies;
+      if (identifiedDeps) {
+        identifiedDeps.forEach(dep => {
+          const type = dep.packageType.toLowerCase();
+
+          if (! dependencies[type]) {
+            dependencies[type] = [];
+          }
+
+          dependencies[type].push({
+            name: dep.name,
+            type: dep.packageType,
+            version: dep.version,
+          })
+        })
+      }
+    });
+
+    return {
+      manifests: {
+        processed: processed,
+        unprocessed: unprocessed,
+      },
+      totalDependencies: totalDeps,
+      dependencies: dependencies
+    };
+  }
+
+  getVulnerabilitiesBySeverity() {
+    const result = {};
+
+    // Obtain third party artifacts ranked by severity
+    const vulnerabilities = this.openDependencyVulnerabilities;
+    vulnerabilities.forEach(vulnerability => {
+      const severity = vulnerability.severity.toLowerCase();
+
+      if (! result[severity]) {
+        result[severity] = [];
+      }
+      result[severity].push(vulnerability);
+    });
+
+    return result;
+  }
+
+  getAppliedCodeScanningRules() {
+    const rules = this.codeScanningRules;
+
+    if (rules) {
+      return Object.values(rules).map(rule => { return getRuleData(rule) });
+    }
+
+    return [];
+  }
+
+  getCodeScanSummary() {
+    const open = this.openCodeScanResults
+      , closed = this.closedCodeScanResults
+      , rules = this.codeScanningRules
+    ;
+
+    const data = {
+      open: generateAlertSummary(open, rules),
+      closed: generateAlertSummary(closed, rules),
+    }
+
+    return data;
+  }
 }
 
-// The input can also be a promise, so we await it
-const testElement = async (element, tester) => tester(await element);
 
-// The input can also be a promise, so we `Promise.all()` them both
-const finder = async element => {
-	const values = await Promise.all(element);
-	if (values[1] === true) {
-		throw new EndError(values[0]);
-	}
+function generateAlertSummary(open, rules) {
+  const result = {};
+  let total = 0;
 
-	return false;
-};
+  if (open['CodeQL']) {
+    open['CodeQL'].forEach(codeScanAlert => {
+      const severity = codeScanAlert.severity
+        , matchedRule = rules ? rules[codeScanAlert.ruleId] : null
+      ;
 
-const pLocate = async (iterable, tester, options) => {
-	options = {
-		concurrency: Infinity,
-		preserveOrder: true,
-		...options
-	};
+      const summary = {
+        tool: codeScanAlert.toolName,
+        name: codeScanAlert.ruleDescription,
+        state: codeScanAlert.state,
+        created: codeScanAlert.created,
+        url: codeScanAlert.url,
+        rule: {
+          id: codeScanAlert.ruleId,
+        }
+      }
 
-	const limit = pLimit(options.concurrency);
+      if (matchedRule) {
+        summary.rule.details = matchedRule
+      }
 
-	// Start all the promises concurrently with optional limit
-	const items = [...iterable].map(element => [element, limit(testElement, element, tester)]);
+      if (!result[severity]) {
+        result[severity] = [];
+      }
+      result[severity].push(summary);
+      total++;
+    });
+  }
 
-	// Check the promises either serially or concurrently
-	const checkLimit = pLimit(options.preserveOrder ? 1 : Infinity);
+  return {
+    total: total,
+    scans: result
+  };
+}
 
-	try {
-		await Promise.all(items.map(element => checkLimit(finder, element)));
-	} catch (error) {
-		if (error instanceof EndError) {
-			return error.value;
-		}
 
-		throw error;
-	}
-};
+function getRuleData(rule) {
+  if (! rule) {
+    return null;
+  }
 
-module.exports = pLocate;
-// TODO: Remove this for the next major release
-module.exports.default = pLocate;
+  return {
+    name: rule.name,
+    //TODO maybe id?
+    severity: rule.severity,
+    precision: rule.precision,
+    kind: rule.kind,
+    shortDescription: rule.shortDescription,
+    description: rule.description,
+    tags: rule.tags,
+    cwe: rule.cwes,
+  }
+}
 
+function getVulnerability(vuln) {
+  if (!vuln) {
+    return null;
+  }
+
+  const data = {
+    created: vuln.created,
+    published: vuln.publishedAt,
+    severity: vuln.severity,
+    vulnerability: vuln.vulnerability,
+    advisory: vuln.advisory,
+    source: vuln.source,
+    link: vuln.link,
+  }
+
+  if (vuln.isDismissed()) {
+    data.dismissed = vuln.dismissedBy;
+  }
+
+  return data;
+}
 
 /***/ }),
 /* 923 */,
@@ -54629,64 +54580,184 @@ exports.NetworkManager = NetworkManager;
 /* 963 */,
 /* 964 */,
 /* 965 */
-/***/ (function(module) {
+/***/ (function(module, __unusedexports, __webpack_require__) {
 
-module.exports = Pend;
+const Vulnerability = __webpack_require__(656)
+  , DependencySet = __webpack_require__(445)
+  ;
 
-function Pend() {
-  this.pending = 0;
-  this.max = Infinity;
-  this.listeners = [];
-  this.waiting = [];
-  this.error = null;
-}
+const QUERY_SECURITY_VULNERABILITIES = `
+query users($organizationName: String!, $repositoryName: String!, $cursor: String) {
 
-Pend.prototype.go = function(fn) {
-  if (this.pending < this.max) {
-    pendGo(this, fn);
-  } else {
-    this.waiting.push(fn);
-  }
-};
-
-Pend.prototype.wait = function(cb) {
-  if (this.pending === 0) {
-    cb(this.error);
-  } else {
-    this.listeners.push(cb);
-  }
-};
-
-Pend.prototype.hold = function() {
-  return pendHold(this);
-};
-
-function pendHold(self) {
-  self.pending += 1;
-  var called = false;
-  return onCb;
-  function onCb(err) {
-    if (called) throw new Error("callback called twice");
-    called = true;
-    self.error = self.error || err;
-    self.pending -= 1;
-    if (self.waiting.length > 0 && self.pending < self.max) {
-      pendGo(self, self.waiting.shift());
-    } else if (self.pending === 0) {
-      var listeners = self.listeners;
-      self.listeners = [];
-      listeners.forEach(cbListener);
+  repository(owner: $organizationName, name: $repositoryName) {
+    vulnerabilityAlerts(first: 100, after: $cursor) {
+      totalCount
+      pageInfo {
+        hasNextPage
+        endCursor
+      }
+      nodes {
+        id
+        createdAt
+        dismisser {
+          login
+          name
+        }
+        dismissedAt
+        dismissReason
+        vulnerableManifestFilename
+        vulnerableRequirements
+        vulnerableManifestPath
+        securityVulnerability{
+          package {
+            ecosystem
+            name
+          }
+          severity
+          vulnerableVersionRange
+        }
+        securityAdvisory{
+          databaseId
+          id
+          summary
+          severity
+          description
+          ghsaId
+          identifiers {
+            type
+            value
+          }
+          permalink
+          publishedAt
+        }
+      }
     }
   }
-  function cbListener(listener) {
-    listener(self.error);
+}
+`;
+
+const QUERY_DEPENDENCY_GRAPH = `
+query ($organizationName: String!, $repositoryName: String!, $cursor: String){
+  repository(owner: $organizationName name: $repositoryName) {
+    name
+    dependencyGraphManifests(first: 100, after: $cursor) {
+      pageInfo {
+        hasNextPage
+        endCursor
+      }
+      totalCount
+      edges {
+        node {
+          filename
+          dependenciesCount
+          blobPath
+          exceedsMaxSize
+          parseable
+          dependencies{
+            edges {
+              node {
+                packageName
+                packageManager
+                requirements
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+`
+
+module.exports.create = (octokit) => {
+  return new GraphQL(octokit)
+}
+
+class GraphQL {
+
+  constructor(octokit) {
+    this._octokit = octokit;
+  }
+
+  get octokit() {
+    return this._octokit;
+  }
+
+  async getAllVulnerabilities(org, repo) {
+    const data = await this.getPaginatedQuery(
+      QUERY_SECURITY_VULNERABILITIES,
+      {organizationName: org, repositoryName: repo},
+      'repository.vulnerabilityAlerts.pageInfo',
+      data => { return data.repository.vulnerabilityAlerts.nodes }
+    );
+
+    return data.map(val => {return new Vulnerability(val)});
+  }
+
+  async getAllDependencies(org, repo) {
+    const data = await this.getPaginatedQuery(
+      QUERY_DEPENDENCY_GRAPH,
+      {organizationName: org, repositoryName: repo},
+      'repository.dependencyGraphManifests.pageInfo',
+      data => { return data.repository.dependencyGraphManifests.edges },
+      {accept: 'application/vnd.github.hawkgirl-preview+json'}
+    );
+
+    // console.log(JSON.stringify(data, null, 2));
+    return data.map(node => { return new DependencySet(node.node); });
+  }
+
+  async getPaginatedQuery(query, parameters, pageInfoPath, extractResultsFn, headers) {
+    const octokit = this.octokit
+      , results = []
+      , queryParameters = Object.assign({cursor: null}, parameters)
+    ;
+
+    let hasNextPage = false;
+    do {
+      const graphqlParameters = buildGraphQLParameters(query, parameters, headers)
+        , queryResult = await octokit.graphql(graphqlParameters)
+      ;
+
+      const extracted = extractResultsFn(queryResult)
+      results.push(...extracted);
+
+      const pageInfo = getObject(queryResult, ...pageInfoPath.split('.'));
+      hasNextPage = pageInfo ? pageInfo.hasNextPage : false;
+      if (hasNextPage) {
+        queryParameters.cursor = pageInfo.endCursor;
+      }
+    } while (hasNextPage)
+
+    return results;
   }
 }
 
-function pendGo(self, fn) {
-  fn(pendHold(self));
+function buildGraphQLParameters(query, parameters, headers) {
+  const result = {
+    ...(parameters || {}),
+    query: query,
+  };
+
+  if (headers) {
+    result.headers = headers;
+  }
+
+  return result;
 }
 
+function getObject(target, ...path) {
+  if (target !== null && target !== undefined) {
+    const value = target[path[0]];
+
+    if (path.length > 1) {
+      return getObject(value, ...path.slice(1));
+    } else {
+      return value;
+    }
+  }
+  return null;
+}
 
 /***/ }),
 /* 966 */
@@ -54822,6 +54893,45 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const initialize_js_1 = __webpack_require__(380);
 const puppeteer = initialize_js_1.initializePuppeteer('puppeteer-core');
 exports.default = puppeteer;
+
+
+/***/ }),
+/* 986 */,
+/* 987 */,
+/* 988 */,
+/* 989 */,
+/* 990 */,
+/* 991 */,
+/* 992 */,
+/* 993 */,
+/* 994 */,
+/* 995 */,
+/* 996 */,
+/* 997 */,
+/* 998 */,
+/* 999 */
+/***/ (function(module) {
+
+/*!
+ * is-extglob <https://github.com/jonschlinkert/is-extglob>
+ *
+ * Copyright (c) 2014-2016, Jon Schlinkert.
+ * Licensed under the MIT License.
+ */
+
+module.exports = function isExtglob(str) {
+  if (typeof str !== 'string' || str === '') {
+    return false;
+  }
+
+  var match;
+  while ((match = /(\\).|([@?!+*]\(.*\))/g.exec(str))) {
+    if (match[2]) return true;
+    str = str.slice(match.index + match[0].length);
+  }
+
+  return false;
+};
 
 
 /***/ })

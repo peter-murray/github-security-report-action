@@ -67,87 +67,88 @@
 </head>
 
 <body>
-<h1>GitHub Advanced Security Report</h1>
+<h1>GitHub Advanced Security - Summary Report</h1>
 
-{% if dependencies %}
-  {% if dependencies.deps %}
-    <div class="dependencies">
-      <h2>Software Composition Analysis (SCA)</h2>
-      <p>Number of Dependencies: {{dependencies.deps.totalDependencies}}</p>
-    </div>
+{% if sca %}
+<div class="dependencies">
+  <h2>Software Composition Analysis (SCA)</h2>
+  <p>Number of Dependencies: {{ sca.dependencies.totalDependencies }}</p>
+
+  {% if sca.vulnerabilities %}
+  <div>
+    <h3>Dependency Vulnerabilities</h3>
 
     <div>
-      <h3>Dependency Vulnerabilities</h3>
-
-      {% if dependencies.vulnerabilities %}
-        <table>
-          <tr>
-            <td>Critical</td>
-            <td>{{ dependencies.vulnerabilities.CRITICAL | length }}</td>
-          </tr>
-          <tr>
-            <td>High</td>
-            <td>{{ dependencies.vulnerabilities.HIGH | length }}</td>
-          </tr>
-          <tr>
-            <td>Moderate</td>
-            <td>{{ dependencies.vulnerabilities.MODERATE | length }}</td>
-          </tr>
-          <tr>
-            <td>Low</td>
-            <td>{{ dependencies.vulnerabilities.LOW | length }}</td>
-          </tr>
-        </table>
-      {% else %}
-        <strong>None identified.</strong>
-      {% endif %}
-    </div>
-
-    {% if dependencies.deps.manifests and dependencies.deps.manifests.processed | length > 0 and dependencies.deps.manifests.unprocessed.length > 0 %}
+      {% for severity in ['high', 'warning', 'moderate', 'low'] %}
       <div>
-        <h3>Dependency Sources</h3>
-        {% if dependencies.deps.manifests.processed | length > 0 %}
-          <h4>Processed</h4>
-          <ul>
-            {% for manfest in dependencies.deps.manifests.processed %}
-            <li>{{ manfest.path }}/{{ manfest.filename }}</li>
-            {% endfor %}
-          </ul>
-        {% endif %}
-
-        {% if dependencies.deps.manifests.unprocessed | length > 0 %}
-          <h4>Identified but not processed</h4>
-          <ul>
-          {% for manfest in dependencies.deps.manifests.unprocessed %}
-            <li>{{ manfest.path }}/{{ manfest.filename }}</li>
-          {% endfor %}
-          </ul>
-        {% endif %}
+        <div>{{ severity }}</div>
+        <div>{{ sca.vulnerabilities[severity] | length }}</div>
       </div>
-    {% endif %}
-  {% endif %}
-{% endif %}
-
-{% if codeScanning %}
-  {% if codeScanning.rules %}
-    <h2>Code Scanning Rules Applied</h2>
-    <div id="codeScanningRules">
-      {% for rule in codeScanning.rules %}
-        <div class="rule">
-          <div class="ruleHeader">
-            <span class="ruleName">{{ rule.name }}</span>
-            <span class="ruleSeverity {{ rule.severity}}">{{ rule.severity }}</span>
-          </div>
-          <div class="ruleDetail">
-            <p>{{ rule.description }}</p>
-            <p>Tags: {{ rule.tags | join(' ') }}</p>
-            <p>CWE: {{ rule.cwe | join(' ') }}</p>
-          </div>
-        </div>
       {% endfor %}
     </div>
+
+  </div>
   {% endif %}
+</div>
 {% endif %}
 
+{% if scanning %}
+<div class="scanning">
+  <h2>Code Scanning</h2>
+
+  <div>
+    <div>Code Scanning Rules</div>
+    <div>{{ scanning.rules | length }}</div>
+  </div>
+
+  <div>
+    <div>CWE's</div>
+    <div>{{ scanning.cwe.cwes | length }}</div>
+  </div>
+
+  <div>Code Scanning Results</div>
+  {% if scanning.results.open %}
+  <div>
+    <div>Open: {{ total }}</div>
+    <div>
+      <div>{{ scanning.results.open.total }}</div>
+      {% if scanning.results.open.total > 0 %}
+      <div>
+        {% for severity in ['error', 'warning'] %}
+        <div>
+          <div>{{ severity }}</div>
+          <div>{{ scanning.results.open.scans[severity] | length }}</div>
+        </div>
+        {% endfor %}
+      </div>
+      {% endif %}
+    </div>
+  {% endif %}
+
+  {% if scanning.results.open %}
+  <div>
+    <div>Closed: {{ total }}</div>
+    <div>
+      <div>{{ scanning.results.closed.total }}</div>
+      {% if scanning.results.closed.total > 0 %}
+      <div>
+        {% for severity in ['error', 'warning'] %}
+        <div>
+          <div>{{ severity }}</div>
+          <div>{{ scanning.results.closed.scans[severity] | length }}</div>
+        </div>
+        {% endfor %}
+      </div>
+      {% endif %}
+    </div>
+    {% endif %}
+</div>
+{% endif %}
+
+<!--
+{{ sca | dump }}
+
+{{ scanning | dump }}
+-->
 </body>
 </html>

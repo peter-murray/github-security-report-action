@@ -7,8 +7,9 @@ module.exports = class ReportTemplate {
 
   constructor(templatesDir) {
     if (!templatesDir) {
-      templatesDir = path.join(__dirname, '..', 'templates');
+      templatesDir = path.join(__dirname, '..', '..', 'templates');
     }
+
     this._renderer = nunjucks.configure(templatesDir, {autoescape: true})
   }
 
