@@ -44,6 +44,9 @@ with:
   token: ${{ secrets.SECURITY_TOKEN }}
 ```
 
+Example summary report output:
+![Example summary report](summary_report_example.png)
+
 
 ## Future improvements
 
