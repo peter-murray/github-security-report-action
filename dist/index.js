@@ -4738,11 +4738,12 @@ async function run() {
   const token = getRequiredInputValue('token')
     , sarifReportDir = getRequiredInputValue('sarifReportDir')
     , outputDir = getRequiredInputValue('outputDir')
+    , repository = getRequiredInputValue('repository')
     , octokit = github.getOctokit(token)
   ;
 
   try {
-    const collector = new DataCollector(octokit, github.context)
+    const collector = new DataCollector(octokit, repository)
       , reportData = await collector.getPayload(sarifReportDir)
       , reportTemplate = new ReportTemplate() //TODO add support to set a different directory
     ;
@@ -4750,7 +4751,7 @@ async function run() {
     //TODO outputting this to console for testing, needs to be converted into a reportData
     // console.log(JSON.stringify(reportData.getPayload(), null, 2));
 
-    const html = reportTemplate.render(reportData, 'summary.html');
+    const html = reportTemplate.render(reportData.getJSONPayload(), 'summary.html');
     const result = await pdfWriter.save(html, path.join(outputDir, 'summary.pdf'));
     console.log(JSON.stringify(result));
   } catch (err) {
@@ -7511,16 +7512,21 @@ const SarifReportFinder = __webpack_require__(795)
 
 module.exports = class DataCollector {
 
-  constructor(octokit, context) {
+  constructor(octokit, repo) {
     if (!octokit) {
       throw new Error('A GitHub Octokit client needs to be provided');
     }
     this._octokit = octokit;
 
-    if (!context) {
-      throw new Error('A GitHub Actions context is required');
+    if (!repo) {
+      throw new Error('A GitHub repository must be provided');
     }
-    this._context = context;
+
+    const parts = repo.split('/')
+    this._repo = {
+      owner: parts[0],
+      repo: parts[1]
+    }
   }
 
   get githubClient() {
@@ -7528,11 +7534,11 @@ module.exports = class DataCollector {
   }
 
   get repo() {
-    return this._context.repo.repo;
+    return this._repo.repo;
   }
 
-  get org() {
-    return this._context.repo.owner;
+  get owner() {
+    return this._repo.owner;
   }
 
   getPayload(sarifReportDir) {
@@ -7545,20 +7551,25 @@ module.exports = class DataCollector {
       sarifFinder.getSarifFiles().then(sarif => {
         return {sarifReports: sarif};
       }),
-      dependencies.getAllDependencies(this.org, this.repo).then(deps => {
+      dependencies.getAllDependencies(this.owner, this.repo).then(deps => {
         return {dependencies: deps};
       }),
-      dependencies.getAllVulnerabilities(this.org, this.repo).then(vulns => {
+      dependencies.getAllVulnerabilities(this.owner, this.repo).then(vulns => {
         return {vulnerabilities: vulns};
       }),
-      codeScanning.getOpenCodeScanningAlerts(this.org, this.repo).then(open => {
+      codeScanning.getOpenCodeScanningAlerts(this.owner, this.repo).then(open => {
         return {codeScanningOpen: open};
       }),
-      codeScanning.getClosedCodeScanningAlerts(this.org, this.repo).then(closed => {
+      codeScanning.getClosedCodeScanningAlerts(this.owner, this.repo).then(closed => {
         return {codeScanningClosed: closed};
       }),
     ]).then(results => {
-      const data = {};
+      const data = {
+        github: {
+          owner: this.owner,
+          repo: this.repo
+        }
+      };
 
       results.forEach(result => {
         Object.assign(data, result);
@@ -52685,6 +52696,10 @@ module.exports = class ReportData {
     this._data = data || {};
   }
 
+  get githubRepo() {
+    return this._data.github || {};
+  }
+
   get vulnerabilities() {
     return this._data.vulnerabilities || [];
   }
@@ -52732,9 +52747,16 @@ module.exports = class ReportData {
 
   getJSONPayload() {
     return {
+      github: this.githubRepo,
+      metadata: {
+        created: new Date().toISOString(),
+      },
       sca: {
         dependencies: this.getDependencySummary(),
-        vulnerabilities: this.getVulnerabilitiesBySeverity(),
+        vulnerabilities: {
+          total: this.openDependencyVulnerabilities.length,
+          bySeverity: this.getVulnerabilitiesBySeverity()
+        },
       },
       scanning: {
         rules: this.getAppliedCodeScanningRules(),
@@ -52751,15 +52773,17 @@ module.exports = class ReportData {
       const result = {};
 
       rules.forEach(rule => {
-        const cwes = rule.cwes;
+        const cwes = rule.cwe;
 
-        cwes.forEach(cwe => {
-          if (! result[cwe]) {
-            result[cwe] = [];
-          }
+        if (cwes) {
+          cwes.forEach(cwe => {
+            if (! result[cwe]) {
+              result[cwe] = [];
+            }
 
-          result[cwe].push(rule);
-        });
+            result[cwe].push(rule);
+          });
+        }
       });
 
       return {

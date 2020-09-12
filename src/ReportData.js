@@ -5,6 +5,10 @@ module.exports = class ReportData {
     this._data = data || {};
   }
 
+  get githubRepo() {
+    return this._data.github || {};
+  }
+
   get vulnerabilities() {
     return this._data.vulnerabilities || [];
   }
@@ -52,9 +56,16 @@ module.exports = class ReportData {
 
   getJSONPayload() {
     return {
+      github: this.githubRepo,
+      metadata: {
+        created: new Date().toISOString(),
+      },
       sca: {
         dependencies: this.getDependencySummary(),
-        vulnerabilities: this.getVulnerabilitiesBySeverity(),
+        vulnerabilities: {
+          total: this.openDependencyVulnerabilities.length,
+          bySeverity: this.getVulnerabilitiesBySeverity()
+        },
       },
       scanning: {
         rules: this.getAppliedCodeScanningRules(),
@@ -71,15 +82,17 @@ module.exports = class ReportData {
       const result = {};
 
       rules.forEach(rule => {
-        const cwes = rule.cwes;
+        const cwes = rule.cwe;
 
-        cwes.forEach(cwe => {
-          if (! result[cwe]) {
-            result[cwe] = [];
-          }
+        if (cwes) {
+          cwes.forEach(cwe => {
+            if (! result[cwe]) {
+              result[cwe] = [];
+            }
 
-          result[cwe].push(rule);
-        });
+            result[cwe].push(rule);
+          });
+        }
       });
 
       return {

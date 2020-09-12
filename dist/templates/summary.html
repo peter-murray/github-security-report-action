@@ -1,154 +1,214 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <mate charest="utf-8" />
+  <mate charest="utf-8"/>
   <title>GitHub Advanced Security Report</title>
 
   <style type="text/css">
-      html, body {
-          font-family: Arial;
+      .report {
+          margin: 30px;
       }
 
-      .dependencies {
-
+      .heading {
+          margin-bottom: 50px;
       }
 
-      #codeScanningRules {
-          display: flex;
-          flex-direction: row;
+      .section {
+          margin-bottom: 50px;
       }
 
-      .rule {
-          display: flex;
-          flex-direction: column;
-          padding: 1.5em;
+      .section-header {
+          margin-bottom: 20px;
       }
 
-      .ruleHeader {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
+      /*.row {*/
+      /*    margin-bottom: 10px;*/
+      /*}*/
 
-        padding: 5px;
-
-        background-color: black;
-        color: white;
-        border-bottom: 1px solid black;
-
-        font-size: 110%;
-      }
-
-      .ruleDetail {
-
-      }
-
-      .ruleName {
-          font-style: italic;
-          font-weight: bold;
-      }
-
-      .ruleSeverity {
-        text-transform: uppercase;
-        /*flex-grow: 1;*/
-      }
-
-      .ruleSeverity.error {
-          color: red;
-      }
-
-      .ruleSeverity.warning {
-          color: yellow;
-      }
-
-      .ruleSeverity.recommendation {
-          color: green;
+      /* Allows for PDF to use coloured components */
+      @media print {
+          * {
+              -webkit-print-color-adjust: exact;
+          }
       }
   </style>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 </head>
 
 <body>
-<h1>GitHub Advanced Security - Summary Report</h1>
 
-{% if sca %}
-<div class="dependencies">
-  <h2>Software Composition Analysis (SCA)</h2>
-  <p>Number of Dependencies: {{ sca.dependencies.totalDependencies }}</p>
+<div class="report container-fluid">
+  <div class="row border-bottom heading">
+    <div class="col">
+      <img class="githubLogo float-left"
+           width="130px"
+           src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png">
+      <h1 class="reportTitle display-4">GitHub Advanced Security<br>Summary Report</h1>
+    </div>
+  </div>
 
-  {% if sca.vulnerabilities %}
-  <div>
-    <h3>Dependency Vulnerabilities</h3>
+  <div class="row mt-4">
+    <dt class="col-sm-2">GitHub Repository:</dt>
+    <dd class="col-sm-9">{{ github.owner }}/{{ github.repo }}</dd>
 
-    <div>
-      {% for severity in ['high', 'warning', 'moderate', 'low'] %}
-      <div>
-        <div>{{ severity }}</div>
-        <div>{{ sca.vulnerabilities[severity] | length }}</div>
+    <dt class="col-sm-2">Generated:</dt>
+    <dd class="col-sm-9">{{ metadata.created }}</dd>
+    </dl>
+  </div>
+
+  {% if sca %}
+  <div class="sca section mt-4">
+    <div class="row">
+      <div class="col">
+        <h2 class="section-header border-bottom">Software Composition Analysis</h2>
       </div>
-      {% endfor %}
     </div>
 
-  </div>
-  {% endif %}
-</div>
-{% endif %}
+    <div class="row row-cols-1 row-cols-md-2">
+      <div class="col mb-4">
+        <div class="card">
+          <div class="card-header">
+            <h5 class="float-left">Dependencies</h5>
+            <h5><span class="badge badge-light float-right">{{ sca.dependencies.totalDependencies }}</span></h5>
+          </div>
 
-{% if scanning %}
-<div class="scanning">
-  <h2>Code Scanning</h2>
-
-  <div>
-    <div>Code Scanning Rules</div>
-    <div>{{ scanning.rules | length }}</div>
-  </div>
-
-  <div>
-    <div>CWE's</div>
-    <div>{{ scanning.cwe.cwes | length }}</div>
-  </div>
-
-  <div>Code Scanning Results</div>
-  {% if scanning.results.open %}
-  <div>
-    <div>Open: {{ total }}</div>
-    <div>
-      <div>{{ scanning.results.open.total }}</div>
-      {% if scanning.results.open.total > 0 %}
-      <div>
-        {% for severity in ['error', 'warning'] %}
-        <div>
-          <div>{{ severity }}</div>
-          <div>{{ scanning.results.open.scans[severity] | length }}</div>
+          <div class="card-body">
+            <button type="button" class="btn btn-danger">
+              Unprocessed manifests <span class="badge badge-light">{{ sca.dependencies.manifests.unprocessed | length }}</span>
+            </button>
+            <button type="button" class="btn btn-success">
+              Processed manifests <span
+                class="badge badge-light">{{ sca.dependencies.manifests.processed | length }}</span>
+            </button>
+          </div>
         </div>
-        {% endfor %}
+      </div>
+
+      {% if sca.vulnerabilities %}
+      <div class="col mb-4">
+        <div class="card vulnerabilities">
+          <div class="card-header">
+            <h5 class="float-left">Dependency Vulnerabilities</h5>
+            <h5><span class="badge badge-light float-right">{{ sca.vulnerabilities.total }}</span></h5>
+          </div>
+
+          <div class="card-body">
+            <button type="button" class="btn btn-danger">
+              High <span class="badge badge-light">{{ sca.vulnerabilities.bySeverity.high | length }}</span>
+            </button>
+            <button type="button" class="btn btn-warning">
+              Warning <span class="badge badge-light">{{ sca.vulnerabilities.bySeverity.warning | length }}</span>
+            </button>
+            <button type="button" class="btn btn-info">
+              Moderate <span class="badge badge-light">{{ sca.vulnerabilities.bySeverity.moderate | length }}</span>
+            </button>
+            <button type="button" class="btn btn-secondary">
+              Low <span class="badge badge-light">{{ sca.vulnerabilities.bySeverity.low | length }}</span>
+            </button>
+          </div>
+        </div>
       </div>
       {% endif %}
     </div>
+  </div>
   {% endif %}
 
-  {% if scanning.results.open %}
-  <div>
-    <div>Closed: {{ total }}</div>
-    <div>
-      <div>{{ scanning.results.closed.total }}</div>
-      {% if scanning.results.closed.total > 0 %}
-      <div>
-        {% for severity in ['error', 'warning'] %}
-        <div>
-          <div>{{ severity }}</div>
-          <div>{{ scanning.results.closed.scans[severity] | length }}</div>
-        </div>
-        {% endfor %}
+  {% if scanning %}
+  <div class="scanning section mt-4">
+    <div class="row mb-3">
+      <div class="col">
+        <h2 class="section-header border-bottom">Code Scanning</h2>
       </div>
-      {% endif %}
     </div>
-    {% endif %}
+
+    <div class="row mb-3">
+      <div class="col">
+        <div class="card">
+          <div class="card-header">
+            <h5 class="float-left">Code Scanning Rules Applied</h5>
+            <h5><span class="badge badge-light float-right">{{ scanning.rules | length }}</span></h5>
+          </div>
+        </div>
+      </div>
+
+      <div class="col"></div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col">
+        <div class="card">
+          <div class="card-header">
+            <h5 class="float-left">CWE Coverage</h5>
+            <h5><span class="badge badge-light float-right">{{ scanning.cwe.cwes | length }}</span></h5>
+          </div>
+          <div class="card-body">
+            <div>
+              <ul class="list-inline">
+                {% for cwe in scanning.cwe.cwes | sort %}
+                <li class="text-monospace badge badge-secondary m-1">{{ cwe }}</li>
+                {% endfor %}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row row-cols-1 row-cols-md-2 mb-3">
+      <div class="col mb-4">
+        {% if scanning.results.open %}
+        <div class="card">
+          <div class="card-header">
+            <h5 class="float-left">Open Findings</h5>
+            <h5><span class="badge badge-light float-right">{{ scanning.results.open.total }}</span></h5>
+          </div>
+          <div class="card-body">
+            {% if scanning.results.open.total > 0 %}
+            <button type="button" class="btn btn-danger">
+              Error <span class="badge badge-light">{{ scanning.results.open.scans.error | length }}</span>
+            </button>
+            <button type="button" class="btn btn-warning">
+              Warning <span class="badge badge-light">{{ scanning.results.open.scans.warning | length }}</span>
+            </button>
+            {% endif %}
+          </div>
+        </div>
+        {% endif %}
+      </div>
+
+      <div class="col mb-4">
+        {% if scanning.results.closed %}
+        <div class="card">
+          <div class="card-header">
+            <h5 class="float-left">Closed Findings</h5>
+            <h5><span class="badge badge-light float-right">{{ scanning.results.closed.total }}</span></h5>
+          </div>
+          <div class="card-body">
+            {% if scanning.results.closed.total > 0 %}
+            <button type="button" class="btn btn-danger">
+              Error <span class="badge badge-light">{{ scanning.results.closed.scans.error | length }}</span>
+            </button>
+            <button type="button" class="btn btn-warning">
+              Warning <span class="badge badge-light">{{ scanning.results.closed.scans.warning | length }}</span>
+            </button>
+            {% endif %}
+          </div>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  {% endif %}
 </div>
-{% endif %}
 
 <!--
 {{ sca | dump }}
-
 {{ scanning | dump }}
 -->
+
 </body>
 </html>

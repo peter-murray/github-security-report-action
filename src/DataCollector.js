@@ -6,16 +6,21 @@ const SarifReportFinder = require('./codeScanning/sarif/SarifReportFinder')
 
 module.exports = class DataCollector {
 
-  constructor(octokit, context) {
+  constructor(octokit, repo) {
     if (!octokit) {
       throw new Error('A GitHub Octokit client needs to be provided');
     }
     this._octokit = octokit;
 
-    if (!context) {
-      throw new Error('A GitHub Actions context is required');
+    if (!repo) {
+      throw new Error('A GitHub repository must be provided');
     }
-    this._context = context;
+
+    const parts = repo.split('/')
+    this._repo = {
+      owner: parts[0],
+      repo: parts[1]
+    }
   }
 
   get githubClient() {
@@ -23,11 +28,11 @@ module.exports = class DataCollector {
   }
 
   get repo() {
-    return this._context.repo.repo;
+    return this._repo.repo;
   }
 
-  get org() {
-    return this._context.repo.owner;
+  get owner() {
+    return this._repo.owner;
   }
 
   getPayload(sarifReportDir) {
@@ -40,20 +45,25 @@ module.exports = class DataCollector {
       sarifFinder.getSarifFiles().then(sarif => {
         return {sarifReports: sarif};
       }),
-      dependencies.getAllDependencies(this.org, this.repo).then(deps => {
+      dependencies.getAllDependencies(this.owner, this.repo).then(deps => {
         return {dependencies: deps};
       }),
-      dependencies.getAllVulnerabilities(this.org, this.repo).then(vulns => {
+      dependencies.getAllVulnerabilities(this.owner, this.repo).then(vulns => {
         return {vulnerabilities: vulns};
       }),
-      codeScanning.getOpenCodeScanningAlerts(this.org, this.repo).then(open => {
+      codeScanning.getOpenCodeScanningAlerts(this.owner, this.repo).then(open => {
         return {codeScanningOpen: open};
       }),
-      codeScanning.getClosedCodeScanningAlerts(this.org, this.repo).then(closed => {
+      codeScanning.getClosedCodeScanningAlerts(this.owner, this.repo).then(closed => {
         return {codeScanningClosed: closed};
       }),
     ]).then(results => {
-      const data = {};
+      const data = {
+        github: {
+          owner: this.owner,
+          repo: this.repo
+        }
+      };
 
       results.forEach(result => {
         Object.assign(data, result);

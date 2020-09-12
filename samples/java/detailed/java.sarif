@@ -1,0 +1,2871 @@
+{
+  "version": "2.1.0",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "CodeQL",
+          "organization": "GitHub",
+          "semanticVersion": "2.2.5",
+          "rules": [
+            {
+              "id": "java/implicit-cast-in-compound-assignment",
+              "name": "java/implicit-cast-in-compound-assignment",
+              "shortDescription": {
+                "text": "Implicit narrowing conversion in compound assignment"
+              },
+              "fullDescription": {
+                "text": "Compound assignment statements (for example 'intvar += longvar') that implicitly cast a value of a wider type to a narrower type may result in information loss and numeric errors such as overflows."
+              },
+              "defaultConfiguration": {},
+              "properties": {
+                "tags": [
+                  "reliability",
+                  "security",
+                  "external/cwe/cwe-190",
+                  "external/cwe/cwe-192",
+                  "external/cwe/cwe-197",
+                  "external/cwe/cwe-681"
+                ],
+                "kind": "problem",
+                "precision": "very-high",
+                "name": "Implicit narrowing conversion in compound assignment",
+                "description": "Compound assignment statements (for example 'intvar += longvar') that implicitly\n              cast a value of a wider type to a narrower type may result in information loss and\n              numeric errors such as overflows.",
+                "id": "java/implicit-cast-in-compound-assignment",
+                "problem.severity": "warning"
+              }
+            },
+            {
+              "id": "java/integer-multiplication-cast-to-long",
+              "name": "java/integer-multiplication-cast-to-long",
+              "shortDescription": {
+                "text": "Result of multiplication cast to wider type"
+              },
+              "fullDescription": {
+                "text": "Casting the result of a multiplication to a wider type instead of casting before the multiplication may cause overflow."
+              },
+              "defaultConfiguration": {},
+              "properties": {
+                "tags": [
+                  "reliability",
+                  "security",
+                  "correctness",
+                  "types",
+                  "external/cwe/cwe-190",
+                  "external/cwe/cwe-192",
+                  "external/cwe/cwe-197",
+                  "external/cwe/cwe-681"
+                ],
+                "kind": "problem",
+                "precision": "very-high",
+                "name": "Result of multiplication cast to wider type",
+                "description": "Casting the result of a multiplication to a wider type instead of casting\n              before the multiplication may cause overflow.",
+                "id": "java/integer-multiplication-cast-to-long",
+                "problem.severity": "warning"
+              }
+            },
+            {
+              "id": "java/spring-disabled-csrf-protection",
+              "name": "java/spring-disabled-csrf-protection",
+              "shortDescription": {
+                "text": "Disabled Spring CSRF protection"
+              },
+              "fullDescription": {
+                "text": "Disabling CSRF protection makes the application vulnerable to a Cross-Site Request Forgery (CSRF) attack."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "properties": {
+                "tags": [
+                  "security",
+                  "external/cwe/cwe-352"
+                ],
+                "kind": "problem",
+                "precision": "high",
+                "name": "Disabled Spring CSRF protection",
+                "description": "Disabling CSRF protection makes the application vulnerable to\n              a Cross-Site Request Forgery (CSRF) attack.",
+                "id": "java/spring-disabled-csrf-protection",
+                "problem.severity": "error"
+              }
+            },
+            {
+              "id": "java/tainted-numeric-cast",
+              "name": "java/tainted-numeric-cast",
+              "shortDescription": {
+                "text": "User-controlled data in numeric cast"
+              },
+              "fullDescription": {
+                "text": "Casting user-controlled numeric data to a narrower type without validation can cause unexpected truncation."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "properties": {
+                "tags": [
+                  "security",
+                  "external/cwe/cwe-197",
+                  "external/cwe/cwe-681"
+                ],
+                "kind": "path-problem",
+                "precision": "high",
+                "name": "User-controlled data in numeric cast",
+                "description": "Casting user-controlled numeric data to a narrower type without validation\n              can cause unexpected truncation.",
+                "id": "java/tainted-numeric-cast",
+                "problem.severity": "error"
+              }
+            },
+            {
+              "id": "java/unvalidated-url-redirection",
+              "name": "java/unvalidated-url-redirection",
+              "shortDescription": {
+                "text": "URL redirection from remote source"
+              },
+              "fullDescription": {
+                "text": "URL redirection based on unvalidated user-input may cause redirection to malicious web sites."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "properties": {
+                "tags": [
+                  "security",
+                  "external/cwe/cwe-601"
+                ],
+                "kind": "path-problem",
+                "precision": "high",
+                "name": "URL redirection from remote source",
+                "description": "URL redirection based on unvalidated user-input\n              may cause redirection to malicious web sites.",
+                "id": "java/unvalidated-url-redirection",
+                "problem.severity": "error"
+              }
+            },
+            {
+              "id": "java/sql-injection",
+              "name": "java/sql-injection",
+              "shortDescription": {
+                "text": "Query built from user-controlled sources"
+              },
+              "fullDescription": {
+                "text": "Building a SQL or Java Persistence query from user-controlled sources is vulnerable to insertion of malicious code by the user."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "properties": {
+                "tags": [
+                  "security",
+                  "external/cwe/cwe-089"
+                ],
+                "kind": "path-problem",
+                "precision": "high",
+                "name": "Query built from user-controlled sources",
+                "description": "Building a SQL or Java Persistence query from user-controlled sources is vulnerable to insertion of\n              malicious code by the user.",
+                "id": "java/sql-injection",
+                "problem.severity": "error"
+              }
+            },
+            {
+              "id": "java/concatenated-sql-query",
+              "name": "java/concatenated-sql-query",
+              "shortDescription": {
+                "text": "Query built without neutralizing special characters"
+              },
+              "fullDescription": {
+                "text": "Building a SQL or Java Persistence query without escaping or otherwise neutralizing any special characters is vulnerable to insertion of malicious code."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "properties": {
+                "tags": [
+                  "security",
+                  "external/cwe/cwe-089"
+                ],
+                "kind": "problem",
+                "precision": "high",
+                "name": "Query built without neutralizing special characters",
+                "description": "Building a SQL or Java Persistence query without escaping or otherwise neutralizing any special\n              characters is vulnerable to insertion of malicious code.",
+                "id": "java/concatenated-sql-query",
+                "problem.severity": "error"
+              }
+            },
+            {
+              "id": "java/http-response-splitting",
+              "name": "java/http-response-splitting",
+              "shortDescription": {
+                "text": "HTTP response splitting"
+              },
+              "fullDescription": {
+                "text": "Writing user input directly to an HTTP header makes code vulnerable to attack by header splitting."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "properties": {
+                "tags": [
+                  "security",
+                  "external/cwe/cwe-113"
+                ],
+                "kind": "path-problem",
+                "precision": "high",
+                "name": "HTTP response splitting",
+                "description": "Writing user input directly to an HTTP header\n              makes code vulnerable to attack by header splitting.",
+                "id": "java/http-response-splitting",
+                "problem.severity": "error"
+              }
+            },
+            {
+              "id": "java/netty-http-response-splitting",
+              "name": "java/netty-http-response-splitting",
+              "shortDescription": {
+                "text": "Disabled Netty HTTP header validation"
+              },
+              "fullDescription": {
+                "text": "Disabling HTTP header validation makes code vulnerable to attack by header splitting if user input is written directly to an HTTP header."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "properties": {
+                "tags": [
+                  "security",
+                  "external/cwe/cwe-113"
+                ],
+                "kind": "problem",
+                "precision": "high",
+                "name": "Disabled Netty HTTP header validation",
+                "description": "Disabling HTTP header validation makes code vulnerable to\n              attack by header splitting if user input is written directly to\n              an HTTP header.",
+                "id": "java/netty-http-response-splitting",
+                "problem.severity": "error"
+              }
+            },
+            {
+              "id": "java/tainted-permissions-check",
+              "name": "java/tainted-permissions-check",
+              "shortDescription": {
+                "text": "User-controlled data used in permissions check"
+              },
+              "fullDescription": {
+                "text": "Using user-controlled data in a permissions check may result in inappropriate permissions being granted."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "properties": {
+                "tags": [
+                  "security",
+                  "external/cwe/cwe-807",
+                  "external/cwe/cwe-290"
+                ],
+                "kind": "path-problem",
+                "precision": "high",
+                "name": "User-controlled data used in permissions check",
+                "description": "Using user-controlled data in a permissions check may result in inappropriate\n              permissions being granted.",
+                "id": "java/tainted-permissions-check",
+                "problem.severity": "error"
+              }
+            },
+            {
+              "id": "java/xss",
+              "name": "java/xss",
+              "shortDescription": {
+                "text": "Cross-site scripting"
+              },
+              "fullDescription": {
+                "text": "Writing user input directly to a web page allows for a cross-site scripting vulnerability."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "properties": {
+                "tags": [
+                  "security",
+                  "external/cwe/cwe-079"
+                ],
+                "kind": "path-problem",
+                "precision": "high",
+                "name": "Cross-site scripting",
+                "description": "Writing user input directly to a web page\n              allows for a cross-site scripting vulnerability.",
+                "id": "java/xss",
+                "problem.severity": "error"
+              }
+            },
+            {
+              "id": "java/tainted-format-string",
+              "name": "java/tainted-format-string",
+              "shortDescription": {
+                "text": "Use of externally-controlled format string"
+              },
+              "fullDescription": {
+                "text": "Using external input in format strings can lead to exceptions or information leaks."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "properties": {
+                "tags": [
+                  "security",
+                  "external/cwe/cwe-134"
+                ],
+                "kind": "path-problem",
+                "precision": "high",
+                "name": "Use of externally-controlled format string",
+                "description": "Using external input in format strings can lead to exceptions or information leaks.",
+                "id": "java/tainted-format-string",
+                "problem.severity": "error"
+              }
+            },
+            {
+              "id": "java/insecure-cookie",
+              "name": "java/insecure-cookie",
+              "shortDescription": {
+                "text": "Failure to use secure cookies"
+              },
+              "fullDescription": {
+                "text": "Insecure cookies may be sent in cleartext, which makes them vulnerable to interception."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "properties": {
+                "tags": [
+                  "security",
+                  "external/cwe/cwe-614"
+                ],
+                "kind": "problem",
+                "precision": "high",
+                "name": "Failure to use secure cookies",
+                "description": "Insecure cookies may be sent in cleartext, which makes them vulnerable to\n              interception.",
+                "id": "java/insecure-cookie",
+                "problem.severity": "error"
+              }
+            },
+            {
+              "id": "java/concatenated-command-line",
+              "name": "java/concatenated-command-line",
+              "shortDescription": {
+                "text": "Building a command line with string concatenation"
+              },
+              "fullDescription": {
+                "text": "Using concatenated strings in a command line is vulnerable to malicious insertion of special characters in the strings."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "properties": {
+                "tags": [
+                  "security",
+                  "external/cwe/cwe-078",
+                  "external/cwe/cwe-088"
+                ],
+                "kind": "problem",
+                "precision": "high",
+                "name": "Building a command line with string concatenation",
+                "description": "Using concatenated strings in a command line is vulnerable to malicious\n              insertion of special characters in the strings.",
+                "id": "java/concatenated-command-line",
+                "problem.severity": "error"
+              }
+            },
+            {
+              "id": "java/command-line-injection",
+              "name": "java/command-line-injection",
+              "shortDescription": {
+                "text": "Uncontrolled command line"
+              },
+              "fullDescription": {
+                "text": "Using externally controlled strings in a command line is vulnerable to malicious changes in the strings."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "properties": {
+                "tags": [
+                  "security",
+                  "external/cwe/cwe-078",
+                  "external/cwe/cwe-088"
+                ],
+                "kind": "path-problem",
+                "precision": "high",
+                "name": "Uncontrolled command line",
+                "description": "Using externally controlled strings in a command line is vulnerable to malicious\n              changes in the strings.",
+                "id": "java/command-line-injection",
+                "problem.severity": "error"
+              }
+            },
+            {
+              "id": "java/maven/non-https-url",
+              "name": "java/maven/non-https-url",
+              "shortDescription": {
+                "text": "Failure to use HTTPS or SFTP URL in Maven artifact upload/download"
+              },
+              "fullDescription": {
+                "text": "Non-HTTPS connections can be intercepted by third parties."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "properties": {
+                "tags": [
+                  "security",
+                  "external/cwe/cwe-300",
+                  "external/cwe/cwe-319",
+                  "external/cwe/cwe-494",
+                  "external/cwe/cwe-829"
+                ],
+                "kind": "problem",
+                "precision": "very-high",
+                "name": "Failure to use HTTPS or SFTP URL in Maven artifact upload/download",
+                "description": "Non-HTTPS connections can be intercepted by third parties.",
+                "id": "java/maven/non-https-url",
+                "problem.severity": "error"
+              }
+            },
+            {
+              "id": "java/xxe",
+              "name": "java/xxe",
+              "shortDescription": {
+                "text": "Resolving XML external entity in user-controlled data"
+              },
+              "fullDescription": {
+                "text": "Parsing user-controlled XML documents and allowing expansion of external entity references may lead to disclosure of confidential data or denial of service."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "properties": {
+                "tags": [
+                  "security",
+                  "external/cwe/cwe-611"
+                ],
+                "kind": "path-problem",
+                "precision": "high",
+                "name": "Resolving XML external entity in user-controlled data",
+                "description": "Parsing user-controlled XML documents and allowing expansion of external entity\n references may lead to disclosure of confidential data or denial of service.",
+                "id": "java/xxe",
+                "problem.severity": "error"
+              }
+            },
+            {
+              "id": "java/predictable-seed",
+              "name": "java/predictable-seed",
+              "shortDescription": {
+                "text": "Use of a predictable seed in a secure random number generator"
+              },
+              "fullDescription": {
+                "text": "Using a predictable seed in a pseudo-random number generator can lead to predictability of the numbers generated by it."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "properties": {
+                "tags": [
+                  "security"
+                ],
+                "kind": "problem",
+                "precision": "high",
+                "name": "Use of a predictable seed in a secure random number generator",
+                "description": "Using a predictable seed in a pseudo-random number generator can lead to predictability of the numbers generated by it.",
+                "id": "java/predictable-seed",
+                "problem.severity": "error"
+              }
+            },
+            {
+              "id": "java/unsafe-deserialization",
+              "name": "java/unsafe-deserialization",
+              "shortDescription": {
+                "text": "Deserialization of user-controlled data"
+              },
+              "fullDescription": {
+                "text": "Deserializing user-controlled data may allow attackers to execute arbitrary code."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "properties": {
+                "tags": [
+                  "security",
+                  "external/cwe/cwe-502"
+                ],
+                "kind": "path-problem",
+                "precision": "high",
+                "name": "Deserialization of user-controlled data",
+                "description": "Deserializing user-controlled data may allow attackers to\n              execute arbitrary code.",
+                "id": "java/unsafe-deserialization",
+                "problem.severity": "error"
+              }
+            },
+            {
+              "id": "java/ldap-injection",
+              "name": "java/ldap-injection",
+              "shortDescription": {
+                "text": "LDAP query built from user-controlled sources"
+              },
+              "fullDescription": {
+                "text": "Building an LDAP query from user-controlled sources is vulnerable to insertion of malicious LDAP code by the user."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "properties": {
+                "tags": [
+                  "security",
+                  "external/cwe/cwe-090"
+                ],
+                "kind": "path-problem",
+                "precision": "high",
+                "name": "LDAP query built from user-controlled sources",
+                "description": "Building an LDAP query from user-controlled sources is vulnerable to insertion of\n              malicious LDAP code by the user.",
+                "id": "java/ldap-injection",
+                "problem.severity": "error"
+              }
+            },
+            {
+              "id": "java/path-injection",
+              "name": "java/path-injection",
+              "shortDescription": {
+                "text": "Uncontrolled data used in path expression"
+              },
+              "fullDescription": {
+                "text": "Accessing paths influenced by users can allow an attacker to access unexpected resources."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "properties": {
+                "tags": [
+                  "security",
+                  "external/cwe/cwe-022",
+                  "external/cwe/cwe-023",
+                  "external/cwe/cwe-036",
+                  "external/cwe/cwe-073"
+                ],
+                "kind": "path-problem",
+                "precision": "high",
+                "name": "Uncontrolled data used in path expression",
+                "description": "Accessing paths influenced by users can allow an attacker to access unexpected resources.",
+                "id": "java/path-injection",
+                "problem.severity": "error"
+              }
+            },
+            {
+              "id": "java/zipslip",
+              "name": "java/zipslip",
+              "shortDescription": {
+                "text": "Arbitrary file write during archive extraction (\"Zip Slip\")"
+              },
+              "fullDescription": {
+                "text": "Extracting files from a malicious archive without validating that the destination file path is within the destination directory can cause files outside the destination directory to be overwritten."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "properties": {
+                "tags": [
+                  "security",
+                  "external/cwe/cwe-022"
+                ],
+                "kind": "path-problem",
+                "precision": "high",
+                "name": "Arbitrary file write during archive extraction (\"Zip Slip\")",
+                "description": "Extracting files from a malicious archive without validating that the\n              destination file path is within the destination directory can cause files outside\n              the destination directory to be overwritten.",
+                "id": "java/zipslip",
+                "problem.severity": "error"
+              }
+            },
+            {
+              "id": "java/cleartext-storage-in-cookie",
+              "name": "java/cleartext-storage-in-cookie",
+              "shortDescription": {
+                "text": "Cleartext storage of sensitive information in cookie"
+              },
+              "fullDescription": {
+                "text": "Storing sensitive information in cleartext can expose it to an attacker."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "properties": {
+                "tags": [
+                  "security",
+                  "external/cwe/cwe-315"
+                ],
+                "kind": "problem",
+                "precision": "high",
+                "name": "Cleartext storage of sensitive information in cookie",
+                "description": "Storing sensitive information in cleartext can expose it to an attacker.",
+                "id": "java/cleartext-storage-in-cookie",
+                "problem.severity": "error"
+              }
+            },
+            {
+              "id": "java/stack-trace-exposure",
+              "name": "java/stack-trace-exposure",
+              "shortDescription": {
+                "text": "Information exposure through a stack trace"
+              },
+              "fullDescription": {
+                "text": "Information from a stack trace propagates to an external user. Stack traces can unintentionally reveal implementation details that are useful to an attacker for developing a subsequent exploit."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "properties": {
+                "tags": [
+                  "security",
+                  "external/cwe/cwe-209",
+                  "external/cwe/cwe-497"
+                ],
+                "kind": "problem",
+                "precision": "high",
+                "name": "Information exposure through a stack trace",
+                "description": "Information from a stack trace propagates to an external user.\n              Stack traces can unintentionally reveal implementation details\n              that are useful to an attacker for developing a subsequent exploit.",
+                "id": "java/stack-trace-exposure",
+                "problem.severity": "error"
+              }
+            },
+            {
+              "id": "java/world-writable-file-read",
+              "name": "java/world-writable-file-read",
+              "shortDescription": {
+                "text": "Reading from a world writable file"
+              },
+              "fullDescription": {
+                "text": "Reading from a file which is set as world writable is dangerous because the file may be modified or removed by external actors."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "properties": {
+                "tags": [
+                  "security",
+                  "external/cwe/cwe-732"
+                ],
+                "kind": "problem",
+                "precision": "high",
+                "name": "Reading from a world writable file",
+                "description": "Reading from a file which is set as world writable is dangerous because\n              the file may be modified or removed by external actors.",
+                "id": "java/world-writable-file-read",
+                "problem.severity": "error"
+              }
+            }
+          ]
+        }
+      },
+      "artifacts": [
+        {
+          "location": {
+            "uri": "webgoat-lessons/sql-injection/src/main/java/org/owasp/webgoat/sql_injection/advanced/SqlInjectionLesson6a.java",
+            "uriBaseId": "%SRCROOT%",
+            "index": 0
+          }
+        },
+        {
+          "location": {
+            "uri": "webgoat-lessons/sql-injection/src/main/java/org/owasp/webgoat/sql_injection/introduction/SqlInjectionLesson10.java",
+            "uriBaseId": "%SRCROOT%",
+            "index": 1
+          }
+        },
+        {
+          "location": {
+            "uri": "webgoat-lessons/sql-injection/src/main/java/org/owasp/webgoat/sql_injection/introduction/SqlInjectionLesson2.java",
+            "uriBaseId": "%SRCROOT%",
+            "index": 2
+          }
+        },
+        {
+          "location": {
+            "uri": "webgoat-lessons/sql-injection/src/main/java/org/owasp/webgoat/sql_injection/introduction/SqlInjectionLesson3.java",
+            "uriBaseId": "%SRCROOT%",
+            "index": 3
+          }
+        },
+        {
+          "location": {
+            "uri": "webgoat-lessons/sql-injection/src/main/java/org/owasp/webgoat/sql_injection/introduction/SqlInjectionLesson4.java",
+            "uriBaseId": "%SRCROOT%",
+            "index": 4
+          }
+        },
+        {
+          "location": {
+            "uri": "webgoat-lessons/sql-injection/src/main/java/org/owasp/webgoat/sql_injection/introduction/SqlInjectionLesson5a.java",
+            "uriBaseId": "%SRCROOT%",
+            "index": 5
+          }
+        },
+        {
+          "location": {
+            "uri": "webgoat-lessons/sql-injection/src/main/java/org/owasp/webgoat/sql_injection/introduction/SqlInjectionLesson5b.java",
+            "uriBaseId": "%SRCROOT%",
+            "index": 6
+          }
+        },
+        {
+          "location": {
+            "uri": "webgoat-lessons/sql-injection/src/main/java/org/owasp/webgoat/sql_injection/introduction/SqlInjectionLesson8.java",
+            "uriBaseId": "%SRCROOT%",
+            "index": 7
+          }
+        },
+        {
+          "location": {
+            "uri": "webgoat-lessons/sql-injection/src/main/java/org/owasp/webgoat/sql_injection/introduction/SqlInjectionLesson9.java",
+            "uriBaseId": "%SRCROOT%",
+            "index": 8
+          }
+        },
+        {
+          "location": {
+            "uri": "webgoat-lessons/jwt/src/main/java/org/owasp/webgoat/jwt/JWTFinalEndpoint.java",
+            "uriBaseId": "%SRCROOT%",
+            "index": 9
+          }
+        },
+        {
+          "location": {
+            "uri": "webgoat-lessons/jwt/src/main/java/org/owasp/webgoat/jwt/JWTVotesEndpoint.java",
+            "uriBaseId": "%SRCROOT%",
+            "index": 10
+          }
+        },
+        {
+          "location": {
+            "uri": "webgoat-lessons/xxe/src/main/java/org/owasp/webgoat/xxe/Comments.java",
+            "uriBaseId": "%SRCROOT%",
+            "index": 11
+          }
+        },
+        {
+          "location": {
+            "uri": "webgoat-lessons/xxe/src/main/java/org/owasp/webgoat/xxe/ContentTypeAssignment.java",
+            "uriBaseId": "%SRCROOT%",
+            "index": 12
+          }
+        },
+        {
+          "location": {
+            "uri": "webgoat-lessons/xxe/src/main/java/org/owasp/webgoat/xxe/SimpleXXE.java",
+            "uriBaseId": "%SRCROOT%",
+            "index": 13
+          }
+        },
+        {
+          "location": {
+            "uri": "webgoat-lessons/vulnerable-components/src/main/java/org/owasp/webgoat/vulnerable_components/VulnerableComponentsLesson.java",
+            "uriBaseId": "%SRCROOT%",
+            "index": 14
+          }
+        }
+      ],
+      "results": [
+        {
+          "ruleId": "java/sql-injection",
+          "ruleIndex": 5,
+          "message": {
+            "text": "Query might include code from [this user input](1)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "webgoat-lessons/sql-injection/src/main/java/org/owasp/webgoat/sql_injection/advanced/SqlInjectionLesson6a.java",
+                  "uriBaseId": "%SRCROOT%",
+                  "index": 0
+                },
+                "region": {
+                  "startLine": 67,
+                  "startColumn": 60,
+                  "endColumn": 65
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "2b95e3c48ba92cd0:1",
+            "primaryLocationStartColumnFingerprint": "43"
+          },
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "webgoat-lessons/sql-injection/src/main/java/org/owasp/webgoat/sql_injection/advanced/SqlInjectionLesson6a.java",
+                            "uriBaseId": "%SRCROOT%",
+                            "index": 0
+                          },
+                          "region": {
+                            "startLine": 51,
+                            "startColumn": 35,
+                            "endColumn": 65
+                          }
+                        },
+                        "message": {
+                          "text": "userid_6a : String"
+                        }
+                      }
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "webgoat-lessons/sql-injection/src/main/java/org/owasp/webgoat/sql_injection/advanced/SqlInjectionLesson6a.java",
+                            "uriBaseId": "%SRCROOT%",
+                            "index": 0
+                          },
+                          "region": {
+                            "startLine": 52,
+                            "startColumn": 32,
+                            "endColumn": 41
+                          }
+                        },
+                        "message": {
+                          "text": "userid_6a : String"
+                        }
+                      }
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "webgoat-lessons/sql-injection/src/main/java/org/owasp/webgoat/sql_injection/advanced/SqlInjectionLesson6a.java",
+                            "uriBaseId": "%SRCROOT%",
+                            "index": 0
+                          },
+                          "region": {
+                            "startLine": 56,
+                            "startColumn": 44,
+                            "endColumn": 62
+                          }
+                        },
+                        "message": {
+                          "text": "accountName : String"
+                        }
+                      }
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "webgoat-lessons/sql-injection/src/main/java/org/owasp/webgoat/sql_injection/advanced/SqlInjectionLesson6a.java",
+                            "uriBaseId": "%SRCROOT%",
+                            "index": 0
+                          },
+                          "region": {
+                            "startLine": 67,
+                            "startColumn": 60,
+                            "endColumn": 65
+                          }
+                        },
+                        "message": {
+                          "text": "query"
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "relatedLocations": [
+            {
+              "id": 1,
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "webgoat-lessons/sql-injection/src/main/java/org/owasp/webgoat/sql_injection/advanced/SqlInjectionLesson6a.java",
+                  "uriBaseId": "%SRCROOT%",
+                  "index": 0
+                },
+                "region": {
+                  "startLine": 51,
+                  "startColumn": 35,
+                  "endColumn": 65
+                }
+              },
+              "message": {
+                "text": "this user input"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "java/sql-injection",
+          "ruleIndex": 5,
+          "message": {
+            "text": "Query might include code from [this user input](1)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "webgoat-lessons/sql-injection/src/main/java/org/owasp/webgoat/sql_injection/introduction/SqlInjectionLesson10.java",
+                  "uriBaseId": "%SRCROOT%",
+                  "index": 1
+                },
+                "region": {
+                  "startLine": 63,
+                  "startColumn": 60,
+                  "endColumn": 65
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "983b99783dada75a:1",
+            "primaryLocationStartColumnFingerprint": "43"
+          },
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "webgoat-lessons/sql-injection/src/main/java/org/owasp/webgoat/sql_injection/introduction/SqlInjectionLesson10.java",
+                            "uriBaseId": "%SRCROOT%",
+                            "index": 1
+                          },
+                          "region": {
+                            "startLine": 52,
+                            "startColumn": 35,
+                            "endColumn": 69
+                          }
+                        },
+                        "message": {
+                          "text": "action_string : String"
+                        }
+                      }
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "webgoat-lessons/sql-injection/src/main/java/org/owasp/webgoat/sql_injection/introduction/SqlInjectionLesson10.java",
+                            "uriBaseId": "%SRCROOT%",
+                            "index": 1
+                          },
+                          "region": {
+                            "startLine": 53,
+                            "startColumn": 44,
+                            "endColumn": 57
+                          }
+                        },
+                        "message": {
+                          "text": "action_string : String"
+                        }
+                      }
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "webgoat-lessons/sql-injection/src/main/java/org/owasp/webgoat/sql_injection/introduction/SqlInjectionLesson10.java",
+                            "uriBaseId": "%SRCROOT%",
+                            "index": 1
+                          },
+                          "region": {
+                            "startLine": 56,
+                            "startColumn": 56,
+                            "endColumn": 69
+                          }
+                        },
+                        "message": {
+                          "text": "action : String"
+                        }
+                      }
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "webgoat-lessons/sql-injection/src/main/java/org/owasp/webgoat/sql_injection/introduction/SqlInjectionLesson10.java",
+                            "uriBaseId": "%SRCROOT%",
+                            "index": 1
+                          },
+                          "region": {
+                            "startLine": 63,
+                            "startColumn": 60,
+                            "endColumn": 65
+                          }
+                        },
+                        "message": {
+                          "text": "query"
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "relatedLocations": [
+            {
+              "id": 1,
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "webgoat-lessons/sql-injection/src/main/java/org/owasp/webgoat/sql_injection/introduction/SqlInjectionLesson10.java",
+                  "uriBaseId": "%SRCROOT%",
+                  "index": 1
+                },
+                "region": {
+                  "startLine": 52,
+                  "startColumn": 35,
+                  "endColumn": 69
+                }
+              },
+              "message": {
+                "text": "this user input"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "java/sql-injection",
+          "ruleIndex": 5,
+          "message": {
+            "text": "Query might include code from [this user input](1)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "webgoat-lessons/sql-injection/src/main/java/org/owasp/webgoat/sql_injection/introduction/SqlInjectionLesson2.java",
+                  "uriBaseId": "%SRCROOT%",
+                  "index": 2
+                },
+                "region": {
+                  "startLine": 62,
+                  "startColumn": 56,
+                  "endColumn": 61
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "1c69de562b7d4118:1",
+            "primaryLocationStartColumnFingerprint": "43"
+          },
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "webgoat-lessons/sql-injection/src/main/java/org/owasp/webgoat/sql_injection/introduction/SqlInjectionLesson2.java",
+                            "uriBaseId": "%SRCROOT%",
+                            "index": 2
+                          },
+                          "region": {
+                            "startLine": 55,
+                            "startColumn": 35,
+                            "endColumn": 61
+                          }
+                        },
+                        "message": {
+                          "text": "query : String"
+                        }
+                      }
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "webgoat-lessons/sql-injection/src/main/java/org/owasp/webgoat/sql_injection/introduction/SqlInjectionLesson2.java",
+                            "uriBaseId": "%SRCROOT%",
+                            "index": 2
+                          },
+                          "region": {
+                            "startLine": 56,
+                            "startColumn": 32,
+                            "endColumn": 37
+                          }
+                        },
+                        "message": {
+                          "text": "query : String"
+                        }
+                      }
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "webgoat-lessons/sql-injection/src/main/java/org/owasp/webgoat/sql_injection/introduction/SqlInjectionLesson2.java",
+                            "uriBaseId": "%SRCROOT%",
+                            "index": 2
+                          },
+                          "region": {
+                            "startLine": 59,
+                            "startColumn": 44,
+                            "endColumn": 56
+                          }
+                        },
+                        "message": {
+                          "text": "query : String"
+                        }
+                      }
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "webgoat-lessons/sql-injection/src/main/java/org/owasp/webgoat/sql_injection/introduction/SqlInjectionLesson2.java",
+                            "uriBaseId": "%SRCROOT%",
+                            "index": 2
+                          },
+                          "region": {
+                            "startLine": 62,
+                            "startColumn": 56,
+                            "endColumn": 61
+                          }
+                        },
+                        "message": {
+                          "text": "query"
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "relatedLocations": [
+            {
+              "id": 1,
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "webgoat-lessons/sql-injection/src/main/java/org/owasp/webgoat/sql_injection/introduction/SqlInjectionLesson2.java",
+                  "uriBaseId": "%SRCROOT%",
+                  "index": 2
+                },
+                "region": {
+                  "startLine": 55,
+                  "startColumn": 35,
+                  "endColumn": 61
+                }
+              },
+              "message": {
+                "text": "this user input"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "java/sql-injection",
+          "ruleIndex": 5,
+          "message": {
+            "text": "Query might include code from [this user input](1)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "webgoat-lessons/sql-injection/src/main/java/org/owasp/webgoat/sql_injection/introduction/SqlInjectionLesson3.java",
+                  "uriBaseId": "%SRCROOT%",
+                  "index": 3
+                },
+                "region": {
+                  "startLine": 65,
+                  "startColumn": 41,
+                  "endColumn": 46
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "6831612ccb8d413b:1",
+            "primaryLocationStartColumnFingerprint": "24"
+          },
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "webgoat-lessons/sql-injection/src/main/java/org/owasp/webgoat/sql_injection/introduction/SqlInjectionLesson3.java",
+                            "uriBaseId": "%SRCROOT%",
+                            "index": 3
+                          },
+                          "region": {
+                            "startLine": 56,
+                            "startColumn": 35,
+                            "endColumn": 61
+                          }
+                        },
+                        "message": {
+                          "text": "query : String"
+                        }
+                      }
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "webgoat-lessons/sql-injection/src/main/java/org/owasp/webgoat/sql_injection/introduction/SqlInjectionLesson3.java",
+                            "uriBaseId": "%SRCROOT%",
+                            "index": 3
+                          },
+                          "region": {
+                            "startLine": 57,
+                            "startColumn": 32,
+                            "endColumn": 37
+                          }
+                        },
+                        "message": {
+                          "text": "query : String"
+                        }
+                      }
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "webgoat-lessons/sql-injection/src/main/java/org/owasp/webgoat/sql_injection/introduction/SqlInjectionLesson3.java",
+                            "uriBaseId": "%SRCROOT%",
+                            "index": 3
+                          },
+                          "region": {
+                            "startLine": 60,
+                            "startColumn": 44,
+                            "endColumn": 56
+                          }
+                        },
+                        "message": {
+                          "text": "query : String"
+                        }
+                      }
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "webgoat-lessons/sql-injection/src/main/java/org/owasp/webgoat/sql_injection/introduction/SqlInjectionLesson3.java",
+                            "uriBaseId": "%SRCROOT%",
+                            "index": 3
+                          },
+                          "region": {
+                            "startLine": 65,
+                            "startColumn": 41,
+                            "endColumn": 46
+                          }
+                        },
+                        "message": {
+                          "text": "query"
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "relatedLocations": [
+            {
+              "id": 1,
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "webgoat-lessons/sql-injection/src/main/java/org/owasp/webgoat/sql_injection/introduction/SqlInjectionLesson3.java",
+                  "uriBaseId": "%SRCROOT%",
+                  "index": 3
+                },
+                "region": {
+                  "startLine": 56,
+                  "startColumn": 35,
+                  "endColumn": 61
+                }
+              },
+              "message": {
+                "text": "this user input"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "java/sql-injection",
+          "ruleIndex": 5,
+          "message": {
+            "text": "Query might include code from [this user input](1)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "webgoat-lessons/sql-injection/src/main/java/org/owasp/webgoat/sql_injection/introduction/SqlInjectionLesson4.java",
+                  "uriBaseId": "%SRCROOT%",
+                  "index": 4
+                },
+                "region": {
+                  "startLine": 59,
+                  "startColumn": 41,
+                  "endColumn": 46
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "70e3ff06f7af756a:1",
+            "primaryLocationStartColumnFingerprint": "24"
+          },
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "webgoat-lessons/sql-injection/src/main/java/org/owasp/webgoat/sql_injection/introduction/SqlInjectionLesson4.java",
+                            "uriBaseId": "%SRCROOT%",
+                            "index": 4
+                          },
+                          "region": {
+                            "startLine": 52,
+                            "startColumn": 35,
+                            "endColumn": 61
+                          }
+                        },
+                        "message": {
+                          "text": "query : String"
+                        }
+                      }
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "webgoat-lessons/sql-injection/src/main/java/org/owasp/webgoat/sql_injection/introduction/SqlInjectionLesson4.java",
+                            "uriBaseId": "%SRCROOT%",
+                            "index": 4
+                          },
+                          "region": {
+                            "startLine": 53,
+                            "startColumn": 32,
+                            "endColumn": 37
+                          }
+                        },
+                        "message": {
+                          "text": "query : String"
+                        }
+                      }
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "webgoat-lessons/sql-injection/src/main/java/org/owasp/webgoat/sql_injection/introduction/SqlInjectionLesson4.java",
+                            "uriBaseId": "%SRCROOT%",
+                            "index": 4
+                          },
+                          "region": {
+                            "startLine": 56,
+                            "startColumn": 44,
+                            "endColumn": 56
+                          }
+                        },
+                        "message": {
+                          "text": "query : String"
+                        }
+                      }
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "webgoat-lessons/sql-injection/src/main/java/org/owasp/webgoat/sql_injection/introduction/SqlInjectionLesson4.java",
+                            "uriBaseId": "%SRCROOT%",
+                            "index": 4
+                          },
+                          "region": {
+                            "startLine": 59,
+                            "startColumn": 41,
+                            "endColumn": 46
+                          }
+                        },
+                        "message": {
+                          "text": "query"
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "relatedLocations": [
+            {
+              "id": 1,
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "webgoat-lessons/sql-injection/src/main/java/org/owasp/webgoat/sql_injection/introduction/SqlInjectionLesson4.java",
+                  "uriBaseId": "%SRCROOT%",
+                  "index": 4
+                },
+                "region": {
+                  "startLine": 52,
+                  "startColumn": 35,
+                  "endColumn": 61
+                }
+              },
+              "message": {
+                "text": "this user input"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "java/sql-injection",
+          "ruleIndex": 5,
+          "message": {
+            "text": "Query might include code from [this user input](1).\nQuery might include code from [this user input](2).\nQuery might include code from [this user input](3)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "webgoat-lessons/sql-injection/src/main/java/org/owasp/webgoat/sql_injection/introduction/SqlInjectionLesson5a.java",
+                  "uriBaseId": "%SRCROOT%",
+                  "index": 5
+                },
+                "region": {
+                  "startLine": 62,
+                  "startColumn": 60,
+                  "endColumn": 65
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "2b95e3c48ba92cd0:1",
+            "primaryLocationStartColumnFingerprint": "43"
+          },
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "webgoat-lessons/sql-injection/src/main/java/org/owasp/webgoat/sql_injection/introduction/SqlInjectionLesson5a.java",
+                            "uriBaseId": "%SRCROOT%",
+                            "index": 5
+                          },
+                          "region": {
+                            "startLine": 53,
+                            "startColumn": 35,
+                            "endColumn": 63
+                          }
+                        },
+                        "message": {
+                          "text": "account : String"
+                        }
+                      }
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "webgoat-lessons/sql-injection/src/main/java/org/owasp/webgoat/sql_injection/introduction/SqlInjectionLesson5a.java",
+                            "uriBaseId": "%SRCROOT%",
+                            "index": 5
+                          },
+                          "region": {
+                            "startLine": 54,
+                            "startColumn": 32,
+                            "endColumn": 74
+                          }
+                        },
+                        "message": {
+                          "text": "... + ... : String"
+                        }
+                      }
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "webgoat-lessons/sql-injection/src/main/java/org/owasp/webgoat/sql_injection/introduction/SqlInjectionLesson5a.java",
+                            "uriBaseId": "%SRCROOT%",
+                            "index": 5
+                          },
+                          "region": {
+                            "startLine": 57,
+                            "startColumn": 44,
+                            "endColumn": 62
+                          }
+                        },
+                        "message": {
+                          "text": "accountName : String"
+                        }
+                      }
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "webgoat-lessons/sql-injection/src/main/java/org/owasp/webgoat/sql_injection/introduction/SqlInjectionLesson5a.java",
+                            "uriBaseId": "%SRCROOT%",
+                            "index": 5
+                          },
+                          "region": {
+                            "startLine": 62,
+                            "startColumn": 60,
+                            "endColumn": 65
+                          }
+                        },
+                        "message": {
+                          "text": "query"
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "webgoat-lessons/sql-injection/src/main/java/org/owasp/webgoat/sql_injection/introduction/SqlInjectionLesson5a.java",
+                            "uriBaseId": "%SRCROOT%",
+                            "index": 5
+                          },
+                          "region": {
+                            "startLine": 53,
+                            "startColumn": 65,
+                            "endColumn": 94
+                          }
+                        },
+                        "message": {
+                          "text": "operator : String"
+                        }
+                      }
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "webgoat-lessons/sql-injection/src/main/java/org/owasp/webgoat/sql_injection/introduction/SqlInjectionLesson5a.java",
+                            "uriBaseId": "%SRCROOT%",
+                            "index": 5
+                          },
+                          "region": {
+                            "startLine": 54,
+                            "startColumn": 32,
+                            "endColumn": 74
+                          }
+                        },
+                        "message": {
+                          "text": "... + ... : String"
+                        }
+                      }
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "webgoat-lessons/sql-injection/src/main/java/org/owasp/webgoat/sql_injection/introduction/SqlInjectionLesson5a.java",
+                            "uriBaseId": "%SRCROOT%",
+                            "index": 5
+                          },
+                          "region": {
+                            "startLine": 57,
+                            "startColumn": 44,
+                            "endColumn": 62
+                          }
+                        },
+                        "message": {
+                          "text": "accountName : String"
+                        }
+                      }
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "webgoat-lessons/sql-injection/src/main/java/org/owasp/webgoat/sql_injection/introduction/SqlInjectionLesson5a.java",
+                            "uriBaseId": "%SRCROOT%",
+                            "index": 5
+                          },
+                          "region": {
+                            "startLine": 62,
+                            "startColumn": 60,
+                            "endColumn": 65
+                          }
+                        },
+                        "message": {
+                          "text": "query"
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "webgoat-lessons/sql-injection/src/main/java/org/owasp/webgoat/sql_injection/introduction/SqlInjectionLesson5a.java",
+                            "uriBaseId": "%SRCROOT%",
+                            "index": 5
+                          },
+                          "region": {
+                            "startLine": 53,
+                            "startColumn": 96,
+                            "endColumn": 126
+                          }
+                        },
+                        "message": {
+                          "text": "injection : String"
+                        }
+                      }
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "webgoat-lessons/sql-injection/src/main/java/org/owasp/webgoat/sql_injection/introduction/SqlInjectionLesson5a.java",
+                            "uriBaseId": "%SRCROOT%",
+                            "index": 5
+                          },
+                          "region": {
+                            "startLine": 54,
+                            "startColumn": 32,
+                            "endColumn": 74
+                          }
+                        },
+                        "message": {
+                          "text": "... + ... : String"
+                        }
+                      }
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "webgoat-lessons/sql-injection/src/main/java/org/owasp/webgoat/sql_injection/introduction/SqlInjectionLesson5a.java",
+                            "uriBaseId": "%SRCROOT%",
+                            "index": 5
+                          },
+                          "region": {
+                            "startLine": 57,
+                            "startColumn": 44,
+                            "endColumn": 62
+                          }
+                        },
+                        "message": {
+                          "text": "accountName : String"
+                        }
+                      }
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "webgoat-lessons/sql-injection/src/main/java/org/owasp/webgoat/sql_injection/introduction/SqlInjectionLesson5a.java",
+                            "uriBaseId": "%SRCROOT%",
+                            "index": 5
+                          },
+                          "region": {
+                            "startLine": 62,
+                            "startColumn": 60,
+                            "endColumn": 65
+                          }
+                        },
+                        "message": {
+                          "text": "query"
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "relatedLocations": [
+            {
+              "id": 1,
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "webgoat-lessons/sql-injection/src/main/java/org/owasp/webgoat/sql_injection/introduction/SqlInjectionLesson5a.java",
+                  "uriBaseId": "%SRCROOT%",
+                  "index": 5
+                },
+                "region": {
+                  "startLine": 53,
+                  "startColumn": 35,
+                  "endColumn": 63
+                }
+              },
+              "message": {
+                "text": "this user input"
+              }
+            },
+            {
+              "id": 2,
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "webgoat-lessons/sql-injection/src/main/java/org/owasp/webgoat/sql_injection/introduction/SqlInjectionLesson5a.java",
+                  "uriBaseId": "%SRCROOT%",
+                  "index": 5
+                },
+                "region": {
+                  "startLine": 53,
+                  "startColumn": 65,
+                  "endColumn": 94
+                }
+              },
+              "message": {
+                "text": "this user input"
+              }
+            },
+            {
+              "id": 3,
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "webgoat-lessons/sql-injection/src/main/java/org/owasp/webgoat/sql_injection/introduction/SqlInjectionLesson5a.java",
+                  "uriBaseId": "%SRCROOT%",
+                  "index": 5
+                },
+                "region": {
+                  "startLine": 53,
+                  "startColumn": 96,
+                  "endColumn": 126
+                }
+              },
+              "message": {
+                "text": "this user input"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "java/sql-injection",
+          "ruleIndex": 5,
+          "message": {
+            "text": "Query might include code from [this user input](1)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "webgoat-lessons/sql-injection/src/main/java/org/owasp/webgoat/sql_injection/introduction/SqlInjectionLesson5b.java",
+                  "uriBaseId": "%SRCROOT%",
+                  "index": 6
+                },
+                "region": {
+                  "startLine": 58,
+                  "startColumn": 67,
+                  "endColumn": 78
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "c54383daa06514cd:1",
+            "primaryLocationStartColumnFingerprint": "54"
+          },
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "webgoat-lessons/sql-injection/src/main/java/org/owasp/webgoat/sql_injection/introduction/SqlInjectionLesson5b.java",
+                            "uriBaseId": "%SRCROOT%",
+                            "index": 6
+                          },
+                          "region": {
+                            "startLine": 51,
+                            "startColumn": 35,
+                            "endColumn": 62
+                          }
+                        },
+                        "message": {
+                          "text": "userid : String"
+                        }
+                      }
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "webgoat-lessons/sql-injection/src/main/java/org/owasp/webgoat/sql_injection/introduction/SqlInjectionLesson5b.java",
+                            "uriBaseId": "%SRCROOT%",
+                            "index": 6
+                          },
+                          "region": {
+                            "startLine": 52,
+                            "startColumn": 45,
+                            "endColumn": 51
+                          }
+                        },
+                        "message": {
+                          "text": "userid : String"
+                        }
+                      }
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "webgoat-lessons/sql-injection/src/main/java/org/owasp/webgoat/sql_injection/introduction/SqlInjectionLesson5b.java",
+                            "uriBaseId": "%SRCROOT%",
+                            "index": 6
+                          },
+                          "region": {
+                            "startLine": 55,
+                            "startColumn": 64,
+                            "endColumn": 82
+                          }
+                        },
+                        "message": {
+                          "text": "accountName : String"
+                        }
+                      }
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "webgoat-lessons/sql-injection/src/main/java/org/owasp/webgoat/sql_injection/introduction/SqlInjectionLesson5b.java",
+                            "uriBaseId": "%SRCROOT%",
+                            "index": 6
+                          },
+                          "region": {
+                            "startLine": 58,
+                            "startColumn": 67,
+                            "endColumn": 78
+                          }
+                        },
+                        "message": {
+                          "text": "queryString"
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "relatedLocations": [
+            {
+              "id": 1,
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "webgoat-lessons/sql-injection/src/main/java/org/owasp/webgoat/sql_injection/introduction/SqlInjectionLesson5b.java",
+                  "uriBaseId": "%SRCROOT%",
+                  "index": 6
+                },
+                "region": {
+                  "startLine": 51,
+                  "startColumn": 35,
+                  "endColumn": 62
+                }
+              },
+              "message": {
+                "text": "this user input"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "java/sql-injection",
+          "ruleIndex": 5,
+          "message": {
+            "text": "Query might include code from [this user input](1).\nQuery might include code from [this user input](2)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "webgoat-lessons/sql-injection/src/main/java/org/owasp/webgoat/sql_injection/introduction/SqlInjectionLesson8.java",
+                  "uriBaseId": "%SRCROOT%",
+                  "index": 7
+                },
+                "region": {
+                  "startLine": 65,
+                  "startColumn": 60,
+                  "endColumn": 65
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "615295edb2bddc7:1",
+            "primaryLocationStartColumnFingerprint": "43"
+          },
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "webgoat-lessons/sql-injection/src/main/java/org/owasp/webgoat/sql_injection/introduction/SqlInjectionLesson8.java",
+                            "uriBaseId": "%SRCROOT%",
+                            "index": 7
+                          },
+                          "region": {
+                            "startLine": 53,
+                            "startColumn": 35,
+                            "endColumn": 60
+                          }
+                        },
+                        "message": {
+                          "text": "name : String"
+                        }
+                      }
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "webgoat-lessons/sql-injection/src/main/java/org/owasp/webgoat/sql_injection/introduction/SqlInjectionLesson8.java",
+                            "uriBaseId": "%SRCROOT%",
+                            "index": 7
+                          },
+                          "region": {
+                            "startLine": 54,
+                            "startColumn": 47,
+                            "endColumn": 51
+                          }
+                        },
+                        "message": {
+                          "text": "name : String"
+                        }
+                      }
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "webgoat-lessons/sql-injection/src/main/java/org/owasp/webgoat/sql_injection/introduction/SqlInjectionLesson8.java",
+                            "uriBaseId": "%SRCROOT%",
+                            "index": 7
+                          },
+                          "region": {
+                            "startLine": 57,
+                            "startColumn": 59,
+                            "endColumn": 70
+                          }
+                        },
+                        "message": {
+                          "text": "name : String"
+                        }
+                      }
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "webgoat-lessons/sql-injection/src/main/java/org/owasp/webgoat/sql_injection/introduction/SqlInjectionLesson8.java",
+                            "uriBaseId": "%SRCROOT%",
+                            "index": 7
+                          },
+                          "region": {
+                            "startLine": 65,
+                            "startColumn": 60,
+                            "endColumn": 65
+                          }
+                        },
+                        "message": {
+                          "text": "query"
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "webgoat-lessons/sql-injection/src/main/java/org/owasp/webgoat/sql_injection/introduction/SqlInjectionLesson8.java",
+                            "uriBaseId": "%SRCROOT%",
+                            "index": 7
+                          },
+                          "region": {
+                            "startLine": 53,
+                            "startColumn": 62,
+                            "endColumn": 91
+                          }
+                        },
+                        "message": {
+                          "text": "auth_tan : String"
+                        }
+                      }
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "webgoat-lessons/sql-injection/src/main/java/org/owasp/webgoat/sql_injection/introduction/SqlInjectionLesson8.java",
+                            "uriBaseId": "%SRCROOT%",
+                            "index": 7
+                          },
+                          "region": {
+                            "startLine": 54,
+                            "startColumn": 53,
+                            "endColumn": 61
+                          }
+                        },
+                        "message": {
+                          "text": "auth_tan : String"
+                        }
+                      }
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "webgoat-lessons/sql-injection/src/main/java/org/owasp/webgoat/sql_injection/introduction/SqlInjectionLesson8.java",
+                            "uriBaseId": "%SRCROOT%",
+                            "index": 7
+                          },
+                          "region": {
+                            "startLine": 57,
+                            "startColumn": 72,
+                            "endColumn": 87
+                          }
+                        },
+                        "message": {
+                          "text": "auth_tan : String"
+                        }
+                      }
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "webgoat-lessons/sql-injection/src/main/java/org/owasp/webgoat/sql_injection/introduction/SqlInjectionLesson8.java",
+                            "uriBaseId": "%SRCROOT%",
+                            "index": 7
+                          },
+                          "region": {
+                            "startLine": 65,
+                            "startColumn": 60,
+                            "endColumn": 65
+                          }
+                        },
+                        "message": {
+                          "text": "query"
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "relatedLocations": [
+            {
+              "id": 1,
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "webgoat-lessons/sql-injection/src/main/java/org/owasp/webgoat/sql_injection/introduction/SqlInjectionLesson8.java",
+                  "uriBaseId": "%SRCROOT%",
+                  "index": 7
+                },
+                "region": {
+                  "startLine": 53,
+                  "startColumn": 35,
+                  "endColumn": 60
+                }
+              },
+              "message": {
+                "text": "this user input"
+              }
+            },
+            {
+              "id": 2,
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "webgoat-lessons/sql-injection/src/main/java/org/owasp/webgoat/sql_injection/introduction/SqlInjectionLesson8.java",
+                  "uriBaseId": "%SRCROOT%",
+                  "index": 7
+                },
+                "region": {
+                  "startLine": 53,
+                  "startColumn": 62,
+                  "endColumn": 91
+                }
+              },
+              "message": {
+                "text": "this user input"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "java/sql-injection",
+          "ruleIndex": 5,
+          "message": {
+            "text": "Query might include code from [this user input](1).\nQuery might include code from [this user input](2)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "webgoat-lessons/sql-injection/src/main/java/org/owasp/webgoat/sql_injection/introduction/SqlInjectionLesson9.java",
+                  "uriBaseId": "%SRCROOT%",
+                  "index": 8
+                },
+                "region": {
+                  "startLine": 66,
+                  "startColumn": 60,
+                  "endColumn": 65
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "c3579bd895056390:1",
+            "primaryLocationStartColumnFingerprint": "43"
+          },
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "webgoat-lessons/sql-injection/src/main/java/org/owasp/webgoat/sql_injection/introduction/SqlInjectionLesson9.java",
+                            "uriBaseId": "%SRCROOT%",
+                            "index": 8
+                          },
+                          "region": {
+                            "startLine": 55,
+                            "startColumn": 35,
+                            "endColumn": 60
+                          }
+                        },
+                        "message": {
+                          "text": "name : String"
+                        }
+                      }
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "webgoat-lessons/sql-injection/src/main/java/org/owasp/webgoat/sql_injection/introduction/SqlInjectionLesson9.java",
+                            "uriBaseId": "%SRCROOT%",
+                            "index": 8
+                          },
+                          "region": {
+                            "startLine": 56,
+                            "startColumn": 41,
+                            "endColumn": 45
+                          }
+                        },
+                        "message": {
+                          "text": "name : String"
+                        }
+                      }
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "webgoat-lessons/sql-injection/src/main/java/org/owasp/webgoat/sql_injection/introduction/SqlInjectionLesson9.java",
+                            "uriBaseId": "%SRCROOT%",
+                            "index": 8
+                          },
+                          "region": {
+                            "startLine": 59,
+                            "startColumn": 53,
+                            "endColumn": 64
+                          }
+                        },
+                        "message": {
+                          "text": "name : String"
+                        }
+                      }
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "webgoat-lessons/sql-injection/src/main/java/org/owasp/webgoat/sql_injection/introduction/SqlInjectionLesson9.java",
+                            "uriBaseId": "%SRCROOT%",
+                            "index": 8
+                          },
+                          "region": {
+                            "startLine": 66,
+                            "startColumn": 60,
+                            "endColumn": 65
+                          }
+                        },
+                        "message": {
+                          "text": "query"
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "webgoat-lessons/sql-injection/src/main/java/org/owasp/webgoat/sql_injection/introduction/SqlInjectionLesson9.java",
+                            "uriBaseId": "%SRCROOT%",
+                            "index": 8
+                          },
+                          "region": {
+                            "startLine": 55,
+                            "startColumn": 62,
+                            "endColumn": 91
+                          }
+                        },
+                        "message": {
+                          "text": "auth_tan : String"
+                        }
+                      }
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "webgoat-lessons/sql-injection/src/main/java/org/owasp/webgoat/sql_injection/introduction/SqlInjectionLesson9.java",
+                            "uriBaseId": "%SRCROOT%",
+                            "index": 8
+                          },
+                          "region": {
+                            "startLine": 56,
+                            "startColumn": 47,
+                            "endColumn": 55
+                          }
+                        },
+                        "message": {
+                          "text": "auth_tan : String"
+                        }
+                      }
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "webgoat-lessons/sql-injection/src/main/java/org/owasp/webgoat/sql_injection/introduction/SqlInjectionLesson9.java",
+                            "uriBaseId": "%SRCROOT%",
+                            "index": 8
+                          },
+                          "region": {
+                            "startLine": 59,
+                            "startColumn": 66,
+                            "endColumn": 81
+                          }
+                        },
+                        "message": {
+                          "text": "auth_tan : String"
+                        }
+                      }
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "webgoat-lessons/sql-injection/src/main/java/org/owasp/webgoat/sql_injection/introduction/SqlInjectionLesson9.java",
+                            "uriBaseId": "%SRCROOT%",
+                            "index": 8
+                          },
+                          "region": {
+                            "startLine": 66,
+                            "startColumn": 60,
+                            "endColumn": 65
+                          }
+                        },
+                        "message": {
+                          "text": "query"
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "relatedLocations": [
+            {
+              "id": 1,
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "webgoat-lessons/sql-injection/src/main/java/org/owasp/webgoat/sql_injection/introduction/SqlInjectionLesson9.java",
+                  "uriBaseId": "%SRCROOT%",
+                  "index": 8
+                },
+                "region": {
+                  "startLine": 55,
+                  "startColumn": 35,
+                  "endColumn": 60
+                }
+              },
+              "message": {
+                "text": "this user input"
+              }
+            },
+            {
+              "id": 2,
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "webgoat-lessons/sql-injection/src/main/java/org/owasp/webgoat/sql_injection/introduction/SqlInjectionLesson9.java",
+                  "uriBaseId": "%SRCROOT%",
+                  "index": 8
+                },
+                "region": {
+                  "startLine": 55,
+                  "startColumn": 62,
+                  "endColumn": 91
+                }
+              },
+              "message": {
+                "text": "this user input"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "java/concatenated-sql-query",
+          "ruleIndex": 6,
+          "message": {
+            "text": "Query might not neutralize special characters in [this expression](1)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "webgoat-lessons/jwt/src/main/java/org/owasp/webgoat/jwt/JWTFinalEndpoint.java",
+                  "uriBaseId": "%SRCROOT%",
+                  "index": 9
+                },
+                "region": {
+                  "startLine": 94,
+                  "startColumn": 86,
+                  "endColumn": 137
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "197b8453ba41cf48:1",
+            "primaryLocationStartColumnFingerprint": "57"
+          },
+          "relatedLocations": [
+            {
+              "id": 1,
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "webgoat-lessons/jwt/src/main/java/org/owasp/webgoat/jwt/JWTFinalEndpoint.java",
+                  "uriBaseId": "%SRCROOT%",
+                  "index": 9
+                },
+                "region": {
+                  "startLine": 94,
+                  "startColumn": 128,
+                  "endColumn": 131
+                }
+              },
+              "message": {
+                "text": "this expression"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "java/concatenated-sql-query",
+          "ruleIndex": 6,
+          "message": {
+            "text": "Query might not neutralize special characters in [this expression](1).\nQuery might not neutralize special characters in [this expression](2)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "webgoat-lessons/sql-injection/src/main/java/org/owasp/webgoat/sql_injection/introduction/SqlInjectionLesson8.java",
+                  "uriBaseId": "%SRCROOT%",
+                  "index": 7
+                },
+                "region": {
+                  "startLine": 137,
+                  "startColumn": 37,
+                  "endColumn": 45
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "86ab9021267dc726:1",
+            "primaryLocationStartColumnFingerprint": "24"
+          },
+          "relatedLocations": [
+            {
+              "id": 1,
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "webgoat-lessons/sql-injection/src/main/java/org/owasp/webgoat/sql_injection/introduction/SqlInjectionLesson8.java",
+                  "uriBaseId": "%SRCROOT%",
+                  "index": 7
+                },
+                "region": {
+                  "startLine": 133,
+                  "startColumn": 95,
+                  "endColumn": 101
+                }
+              },
+              "message": {
+                "text": "this expression"
+              }
+            },
+            {
+              "id": 2,
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "webgoat-lessons/sql-injection/src/main/java/org/owasp/webgoat/sql_injection/introduction/SqlInjectionLesson8.java",
+                  "uriBaseId": "%SRCROOT%",
+                  "index": 7
+                },
+                "region": {
+                  "startLine": 133,
+                  "startColumn": 79,
+                  "endColumn": 83
+                }
+              },
+              "message": {
+                "text": "this expression"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "java/insecure-cookie",
+          "ruleIndex": 12,
+          "message": {
+            "text": "Cookie is added to response without the 'secure' flag being set."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "webgoat-lessons/jwt/src/main/java/org/owasp/webgoat/jwt/JWTVotesEndpoint.java",
+                  "uriBaseId": "%SRCROOT%",
+                  "index": 10
+                },
+                "region": {
+                  "startLine": 99,
+                  "startColumn": 13,
+                  "endColumn": 39
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "84a4c92c523d81a1:1",
+            "primaryLocationStartColumnFingerprint": "0"
+          }
+        },
+        {
+          "ruleId": "java/insecure-cookie",
+          "ruleIndex": 12,
+          "message": {
+            "text": "Cookie is added to response without the 'secure' flag being set."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "webgoat-lessons/jwt/src/main/java/org/owasp/webgoat/jwt/JWTVotesEndpoint.java",
+                  "uriBaseId": "%SRCROOT%",
+                  "index": 10
+                },
+                "region": {
+                  "startLine": 104,
+                  "startColumn": 13,
+                  "endColumn": 39
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "178a5d22f3f4ca47:1",
+            "primaryLocationStartColumnFingerprint": "0"
+          }
+        },
+        {
+          "ruleId": "java/xxe",
+          "ruleIndex": 16,
+          "message": {
+            "text": "Unsafe parsing of XML file from [user input](1).\nUnsafe parsing of XML file from [user input](2)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "webgoat-lessons/xxe/src/main/java/org/owasp/webgoat/xxe/Comments.java",
+                  "uriBaseId": "%SRCROOT%",
+                  "index": 11
+                },
+                "region": {
+                  "startLine": 87,
+                  "startColumn": 57,
+                  "endColumn": 78
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "84f6ab8c534bb6f:1",
+            "primaryLocationStartColumnFingerprint": "48"
+          },
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "webgoat-lessons/xxe/src/main/java/org/owasp/webgoat/xxe/ContentTypeAssignment.java",
+                            "uriBaseId": "%SRCROOT%",
+                            "index": 12
+                          },
+                          "region": {
+                            "startLine": 53,
+                            "startColumn": 39,
+                            "endColumn": 69
+                          }
+                        },
+                        "message": {
+                          "text": "commentStr : String"
+                        }
+                      }
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "webgoat-lessons/xxe/src/main/java/org/owasp/webgoat/xxe/ContentTypeAssignment.java",
+                            "uriBaseId": "%SRCROOT%",
+                            "index": 12
+                          },
+                          "region": {
+                            "startLine": 64,
+                            "startColumn": 53,
+                            "endColumn": 63
+                          }
+                        },
+                        "message": {
+                          "text": "commentStr : String"
+                        }
+                      }
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "webgoat-lessons/xxe/src/main/java/org/owasp/webgoat/xxe/Comments.java",
+                            "uriBaseId": "%SRCROOT%",
+                            "index": 11
+                          },
+                          "region": {
+                            "startLine": 79,
+                            "startColumn": 32,
+                            "endColumn": 42
+                          }
+                        },
+                        "message": {
+                          "text": "xml : String"
+                        }
+                      }
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "webgoat-lessons/xxe/src/main/java/org/owasp/webgoat/xxe/Comments.java",
+                            "uriBaseId": "%SRCROOT%",
+                            "index": 11
+                          },
+                          "region": {
+                            "startLine": 87,
+                            "startColumn": 57,
+                            "endColumn": 78
+                          }
+                        },
+                        "message": {
+                          "text": "new StringReader(...)"
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "webgoat-lessons/xxe/src/main/java/org/owasp/webgoat/xxe/SimpleXXE.java",
+                            "uriBaseId": "%SRCROOT%",
+                            "index": 13
+                          },
+                          "region": {
+                            "startLine": 66,
+                            "startColumn": 42,
+                            "endColumn": 72
+                          }
+                        },
+                        "message": {
+                          "text": "commentStr : String"
+                        }
+                      }
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "webgoat-lessons/xxe/src/main/java/org/owasp/webgoat/xxe/SimpleXXE.java",
+                            "uriBaseId": "%SRCROOT%",
+                            "index": 13
+                          },
+                          "region": {
+                            "startLine": 69,
+                            "startColumn": 49,
+                            "endColumn": 59
+                          }
+                        },
+                        "message": {
+                          "text": "commentStr : String"
+                        }
+                      }
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "webgoat-lessons/xxe/src/main/java/org/owasp/webgoat/xxe/Comments.java",
+                            "uriBaseId": "%SRCROOT%",
+                            "index": 11
+                          },
+                          "region": {
+                            "startLine": 79,
+                            "startColumn": 32,
+                            "endColumn": 42
+                          }
+                        },
+                        "message": {
+                          "text": "xml : String"
+                        }
+                      }
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "webgoat-lessons/xxe/src/main/java/org/owasp/webgoat/xxe/Comments.java",
+                            "uriBaseId": "%SRCROOT%",
+                            "index": 11
+                          },
+                          "region": {
+                            "startLine": 87,
+                            "startColumn": 57,
+                            "endColumn": 78
+                          }
+                        },
+                        "message": {
+                          "text": "new StringReader(...)"
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "relatedLocations": [
+            {
+              "id": 1,
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "webgoat-lessons/xxe/src/main/java/org/owasp/webgoat/xxe/ContentTypeAssignment.java",
+                  "uriBaseId": "%SRCROOT%",
+                  "index": 12
+                },
+                "region": {
+                  "startLine": 53,
+                  "startColumn": 39,
+                  "endColumn": 69
+                }
+              },
+              "message": {
+                "text": "user input"
+              }
+            },
+            {
+              "id": 2,
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "webgoat-lessons/xxe/src/main/java/org/owasp/webgoat/xxe/SimpleXXE.java",
+                  "uriBaseId": "%SRCROOT%",
+                  "index": 13
+                },
+                "region": {
+                  "startLine": 66,
+                  "startColumn": 42,
+                  "endColumn": 72
+                }
+              },
+              "message": {
+                "text": "user input"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "java/unsafe-deserialization",
+          "ruleIndex": 18,
+          "message": {
+            "text": "Unsafe deserialization of [user input](1)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "webgoat-lessons/vulnerable-components/src/main/java/org/owasp/webgoat/vulnerable_components/VulnerableComponentsLesson.java",
+                  "uriBaseId": "%SRCROOT%",
+                  "index": 14
+                },
+                "region": {
+                  "startLine": 68,
+                  "startColumn": 38,
+                  "endColumn": 62
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "9818b61b5ac06370:1",
+            "primaryLocationStartColumnFingerprint": "25"
+          },
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "webgoat-lessons/vulnerable-components/src/main/java/org/owasp/webgoat/vulnerable_components/VulnerableComponentsLesson.java",
+                            "uriBaseId": "%SRCROOT%",
+                            "index": 14
+                          },
+                          "region": {
+                            "startLine": 37,
+                            "startColumn": 28,
+                            "endColumn": 56
+                          }
+                        },
+                        "message": {
+                          "text": "payload : String"
+                        }
+                      }
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "webgoat-lessons/vulnerable-components/src/main/java/org/owasp/webgoat/vulnerable_components/VulnerableComponentsLesson.java",
+                            "uriBaseId": "%SRCROOT%",
+                            "index": 14
+                          },
+                          "region": {
+                            "startLine": 68,
+                            "startColumn": 54,
+                            "endColumn": 61
+                          }
+                        },
+                        "message": {
+                          "text": "payload"
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "relatedLocations": [
+            {
+              "id": 1,
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "webgoat-lessons/vulnerable-components/src/main/java/org/owasp/webgoat/vulnerable_components/VulnerableComponentsLesson.java",
+                  "uriBaseId": "%SRCROOT%",
+                  "index": 14
+                },
+                "region": {
+                  "startLine": 37,
+                  "startColumn": 28,
+                  "endColumn": 56
+                }
+              },
+              "message": {
+                "text": "user input"
+              }
+            }
+          ]
+        }
+      ],
+      "columnKind": "utf16CodeUnits",
+      "properties": {
+        "semmle.formatSpecifier": "sarif-latest"
+      }
+    }
+  ]
+}

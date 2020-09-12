@@ -10,12 +10,17 @@ inputs:
   sarifReportDir:
     description: The CodeQL output directory for SARIF report(s).
     required: true
-    default: ../results
+    default: "../results"
 
   outputDir:
     description: The output directory for the generated report(s).
     required: true
-    default:
+    default: ${{ github.workspace }}
+
+  repository:
+    description: Repository name with owner. For example, peter-murray/github-security-report
+    required: true
+    default: ${{ github.repository }}
 
 runs:
   using: node12

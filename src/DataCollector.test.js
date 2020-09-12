@@ -6,16 +6,20 @@ const github = require('@actions/github')
 ;
 
 const octokit = github.getOctokit(process.env.GITHUB_TOKEN);
-const collector = new DataCollector(octokit, {repo: {repo: 'ghas-reporting', owner: 'octodemo'}});
+const collector = new DataCollector(octokit, 'octodemo/ghas-reporting');
 
-collector.getPayload(__dirname)
+collector.getPayload(path.join(__dirname, '..', 'samples', 'java', 'detailed'))
   .then(reportData => {
     const json = reportData.getJSONPayload();
 
-    console.log(JSON.stringify(json, null, 2));
+    // console.log(JSON.stringify(json, null, 2));
 
     const templates = new ReportTemplate();
     const html = templates.render(json, 'summary.html')
+
+    const fs = require('fs');
+    fs.writeFileSync(path.join(__dirname, '..', 'summary.html'), html);
+
     pdfWriter.save(html, path.join(__dirname, '..', 'summary.pdf'));
 
   })
