@@ -1,5 +1,5 @@
-name: GitHub Security Report Generator
-description: Generates a software quality report for a repository
+name: security-report-action
+description: Generates security reports for a GitHub repository
 author: Peter Murray
 
 inputs:
@@ -25,3 +25,7 @@ inputs:
 runs:
   using: node12
   main: dist/index.js
+
+branding:
+  icon: shield
+  color: green
