@@ -1,0 +1,34 @@
+name: Manual Test Repository
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    
+      - name: Checkout Sources
+        uses: actions/checkout@v2
+        
+      - name: List files
+        run: |
+          ls -l
+          ls -l ./samples
+          ls -l ./samples/java
+          ls -l ./samples/java/basic
+          
+      - name: Invoke Action
+        uses: ./
+        with:
+          token: ${{ secrets.SECURITY_TOKEN }}
+          sarifReportDir: ./samples/java/detailed
+          outputDir: .
+          repository: octodemo/ghas-reporting
+          
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: reports
+          path: ./*.pdf
