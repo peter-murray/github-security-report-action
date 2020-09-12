@@ -1,4 +1,4 @@
-# security-report-action
+# github-security-report-action
 
 A GitHub Action for generating PDF reports for GitHub Advanced Security Code Scan Results and Dependency Vulnerabilities.
 
@@ -39,7 +39,7 @@ a future release to provide customization of these templates, via an ability to 
 
 ```
 name: Generate Security Report
-uses: peter-murray/security-report@v1
+uses: peter-murray/github-security-report-action@v1
 with:
   token: ${{ secrets.SECURITY_TOKEN }}
 ```

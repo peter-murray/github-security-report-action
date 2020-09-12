@@ -1,4 +1,4 @@
-name: security-report-action
+name: GitHub Security Report Action
 description: Generates security reports for a GitHub repository
 author: Peter Murray
 
