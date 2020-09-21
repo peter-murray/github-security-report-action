@@ -7,14 +7,14 @@ const path = require('path')
   ;
 
 async function run() {
-  const token = getRequiredInputValue('token')
-    , sarifReportDir = getRequiredInputValue('sarifReportDir')
-    , outputDir = getRequiredInputValue('outputDir')
-    , repository = getRequiredInputValue('repository')
-    , octokit = github.getOctokit(token)
-  ;
-
   try {
+    const token = getRequiredInputValue('token')
+      , sarifReportDir = getRequiredInputValue('sarifReportDir')
+      , outputDir = getRequiredInputValue('outputDir')
+      , repository = getRequiredInputValue('repository')
+      , octokit = github.getOctokit(token)
+    ;
+    
     const collector = new DataCollector(octokit, repository)
       , reportData = await collector.getPayload(sarifReportDir)
       , reportTemplate = new ReportTemplate() //TODO add support to set a different directory
