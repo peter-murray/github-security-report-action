@@ -1,0 +1,4913 @@
+{
+  "github": {
+    "owner": "peter-murray",
+    "repo": "advanced-security-java"
+  },
+  "metadata": {
+    "created": "2020-10-04T16:45:10.564Z"
+  },
+  "sca": {
+    "dependencies": {
+      "manifests": {
+        "processed": [
+          {
+            "filename": "pom.xml",
+            "path": "/peter-murray/advanced-security-java/blob/main/pom.xml"
+          },
+          {
+            "filename": "docker/pom.xml",
+            "path": "/peter-murray/advanced-security-java/blob/main/docker/pom.xml"
+          },
+          {
+            "filename": "webwolf/pom.xml",
+            "path": "/peter-murray/advanced-security-java/blob/main/webwolf/pom.xml"
+          },
+          {
+            "filename": "webgoat-server/pom.xml",
+            "path": "/peter-murray/advanced-security-java/blob/main/webgoat-server/pom.xml"
+          },
+          {
+            "filename": "webgoat-lessons/pom.xml",
+            "path": "/peter-murray/advanced-security-java/blob/main/webgoat-lessons/pom.xml"
+          },
+          {
+            "filename": "webgoat-container/pom.xml",
+            "path": "/peter-murray/advanced-security-java/blob/main/webgoat-container/pom.xml"
+          },
+          {
+            "filename": "webgoat-lessons/cia/pom.xml",
+            "path": "/peter-murray/advanced-security-java/blob/main/webgoat-lessons/cia/pom.xml"
+          },
+          {
+            "filename": "webgoat-lessons/csrf/pom.xml",
+            "path": "/peter-murray/advanced-security-java/blob/main/webgoat-lessons/csrf/pom.xml"
+          },
+          {
+            "filename": "webgoat-lessons/crypto/pom.xml",
+            "path": "/peter-murray/advanced-security-java/blob/main/webgoat-lessons/crypto/pom.xml"
+          },
+          {
+            "filename": "webgoat-integration-tests/pom.xml",
+            "path": "/peter-murray/advanced-security-java/blob/main/webgoat-integration-tests/pom.xml"
+          },
+          {
+            "filename": "webgoat-lessons/challenge/pom.xml",
+            "path": "/peter-murray/advanced-security-java/blob/main/webgoat-lessons/challenge/pom.xml"
+          },
+          {
+            "filename": "webgoat-lessons/auth-bypass/pom.xml",
+            "path": "/peter-murray/advanced-security-java/blob/main/webgoat-lessons/auth-bypass/pom.xml"
+          },
+          {
+            "filename": "webgoat-lessons/http-basics/pom.xml",
+            "path": "/peter-murray/advanced-security-java/blob/main/webgoat-lessons/http-basics/pom.xml"
+          },
+          {
+            "filename": "webgoat-lessons/http-proxies/pom.xml",
+            "path": "/peter-murray/advanced-security-java/blob/main/webgoat-lessons/http-proxies/pom.xml"
+          },
+          {
+            "filename": "webgoat-lessons/html-tampering/pom.xml",
+            "path": "/peter-murray/advanced-security-java/blob/main/webgoat-lessons/html-tampering/pom.xml"
+          },
+          {
+            "filename": "webgoat-lessons/chrome-dev-tools/pom.xml",
+            "path": "/peter-murray/advanced-security-java/blob/main/webgoat-lessons/chrome-dev-tools/pom.xml"
+          },
+          {
+            "filename": "webgoat-lessons/command-injection/pom.xml",
+            "path": "/peter-murray/advanced-security-java/blob/main/webgoat-lessons/command-injection/pom.xml"
+          },
+          {
+            "filename": "webgoat-lessons/bypass-restrictions/pom.xml",
+            "path": "/peter-murray/advanced-security-java/blob/main/webgoat-lessons/bypass-restrictions/pom.xml"
+          },
+          {
+            "filename": "webgoat-lessons/cross-site-scripting/pom.xml",
+            "path": "/peter-murray/advanced-security-java/blob/main/webgoat-lessons/cross-site-scripting/pom.xml"
+          },
+          {
+            "filename": "webgoat-lessons/client-side-filtering/pom.xml",
+            "path": "/peter-murray/advanced-security-java/blob/main/webgoat-lessons/client-side-filtering/pom.xml"
+          }
+        ],
+        "unprocessed": []
+      },
+      "totalDependencies": 107,
+      "dependencies": {
+        "maven": [
+          {
+            "name": "javax.xml.bind:jaxb-api",
+            "type": "MAVEN",
+            "version": ""
+          },
+          {
+            "name": "org.apache.commons:commons-exec",
+            "type": "MAVEN",
+            "version": "= 1.3"
+          },
+          {
+            "name": "org.apache.maven.plugins:maven-checkstyle-plugin",
+            "type": "MAVEN",
+            "version": "= 3.1.0"
+          },
+          {
+            "name": "org.apache.maven.plugins:maven-compiler-plugin",
+            "type": "MAVEN",
+            "version": ""
+          },
+          {
+            "name": "org.apache.maven.plugins:maven-pmd-plugin",
+            "type": "MAVEN",
+            "version": "= 3.13.0"
+          },
+          {
+            "name": "org.owasp:dependency-check-maven",
+            "type": "MAVEN",
+            "version": "= 5.3.2"
+          },
+          {
+            "name": "org.projectlombok:lombok",
+            "type": "MAVEN",
+            "version": ""
+          },
+          {
+            "name": "org.apache.maven.plugins:maven-antrun-plugin",
+            "type": "MAVEN",
+            "version": "= 1.8"
+          },
+          {
+            "name": "com.fasterxml.jackson.datatype:jackson-datatype-jsr310",
+            "type": "MAVEN",
+            "version": ""
+          },
+          {
+            "name": "com.google.guava:guava",
+            "type": "MAVEN",
+            "version": ""
+          },
+          {
+            "name": "commons-io:commons-io",
+            "type": "MAVEN",
+            "version": ""
+          },
+          {
+            "name": "org.apache.commons:commons-lang3",
+            "type": "MAVEN",
+            "version": ""
+          },
+          {
+            "name": "org.apache.maven.plugins:maven-compiler-plugin",
+            "type": "MAVEN",
+            "version": ""
+          },
+          {
+            "name": "org.apache.maven.plugins:maven-jar-plugin",
+            "type": "MAVEN",
+            "version": ""
+          },
+          {
+            "name": "org.apache.maven.plugins:maven-surefire-plugin",
+            "type": "MAVEN",
+            "version": ""
+          },
+          {
+            "name": "org.hsqldb:hsqldb",
+            "type": "MAVEN",
+            "version": ""
+          },
+          {
+            "name": "org.postgresql:postgresql",
+            "type": "MAVEN",
+            "version": ""
+          },
+          {
+            "name": "org.projectlombok:lombok",
+            "type": "MAVEN",
+            "version": ""
+          },
+          {
+            "name": "org.springframework.boot:spring-boot-devtools",
+            "type": "MAVEN",
+            "version": ""
+          },
+          {
+            "name": "org.springframework.boot:spring-boot-maven-plugin",
+            "type": "MAVEN",
+            "version": ""
+          },
+          {
+            "name": "org.springframework.boot:spring-boot-starter-actuator",
+            "type": "MAVEN",
+            "version": ""
+          },
+          {
+            "name": "org.springframework.boot:spring-boot-starter-data-jpa",
+            "type": "MAVEN",
+            "version": ""
+          },
+          {
+            "name": "org.springframework.boot:spring-boot-starter-security",
+            "type": "MAVEN",
+            "version": ""
+          },
+          {
+            "name": "org.springframework.boot:spring-boot-starter-test",
+            "type": "MAVEN",
+            "version": ""
+          },
+          {
+            "name": "org.springframework.boot:spring-boot-starter-thymeleaf",
+            "type": "MAVEN",
+            "version": ""
+          },
+          {
+            "name": "org.springframework.boot:spring-boot-starter-undertow",
+            "type": "MAVEN",
+            "version": ""
+          },
+          {
+            "name": "org.springframework.boot:spring-boot-starter-web",
+            "type": "MAVEN",
+            "version": ""
+          },
+          {
+            "name": "org.springframework.security:spring-security-test",
+            "type": "MAVEN",
+            "version": ""
+          },
+          {
+            "name": "org.thymeleaf.extras:thymeleaf-extras-springsecurity5",
+            "type": "MAVEN",
+            "version": ""
+          },
+          {
+            "name": "org.webjars:bootstrap",
+            "type": "MAVEN",
+            "version": "= 3.3.7"
+          },
+          {
+            "name": "org.webjars:jquery",
+            "type": "MAVEN",
+            "version": "= 3.2.1"
+          },
+          {
+            "name": "org.apache.maven.plugins:maven-jar-plugin",
+            "type": "MAVEN",
+            "version": ""
+          },
+          {
+            "name": "org.owasp.webgoat.lesson:auth-bypass",
+            "type": "MAVEN",
+            "version": "= v8.1.0"
+          },
+          {
+            "name": "org.owasp.webgoat.lesson:bypass-restrictions",
+            "type": "MAVEN",
+            "version": "= v8.1.0"
+          },
+          {
+            "name": "org.owasp.webgoat.lesson:challenge",
+            "type": "MAVEN",
+            "version": "= v8.1.0"
+          },
+          {
+            "name": "org.owasp.webgoat.lesson:chrome-dev-tools",
+            "type": "MAVEN",
+            "version": "= v8.1.0"
+          },
+          {
+            "name": "org.owasp.webgoat.lesson:cia",
+            "type": "MAVEN",
+            "version": "= v8.1.0"
+          },
+          {
+            "name": "org.owasp.webgoat.lesson:client-side-filtering",
+            "type": "MAVEN",
+            "version": "= v8.1.0"
+          },
+          {
+            "name": "org.owasp.webgoat.lesson:cross-site-scripting",
+            "type": "MAVEN",
+            "version": "= v8.1.0"
+          },
+          {
+            "name": "org.owasp.webgoat.lesson:crypto",
+            "type": "MAVEN",
+            "version": "= v8.1.0"
+          },
+          {
+            "name": "org.owasp.webgoat.lesson:csrf",
+            "type": "MAVEN",
+            "version": "= v8.1.0"
+          },
+          {
+            "name": "org.owasp.webgoat.lesson:html-tampering",
+            "type": "MAVEN",
+            "version": "= v8.1.0"
+          },
+          {
+            "name": "org.owasp.webgoat.lesson:http-basics",
+            "type": "MAVEN",
+            "version": "= v8.1.0"
+          },
+          {
+            "name": "org.owasp.webgoat.lesson:http-proxies",
+            "type": "MAVEN",
+            "version": "= v8.1.0"
+          },
+          {
+            "name": "org.owasp.webgoat.lesson:idor",
+            "type": "MAVEN",
+            "version": "= v8.1.0"
+          },
+          {
+            "name": "org.owasp.webgoat.lesson:insecure-deserialization",
+            "type": "MAVEN",
+            "version": "= v8.1.0"
+          },
+          {
+            "name": "org.owasp.webgoat.lesson:insecure-login",
+            "type": "MAVEN",
+            "version": "= v8.1.0"
+          },
+          {
+            "name": "org.owasp.webgoat.lesson:jwt",
+            "type": "MAVEN",
+            "version": "= v8.1.0"
+          },
+          {
+            "name": "org.owasp.webgoat.lesson:missing-function-ac",
+            "type": "MAVEN",
+            "version": "= v8.1.0"
+          },
+          {
+            "name": "org.owasp.webgoat.lesson:password-reset",
+            "type": "MAVEN",
+            "version": "= v8.1.0"
+          },
+          {
+            "name": "org.owasp.webgoat.lesson:path-traversal",
+            "type": "MAVEN",
+            "version": "= v8.1.0"
+          },
+          {
+            "name": "org.owasp.webgoat.lesson:secure-passwords",
+            "type": "MAVEN",
+            "version": "= v8.1.0"
+          },
+          {
+            "name": "org.owasp.webgoat.lesson:sql-injection",
+            "type": "MAVEN",
+            "version": "= v8.1.0"
+          },
+          {
+            "name": "org.owasp.webgoat.lesson:ssrf",
+            "type": "MAVEN",
+            "version": "= v8.1.0"
+          },
+          {
+            "name": "org.owasp.webgoat.lesson:vulnerable-components",
+            "type": "MAVEN",
+            "version": "= v8.1.0"
+          },
+          {
+            "name": "org.owasp.webgoat.lesson:webgoat-introduction",
+            "type": "MAVEN",
+            "version": "= v8.1.0"
+          },
+          {
+            "name": "org.owasp.webgoat.lesson:webgoat-lesson-template",
+            "type": "MAVEN",
+            "version": "= v8.1.0"
+          },
+          {
+            "name": "org.owasp.webgoat.lesson:webwolf-introduction",
+            "type": "MAVEN",
+            "version": "= v8.1.0"
+          },
+          {
+            "name": "org.owasp.webgoat.lesson:xxe",
+            "type": "MAVEN",
+            "version": "= v8.1.0"
+          },
+          {
+            "name": "org.owasp.webgoat:webgoat-container",
+            "type": "MAVEN",
+            "version": "= v8.1.0"
+          },
+          {
+            "name": "org.postgresql:postgresql",
+            "type": "MAVEN",
+            "version": ""
+          },
+          {
+            "name": "org.springframework.boot:spring-boot-devtools",
+            "type": "MAVEN",
+            "version": ""
+          },
+          {
+            "name": "org.springframework.boot:spring-boot-maven-plugin",
+            "type": "MAVEN",
+            "version": ""
+          },
+          {
+            "name": "junit:junit",
+            "type": "MAVEN",
+            "version": ""
+          },
+          {
+            "name": "org.apache.maven.plugins:maven-compiler-plugin",
+            "type": "MAVEN",
+            "version": ""
+          },
+          {
+            "name": "org.apache.maven.plugins:maven-surefire-plugin",
+            "type": "MAVEN",
+            "version": ""
+          },
+          {
+            "name": "org.mockito:mockito-core",
+            "type": "MAVEN",
+            "version": ""
+          },
+          {
+            "name": "org.owasp.webgoat:webgoat-container",
+            "type": "MAVEN",
+            "version": "= v8.1.0"
+          },
+          {
+            "name": "org.springframework.boot:spring-boot-starter-test",
+            "type": "MAVEN",
+            "version": ""
+          },
+          {
+            "name": "org.springframework.security:spring-security-test",
+            "type": "MAVEN",
+            "version": "= 4.1.3"
+          },
+          {
+            "name": "javax.activation:activation",
+            "type": "MAVEN",
+            "version": ""
+          },
+          {
+            "name": "junit:junit",
+            "type": "MAVEN",
+            "version": ""
+          },
+          {
+            "name": "org.apache.commons:commons-lang3",
+            "type": "MAVEN",
+            "version": ""
+          },
+          {
+            "name": "org.apache.maven.plugins:maven-jar-plugin",
+            "type": "MAVEN",
+            "version": ""
+          },
+          {
+            "name": "org.apache.maven.plugins:maven-surefire-plugin",
+            "type": "MAVEN",
+            "version": ""
+          },
+          {
+            "name": "org.asciidoctor:asciidoctorj",
+            "type": "MAVEN",
+            "version": "= 1.5.8.1"
+          },
+          {
+            "name": "org.flywaydb:flyway-core",
+            "type": "MAVEN",
+            "version": ""
+          },
+          {
+            "name": "org.hsqldb:hsqldb",
+            "type": "MAVEN",
+            "version": ""
+          },
+          {
+            "name": "org.springframework.boot:spring-boot-starter-actuator",
+            "type": "MAVEN",
+            "version": ""
+          },
+          {
+            "name": "org.springframework.boot:spring-boot-starter-data-jpa",
+            "type": "MAVEN",
+            "version": ""
+          },
+          {
+            "name": "org.springframework.boot:spring-boot-starter-security",
+            "type": "MAVEN",
+            "version": ""
+          },
+          {
+            "name": "org.springframework.boot:spring-boot-starter-test",
+            "type": "MAVEN",
+            "version": ""
+          },
+          {
+            "name": "org.springframework.boot:spring-boot-starter-thymeleaf",
+            "type": "MAVEN",
+            "version": ""
+          },
+          {
+            "name": "org.springframework.boot:spring-boot-starter-undertow",
+            "type": "MAVEN",
+            "version": ""
+          },
+          {
+            "name": "org.springframework.boot:spring-boot-starter-web",
+            "type": "MAVEN",
+            "version": ""
+          },
+          {
+            "name": "org.springframework.security:spring-security-test",
+            "type": "MAVEN",
+            "version": ""
+          },
+          {
+            "name": "org.thymeleaf.extras:thymeleaf-extras-springsecurity5",
+            "type": "MAVEN",
+            "version": ""
+          },
+          {
+            "name": "io.rest-assured:rest-assured",
+            "type": "MAVEN",
+            "version": ""
+          },
+          {
+            "name": "org.apache.maven.plugins:maven-surefire-plugin",
+            "type": "MAVEN",
+            "version": ""
+          },
+          {
+            "name": "org.owasp.webgoat:webgoat-server",
+            "type": "MAVEN",
+            "version": "= v8.1.0"
+          },
+          {
+            "name": "org.owasp.webgoat:webwolf",
+            "type": "MAVEN",
+            "version": "= v8.1.0"
+          },
+          {
+            "name": "org.springframework.boot:spring-boot-starter-test",
+            "type": "MAVEN",
+            "version": ""
+          },
+          {
+            "name": "io.jsonwebtoken:jjwt",
+            "type": "MAVEN",
+            "version": "= 0.7.0"
+          },
+          {
+            "name": "junit:junit",
+            "type": "MAVEN",
+            "version": ""
+          },
+          {
+            "name": "org.springframework.boot:spring-boot-starter-test",
+            "type": "MAVEN",
+            "version": ""
+          },
+          {
+            "name": "org.springframework.security:spring-security-test",
+            "type": "MAVEN",
+            "version": "= 4.1.3"
+          },
+          {
+            "name": "junit:junit",
+            "type": "MAVEN",
+            "version": ""
+          },
+          {
+            "name": "org.springframework.boot:spring-boot-starter-test",
+            "type": "MAVEN",
+            "version": ""
+          },
+          {
+            "name": "org.springframework.security:spring-security-test",
+            "type": "MAVEN",
+            "version": "= 4.1.3"
+          },
+          {
+            "name": "junit:junit",
+            "type": "MAVEN",
+            "version": ""
+          },
+          {
+            "name": "org.springframework.boot:spring-boot-starter-test",
+            "type": "MAVEN",
+            "version": ""
+          },
+          {
+            "name": "org.springframework.security:spring-security-test",
+            "type": "MAVEN",
+            "version": "= 4.1.3"
+          },
+          {
+            "name": "junit:junit",
+            "type": "MAVEN",
+            "version": ""
+          },
+          {
+            "name": "org.springframework.boot:spring-boot-starter-test",
+            "type": "MAVEN",
+            "version": ""
+          },
+          {
+            "name": "org.springframework.security:spring-security-test",
+            "type": "MAVEN",
+            "version": "= 4.1.3"
+          },
+          {
+            "name": "org.asciidoctor:asciidoctor-maven-plugin",
+            "type": "MAVEN",
+            "version": "= 1.5.3"
+          },
+          {
+            "name": "org.jsoup:jsoup",
+            "type": "MAVEN",
+            "version": "= 1.11.3"
+          }
+        ]
+      }
+    },
+    "vulnerabilities": {
+      "total": 0,
+      "bySeverity": {}
+    }
+  },
+  "scanning": {
+    "rules": [
+      {
+        "name": "java/netty-http-response-splitting",
+        "severity": "error",
+        "precision": "high",
+        "kind": "problem",
+        "shortDescription": "Disabled Netty HTTP header validation",
+        "description": "Disabling HTTP header validation makes code vulnerable to attack by header splitting if user input is written directly to an HTTP header.",
+        "tags": [
+          "security",
+          "external/cwe/cwe-113"
+        ],
+        "cwe": [
+          "cwe-113"
+        ]
+      },
+      {
+        "name": "java/http-response-splitting",
+        "severity": "error",
+        "precision": "high",
+        "kind": "path-problem",
+        "shortDescription": "HTTP response splitting",
+        "description": "Writing user input directly to an HTTP header makes code vulnerable to attack by header splitting.",
+        "tags": [
+          "security",
+          "external/cwe/cwe-113"
+        ],
+        "cwe": [
+          "cwe-113"
+        ]
+      },
+      {
+        "name": "java/insecure-cookie",
+        "severity": "error",
+        "precision": "high",
+        "kind": "problem",
+        "shortDescription": "Failure to use secure cookies",
+        "description": "Insecure cookies may be sent in cleartext, which makes them vulnerable to interception.",
+        "tags": [
+          "security",
+          "external/cwe/cwe-614"
+        ],
+        "cwe": [
+          "cwe-614"
+        ]
+      },
+      {
+        "name": "java/tainted-permissions-check",
+        "severity": "error",
+        "precision": "high",
+        "kind": "path-problem",
+        "shortDescription": "User-controlled data used in permissions check",
+        "description": "Using user-controlled data in a permissions check may result in inappropriate permissions being granted.",
+        "tags": [
+          "security",
+          "external/cwe/cwe-807",
+          "external/cwe/cwe-290"
+        ],
+        "cwe": [
+          "cwe-290",
+          "cwe-807"
+        ]
+      },
+      {
+        "name": "java/concatenated-sql-query",
+        "severity": "error",
+        "precision": "high",
+        "kind": "problem",
+        "shortDescription": "Query built without neutralizing special characters",
+        "description": "Building a SQL or Java Persistence query without escaping or otherwise neutralizing any special characters is vulnerable to insertion of malicious code.",
+        "tags": [
+          "security",
+          "external/cwe/cwe-089"
+        ],
+        "cwe": [
+          "cwe-089"
+        ]
+      },
+      {
+        "name": "java/sql-injection",
+        "severity": "error",
+        "precision": "high",
+        "kind": "path-problem",
+        "shortDescription": "Query built from user-controlled sources",
+        "description": "Building a SQL or Java Persistence query from user-controlled sources is vulnerable to insertion of malicious code by the user.",
+        "tags": [
+          "security",
+          "external/cwe/cwe-089"
+        ],
+        "cwe": [
+          "cwe-089"
+        ]
+      },
+      {
+        "name": "java/tainted-numeric-cast",
+        "severity": "error",
+        "precision": "high",
+        "kind": "path-problem",
+        "shortDescription": "User-controlled data in numeric cast",
+        "description": "Casting user-controlled numeric data to a narrower type without validation can cause unexpected truncation.",
+        "tags": [
+          "security",
+          "external/cwe/cwe-197",
+          "external/cwe/cwe-681"
+        ],
+        "cwe": [
+          "cwe-197",
+          "cwe-681"
+        ]
+      },
+      {
+        "name": "java/maven/non-https-url",
+        "severity": "error",
+        "precision": "very-high",
+        "kind": "problem",
+        "shortDescription": "Failure to use HTTPS or SFTP URL in Maven artifact upload/download",
+        "description": "Non-HTTPS connections can be intercepted by third parties.",
+        "tags": [
+          "security",
+          "external/cwe/cwe-300",
+          "external/cwe/cwe-319",
+          "external/cwe/cwe-494",
+          "external/cwe/cwe-829"
+        ],
+        "cwe": [
+          "cwe-300",
+          "cwe-319",
+          "cwe-494",
+          "cwe-829"
+        ]
+      },
+      {
+        "name": "java/world-writable-file-read",
+        "severity": "error",
+        "precision": "high",
+        "kind": "problem",
+        "shortDescription": "Reading from a world writable file",
+        "description": "Reading from a file which is set as world writable is dangerous because the file may be modified or removed by external actors.",
+        "tags": [
+          "security",
+          "external/cwe/cwe-732"
+        ],
+        "cwe": [
+          "cwe-732"
+        ]
+      },
+      {
+        "name": "java/spring-disabled-csrf-protection",
+        "severity": "error",
+        "precision": "high",
+        "kind": "problem",
+        "shortDescription": "Disabled Spring CSRF protection",
+        "description": "Disabling CSRF protection makes the application vulnerable to a Cross-Site Request Forgery (CSRF) attack.",
+        "tags": [
+          "security",
+          "external/cwe/cwe-352"
+        ],
+        "cwe": [
+          "cwe-352"
+        ]
+      },
+      {
+        "name": "java/concatenated-command-line",
+        "severity": "error",
+        "precision": "high",
+        "kind": "problem",
+        "shortDescription": "Building a command line with string concatenation",
+        "description": "Using concatenated strings in a command line is vulnerable to malicious insertion of special characters in the strings.",
+        "tags": [
+          "security",
+          "external/cwe/cwe-078",
+          "external/cwe/cwe-088"
+        ],
+        "cwe": [
+          "cwe-078",
+          "cwe-088"
+        ]
+      },
+      {
+        "name": "java/command-line-injection",
+        "severity": "error",
+        "precision": "high",
+        "kind": "path-problem",
+        "shortDescription": "Uncontrolled command line",
+        "description": "Using externally controlled strings in a command line is vulnerable to malicious changes in the strings.",
+        "tags": [
+          "security",
+          "external/cwe/cwe-078",
+          "external/cwe/cwe-088"
+        ],
+        "cwe": [
+          "cwe-078",
+          "cwe-088"
+        ]
+      },
+      {
+        "name": "java/stack-trace-exposure",
+        "severity": "error",
+        "precision": "high",
+        "kind": "problem",
+        "shortDescription": "Information exposure through a stack trace",
+        "description": "Information from a stack trace propagates to an external user. Stack traces can unintentionally reveal implementation details that are useful to an attacker for developing a subsequent exploit.",
+        "tags": [
+          "security",
+          "external/cwe/cwe-209",
+          "external/cwe/cwe-497"
+        ],
+        "cwe": [
+          "cwe-209",
+          "cwe-497"
+        ]
+      },
+      {
+        "name": "java/zipslip",
+        "severity": "error",
+        "precision": "high",
+        "kind": "path-problem",
+        "shortDescription": "Arbitrary file write during archive extraction (\"Zip Slip\")",
+        "description": "Extracting files from a malicious archive without validating that the destination file path is within the destination directory can cause files outside the destination directory to be overwritten.",
+        "tags": [
+          "security",
+          "external/cwe/cwe-022"
+        ],
+        "cwe": [
+          "cwe-022"
+        ]
+      },
+      {
+        "name": "java/path-injection",
+        "severity": "error",
+        "precision": "high",
+        "kind": "path-problem",
+        "shortDescription": "Uncontrolled data used in path expression",
+        "description": "Accessing paths influenced by users can allow an attacker to access unexpected resources.",
+        "tags": [
+          "security",
+          "external/cwe/cwe-022",
+          "external/cwe/cwe-023",
+          "external/cwe/cwe-036",
+          "external/cwe/cwe-073"
+        ],
+        "cwe": [
+          "cwe-022",
+          "cwe-023",
+          "cwe-036",
+          "cwe-073"
+        ]
+      },
+      {
+        "name": "java/unvalidated-url-redirection",
+        "severity": "error",
+        "precision": "high",
+        "kind": "path-problem",
+        "shortDescription": "URL redirection from remote source",
+        "description": "URL redirection based on unvalidated user-input may cause redirection to malicious web sites.",
+        "tags": [
+          "security",
+          "external/cwe/cwe-601"
+        ],
+        "cwe": [
+          "cwe-601"
+        ]
+      },
+      {
+        "name": "java/ldap-injection",
+        "severity": "error",
+        "precision": "high",
+        "kind": "path-problem",
+        "shortDescription": "LDAP query built from user-controlled sources",
+        "description": "Building an LDAP query from user-controlled sources is vulnerable to insertion of malicious LDAP code by the user.",
+        "tags": [
+          "security",
+          "external/cwe/cwe-090"
+        ],
+        "cwe": [
+          "cwe-090"
+        ]
+      },
+      {
+        "name": "java/predictable-seed",
+        "severity": "error",
+        "precision": "high",
+        "kind": "problem",
+        "shortDescription": "Use of a predictable seed in a secure random number generator",
+        "description": "Using a predictable seed in a pseudo-random number generator can lead to predictability of the numbers generated by it.",
+        "tags": [
+          "security"
+        ],
+        "cwe": []
+      },
+      {
+        "name": "java/tainted-format-string",
+        "severity": "error",
+        "precision": "high",
+        "kind": "path-problem",
+        "shortDescription": "Use of externally-controlled format string",
+        "description": "Using external input in format strings can lead to exceptions or information leaks.",
+        "tags": [
+          "security",
+          "external/cwe/cwe-134"
+        ],
+        "cwe": [
+          "cwe-134"
+        ]
+      },
+      {
+        "name": "java/cleartext-storage-in-cookie",
+        "severity": "error",
+        "precision": "high",
+        "kind": "problem",
+        "shortDescription": "Cleartext storage of sensitive information in cookie",
+        "description": "Storing sensitive information in cleartext can expose it to an attacker.",
+        "tags": [
+          "security",
+          "external/cwe/cwe-315"
+        ],
+        "cwe": [
+          "cwe-315"
+        ]
+      },
+      {
+        "name": "java/unsafe-deserialization",
+        "severity": "error",
+        "precision": "high",
+        "kind": "path-problem",
+        "shortDescription": "Deserialization of user-controlled data",
+        "description": "Deserializing user-controlled data may allow attackers to execute arbitrary code.",
+        "tags": [
+          "security",
+          "external/cwe/cwe-502"
+        ],
+        "cwe": [
+          "cwe-502"
+        ]
+      },
+      {
+        "name": "java/xss",
+        "severity": "error",
+        "precision": "high",
+        "kind": "path-problem",
+        "shortDescription": "Cross-site scripting",
+        "description": "Writing user input directly to a web page allows for a cross-site scripting vulnerability.",
+        "tags": [
+          "security",
+          "external/cwe/cwe-079"
+        ],
+        "cwe": [
+          "cwe-079"
+        ]
+      },
+      {
+        "name": "java/xxe",
+        "severity": "error",
+        "precision": "high",
+        "kind": "path-problem",
+        "shortDescription": "Resolving XML external entity in user-controlled data",
+        "description": "Parsing user-controlled XML documents and allowing expansion of external entity references may lead to disclosure of confidential data or denial of service.",
+        "tags": [
+          "security",
+          "external/cwe/cwe-611"
+        ],
+        "cwe": [
+          "cwe-611"
+        ]
+      },
+      {
+        "name": "java/integer-multiplication-cast-to-long",
+        "severity": "warning",
+        "precision": "very-high",
+        "kind": "problem",
+        "shortDescription": "Result of multiplication cast to wider type",
+        "description": "Casting the result of a multiplication to a wider type instead of casting before the multiplication may cause overflow.",
+        "tags": [
+          "reliability",
+          "security",
+          "correctness",
+          "types",
+          "external/cwe/cwe-190",
+          "external/cwe/cwe-192",
+          "external/cwe/cwe-197",
+          "external/cwe/cwe-681"
+        ],
+        "cwe": [
+          "cwe-190",
+          "cwe-192",
+          "cwe-197",
+          "cwe-681"
+        ]
+      },
+      {
+        "name": "java/implicit-cast-in-compound-assignment",
+        "severity": "warning",
+        "precision": "very-high",
+        "kind": "problem",
+        "shortDescription": "Implicit narrowing conversion in compound assignment",
+        "description": "Compound assignment statements (for example 'intvar += longvar') that implicitly cast a value of a wider type to a narrower type may result in information loss and numeric errors such as overflows.",
+        "tags": [
+          "reliability",
+          "security",
+          "external/cwe/cwe-190",
+          "external/cwe/cwe-192",
+          "external/cwe/cwe-197",
+          "external/cwe/cwe-681"
+        ],
+        "cwe": [
+          "cwe-190",
+          "cwe-192",
+          "cwe-197",
+          "cwe-681"
+        ]
+      },
+      {
+        "name": "js/angular/disabling-sce",
+        "severity": "warning",
+        "precision": "very-high",
+        "kind": "problem",
+        "shortDescription": "Disabling SCE",
+        "description": "Disabling strict contextual escaping (SCE) can cause security vulnerabilities.",
+        "tags": [
+          "security",
+          "maintainability",
+          "frameworks/angularjs"
+        ],
+        "cwe": []
+      },
+      {
+        "name": "js/angular/insecure-url-whitelist",
+        "severity": "warning",
+        "precision": "very-high",
+        "kind": "problem",
+        "shortDescription": "Insecure URL whitelist",
+        "description": "URL whitelists that are too permissive can cause security vulnerabilities.",
+        "tags": [
+          "security",
+          "frameworks/angularjs",
+          "external/cwe/cwe-183",
+          "external/cwe/cwe-625"
+        ],
+        "cwe": [
+          "cwe-183",
+          "cwe-625"
+        ]
+      },
+      {
+        "name": "js/disabling-electron-websecurity",
+        "severity": "error",
+        "precision": "very-high",
+        "kind": "problem",
+        "shortDescription": "Disabling Electron webSecurity",
+        "description": "Disabling webSecurity can cause critical security vulnerabilities.",
+        "tags": [
+          "security",
+          "frameworks/electron"
+        ],
+        "cwe": []
+      },
+      {
+        "name": "js/enabling-electron-insecure-content",
+        "severity": "error",
+        "precision": "very-high",
+        "kind": "problem",
+        "shortDescription": "Enabling Electron allowRunningInsecureContent",
+        "description": "Enabling allowRunningInsecureContent can allow remote code execution.",
+        "tags": [
+          "security",
+          "frameworks/electron"
+        ],
+        "cwe": []
+      },
+      {
+        "name": "js/prototype-pollution-utility",
+        "severity": "warning",
+        "precision": "high",
+        "kind": "path-problem",
+        "shortDescription": "Prototype pollution in utility function",
+        "description": "Recursively assigning properties on objects may cause accidental modification of a built-in prototype object.",
+        "tags": [
+          "security",
+          "external/cwe/cwe-400",
+          "external/cwe/cwe-471"
+        ],
+        "cwe": [
+          "cwe-400",
+          "cwe-471"
+        ]
+      },
+      {
+        "name": "js/prototype-pollution",
+        "severity": "error",
+        "precision": "high",
+        "kind": "path-problem",
+        "shortDescription": "Prototype pollution",
+        "description": "Recursively merging a user-controlled object into another object can allow an attacker to modify the built-in Object prototype.",
+        "tags": [
+          "security",
+          "external/cwe/cwe-250",
+          "external/cwe/cwe-400"
+        ],
+        "cwe": [
+          "cwe-250",
+          "cwe-400"
+        ]
+      },
+      {
+        "name": "js/insecure-randomness",
+        "severity": "warning",
+        "precision": "high",
+        "kind": "path-problem",
+        "shortDescription": "Insecure randomness",
+        "description": "Using a cryptographically weak pseudo-random number generator to generate a security-sensitive value may allow an attacker to predict what value will be generated.",
+        "tags": [
+          "security",
+          "external/cwe/cwe-338"
+        ],
+        "cwe": [
+          "cwe-338"
+        ]
+      },
+      {
+        "name": "js/unvalidated-dynamic-method-call",
+        "severity": "warning",
+        "precision": "high",
+        "kind": "path-problem",
+        "shortDescription": "Unvalidated dynamic method call",
+        "description": "Calling a method with a user-controlled name may dispatch to an unexpected target, which could cause an exception.",
+        "tags": [
+          "security",
+          "external/cwe/cwe-754"
+        ],
+        "cwe": [
+          "cwe-754"
+        ]
+      },
+      {
+        "name": "js/incomplete-multi-character-sanitization",
+        "severity": "warning",
+        "precision": "high",
+        "kind": "problem",
+        "shortDescription": "Incomplete multi-character sanitization",
+        "description": "A sanitizer that removes a sequence of characters may reintroduce the dangerous sequence.",
+        "tags": [
+          "correctness",
+          "security",
+          "external/cwe/cwe-116",
+          "external/cwe/cwe-20"
+        ],
+        "cwe": [
+          "cwe-116",
+          "cwe-20"
+        ]
+      },
+      {
+        "name": "js/double-escaping",
+        "severity": "warning",
+        "precision": "high",
+        "kind": "problem",
+        "shortDescription": "Double escaping or unescaping",
+        "description": "When escaping special characters using a meta-character like backslash or ampersand, the meta-character has to be escaped first to avoid double-escaping, and conversely it has to be unescaped last to avoid double-unescaping.",
+        "tags": [
+          "correctness",
+          "security",
+          "external/cwe/cwe-116",
+          "external/cwe/cwe-20"
+        ],
+        "cwe": [
+          "cwe-116",
+          "cwe-20"
+        ]
+      },
+      {
+        "name": "js/incomplete-sanitization",
+        "severity": "warning",
+        "precision": "high",
+        "kind": "problem",
+        "shortDescription": "Incomplete string escaping or encoding",
+        "description": "A string transformer that does not replace or escape all occurrences of a meta-character may be ineffective.",
+        "tags": [
+          "correctness",
+          "security",
+          "external/cwe/cwe-116",
+          "external/cwe/cwe-20"
+        ],
+        "cwe": [
+          "cwe-116",
+          "cwe-20"
+        ]
+      },
+      {
+        "name": "js/incomplete-html-attribute-sanitization",
+        "severity": "warning",
+        "precision": "high",
+        "kind": "path-problem",
+        "shortDescription": "Incomplete HTML attribute sanitization",
+        "description": "Writing incompletely sanitized values to HTML attribute strings can lead to a cross-site scripting vulnerability.",
+        "tags": [
+          "security",
+          "external/cwe/cwe-079",
+          "external/cwe/cwe-116",
+          "external/cwe/cwe-20"
+        ],
+        "cwe": [
+          "cwe-079",
+          "cwe-116",
+          "cwe-20"
+        ]
+      },
+      {
+        "name": "js/unsafe-html-expansion",
+        "severity": "warning",
+        "precision": "very-high",
+        "kind": "problem",
+        "shortDescription": "Unsafe expansion of self-closing HTML tag",
+        "description": "Using regular expressions to expand self-closing HTML tags may lead to cross-site scripting vulnerabilities.",
+        "tags": [
+          "correctness",
+          "security",
+          "external/cwe/cwe-079",
+          "external/cwe/cwe-116"
+        ],
+        "cwe": [
+          "cwe-079",
+          "cwe-116"
+        ]
+      },
+      {
+        "name": "js/host-header-forgery-in-email-generation",
+        "severity": "error",
+        "precision": "high",
+        "kind": "path-problem",
+        "shortDescription": "Host header poisoning in email generation",
+        "description": "Using the HTTP Host header to construct a link in an email can facilitate phishing attacks and leak password reset tokens.",
+        "tags": [
+          "security",
+          "external/cwe/cwe-640"
+        ],
+        "cwe": [
+          "cwe-640"
+        ]
+      },
+      {
+        "name": "js/sql-injection",
+        "severity": "error",
+        "precision": "high",
+        "kind": "path-problem",
+        "shortDescription": "Database query built from user-controlled sources",
+        "description": "Building a database query from user-controlled sources is vulnerable to insertion of malicious code by the user.",
+        "tags": [
+          "security",
+          "external/cwe/cwe-089"
+        ],
+        "cwe": [
+          "cwe-089"
+        ]
+      },
+      {
+        "name": "js/hardcoded-credentials",
+        "severity": "warning",
+        "precision": "high",
+        "kind": "path-problem",
+        "shortDescription": "Hard-coded credentials",
+        "description": "Hard-coding credentials in source code may enable an attacker to gain unauthorized access.",
+        "tags": [
+          "security",
+          "external/cwe/cwe-259",
+          "external/cwe/cwe-321",
+          "external/cwe/cwe-798"
+        ],
+        "cwe": [
+          "cwe-259",
+          "cwe-321",
+          "cwe-798"
+        ]
+      },
+      {
+        "name": "js/type-confusion-through-parameter-tampering",
+        "severity": "error",
+        "precision": "high",
+        "kind": "path-problem",
+        "shortDescription": "Type confusion through parameter tampering",
+        "description": "Sanitizing an HTTP request parameter may be ineffective if the user controls its type.",
+        "tags": [
+          "security",
+          "external/cwe/cwe-843"
+        ],
+        "cwe": [
+          "cwe-843"
+        ]
+      },
+      {
+        "name": "js/exposure-of-private-files",
+        "severity": "warning",
+        "precision": "high",
+        "kind": "problem",
+        "shortDescription": "Exposure of private files",
+        "description": "Exposing a node_modules folder, or the project folder to the public, can cause exposure of private information.",
+        "tags": [
+          "security",
+          "external/cwe/cwe-200"
+        ],
+        "cwe": [
+          "cwe-200"
+        ]
+      },
+      {
+        "name": "js/missing-rate-limiting",
+        "severity": "error",
+        "precision": "high",
+        "kind": "problem",
+        "shortDescription": "Missing rate limiting",
+        "description": "An HTTP request handler that performs expensive operations without restricting the rate at which operations can be carried out is vulnerable to denial-of-service attacks.",
+        "tags": [
+          "security",
+          "external/cwe/cwe-770",
+          "external/cwe/cwe-307",
+          "external/cwe/cwe-400"
+        ],
+        "cwe": [
+          "cwe-307",
+          "cwe-400",
+          "cwe-770"
+        ]
+      },
+      {
+        "name": "js/regex-injection",
+        "severity": "error",
+        "precision": "high",
+        "kind": "path-problem",
+        "shortDescription": "Regular expression injection",
+        "description": "User input should not be used in regular expressions without first being escaped, otherwise a malicious user may be able to inject an expression that could require exponential time on certain inputs.",
+        "tags": [
+          "security",
+          "external/cwe/cwe-730",
+          "external/cwe/cwe-400"
+        ],
+        "cwe": [
+          "cwe-400",
+          "cwe-730"
+        ]
+      },
+      {
+        "name": "js/insecure-download",
+        "severity": "error",
+        "precision": "high",
+        "kind": "path-problem",
+        "shortDescription": "Download of sensitive file through insecure connection",
+        "description": "Downloading executables and other sensitive files over an insecure connection opens up for potential man-in-the-middle attacks.",
+        "tags": [
+          "security",
+          "external/cwe/cwe-829"
+        ],
+        "cwe": [
+          "cwe-829"
+        ]
+      },
+      {
+        "name": "js/weak-cryptographic-algorithm",
+        "severity": "warning",
+        "precision": "high",
+        "kind": "path-problem",
+        "shortDescription": "Use of a broken or weak cryptographic algorithm",
+        "description": "Using broken or weak cryptographic algorithms can compromise security.",
+        "tags": [
+          "security",
+          "external/cwe/cwe-327"
+        ],
+        "cwe": [
+          "cwe-327"
+        ]
+      },
+      {
+        "name": "js/biased-cryptographic-random",
+        "severity": "warning",
+        "precision": "high",
+        "kind": "problem",
+        "shortDescription": "Creating biased random numbers from a cryptographically secure source.",
+        "description": "Some mathematical operations on random numbers can cause bias in the results and compromise security.",
+        "tags": [
+          "security",
+          "external/cwe/cwe-327"
+        ],
+        "cwe": [
+          "cwe-327"
+        ]
+      },
+      {
+        "name": "js/xml-bomb",
+        "severity": "warning",
+        "precision": "high",
+        "kind": "path-problem",
+        "shortDescription": "XML internal entity expansion",
+        "description": "Parsing user input as an XML document with arbitrary internal entity expansion is vulnerable to denial-of-service attacks.",
+        "tags": [
+          "security",
+          "external/cwe/cwe-776",
+          "external/cwe/cwe-400"
+        ],
+        "cwe": [
+          "cwe-400",
+          "cwe-776"
+        ]
+      },
+      {
+        "name": "js/missing-token-validation",
+        "severity": "error",
+        "precision": "high",
+        "kind": "problem",
+        "shortDescription": "Missing CSRF middleware",
+        "description": "Using cookies without CSRF protection may allow malicious websites to submit requests on behalf of the user.",
+        "tags": [
+          "security",
+          "external/cwe/cwe-352"
+        ],
+        "cwe": [
+          "cwe-352"
+        ]
+      },
+      {
+        "name": "js/code-injection",
+        "severity": "error",
+        "precision": "high",
+        "kind": "path-problem",
+        "shortDescription": "Code injection",
+        "description": "Interpreting unsanitized user input as code allows a malicious user arbitrary code execution.",
+        "tags": [
+          "security",
+          "external/cwe/cwe-094",
+          "external/cwe/cwe-079",
+          "external/cwe/cwe-116"
+        ],
+        "cwe": [
+          "cwe-079",
+          "cwe-094",
+          "cwe-116"
+        ]
+      },
+      {
+        "name": "js/unsafe-dynamic-method-access",
+        "severity": "error",
+        "precision": "high",
+        "kind": "path-problem",
+        "shortDescription": "Unsafe dynamic method access",
+        "description": "Invoking user-controlled methods on certain objects can lead to remote code execution.",
+        "tags": [
+          "security",
+          "external/cwe/cwe-094"
+        ],
+        "cwe": [
+          "cwe-094"
+        ]
+      },
+      {
+        "name": "js/bad-code-sanitization",
+        "severity": "error",
+        "precision": "high",
+        "kind": "path-problem",
+        "shortDescription": "Improper code sanitization",
+        "description": "Escaping code as HTML does not provide protection against code injection.",
+        "tags": [
+          "security",
+          "external/cwe/cwe-094",
+          "external/cwe/cwe-079",
+          "external/cwe/cwe-116"
+        ],
+        "cwe": [
+          "cwe-079",
+          "cwe-094",
+          "cwe-116"
+        ]
+      },
+      {
+        "name": "js/cross-window-information-leak",
+        "severity": "error",
+        "precision": "high",
+        "kind": "path-problem",
+        "shortDescription": "Cross-window communication with unrestricted target origin",
+        "description": "When sending sensitive information to another window using `postMessage`, the origin of the target window should be restricted to avoid unintentional information leaks.",
+        "tags": [
+          "security",
+          "external/cwe/cwe-201",
+          "external/cwe/cwe-359"
+        ],
+        "cwe": [
+          "cwe-201",
+          "cwe-359"
+        ]
+      },
+      {
+        "name": "js/cors-misconfiguration-for-credentials",
+        "severity": "error",
+        "precision": "high",
+        "kind": "path-problem",
+        "shortDescription": "CORS misconfiguration for credentials transfer",
+        "description": "Misconfiguration of CORS HTTP headers allows for leaks of secret credentials.",
+        "tags": [
+          "security",
+          "external/cwe/cwe-346",
+          "external/cwe/cwe-639"
+        ],
+        "cwe": [
+          "cwe-346",
+          "cwe-639"
+        ]
+      },
+      {
+        "name": "js/shell-command-injection-from-environment",
+        "severity": "warning",
+        "precision": "high",
+        "kind": "path-problem",
+        "shortDescription": "Shell command built from environment values",
+        "description": "Building a shell command string with values from the enclosing environment may cause subtle bugs or vulnerabilities.",
+        "tags": [
+          "correctness",
+          "security",
+          "external/cwe/cwe-078",
+          "external/cwe/cwe-088"
+        ],
+        "cwe": [
+          "cwe-078",
+          "cwe-088"
+        ]
+      },
+      {
+        "name": "js/shell-command-constructed-from-input",
+        "severity": "error",
+        "precision": "high",
+        "kind": "path-problem",
+        "shortDescription": "Unsafe shell command constructed from library input",
+        "description": "Using externally controlled strings in a command line may allow a malicious user to change the meaning of the command.",
+        "tags": [
+          "correctness",
+          "security",
+          "external/cwe/cwe-078",
+          "external/cwe/cwe-088"
+        ],
+        "cwe": [
+          "cwe-078",
+          "cwe-088"
+        ]
+      },
+      {
+        "name": "js/unnecessary-use-of-cat",
+        "severity": "error",
+        "precision": "high",
+        "kind": "problem",
+        "shortDescription": "Unnecessary use of `cat` process",
+        "description": "Using the `cat` process to read a file is unnecessarily complex, inefficient, unportable, and can lead to subtle bugs, or even security vulnerabilities.",
+        "tags": [
+          "correctness",
+          "security",
+          "maintainability"
+        ],
+        "cwe": []
+      },
+      {
+        "name": "js/command-line-injection",
+        "severity": "error",
+        "precision": "high",
+        "kind": "path-problem",
+        "shortDescription": "Uncontrolled command line",
+        "description": "Using externally controlled strings in a command line may allow a malicious user to change the meaning of the command.",
+        "tags": [
+          "correctness",
+          "security",
+          "external/cwe/cwe-078",
+          "external/cwe/cwe-088"
+        ],
+        "cwe": [
+          "cwe-078",
+          "cwe-088"
+        ]
+      },
+      {
+        "name": "js/insufficient-password-hash",
+        "severity": "warning",
+        "precision": "high",
+        "kind": "path-problem",
+        "shortDescription": "Use of password hash with insufficient computational effort",
+        "description": "Creating a hash of a password with low computational effort makes the hash vulnerable to password cracking attacks.",
+        "tags": [
+          "security",
+          "external/cwe/cwe-916"
+        ],
+        "cwe": [
+          "cwe-916"
+        ]
+      },
+      {
+        "name": "js/stack-trace-exposure",
+        "severity": "warning",
+        "precision": "very-high",
+        "kind": "path-problem",
+        "shortDescription": "Information exposure through a stack trace",
+        "description": "Propagating stack trace information to an external user can unintentionally reveal implementation details that are useful to an attacker for developing a subsequent exploit.",
+        "tags": [
+          "security",
+          "external/cwe/cwe-209"
+        ],
+        "cwe": [
+          "cwe-209"
+        ]
+      },
+      {
+        "name": "js/zipslip",
+        "severity": "error",
+        "precision": "high",
+        "kind": "path-problem",
+        "shortDescription": "Arbitrary file write during zip extraction (\"Zip Slip\")",
+        "description": "Extracting files from a malicious zip archive without validating that the destination file path is within the destination directory can cause files outside the destination directory to be overwritten.",
+        "tags": [
+          "security",
+          "external/cwe/cwe-022"
+        ],
+        "cwe": [
+          "cwe-022"
+        ]
+      },
+      {
+        "name": "js/path-injection",
+        "severity": "error",
+        "precision": "high",
+        "kind": "path-problem",
+        "shortDescription": "Uncontrolled data used in path expression",
+        "description": "Accessing paths influenced by users can allow an attacker to access unexpected resources.",
+        "tags": [
+          "security",
+          "external/cwe/cwe-022",
+          "external/cwe/cwe-023",
+          "external/cwe/cwe-036",
+          "external/cwe/cwe-073",
+          "external/cwe/cwe-099"
+        ],
+        "cwe": [
+          "cwe-022",
+          "cwe-023",
+          "cwe-036",
+          "cwe-073",
+          "cwe-099"
+        ]
+      },
+      {
+        "name": "js/disabling-certificate-validation",
+        "severity": "error",
+        "precision": "very-high",
+        "kind": "problem",
+        "shortDescription": "Disabling certificate validation",
+        "description": "Disabling cryptographic certificate validation can cause security vulnerabilities.",
+        "tags": [
+          "security",
+          "external/cwe-295"
+        ],
+        "cwe": []
+      },
+      {
+        "name": "js/client-side-unvalidated-url-redirection",
+        "severity": "error",
+        "precision": "high",
+        "kind": "path-problem",
+        "shortDescription": "Client-side URL redirect",
+        "description": "Client-side URL redirection based on unvalidated user input may cause redirection to malicious web sites.",
+        "tags": [
+          "security",
+          "external/cwe/cwe-079",
+          "external/cwe/cwe-116",
+          "external/cwe/cwe-601"
+        ],
+        "cwe": [
+          "cwe-079",
+          "cwe-116",
+          "cwe-601"
+        ]
+      },
+      {
+        "name": "js/server-side-unvalidated-url-redirection",
+        "severity": "warning",
+        "precision": "high",
+        "kind": "path-problem",
+        "shortDescription": "Server-side URL redirect",
+        "description": "Server-side URL redirection based on unvalidated user input may cause redirection to malicious web sites.",
+        "tags": [
+          "security",
+          "external/cwe/cwe-601"
+        ],
+        "cwe": [
+          "cwe-601"
+        ]
+      },
+      {
+        "name": "js/loop-bound-injection",
+        "severity": "warning",
+        "precision": "high",
+        "kind": "path-problem",
+        "shortDescription": "Loop bound injection",
+        "description": "Iterating over an object with a user-controlled .length property can cause indefinite looping.",
+        "tags": [
+          "security",
+          "external/cwe/cwe-834"
+        ],
+        "cwe": [
+          "cwe-834"
+        ]
+      },
+      {
+        "name": "js/incorrect-suffix-check",
+        "severity": "error",
+        "precision": "high",
+        "kind": "problem",
+        "shortDescription": "Incorrect suffix check",
+        "description": "Using indexOf to implement endsWith functionality is error-prone if the -1 case is not explicitly handled.",
+        "tags": [
+          "security",
+          "correctness",
+          "external/cwe/cwe-020"
+        ],
+        "cwe": [
+          "cwe-020"
+        ]
+      },
+      {
+        "name": "js/incomplete-url-scheme-check",
+        "severity": "warning",
+        "precision": "high",
+        "kind": "problem",
+        "shortDescription": "Incomplete URL scheme check",
+        "description": "Checking for the \"javascript:\" URL scheme without also checking for \"vbscript:\" and \"data:\" suggests a logic error or even a security vulnerability.",
+        "tags": [
+          "security",
+          "correctness",
+          "external/cwe/cwe-020"
+        ],
+        "cwe": [
+          "cwe-020"
+        ]
+      },
+      {
+        "name": "js/useless-regexp-character-escape",
+        "severity": "error",
+        "precision": "high",
+        "kind": "problem",
+        "shortDescription": "Useless regular-expression character escape",
+        "description": "Prepending a backslash to an ordinary character in a string does not have any effect, and may make regular expressions constructed from this string behave unexpectedly.",
+        "tags": [
+          "correctness",
+          "security",
+          "external/cwe/cwe-20"
+        ],
+        "cwe": [
+          "cwe-20"
+        ]
+      },
+      {
+        "name": "js/incomplete-url-substring-sanitization",
+        "severity": "warning",
+        "precision": "high",
+        "kind": "problem",
+        "shortDescription": "Incomplete URL substring sanitization",
+        "description": "Security checks on the substrings of an unparsed URL are often vulnerable to bypassing.",
+        "tags": [
+          "correctness",
+          "security",
+          "external/cwe/cwe-20"
+        ],
+        "cwe": [
+          "cwe-20"
+        ]
+      },
+      {
+        "name": "js/incomplete-hostname-regexp",
+        "severity": "warning",
+        "precision": "high",
+        "kind": "problem",
+        "shortDescription": "Incomplete regular expression for hostnames",
+        "description": "Matching a URL or hostname against a regular expression that contains an unescaped dot as part of the hostname might match more hostnames than expected.",
+        "tags": [
+          "correctness",
+          "security",
+          "external/cwe/cwe-20"
+        ],
+        "cwe": [
+          "cwe-20"
+        ]
+      },
+      {
+        "name": "js/xpath-injection",
+        "severity": "error",
+        "precision": "high",
+        "kind": "path-problem",
+        "shortDescription": "XPath injection",
+        "description": "Building an XPath expression from user-controlled sources is vulnerable to insertion of malicious code by the user.",
+        "tags": [
+          "security",
+          "external/cwe/cwe-643"
+        ],
+        "cwe": [
+          "cwe-643"
+        ]
+      },
+      {
+        "name": "js/tainted-format-string",
+        "severity": "warning",
+        "precision": "high",
+        "kind": "path-problem",
+        "shortDescription": "Use of externally-controlled format string",
+        "description": "Using external input in format strings can lead to garbled output.",
+        "tags": [
+          "security",
+          "external/cwe/cwe-134"
+        ],
+        "cwe": [
+          "cwe-134"
+        ]
+      },
+      {
+        "name": "js/clear-text-storage-of-sensitive-data",
+        "severity": "error",
+        "precision": "high",
+        "kind": "path-problem",
+        "shortDescription": "Clear text storage of sensitive information",
+        "description": "Sensitive information stored without encryption or hashing can expose it to an attacker.",
+        "tags": [
+          "security",
+          "external/cwe/cwe-312",
+          "external/cwe/cwe-315",
+          "external/cwe/cwe-359"
+        ],
+        "cwe": [
+          "cwe-312",
+          "cwe-315",
+          "cwe-359"
+        ]
+      },
+      {
+        "name": "js/clear-text-logging",
+        "severity": "error",
+        "precision": "high",
+        "kind": "path-problem",
+        "shortDescription": "Clear-text logging of sensitive information",
+        "description": "Logging sensitive information without encryption or hashing can expose it to an attacker.",
+        "tags": [
+          "security",
+          "external/cwe/cwe-312",
+          "external/cwe/cwe-315",
+          "external/cwe/cwe-359"
+        ],
+        "cwe": [
+          "cwe-312",
+          "cwe-315",
+          "cwe-359"
+        ]
+      },
+      {
+        "name": "js/build-artifact-leak",
+        "severity": "error",
+        "precision": "high",
+        "kind": "path-problem",
+        "shortDescription": "Storage of sensitive information in build artifact",
+        "description": "Including sensitive information in a build artifact can expose it to an attacker.",
+        "tags": [
+          "security",
+          "external/cwe/cwe-312",
+          "external/cwe/cwe-315",
+          "external/cwe/cwe-359"
+        ],
+        "cwe": [
+          "cwe-312",
+          "cwe-315",
+          "cwe-359"
+        ]
+      },
+      {
+        "name": "js/unsafe-deserialization",
+        "severity": "warning",
+        "precision": "high",
+        "kind": "path-problem",
+        "shortDescription": "Deserialization of user-controlled data",
+        "description": "Deserializing user-controlled data may allow attackers to execute arbitrary code.",
+        "tags": [
+          "security",
+          "external/cwe/cwe-502"
+        ],
+        "cwe": [
+          "cwe-502"
+        ]
+      },
+      {
+        "name": "js/stored-xss",
+        "severity": "error",
+        "precision": "high",
+        "kind": "path-problem",
+        "shortDescription": "Stored cross-site scripting",
+        "description": "Using uncontrolled stored values in HTML allows for a stored cross-site scripting vulnerability.",
+        "tags": [
+          "security",
+          "external/cwe/cwe-079",
+          "external/cwe/cwe-116"
+        ],
+        "cwe": [
+          "cwe-079",
+          "cwe-116"
+        ]
+      },
+      {
+        "name": "js/reflected-xss",
+        "severity": "error",
+        "precision": "high",
+        "kind": "path-problem",
+        "shortDescription": "Reflected cross-site scripting",
+        "description": "Writing user input directly to an HTTP response allows for a cross-site scripting vulnerability.",
+        "tags": [
+          "security",
+          "external/cwe/cwe-079",
+          "external/cwe/cwe-116"
+        ],
+        "cwe": [
+          "cwe-079",
+          "cwe-116"
+        ]
+      },
+      {
+        "name": "js/xss-through-exception",
+        "severity": "warning",
+        "precision": "high",
+        "kind": "path-problem",
+        "shortDescription": "Exception text reinterpreted as HTML",
+        "description": "Reinterpreting text from an exception as HTML can lead to a cross-site scripting vulnerability.",
+        "tags": [
+          "security",
+          "external/cwe/cwe-079",
+          "external/cwe/cwe-116"
+        ],
+        "cwe": [
+          "cwe-079",
+          "cwe-116"
+        ]
+      },
+      {
+        "name": "js/unsafe-jquery-plugin",
+        "severity": "warning",
+        "precision": "high",
+        "kind": "path-problem",
+        "shortDescription": "Unsafe jQuery plugin",
+        "description": "A jQuery plugin that unintentionally constructs HTML from some of its options may be unsafe to use for clients.",
+        "tags": [
+          "security",
+          "external/cwe/cwe-079",
+          "external/cwe/cwe-116",
+          "frameworks/jquery"
+        ],
+        "cwe": [
+          "cwe-079",
+          "cwe-116"
+        ]
+      },
+      {
+        "name": "js/xss-through-dom",
+        "severity": "warning",
+        "precision": "high",
+        "kind": "path-problem",
+        "shortDescription": "DOM text reinterpreted as HTML",
+        "description": "Reinterpreting text from the DOM as HTML can lead to a cross-site scripting vulnerability.",
+        "tags": [
+          "security",
+          "external/cwe/cwe-079",
+          "external/cwe/cwe-116"
+        ],
+        "cwe": [
+          "cwe-079",
+          "cwe-116"
+        ]
+      },
+      {
+        "name": "js/xss",
+        "severity": "error",
+        "precision": "high",
+        "kind": "path-problem",
+        "shortDescription": "Client-side cross-site scripting",
+        "description": "Writing user input directly to the DOM allows for a cross-site scripting vulnerability.",
+        "tags": [
+          "security",
+          "external/cwe/cwe-079",
+          "external/cwe/cwe-116"
+        ],
+        "cwe": [
+          "cwe-079",
+          "cwe-116"
+        ]
+      },
+      {
+        "name": "js/xxe",
+        "severity": "error",
+        "precision": "high",
+        "kind": "path-problem",
+        "shortDescription": "XML external entity expansion",
+        "description": "Parsing user input as an XML document with external entity expansion is vulnerable to XXE attacks.",
+        "tags": [
+          "security",
+          "external/cwe/cwe-611",
+          "external/cwe/cwe-827"
+        ],
+        "cwe": [
+          "cwe-611",
+          "cwe-827"
+        ]
+      },
+      {
+        "name": "js/unsafe-external-link",
+        "severity": "warning",
+        "precision": "very-high",
+        "kind": "problem",
+        "shortDescription": "Potentially unsafe external link",
+        "description": "External links that open in a new tab or window but do not specify link type 'noopener' or 'noreferrer' are a potential security risk.",
+        "tags": [
+          "maintainability",
+          "security",
+          "external/cwe/cwe-200",
+          "external/cwe/cwe-1022"
+        ],
+        "cwe": [
+          "cwe-1022",
+          "cwe-200"
+        ]
+      },
+      {
+        "name": "js/identity-replacement",
+        "severity": "warning",
+        "precision": "very-high",
+        "kind": "problem",
+        "shortDescription": "Replacement of a substring with itself",
+        "description": "Replacing a substring with itself has no effect and may indicate a mistake.",
+        "tags": [
+          "correctness",
+          "security",
+          "external/cwe/cwe-116"
+        ],
+        "cwe": [
+          "cwe-116"
+        ]
+      },
+      {
+        "name": "js/redos",
+        "severity": "error",
+        "precision": "high",
+        "kind": "problem",
+        "shortDescription": "Inefficient regular expression",
+        "description": "A regular expression that requires exponential time to match certain inputs can be a performance bottleneck, and may be vulnerable to denial-of-service attacks.",
+        "tags": [
+          "security",
+          "external/cwe/cwe-730",
+          "external/cwe/cwe-400"
+        ],
+        "cwe": [
+          "cwe-400",
+          "cwe-730"
+        ]
+      },
+      {
+        "name": "js/polynomial-redos",
+        "severity": "warning",
+        "precision": "high",
+        "kind": "path-problem",
+        "shortDescription": "Polynomial regular expression used on uncontrolled data",
+        "description": "A regular expression that can require polynomial time to match user-provided values may be vulnerable to denial-of-service attacks.",
+        "tags": [
+          "security",
+          "external/cwe/cwe-730",
+          "external/cwe/cwe-400"
+        ],
+        "cwe": [
+          "cwe-400",
+          "cwe-730"
+        ]
+      }
+    ],
+    "cwe": {
+      "cweToRules": {
+        "cwe-113": [
+          {
+            "name": "java/netty-http-response-splitting",
+            "severity": "error",
+            "precision": "high",
+            "kind": "problem",
+            "shortDescription": "Disabled Netty HTTP header validation",
+            "description": "Disabling HTTP header validation makes code vulnerable to attack by header splitting if user input is written directly to an HTTP header.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-113"
+            ],
+            "cwe": [
+              "cwe-113"
+            ]
+          },
+          {
+            "name": "java/http-response-splitting",
+            "severity": "error",
+            "precision": "high",
+            "kind": "path-problem",
+            "shortDescription": "HTTP response splitting",
+            "description": "Writing user input directly to an HTTP header makes code vulnerable to attack by header splitting.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-113"
+            ],
+            "cwe": [
+              "cwe-113"
+            ]
+          }
+        ],
+        "cwe-614": [
+          {
+            "name": "java/insecure-cookie",
+            "severity": "error",
+            "precision": "high",
+            "kind": "problem",
+            "shortDescription": "Failure to use secure cookies",
+            "description": "Insecure cookies may be sent in cleartext, which makes them vulnerable to interception.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-614"
+            ],
+            "cwe": [
+              "cwe-614"
+            ]
+          }
+        ],
+        "cwe-290": [
+          {
+            "name": "java/tainted-permissions-check",
+            "severity": "error",
+            "precision": "high",
+            "kind": "path-problem",
+            "shortDescription": "User-controlled data used in permissions check",
+            "description": "Using user-controlled data in a permissions check may result in inappropriate permissions being granted.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-807",
+              "external/cwe/cwe-290"
+            ],
+            "cwe": [
+              "cwe-290",
+              "cwe-807"
+            ]
+          }
+        ],
+        "cwe-807": [
+          {
+            "name": "java/tainted-permissions-check",
+            "severity": "error",
+            "precision": "high",
+            "kind": "path-problem",
+            "shortDescription": "User-controlled data used in permissions check",
+            "description": "Using user-controlled data in a permissions check may result in inappropriate permissions being granted.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-807",
+              "external/cwe/cwe-290"
+            ],
+            "cwe": [
+              "cwe-290",
+              "cwe-807"
+            ]
+          }
+        ],
+        "cwe-089": [
+          {
+            "name": "java/concatenated-sql-query",
+            "severity": "error",
+            "precision": "high",
+            "kind": "problem",
+            "shortDescription": "Query built without neutralizing special characters",
+            "description": "Building a SQL or Java Persistence query without escaping or otherwise neutralizing any special characters is vulnerable to insertion of malicious code.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-089"
+            ],
+            "cwe": [
+              "cwe-089"
+            ]
+          },
+          {
+            "name": "java/sql-injection",
+            "severity": "error",
+            "precision": "high",
+            "kind": "path-problem",
+            "shortDescription": "Query built from user-controlled sources",
+            "description": "Building a SQL or Java Persistence query from user-controlled sources is vulnerable to insertion of malicious code by the user.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-089"
+            ],
+            "cwe": [
+              "cwe-089"
+            ]
+          },
+          {
+            "name": "js/sql-injection",
+            "severity": "error",
+            "precision": "high",
+            "kind": "path-problem",
+            "shortDescription": "Database query built from user-controlled sources",
+            "description": "Building a database query from user-controlled sources is vulnerable to insertion of malicious code by the user.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-089"
+            ],
+            "cwe": [
+              "cwe-089"
+            ]
+          }
+        ],
+        "cwe-197": [
+          {
+            "name": "java/tainted-numeric-cast",
+            "severity": "error",
+            "precision": "high",
+            "kind": "path-problem",
+            "shortDescription": "User-controlled data in numeric cast",
+            "description": "Casting user-controlled numeric data to a narrower type without validation can cause unexpected truncation.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-197",
+              "external/cwe/cwe-681"
+            ],
+            "cwe": [
+              "cwe-197",
+              "cwe-681"
+            ]
+          },
+          {
+            "name": "java/integer-multiplication-cast-to-long",
+            "severity": "warning",
+            "precision": "very-high",
+            "kind": "problem",
+            "shortDescription": "Result of multiplication cast to wider type",
+            "description": "Casting the result of a multiplication to a wider type instead of casting before the multiplication may cause overflow.",
+            "tags": [
+              "reliability",
+              "security",
+              "correctness",
+              "types",
+              "external/cwe/cwe-190",
+              "external/cwe/cwe-192",
+              "external/cwe/cwe-197",
+              "external/cwe/cwe-681"
+            ],
+            "cwe": [
+              "cwe-190",
+              "cwe-192",
+              "cwe-197",
+              "cwe-681"
+            ]
+          },
+          {
+            "name": "java/implicit-cast-in-compound-assignment",
+            "severity": "warning",
+            "precision": "very-high",
+            "kind": "problem",
+            "shortDescription": "Implicit narrowing conversion in compound assignment",
+            "description": "Compound assignment statements (for example 'intvar += longvar') that implicitly cast a value of a wider type to a narrower type may result in information loss and numeric errors such as overflows.",
+            "tags": [
+              "reliability",
+              "security",
+              "external/cwe/cwe-190",
+              "external/cwe/cwe-192",
+              "external/cwe/cwe-197",
+              "external/cwe/cwe-681"
+            ],
+            "cwe": [
+              "cwe-190",
+              "cwe-192",
+              "cwe-197",
+              "cwe-681"
+            ]
+          }
+        ],
+        "cwe-681": [
+          {
+            "name": "java/tainted-numeric-cast",
+            "severity": "error",
+            "precision": "high",
+            "kind": "path-problem",
+            "shortDescription": "User-controlled data in numeric cast",
+            "description": "Casting user-controlled numeric data to a narrower type without validation can cause unexpected truncation.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-197",
+              "external/cwe/cwe-681"
+            ],
+            "cwe": [
+              "cwe-197",
+              "cwe-681"
+            ]
+          },
+          {
+            "name": "java/integer-multiplication-cast-to-long",
+            "severity": "warning",
+            "precision": "very-high",
+            "kind": "problem",
+            "shortDescription": "Result of multiplication cast to wider type",
+            "description": "Casting the result of a multiplication to a wider type instead of casting before the multiplication may cause overflow.",
+            "tags": [
+              "reliability",
+              "security",
+              "correctness",
+              "types",
+              "external/cwe/cwe-190",
+              "external/cwe/cwe-192",
+              "external/cwe/cwe-197",
+              "external/cwe/cwe-681"
+            ],
+            "cwe": [
+              "cwe-190",
+              "cwe-192",
+              "cwe-197",
+              "cwe-681"
+            ]
+          },
+          {
+            "name": "java/implicit-cast-in-compound-assignment",
+            "severity": "warning",
+            "precision": "very-high",
+            "kind": "problem",
+            "shortDescription": "Implicit narrowing conversion in compound assignment",
+            "description": "Compound assignment statements (for example 'intvar += longvar') that implicitly cast a value of a wider type to a narrower type may result in information loss and numeric errors such as overflows.",
+            "tags": [
+              "reliability",
+              "security",
+              "external/cwe/cwe-190",
+              "external/cwe/cwe-192",
+              "external/cwe/cwe-197",
+              "external/cwe/cwe-681"
+            ],
+            "cwe": [
+              "cwe-190",
+              "cwe-192",
+              "cwe-197",
+              "cwe-681"
+            ]
+          }
+        ],
+        "cwe-300": [
+          {
+            "name": "java/maven/non-https-url",
+            "severity": "error",
+            "precision": "very-high",
+            "kind": "problem",
+            "shortDescription": "Failure to use HTTPS or SFTP URL in Maven artifact upload/download",
+            "description": "Non-HTTPS connections can be intercepted by third parties.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-300",
+              "external/cwe/cwe-319",
+              "external/cwe/cwe-494",
+              "external/cwe/cwe-829"
+            ],
+            "cwe": [
+              "cwe-300",
+              "cwe-319",
+              "cwe-494",
+              "cwe-829"
+            ]
+          }
+        ],
+        "cwe-319": [
+          {
+            "name": "java/maven/non-https-url",
+            "severity": "error",
+            "precision": "very-high",
+            "kind": "problem",
+            "shortDescription": "Failure to use HTTPS or SFTP URL in Maven artifact upload/download",
+            "description": "Non-HTTPS connections can be intercepted by third parties.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-300",
+              "external/cwe/cwe-319",
+              "external/cwe/cwe-494",
+              "external/cwe/cwe-829"
+            ],
+            "cwe": [
+              "cwe-300",
+              "cwe-319",
+              "cwe-494",
+              "cwe-829"
+            ]
+          }
+        ],
+        "cwe-494": [
+          {
+            "name": "java/maven/non-https-url",
+            "severity": "error",
+            "precision": "very-high",
+            "kind": "problem",
+            "shortDescription": "Failure to use HTTPS or SFTP URL in Maven artifact upload/download",
+            "description": "Non-HTTPS connections can be intercepted by third parties.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-300",
+              "external/cwe/cwe-319",
+              "external/cwe/cwe-494",
+              "external/cwe/cwe-829"
+            ],
+            "cwe": [
+              "cwe-300",
+              "cwe-319",
+              "cwe-494",
+              "cwe-829"
+            ]
+          }
+        ],
+        "cwe-829": [
+          {
+            "name": "java/maven/non-https-url",
+            "severity": "error",
+            "precision": "very-high",
+            "kind": "problem",
+            "shortDescription": "Failure to use HTTPS or SFTP URL in Maven artifact upload/download",
+            "description": "Non-HTTPS connections can be intercepted by third parties.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-300",
+              "external/cwe/cwe-319",
+              "external/cwe/cwe-494",
+              "external/cwe/cwe-829"
+            ],
+            "cwe": [
+              "cwe-300",
+              "cwe-319",
+              "cwe-494",
+              "cwe-829"
+            ]
+          },
+          {
+            "name": "js/insecure-download",
+            "severity": "error",
+            "precision": "high",
+            "kind": "path-problem",
+            "shortDescription": "Download of sensitive file through insecure connection",
+            "description": "Downloading executables and other sensitive files over an insecure connection opens up for potential man-in-the-middle attacks.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-829"
+            ],
+            "cwe": [
+              "cwe-829"
+            ]
+          }
+        ],
+        "cwe-732": [
+          {
+            "name": "java/world-writable-file-read",
+            "severity": "error",
+            "precision": "high",
+            "kind": "problem",
+            "shortDescription": "Reading from a world writable file",
+            "description": "Reading from a file which is set as world writable is dangerous because the file may be modified or removed by external actors.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-732"
+            ],
+            "cwe": [
+              "cwe-732"
+            ]
+          }
+        ],
+        "cwe-352": [
+          {
+            "name": "java/spring-disabled-csrf-protection",
+            "severity": "error",
+            "precision": "high",
+            "kind": "problem",
+            "shortDescription": "Disabled Spring CSRF protection",
+            "description": "Disabling CSRF protection makes the application vulnerable to a Cross-Site Request Forgery (CSRF) attack.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-352"
+            ],
+            "cwe": [
+              "cwe-352"
+            ]
+          },
+          {
+            "name": "js/missing-token-validation",
+            "severity": "error",
+            "precision": "high",
+            "kind": "problem",
+            "shortDescription": "Missing CSRF middleware",
+            "description": "Using cookies without CSRF protection may allow malicious websites to submit requests on behalf of the user.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-352"
+            ],
+            "cwe": [
+              "cwe-352"
+            ]
+          }
+        ],
+        "cwe-078": [
+          {
+            "name": "java/concatenated-command-line",
+            "severity": "error",
+            "precision": "high",
+            "kind": "problem",
+            "shortDescription": "Building a command line with string concatenation",
+            "description": "Using concatenated strings in a command line is vulnerable to malicious insertion of special characters in the strings.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-078",
+              "external/cwe/cwe-088"
+            ],
+            "cwe": [
+              "cwe-078",
+              "cwe-088"
+            ]
+          },
+          {
+            "name": "java/command-line-injection",
+            "severity": "error",
+            "precision": "high",
+            "kind": "path-problem",
+            "shortDescription": "Uncontrolled command line",
+            "description": "Using externally controlled strings in a command line is vulnerable to malicious changes in the strings.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-078",
+              "external/cwe/cwe-088"
+            ],
+            "cwe": [
+              "cwe-078",
+              "cwe-088"
+            ]
+          },
+          {
+            "name": "js/shell-command-injection-from-environment",
+            "severity": "warning",
+            "precision": "high",
+            "kind": "path-problem",
+            "shortDescription": "Shell command built from environment values",
+            "description": "Building a shell command string with values from the enclosing environment may cause subtle bugs or vulnerabilities.",
+            "tags": [
+              "correctness",
+              "security",
+              "external/cwe/cwe-078",
+              "external/cwe/cwe-088"
+            ],
+            "cwe": [
+              "cwe-078",
+              "cwe-088"
+            ]
+          },
+          {
+            "name": "js/shell-command-constructed-from-input",
+            "severity": "error",
+            "precision": "high",
+            "kind": "path-problem",
+            "shortDescription": "Unsafe shell command constructed from library input",
+            "description": "Using externally controlled strings in a command line may allow a malicious user to change the meaning of the command.",
+            "tags": [
+              "correctness",
+              "security",
+              "external/cwe/cwe-078",
+              "external/cwe/cwe-088"
+            ],
+            "cwe": [
+              "cwe-078",
+              "cwe-088"
+            ]
+          },
+          {
+            "name": "js/command-line-injection",
+            "severity": "error",
+            "precision": "high",
+            "kind": "path-problem",
+            "shortDescription": "Uncontrolled command line",
+            "description": "Using externally controlled strings in a command line may allow a malicious user to change the meaning of the command.",
+            "tags": [
+              "correctness",
+              "security",
+              "external/cwe/cwe-078",
+              "external/cwe/cwe-088"
+            ],
+            "cwe": [
+              "cwe-078",
+              "cwe-088"
+            ]
+          }
+        ],
+        "cwe-088": [
+          {
+            "name": "java/concatenated-command-line",
+            "severity": "error",
+            "precision": "high",
+            "kind": "problem",
+            "shortDescription": "Building a command line with string concatenation",
+            "description": "Using concatenated strings in a command line is vulnerable to malicious insertion of special characters in the strings.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-078",
+              "external/cwe/cwe-088"
+            ],
+            "cwe": [
+              "cwe-078",
+              "cwe-088"
+            ]
+          },
+          {
+            "name": "java/command-line-injection",
+            "severity": "error",
+            "precision": "high",
+            "kind": "path-problem",
+            "shortDescription": "Uncontrolled command line",
+            "description": "Using externally controlled strings in a command line is vulnerable to malicious changes in the strings.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-078",
+              "external/cwe/cwe-088"
+            ],
+            "cwe": [
+              "cwe-078",
+              "cwe-088"
+            ]
+          },
+          {
+            "name": "js/shell-command-injection-from-environment",
+            "severity": "warning",
+            "precision": "high",
+            "kind": "path-problem",
+            "shortDescription": "Shell command built from environment values",
+            "description": "Building a shell command string with values from the enclosing environment may cause subtle bugs or vulnerabilities.",
+            "tags": [
+              "correctness",
+              "security",
+              "external/cwe/cwe-078",
+              "external/cwe/cwe-088"
+            ],
+            "cwe": [
+              "cwe-078",
+              "cwe-088"
+            ]
+          },
+          {
+            "name": "js/shell-command-constructed-from-input",
+            "severity": "error",
+            "precision": "high",
+            "kind": "path-problem",
+            "shortDescription": "Unsafe shell command constructed from library input",
+            "description": "Using externally controlled strings in a command line may allow a malicious user to change the meaning of the command.",
+            "tags": [
+              "correctness",
+              "security",
+              "external/cwe/cwe-078",
+              "external/cwe/cwe-088"
+            ],
+            "cwe": [
+              "cwe-078",
+              "cwe-088"
+            ]
+          },
+          {
+            "name": "js/command-line-injection",
+            "severity": "error",
+            "precision": "high",
+            "kind": "path-problem",
+            "shortDescription": "Uncontrolled command line",
+            "description": "Using externally controlled strings in a command line may allow a malicious user to change the meaning of the command.",
+            "tags": [
+              "correctness",
+              "security",
+              "external/cwe/cwe-078",
+              "external/cwe/cwe-088"
+            ],
+            "cwe": [
+              "cwe-078",
+              "cwe-088"
+            ]
+          }
+        ],
+        "cwe-209": [
+          {
+            "name": "java/stack-trace-exposure",
+            "severity": "error",
+            "precision": "high",
+            "kind": "problem",
+            "shortDescription": "Information exposure through a stack trace",
+            "description": "Information from a stack trace propagates to an external user. Stack traces can unintentionally reveal implementation details that are useful to an attacker for developing a subsequent exploit.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-209",
+              "external/cwe/cwe-497"
+            ],
+            "cwe": [
+              "cwe-209",
+              "cwe-497"
+            ]
+          },
+          {
+            "name": "js/stack-trace-exposure",
+            "severity": "warning",
+            "precision": "very-high",
+            "kind": "path-problem",
+            "shortDescription": "Information exposure through a stack trace",
+            "description": "Propagating stack trace information to an external user can unintentionally reveal implementation details that are useful to an attacker for developing a subsequent exploit.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-209"
+            ],
+            "cwe": [
+              "cwe-209"
+            ]
+          }
+        ],
+        "cwe-497": [
+          {
+            "name": "java/stack-trace-exposure",
+            "severity": "error",
+            "precision": "high",
+            "kind": "problem",
+            "shortDescription": "Information exposure through a stack trace",
+            "description": "Information from a stack trace propagates to an external user. Stack traces can unintentionally reveal implementation details that are useful to an attacker for developing a subsequent exploit.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-209",
+              "external/cwe/cwe-497"
+            ],
+            "cwe": [
+              "cwe-209",
+              "cwe-497"
+            ]
+          }
+        ],
+        "cwe-022": [
+          {
+            "name": "java/zipslip",
+            "severity": "error",
+            "precision": "high",
+            "kind": "path-problem",
+            "shortDescription": "Arbitrary file write during archive extraction (\"Zip Slip\")",
+            "description": "Extracting files from a malicious archive without validating that the destination file path is within the destination directory can cause files outside the destination directory to be overwritten.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-022"
+            ],
+            "cwe": [
+              "cwe-022"
+            ]
+          },
+          {
+            "name": "java/path-injection",
+            "severity": "error",
+            "precision": "high",
+            "kind": "path-problem",
+            "shortDescription": "Uncontrolled data used in path expression",
+            "description": "Accessing paths influenced by users can allow an attacker to access unexpected resources.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-022",
+              "external/cwe/cwe-023",
+              "external/cwe/cwe-036",
+              "external/cwe/cwe-073"
+            ],
+            "cwe": [
+              "cwe-022",
+              "cwe-023",
+              "cwe-036",
+              "cwe-073"
+            ]
+          },
+          {
+            "name": "js/zipslip",
+            "severity": "error",
+            "precision": "high",
+            "kind": "path-problem",
+            "shortDescription": "Arbitrary file write during zip extraction (\"Zip Slip\")",
+            "description": "Extracting files from a malicious zip archive without validating that the destination file path is within the destination directory can cause files outside the destination directory to be overwritten.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-022"
+            ],
+            "cwe": [
+              "cwe-022"
+            ]
+          },
+          {
+            "name": "js/path-injection",
+            "severity": "error",
+            "precision": "high",
+            "kind": "path-problem",
+            "shortDescription": "Uncontrolled data used in path expression",
+            "description": "Accessing paths influenced by users can allow an attacker to access unexpected resources.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-022",
+              "external/cwe/cwe-023",
+              "external/cwe/cwe-036",
+              "external/cwe/cwe-073",
+              "external/cwe/cwe-099"
+            ],
+            "cwe": [
+              "cwe-022",
+              "cwe-023",
+              "cwe-036",
+              "cwe-073",
+              "cwe-099"
+            ]
+          }
+        ],
+        "cwe-023": [
+          {
+            "name": "java/path-injection",
+            "severity": "error",
+            "precision": "high",
+            "kind": "path-problem",
+            "shortDescription": "Uncontrolled data used in path expression",
+            "description": "Accessing paths influenced by users can allow an attacker to access unexpected resources.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-022",
+              "external/cwe/cwe-023",
+              "external/cwe/cwe-036",
+              "external/cwe/cwe-073"
+            ],
+            "cwe": [
+              "cwe-022",
+              "cwe-023",
+              "cwe-036",
+              "cwe-073"
+            ]
+          },
+          {
+            "name": "js/path-injection",
+            "severity": "error",
+            "precision": "high",
+            "kind": "path-problem",
+            "shortDescription": "Uncontrolled data used in path expression",
+            "description": "Accessing paths influenced by users can allow an attacker to access unexpected resources.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-022",
+              "external/cwe/cwe-023",
+              "external/cwe/cwe-036",
+              "external/cwe/cwe-073",
+              "external/cwe/cwe-099"
+            ],
+            "cwe": [
+              "cwe-022",
+              "cwe-023",
+              "cwe-036",
+              "cwe-073",
+              "cwe-099"
+            ]
+          }
+        ],
+        "cwe-036": [
+          {
+            "name": "java/path-injection",
+            "severity": "error",
+            "precision": "high",
+            "kind": "path-problem",
+            "shortDescription": "Uncontrolled data used in path expression",
+            "description": "Accessing paths influenced by users can allow an attacker to access unexpected resources.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-022",
+              "external/cwe/cwe-023",
+              "external/cwe/cwe-036",
+              "external/cwe/cwe-073"
+            ],
+            "cwe": [
+              "cwe-022",
+              "cwe-023",
+              "cwe-036",
+              "cwe-073"
+            ]
+          },
+          {
+            "name": "js/path-injection",
+            "severity": "error",
+            "precision": "high",
+            "kind": "path-problem",
+            "shortDescription": "Uncontrolled data used in path expression",
+            "description": "Accessing paths influenced by users can allow an attacker to access unexpected resources.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-022",
+              "external/cwe/cwe-023",
+              "external/cwe/cwe-036",
+              "external/cwe/cwe-073",
+              "external/cwe/cwe-099"
+            ],
+            "cwe": [
+              "cwe-022",
+              "cwe-023",
+              "cwe-036",
+              "cwe-073",
+              "cwe-099"
+            ]
+          }
+        ],
+        "cwe-073": [
+          {
+            "name": "java/path-injection",
+            "severity": "error",
+            "precision": "high",
+            "kind": "path-problem",
+            "shortDescription": "Uncontrolled data used in path expression",
+            "description": "Accessing paths influenced by users can allow an attacker to access unexpected resources.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-022",
+              "external/cwe/cwe-023",
+              "external/cwe/cwe-036",
+              "external/cwe/cwe-073"
+            ],
+            "cwe": [
+              "cwe-022",
+              "cwe-023",
+              "cwe-036",
+              "cwe-073"
+            ]
+          },
+          {
+            "name": "js/path-injection",
+            "severity": "error",
+            "precision": "high",
+            "kind": "path-problem",
+            "shortDescription": "Uncontrolled data used in path expression",
+            "description": "Accessing paths influenced by users can allow an attacker to access unexpected resources.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-022",
+              "external/cwe/cwe-023",
+              "external/cwe/cwe-036",
+              "external/cwe/cwe-073",
+              "external/cwe/cwe-099"
+            ],
+            "cwe": [
+              "cwe-022",
+              "cwe-023",
+              "cwe-036",
+              "cwe-073",
+              "cwe-099"
+            ]
+          }
+        ],
+        "cwe-601": [
+          {
+            "name": "java/unvalidated-url-redirection",
+            "severity": "error",
+            "precision": "high",
+            "kind": "path-problem",
+            "shortDescription": "URL redirection from remote source",
+            "description": "URL redirection based on unvalidated user-input may cause redirection to malicious web sites.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-601"
+            ],
+            "cwe": [
+              "cwe-601"
+            ]
+          },
+          {
+            "name": "js/client-side-unvalidated-url-redirection",
+            "severity": "error",
+            "precision": "high",
+            "kind": "path-problem",
+            "shortDescription": "Client-side URL redirect",
+            "description": "Client-side URL redirection based on unvalidated user input may cause redirection to malicious web sites.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-079",
+              "external/cwe/cwe-116",
+              "external/cwe/cwe-601"
+            ],
+            "cwe": [
+              "cwe-079",
+              "cwe-116",
+              "cwe-601"
+            ]
+          },
+          {
+            "name": "js/server-side-unvalidated-url-redirection",
+            "severity": "warning",
+            "precision": "high",
+            "kind": "path-problem",
+            "shortDescription": "Server-side URL redirect",
+            "description": "Server-side URL redirection based on unvalidated user input may cause redirection to malicious web sites.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-601"
+            ],
+            "cwe": [
+              "cwe-601"
+            ]
+          }
+        ],
+        "cwe-090": [
+          {
+            "name": "java/ldap-injection",
+            "severity": "error",
+            "precision": "high",
+            "kind": "path-problem",
+            "shortDescription": "LDAP query built from user-controlled sources",
+            "description": "Building an LDAP query from user-controlled sources is vulnerable to insertion of malicious LDAP code by the user.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-090"
+            ],
+            "cwe": [
+              "cwe-090"
+            ]
+          }
+        ],
+        "cwe-134": [
+          {
+            "name": "java/tainted-format-string",
+            "severity": "error",
+            "precision": "high",
+            "kind": "path-problem",
+            "shortDescription": "Use of externally-controlled format string",
+            "description": "Using external input in format strings can lead to exceptions or information leaks.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-134"
+            ],
+            "cwe": [
+              "cwe-134"
+            ]
+          },
+          {
+            "name": "js/tainted-format-string",
+            "severity": "warning",
+            "precision": "high",
+            "kind": "path-problem",
+            "shortDescription": "Use of externally-controlled format string",
+            "description": "Using external input in format strings can lead to garbled output.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-134"
+            ],
+            "cwe": [
+              "cwe-134"
+            ]
+          }
+        ],
+        "cwe-315": [
+          {
+            "name": "java/cleartext-storage-in-cookie",
+            "severity": "error",
+            "precision": "high",
+            "kind": "problem",
+            "shortDescription": "Cleartext storage of sensitive information in cookie",
+            "description": "Storing sensitive information in cleartext can expose it to an attacker.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-315"
+            ],
+            "cwe": [
+              "cwe-315"
+            ]
+          },
+          {
+            "name": "js/clear-text-storage-of-sensitive-data",
+            "severity": "error",
+            "precision": "high",
+            "kind": "path-problem",
+            "shortDescription": "Clear text storage of sensitive information",
+            "description": "Sensitive information stored without encryption or hashing can expose it to an attacker.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-312",
+              "external/cwe/cwe-315",
+              "external/cwe/cwe-359"
+            ],
+            "cwe": [
+              "cwe-312",
+              "cwe-315",
+              "cwe-359"
+            ]
+          },
+          {
+            "name": "js/clear-text-logging",
+            "severity": "error",
+            "precision": "high",
+            "kind": "path-problem",
+            "shortDescription": "Clear-text logging of sensitive information",
+            "description": "Logging sensitive information without encryption or hashing can expose it to an attacker.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-312",
+              "external/cwe/cwe-315",
+              "external/cwe/cwe-359"
+            ],
+            "cwe": [
+              "cwe-312",
+              "cwe-315",
+              "cwe-359"
+            ]
+          },
+          {
+            "name": "js/build-artifact-leak",
+            "severity": "error",
+            "precision": "high",
+            "kind": "path-problem",
+            "shortDescription": "Storage of sensitive information in build artifact",
+            "description": "Including sensitive information in a build artifact can expose it to an attacker.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-312",
+              "external/cwe/cwe-315",
+              "external/cwe/cwe-359"
+            ],
+            "cwe": [
+              "cwe-312",
+              "cwe-315",
+              "cwe-359"
+            ]
+          }
+        ],
+        "cwe-502": [
+          {
+            "name": "java/unsafe-deserialization",
+            "severity": "error",
+            "precision": "high",
+            "kind": "path-problem",
+            "shortDescription": "Deserialization of user-controlled data",
+            "description": "Deserializing user-controlled data may allow attackers to execute arbitrary code.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-502"
+            ],
+            "cwe": [
+              "cwe-502"
+            ]
+          },
+          {
+            "name": "js/unsafe-deserialization",
+            "severity": "warning",
+            "precision": "high",
+            "kind": "path-problem",
+            "shortDescription": "Deserialization of user-controlled data",
+            "description": "Deserializing user-controlled data may allow attackers to execute arbitrary code.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-502"
+            ],
+            "cwe": [
+              "cwe-502"
+            ]
+          }
+        ],
+        "cwe-079": [
+          {
+            "name": "java/xss",
+            "severity": "error",
+            "precision": "high",
+            "kind": "path-problem",
+            "shortDescription": "Cross-site scripting",
+            "description": "Writing user input directly to a web page allows for a cross-site scripting vulnerability.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-079"
+            ],
+            "cwe": [
+              "cwe-079"
+            ]
+          },
+          {
+            "name": "js/incomplete-html-attribute-sanitization",
+            "severity": "warning",
+            "precision": "high",
+            "kind": "path-problem",
+            "shortDescription": "Incomplete HTML attribute sanitization",
+            "description": "Writing incompletely sanitized values to HTML attribute strings can lead to a cross-site scripting vulnerability.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-079",
+              "external/cwe/cwe-116",
+              "external/cwe/cwe-20"
+            ],
+            "cwe": [
+              "cwe-079",
+              "cwe-116",
+              "cwe-20"
+            ]
+          },
+          {
+            "name": "js/unsafe-html-expansion",
+            "severity": "warning",
+            "precision": "very-high",
+            "kind": "problem",
+            "shortDescription": "Unsafe expansion of self-closing HTML tag",
+            "description": "Using regular expressions to expand self-closing HTML tags may lead to cross-site scripting vulnerabilities.",
+            "tags": [
+              "correctness",
+              "security",
+              "external/cwe/cwe-079",
+              "external/cwe/cwe-116"
+            ],
+            "cwe": [
+              "cwe-079",
+              "cwe-116"
+            ]
+          },
+          {
+            "name": "js/code-injection",
+            "severity": "error",
+            "precision": "high",
+            "kind": "path-problem",
+            "shortDescription": "Code injection",
+            "description": "Interpreting unsanitized user input as code allows a malicious user arbitrary code execution.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-094",
+              "external/cwe/cwe-079",
+              "external/cwe/cwe-116"
+            ],
+            "cwe": [
+              "cwe-079",
+              "cwe-094",
+              "cwe-116"
+            ]
+          },
+          {
+            "name": "js/bad-code-sanitization",
+            "severity": "error",
+            "precision": "high",
+            "kind": "path-problem",
+            "shortDescription": "Improper code sanitization",
+            "description": "Escaping code as HTML does not provide protection against code injection.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-094",
+              "external/cwe/cwe-079",
+              "external/cwe/cwe-116"
+            ],
+            "cwe": [
+              "cwe-079",
+              "cwe-094",
+              "cwe-116"
+            ]
+          },
+          {
+            "name": "js/client-side-unvalidated-url-redirection",
+            "severity": "error",
+            "precision": "high",
+            "kind": "path-problem",
+            "shortDescription": "Client-side URL redirect",
+            "description": "Client-side URL redirection based on unvalidated user input may cause redirection to malicious web sites.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-079",
+              "external/cwe/cwe-116",
+              "external/cwe/cwe-601"
+            ],
+            "cwe": [
+              "cwe-079",
+              "cwe-116",
+              "cwe-601"
+            ]
+          },
+          {
+            "name": "js/stored-xss",
+            "severity": "error",
+            "precision": "high",
+            "kind": "path-problem",
+            "shortDescription": "Stored cross-site scripting",
+            "description": "Using uncontrolled stored values in HTML allows for a stored cross-site scripting vulnerability.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-079",
+              "external/cwe/cwe-116"
+            ],
+            "cwe": [
+              "cwe-079",
+              "cwe-116"
+            ]
+          },
+          {
+            "name": "js/reflected-xss",
+            "severity": "error",
+            "precision": "high",
+            "kind": "path-problem",
+            "shortDescription": "Reflected cross-site scripting",
+            "description": "Writing user input directly to an HTTP response allows for a cross-site scripting vulnerability.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-079",
+              "external/cwe/cwe-116"
+            ],
+            "cwe": [
+              "cwe-079",
+              "cwe-116"
+            ]
+          },
+          {
+            "name": "js/xss-through-exception",
+            "severity": "warning",
+            "precision": "high",
+            "kind": "path-problem",
+            "shortDescription": "Exception text reinterpreted as HTML",
+            "description": "Reinterpreting text from an exception as HTML can lead to a cross-site scripting vulnerability.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-079",
+              "external/cwe/cwe-116"
+            ],
+            "cwe": [
+              "cwe-079",
+              "cwe-116"
+            ]
+          },
+          {
+            "name": "js/unsafe-jquery-plugin",
+            "severity": "warning",
+            "precision": "high",
+            "kind": "path-problem",
+            "shortDescription": "Unsafe jQuery plugin",
+            "description": "A jQuery plugin that unintentionally constructs HTML from some of its options may be unsafe to use for clients.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-079",
+              "external/cwe/cwe-116",
+              "frameworks/jquery"
+            ],
+            "cwe": [
+              "cwe-079",
+              "cwe-116"
+            ]
+          },
+          {
+            "name": "js/xss-through-dom",
+            "severity": "warning",
+            "precision": "high",
+            "kind": "path-problem",
+            "shortDescription": "DOM text reinterpreted as HTML",
+            "description": "Reinterpreting text from the DOM as HTML can lead to a cross-site scripting vulnerability.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-079",
+              "external/cwe/cwe-116"
+            ],
+            "cwe": [
+              "cwe-079",
+              "cwe-116"
+            ]
+          },
+          {
+            "name": "js/xss",
+            "severity": "error",
+            "precision": "high",
+            "kind": "path-problem",
+            "shortDescription": "Client-side cross-site scripting",
+            "description": "Writing user input directly to the DOM allows for a cross-site scripting vulnerability.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-079",
+              "external/cwe/cwe-116"
+            ],
+            "cwe": [
+              "cwe-079",
+              "cwe-116"
+            ]
+          }
+        ],
+        "cwe-611": [
+          {
+            "name": "java/xxe",
+            "severity": "error",
+            "precision": "high",
+            "kind": "path-problem",
+            "shortDescription": "Resolving XML external entity in user-controlled data",
+            "description": "Parsing user-controlled XML documents and allowing expansion of external entity references may lead to disclosure of confidential data or denial of service.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-611"
+            ],
+            "cwe": [
+              "cwe-611"
+            ]
+          },
+          {
+            "name": "js/xxe",
+            "severity": "error",
+            "precision": "high",
+            "kind": "path-problem",
+            "shortDescription": "XML external entity expansion",
+            "description": "Parsing user input as an XML document with external entity expansion is vulnerable to XXE attacks.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-611",
+              "external/cwe/cwe-827"
+            ],
+            "cwe": [
+              "cwe-611",
+              "cwe-827"
+            ]
+          }
+        ],
+        "cwe-190": [
+          {
+            "name": "java/integer-multiplication-cast-to-long",
+            "severity": "warning",
+            "precision": "very-high",
+            "kind": "problem",
+            "shortDescription": "Result of multiplication cast to wider type",
+            "description": "Casting the result of a multiplication to a wider type instead of casting before the multiplication may cause overflow.",
+            "tags": [
+              "reliability",
+              "security",
+              "correctness",
+              "types",
+              "external/cwe/cwe-190",
+              "external/cwe/cwe-192",
+              "external/cwe/cwe-197",
+              "external/cwe/cwe-681"
+            ],
+            "cwe": [
+              "cwe-190",
+              "cwe-192",
+              "cwe-197",
+              "cwe-681"
+            ]
+          },
+          {
+            "name": "java/implicit-cast-in-compound-assignment",
+            "severity": "warning",
+            "precision": "very-high",
+            "kind": "problem",
+            "shortDescription": "Implicit narrowing conversion in compound assignment",
+            "description": "Compound assignment statements (for example 'intvar += longvar') that implicitly cast a value of a wider type to a narrower type may result in information loss and numeric errors such as overflows.",
+            "tags": [
+              "reliability",
+              "security",
+              "external/cwe/cwe-190",
+              "external/cwe/cwe-192",
+              "external/cwe/cwe-197",
+              "external/cwe/cwe-681"
+            ],
+            "cwe": [
+              "cwe-190",
+              "cwe-192",
+              "cwe-197",
+              "cwe-681"
+            ]
+          }
+        ],
+        "cwe-192": [
+          {
+            "name": "java/integer-multiplication-cast-to-long",
+            "severity": "warning",
+            "precision": "very-high",
+            "kind": "problem",
+            "shortDescription": "Result of multiplication cast to wider type",
+            "description": "Casting the result of a multiplication to a wider type instead of casting before the multiplication may cause overflow.",
+            "tags": [
+              "reliability",
+              "security",
+              "correctness",
+              "types",
+              "external/cwe/cwe-190",
+              "external/cwe/cwe-192",
+              "external/cwe/cwe-197",
+              "external/cwe/cwe-681"
+            ],
+            "cwe": [
+              "cwe-190",
+              "cwe-192",
+              "cwe-197",
+              "cwe-681"
+            ]
+          },
+          {
+            "name": "java/implicit-cast-in-compound-assignment",
+            "severity": "warning",
+            "precision": "very-high",
+            "kind": "problem",
+            "shortDescription": "Implicit narrowing conversion in compound assignment",
+            "description": "Compound assignment statements (for example 'intvar += longvar') that implicitly cast a value of a wider type to a narrower type may result in information loss and numeric errors such as overflows.",
+            "tags": [
+              "reliability",
+              "security",
+              "external/cwe/cwe-190",
+              "external/cwe/cwe-192",
+              "external/cwe/cwe-197",
+              "external/cwe/cwe-681"
+            ],
+            "cwe": [
+              "cwe-190",
+              "cwe-192",
+              "cwe-197",
+              "cwe-681"
+            ]
+          }
+        ],
+        "cwe-183": [
+          {
+            "name": "js/angular/insecure-url-whitelist",
+            "severity": "warning",
+            "precision": "very-high",
+            "kind": "problem",
+            "shortDescription": "Insecure URL whitelist",
+            "description": "URL whitelists that are too permissive can cause security vulnerabilities.",
+            "tags": [
+              "security",
+              "frameworks/angularjs",
+              "external/cwe/cwe-183",
+              "external/cwe/cwe-625"
+            ],
+            "cwe": [
+              "cwe-183",
+              "cwe-625"
+            ]
+          }
+        ],
+        "cwe-625": [
+          {
+            "name": "js/angular/insecure-url-whitelist",
+            "severity": "warning",
+            "precision": "very-high",
+            "kind": "problem",
+            "shortDescription": "Insecure URL whitelist",
+            "description": "URL whitelists that are too permissive can cause security vulnerabilities.",
+            "tags": [
+              "security",
+              "frameworks/angularjs",
+              "external/cwe/cwe-183",
+              "external/cwe/cwe-625"
+            ],
+            "cwe": [
+              "cwe-183",
+              "cwe-625"
+            ]
+          }
+        ],
+        "cwe-400": [
+          {
+            "name": "js/prototype-pollution-utility",
+            "severity": "warning",
+            "precision": "high",
+            "kind": "path-problem",
+            "shortDescription": "Prototype pollution in utility function",
+            "description": "Recursively assigning properties on objects may cause accidental modification of a built-in prototype object.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-400",
+              "external/cwe/cwe-471"
+            ],
+            "cwe": [
+              "cwe-400",
+              "cwe-471"
+            ]
+          },
+          {
+            "name": "js/prototype-pollution",
+            "severity": "error",
+            "precision": "high",
+            "kind": "path-problem",
+            "shortDescription": "Prototype pollution",
+            "description": "Recursively merging a user-controlled object into another object can allow an attacker to modify the built-in Object prototype.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-250",
+              "external/cwe/cwe-400"
+            ],
+            "cwe": [
+              "cwe-250",
+              "cwe-400"
+            ]
+          },
+          {
+            "name": "js/missing-rate-limiting",
+            "severity": "error",
+            "precision": "high",
+            "kind": "problem",
+            "shortDescription": "Missing rate limiting",
+            "description": "An HTTP request handler that performs expensive operations without restricting the rate at which operations can be carried out is vulnerable to denial-of-service attacks.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-770",
+              "external/cwe/cwe-307",
+              "external/cwe/cwe-400"
+            ],
+            "cwe": [
+              "cwe-307",
+              "cwe-400",
+              "cwe-770"
+            ]
+          },
+          {
+            "name": "js/regex-injection",
+            "severity": "error",
+            "precision": "high",
+            "kind": "path-problem",
+            "shortDescription": "Regular expression injection",
+            "description": "User input should not be used in regular expressions without first being escaped, otherwise a malicious user may be able to inject an expression that could require exponential time on certain inputs.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-730",
+              "external/cwe/cwe-400"
+            ],
+            "cwe": [
+              "cwe-400",
+              "cwe-730"
+            ]
+          },
+          {
+            "name": "js/xml-bomb",
+            "severity": "warning",
+            "precision": "high",
+            "kind": "path-problem",
+            "shortDescription": "XML internal entity expansion",
+            "description": "Parsing user input as an XML document with arbitrary internal entity expansion is vulnerable to denial-of-service attacks.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-776",
+              "external/cwe/cwe-400"
+            ],
+            "cwe": [
+              "cwe-400",
+              "cwe-776"
+            ]
+          },
+          {
+            "name": "js/redos",
+            "severity": "error",
+            "precision": "high",
+            "kind": "problem",
+            "shortDescription": "Inefficient regular expression",
+            "description": "A regular expression that requires exponential time to match certain inputs can be a performance bottleneck, and may be vulnerable to denial-of-service attacks.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-730",
+              "external/cwe/cwe-400"
+            ],
+            "cwe": [
+              "cwe-400",
+              "cwe-730"
+            ]
+          },
+          {
+            "name": "js/polynomial-redos",
+            "severity": "warning",
+            "precision": "high",
+            "kind": "path-problem",
+            "shortDescription": "Polynomial regular expression used on uncontrolled data",
+            "description": "A regular expression that can require polynomial time to match user-provided values may be vulnerable to denial-of-service attacks.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-730",
+              "external/cwe/cwe-400"
+            ],
+            "cwe": [
+              "cwe-400",
+              "cwe-730"
+            ]
+          }
+        ],
+        "cwe-471": [
+          {
+            "name": "js/prototype-pollution-utility",
+            "severity": "warning",
+            "precision": "high",
+            "kind": "path-problem",
+            "shortDescription": "Prototype pollution in utility function",
+            "description": "Recursively assigning properties on objects may cause accidental modification of a built-in prototype object.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-400",
+              "external/cwe/cwe-471"
+            ],
+            "cwe": [
+              "cwe-400",
+              "cwe-471"
+            ]
+          }
+        ],
+        "cwe-250": [
+          {
+            "name": "js/prototype-pollution",
+            "severity": "error",
+            "precision": "high",
+            "kind": "path-problem",
+            "shortDescription": "Prototype pollution",
+            "description": "Recursively merging a user-controlled object into another object can allow an attacker to modify the built-in Object prototype.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-250",
+              "external/cwe/cwe-400"
+            ],
+            "cwe": [
+              "cwe-250",
+              "cwe-400"
+            ]
+          }
+        ],
+        "cwe-338": [
+          {
+            "name": "js/insecure-randomness",
+            "severity": "warning",
+            "precision": "high",
+            "kind": "path-problem",
+            "shortDescription": "Insecure randomness",
+            "description": "Using a cryptographically weak pseudo-random number generator to generate a security-sensitive value may allow an attacker to predict what value will be generated.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-338"
+            ],
+            "cwe": [
+              "cwe-338"
+            ]
+          }
+        ],
+        "cwe-754": [
+          {
+            "name": "js/unvalidated-dynamic-method-call",
+            "severity": "warning",
+            "precision": "high",
+            "kind": "path-problem",
+            "shortDescription": "Unvalidated dynamic method call",
+            "description": "Calling a method with a user-controlled name may dispatch to an unexpected target, which could cause an exception.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-754"
+            ],
+            "cwe": [
+              "cwe-754"
+            ]
+          }
+        ],
+        "cwe-116": [
+          {
+            "name": "js/incomplete-multi-character-sanitization",
+            "severity": "warning",
+            "precision": "high",
+            "kind": "problem",
+            "shortDescription": "Incomplete multi-character sanitization",
+            "description": "A sanitizer that removes a sequence of characters may reintroduce the dangerous sequence.",
+            "tags": [
+              "correctness",
+              "security",
+              "external/cwe/cwe-116",
+              "external/cwe/cwe-20"
+            ],
+            "cwe": [
+              "cwe-116",
+              "cwe-20"
+            ]
+          },
+          {
+            "name": "js/double-escaping",
+            "severity": "warning",
+            "precision": "high",
+            "kind": "problem",
+            "shortDescription": "Double escaping or unescaping",
+            "description": "When escaping special characters using a meta-character like backslash or ampersand, the meta-character has to be escaped first to avoid double-escaping, and conversely it has to be unescaped last to avoid double-unescaping.",
+            "tags": [
+              "correctness",
+              "security",
+              "external/cwe/cwe-116",
+              "external/cwe/cwe-20"
+            ],
+            "cwe": [
+              "cwe-116",
+              "cwe-20"
+            ]
+          },
+          {
+            "name": "js/incomplete-sanitization",
+            "severity": "warning",
+            "precision": "high",
+            "kind": "problem",
+            "shortDescription": "Incomplete string escaping or encoding",
+            "description": "A string transformer that does not replace or escape all occurrences of a meta-character may be ineffective.",
+            "tags": [
+              "correctness",
+              "security",
+              "external/cwe/cwe-116",
+              "external/cwe/cwe-20"
+            ],
+            "cwe": [
+              "cwe-116",
+              "cwe-20"
+            ]
+          },
+          {
+            "name": "js/incomplete-html-attribute-sanitization",
+            "severity": "warning",
+            "precision": "high",
+            "kind": "path-problem",
+            "shortDescription": "Incomplete HTML attribute sanitization",
+            "description": "Writing incompletely sanitized values to HTML attribute strings can lead to a cross-site scripting vulnerability.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-079",
+              "external/cwe/cwe-116",
+              "external/cwe/cwe-20"
+            ],
+            "cwe": [
+              "cwe-079",
+              "cwe-116",
+              "cwe-20"
+            ]
+          },
+          {
+            "name": "js/unsafe-html-expansion",
+            "severity": "warning",
+            "precision": "very-high",
+            "kind": "problem",
+            "shortDescription": "Unsafe expansion of self-closing HTML tag",
+            "description": "Using regular expressions to expand self-closing HTML tags may lead to cross-site scripting vulnerabilities.",
+            "tags": [
+              "correctness",
+              "security",
+              "external/cwe/cwe-079",
+              "external/cwe/cwe-116"
+            ],
+            "cwe": [
+              "cwe-079",
+              "cwe-116"
+            ]
+          },
+          {
+            "name": "js/code-injection",
+            "severity": "error",
+            "precision": "high",
+            "kind": "path-problem",
+            "shortDescription": "Code injection",
+            "description": "Interpreting unsanitized user input as code allows a malicious user arbitrary code execution.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-094",
+              "external/cwe/cwe-079",
+              "external/cwe/cwe-116"
+            ],
+            "cwe": [
+              "cwe-079",
+              "cwe-094",
+              "cwe-116"
+            ]
+          },
+          {
+            "name": "js/bad-code-sanitization",
+            "severity": "error",
+            "precision": "high",
+            "kind": "path-problem",
+            "shortDescription": "Improper code sanitization",
+            "description": "Escaping code as HTML does not provide protection against code injection.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-094",
+              "external/cwe/cwe-079",
+              "external/cwe/cwe-116"
+            ],
+            "cwe": [
+              "cwe-079",
+              "cwe-094",
+              "cwe-116"
+            ]
+          },
+          {
+            "name": "js/client-side-unvalidated-url-redirection",
+            "severity": "error",
+            "precision": "high",
+            "kind": "path-problem",
+            "shortDescription": "Client-side URL redirect",
+            "description": "Client-side URL redirection based on unvalidated user input may cause redirection to malicious web sites.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-079",
+              "external/cwe/cwe-116",
+              "external/cwe/cwe-601"
+            ],
+            "cwe": [
+              "cwe-079",
+              "cwe-116",
+              "cwe-601"
+            ]
+          },
+          {
+            "name": "js/stored-xss",
+            "severity": "error",
+            "precision": "high",
+            "kind": "path-problem",
+            "shortDescription": "Stored cross-site scripting",
+            "description": "Using uncontrolled stored values in HTML allows for a stored cross-site scripting vulnerability.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-079",
+              "external/cwe/cwe-116"
+            ],
+            "cwe": [
+              "cwe-079",
+              "cwe-116"
+            ]
+          },
+          {
+            "name": "js/reflected-xss",
+            "severity": "error",
+            "precision": "high",
+            "kind": "path-problem",
+            "shortDescription": "Reflected cross-site scripting",
+            "description": "Writing user input directly to an HTTP response allows for a cross-site scripting vulnerability.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-079",
+              "external/cwe/cwe-116"
+            ],
+            "cwe": [
+              "cwe-079",
+              "cwe-116"
+            ]
+          },
+          {
+            "name": "js/xss-through-exception",
+            "severity": "warning",
+            "precision": "high",
+            "kind": "path-problem",
+            "shortDescription": "Exception text reinterpreted as HTML",
+            "description": "Reinterpreting text from an exception as HTML can lead to a cross-site scripting vulnerability.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-079",
+              "external/cwe/cwe-116"
+            ],
+            "cwe": [
+              "cwe-079",
+              "cwe-116"
+            ]
+          },
+          {
+            "name": "js/unsafe-jquery-plugin",
+            "severity": "warning",
+            "precision": "high",
+            "kind": "path-problem",
+            "shortDescription": "Unsafe jQuery plugin",
+            "description": "A jQuery plugin that unintentionally constructs HTML from some of its options may be unsafe to use for clients.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-079",
+              "external/cwe/cwe-116",
+              "frameworks/jquery"
+            ],
+            "cwe": [
+              "cwe-079",
+              "cwe-116"
+            ]
+          },
+          {
+            "name": "js/xss-through-dom",
+            "severity": "warning",
+            "precision": "high",
+            "kind": "path-problem",
+            "shortDescription": "DOM text reinterpreted as HTML",
+            "description": "Reinterpreting text from the DOM as HTML can lead to a cross-site scripting vulnerability.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-079",
+              "external/cwe/cwe-116"
+            ],
+            "cwe": [
+              "cwe-079",
+              "cwe-116"
+            ]
+          },
+          {
+            "name": "js/xss",
+            "severity": "error",
+            "precision": "high",
+            "kind": "path-problem",
+            "shortDescription": "Client-side cross-site scripting",
+            "description": "Writing user input directly to the DOM allows for a cross-site scripting vulnerability.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-079",
+              "external/cwe/cwe-116"
+            ],
+            "cwe": [
+              "cwe-079",
+              "cwe-116"
+            ]
+          },
+          {
+            "name": "js/identity-replacement",
+            "severity": "warning",
+            "precision": "very-high",
+            "kind": "problem",
+            "shortDescription": "Replacement of a substring with itself",
+            "description": "Replacing a substring with itself has no effect and may indicate a mistake.",
+            "tags": [
+              "correctness",
+              "security",
+              "external/cwe/cwe-116"
+            ],
+            "cwe": [
+              "cwe-116"
+            ]
+          }
+        ],
+        "cwe-20": [
+          {
+            "name": "js/incomplete-multi-character-sanitization",
+            "severity": "warning",
+            "precision": "high",
+            "kind": "problem",
+            "shortDescription": "Incomplete multi-character sanitization",
+            "description": "A sanitizer that removes a sequence of characters may reintroduce the dangerous sequence.",
+            "tags": [
+              "correctness",
+              "security",
+              "external/cwe/cwe-116",
+              "external/cwe/cwe-20"
+            ],
+            "cwe": [
+              "cwe-116",
+              "cwe-20"
+            ]
+          },
+          {
+            "name": "js/double-escaping",
+            "severity": "warning",
+            "precision": "high",
+            "kind": "problem",
+            "shortDescription": "Double escaping or unescaping",
+            "description": "When escaping special characters using a meta-character like backslash or ampersand, the meta-character has to be escaped first to avoid double-escaping, and conversely it has to be unescaped last to avoid double-unescaping.",
+            "tags": [
+              "correctness",
+              "security",
+              "external/cwe/cwe-116",
+              "external/cwe/cwe-20"
+            ],
+            "cwe": [
+              "cwe-116",
+              "cwe-20"
+            ]
+          },
+          {
+            "name": "js/incomplete-sanitization",
+            "severity": "warning",
+            "precision": "high",
+            "kind": "problem",
+            "shortDescription": "Incomplete string escaping or encoding",
+            "description": "A string transformer that does not replace or escape all occurrences of a meta-character may be ineffective.",
+            "tags": [
+              "correctness",
+              "security",
+              "external/cwe/cwe-116",
+              "external/cwe/cwe-20"
+            ],
+            "cwe": [
+              "cwe-116",
+              "cwe-20"
+            ]
+          },
+          {
+            "name": "js/incomplete-html-attribute-sanitization",
+            "severity": "warning",
+            "precision": "high",
+            "kind": "path-problem",
+            "shortDescription": "Incomplete HTML attribute sanitization",
+            "description": "Writing incompletely sanitized values to HTML attribute strings can lead to a cross-site scripting vulnerability.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-079",
+              "external/cwe/cwe-116",
+              "external/cwe/cwe-20"
+            ],
+            "cwe": [
+              "cwe-079",
+              "cwe-116",
+              "cwe-20"
+            ]
+          },
+          {
+            "name": "js/useless-regexp-character-escape",
+            "severity": "error",
+            "precision": "high",
+            "kind": "problem",
+            "shortDescription": "Useless regular-expression character escape",
+            "description": "Prepending a backslash to an ordinary character in a string does not have any effect, and may make regular expressions constructed from this string behave unexpectedly.",
+            "tags": [
+              "correctness",
+              "security",
+              "external/cwe/cwe-20"
+            ],
+            "cwe": [
+              "cwe-20"
+            ]
+          },
+          {
+            "name": "js/incomplete-url-substring-sanitization",
+            "severity": "warning",
+            "precision": "high",
+            "kind": "problem",
+            "shortDescription": "Incomplete URL substring sanitization",
+            "description": "Security checks on the substrings of an unparsed URL are often vulnerable to bypassing.",
+            "tags": [
+              "correctness",
+              "security",
+              "external/cwe/cwe-20"
+            ],
+            "cwe": [
+              "cwe-20"
+            ]
+          },
+          {
+            "name": "js/incomplete-hostname-regexp",
+            "severity": "warning",
+            "precision": "high",
+            "kind": "problem",
+            "shortDescription": "Incomplete regular expression for hostnames",
+            "description": "Matching a URL or hostname against a regular expression that contains an unescaped dot as part of the hostname might match more hostnames than expected.",
+            "tags": [
+              "correctness",
+              "security",
+              "external/cwe/cwe-20"
+            ],
+            "cwe": [
+              "cwe-20"
+            ]
+          }
+        ],
+        "cwe-640": [
+          {
+            "name": "js/host-header-forgery-in-email-generation",
+            "severity": "error",
+            "precision": "high",
+            "kind": "path-problem",
+            "shortDescription": "Host header poisoning in email generation",
+            "description": "Using the HTTP Host header to construct a link in an email can facilitate phishing attacks and leak password reset tokens.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-640"
+            ],
+            "cwe": [
+              "cwe-640"
+            ]
+          }
+        ],
+        "cwe-259": [
+          {
+            "name": "js/hardcoded-credentials",
+            "severity": "warning",
+            "precision": "high",
+            "kind": "path-problem",
+            "shortDescription": "Hard-coded credentials",
+            "description": "Hard-coding credentials in source code may enable an attacker to gain unauthorized access.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-259",
+              "external/cwe/cwe-321",
+              "external/cwe/cwe-798"
+            ],
+            "cwe": [
+              "cwe-259",
+              "cwe-321",
+              "cwe-798"
+            ]
+          }
+        ],
+        "cwe-321": [
+          {
+            "name": "js/hardcoded-credentials",
+            "severity": "warning",
+            "precision": "high",
+            "kind": "path-problem",
+            "shortDescription": "Hard-coded credentials",
+            "description": "Hard-coding credentials in source code may enable an attacker to gain unauthorized access.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-259",
+              "external/cwe/cwe-321",
+              "external/cwe/cwe-798"
+            ],
+            "cwe": [
+              "cwe-259",
+              "cwe-321",
+              "cwe-798"
+            ]
+          }
+        ],
+        "cwe-798": [
+          {
+            "name": "js/hardcoded-credentials",
+            "severity": "warning",
+            "precision": "high",
+            "kind": "path-problem",
+            "shortDescription": "Hard-coded credentials",
+            "description": "Hard-coding credentials in source code may enable an attacker to gain unauthorized access.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-259",
+              "external/cwe/cwe-321",
+              "external/cwe/cwe-798"
+            ],
+            "cwe": [
+              "cwe-259",
+              "cwe-321",
+              "cwe-798"
+            ]
+          }
+        ],
+        "cwe-843": [
+          {
+            "name": "js/type-confusion-through-parameter-tampering",
+            "severity": "error",
+            "precision": "high",
+            "kind": "path-problem",
+            "shortDescription": "Type confusion through parameter tampering",
+            "description": "Sanitizing an HTTP request parameter may be ineffective if the user controls its type.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-843"
+            ],
+            "cwe": [
+              "cwe-843"
+            ]
+          }
+        ],
+        "cwe-200": [
+          {
+            "name": "js/exposure-of-private-files",
+            "severity": "warning",
+            "precision": "high",
+            "kind": "problem",
+            "shortDescription": "Exposure of private files",
+            "description": "Exposing a node_modules folder, or the project folder to the public, can cause exposure of private information.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-200"
+            ],
+            "cwe": [
+              "cwe-200"
+            ]
+          },
+          {
+            "name": "js/unsafe-external-link",
+            "severity": "warning",
+            "precision": "very-high",
+            "kind": "problem",
+            "shortDescription": "Potentially unsafe external link",
+            "description": "External links that open in a new tab or window but do not specify link type 'noopener' or 'noreferrer' are a potential security risk.",
+            "tags": [
+              "maintainability",
+              "security",
+              "external/cwe/cwe-200",
+              "external/cwe/cwe-1022"
+            ],
+            "cwe": [
+              "cwe-1022",
+              "cwe-200"
+            ]
+          }
+        ],
+        "cwe-307": [
+          {
+            "name": "js/missing-rate-limiting",
+            "severity": "error",
+            "precision": "high",
+            "kind": "problem",
+            "shortDescription": "Missing rate limiting",
+            "description": "An HTTP request handler that performs expensive operations without restricting the rate at which operations can be carried out is vulnerable to denial-of-service attacks.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-770",
+              "external/cwe/cwe-307",
+              "external/cwe/cwe-400"
+            ],
+            "cwe": [
+              "cwe-307",
+              "cwe-400",
+              "cwe-770"
+            ]
+          }
+        ],
+        "cwe-770": [
+          {
+            "name": "js/missing-rate-limiting",
+            "severity": "error",
+            "precision": "high",
+            "kind": "problem",
+            "shortDescription": "Missing rate limiting",
+            "description": "An HTTP request handler that performs expensive operations without restricting the rate at which operations can be carried out is vulnerable to denial-of-service attacks.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-770",
+              "external/cwe/cwe-307",
+              "external/cwe/cwe-400"
+            ],
+            "cwe": [
+              "cwe-307",
+              "cwe-400",
+              "cwe-770"
+            ]
+          }
+        ],
+        "cwe-730": [
+          {
+            "name": "js/regex-injection",
+            "severity": "error",
+            "precision": "high",
+            "kind": "path-problem",
+            "shortDescription": "Regular expression injection",
+            "description": "User input should not be used in regular expressions without first being escaped, otherwise a malicious user may be able to inject an expression that could require exponential time on certain inputs.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-730",
+              "external/cwe/cwe-400"
+            ],
+            "cwe": [
+              "cwe-400",
+              "cwe-730"
+            ]
+          },
+          {
+            "name": "js/redos",
+            "severity": "error",
+            "precision": "high",
+            "kind": "problem",
+            "shortDescription": "Inefficient regular expression",
+            "description": "A regular expression that requires exponential time to match certain inputs can be a performance bottleneck, and may be vulnerable to denial-of-service attacks.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-730",
+              "external/cwe/cwe-400"
+            ],
+            "cwe": [
+              "cwe-400",
+              "cwe-730"
+            ]
+          },
+          {
+            "name": "js/polynomial-redos",
+            "severity": "warning",
+            "precision": "high",
+            "kind": "path-problem",
+            "shortDescription": "Polynomial regular expression used on uncontrolled data",
+            "description": "A regular expression that can require polynomial time to match user-provided values may be vulnerable to denial-of-service attacks.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-730",
+              "external/cwe/cwe-400"
+            ],
+            "cwe": [
+              "cwe-400",
+              "cwe-730"
+            ]
+          }
+        ],
+        "cwe-327": [
+          {
+            "name": "js/weak-cryptographic-algorithm",
+            "severity": "warning",
+            "precision": "high",
+            "kind": "path-problem",
+            "shortDescription": "Use of a broken or weak cryptographic algorithm",
+            "description": "Using broken or weak cryptographic algorithms can compromise security.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-327"
+            ],
+            "cwe": [
+              "cwe-327"
+            ]
+          },
+          {
+            "name": "js/biased-cryptographic-random",
+            "severity": "warning",
+            "precision": "high",
+            "kind": "problem",
+            "shortDescription": "Creating biased random numbers from a cryptographically secure source.",
+            "description": "Some mathematical operations on random numbers can cause bias in the results and compromise security.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-327"
+            ],
+            "cwe": [
+              "cwe-327"
+            ]
+          }
+        ],
+        "cwe-776": [
+          {
+            "name": "js/xml-bomb",
+            "severity": "warning",
+            "precision": "high",
+            "kind": "path-problem",
+            "shortDescription": "XML internal entity expansion",
+            "description": "Parsing user input as an XML document with arbitrary internal entity expansion is vulnerable to denial-of-service attacks.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-776",
+              "external/cwe/cwe-400"
+            ],
+            "cwe": [
+              "cwe-400",
+              "cwe-776"
+            ]
+          }
+        ],
+        "cwe-094": [
+          {
+            "name": "js/code-injection",
+            "severity": "error",
+            "precision": "high",
+            "kind": "path-problem",
+            "shortDescription": "Code injection",
+            "description": "Interpreting unsanitized user input as code allows a malicious user arbitrary code execution.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-094",
+              "external/cwe/cwe-079",
+              "external/cwe/cwe-116"
+            ],
+            "cwe": [
+              "cwe-079",
+              "cwe-094",
+              "cwe-116"
+            ]
+          },
+          {
+            "name": "js/unsafe-dynamic-method-access",
+            "severity": "error",
+            "precision": "high",
+            "kind": "path-problem",
+            "shortDescription": "Unsafe dynamic method access",
+            "description": "Invoking user-controlled methods on certain objects can lead to remote code execution.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-094"
+            ],
+            "cwe": [
+              "cwe-094"
+            ]
+          },
+          {
+            "name": "js/bad-code-sanitization",
+            "severity": "error",
+            "precision": "high",
+            "kind": "path-problem",
+            "shortDescription": "Improper code sanitization",
+            "description": "Escaping code as HTML does not provide protection against code injection.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-094",
+              "external/cwe/cwe-079",
+              "external/cwe/cwe-116"
+            ],
+            "cwe": [
+              "cwe-079",
+              "cwe-094",
+              "cwe-116"
+            ]
+          }
+        ],
+        "cwe-201": [
+          {
+            "name": "js/cross-window-information-leak",
+            "severity": "error",
+            "precision": "high",
+            "kind": "path-problem",
+            "shortDescription": "Cross-window communication with unrestricted target origin",
+            "description": "When sending sensitive information to another window using `postMessage`, the origin of the target window should be restricted to avoid unintentional information leaks.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-201",
+              "external/cwe/cwe-359"
+            ],
+            "cwe": [
+              "cwe-201",
+              "cwe-359"
+            ]
+          }
+        ],
+        "cwe-359": [
+          {
+            "name": "js/cross-window-information-leak",
+            "severity": "error",
+            "precision": "high",
+            "kind": "path-problem",
+            "shortDescription": "Cross-window communication with unrestricted target origin",
+            "description": "When sending sensitive information to another window using `postMessage`, the origin of the target window should be restricted to avoid unintentional information leaks.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-201",
+              "external/cwe/cwe-359"
+            ],
+            "cwe": [
+              "cwe-201",
+              "cwe-359"
+            ]
+          },
+          {
+            "name": "js/clear-text-storage-of-sensitive-data",
+            "severity": "error",
+            "precision": "high",
+            "kind": "path-problem",
+            "shortDescription": "Clear text storage of sensitive information",
+            "description": "Sensitive information stored without encryption or hashing can expose it to an attacker.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-312",
+              "external/cwe/cwe-315",
+              "external/cwe/cwe-359"
+            ],
+            "cwe": [
+              "cwe-312",
+              "cwe-315",
+              "cwe-359"
+            ]
+          },
+          {
+            "name": "js/clear-text-logging",
+            "severity": "error",
+            "precision": "high",
+            "kind": "path-problem",
+            "shortDescription": "Clear-text logging of sensitive information",
+            "description": "Logging sensitive information without encryption or hashing can expose it to an attacker.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-312",
+              "external/cwe/cwe-315",
+              "external/cwe/cwe-359"
+            ],
+            "cwe": [
+              "cwe-312",
+              "cwe-315",
+              "cwe-359"
+            ]
+          },
+          {
+            "name": "js/build-artifact-leak",
+            "severity": "error",
+            "precision": "high",
+            "kind": "path-problem",
+            "shortDescription": "Storage of sensitive information in build artifact",
+            "description": "Including sensitive information in a build artifact can expose it to an attacker.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-312",
+              "external/cwe/cwe-315",
+              "external/cwe/cwe-359"
+            ],
+            "cwe": [
+              "cwe-312",
+              "cwe-315",
+              "cwe-359"
+            ]
+          }
+        ],
+        "cwe-346": [
+          {
+            "name": "js/cors-misconfiguration-for-credentials",
+            "severity": "error",
+            "precision": "high",
+            "kind": "path-problem",
+            "shortDescription": "CORS misconfiguration for credentials transfer",
+            "description": "Misconfiguration of CORS HTTP headers allows for leaks of secret credentials.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-346",
+              "external/cwe/cwe-639"
+            ],
+            "cwe": [
+              "cwe-346",
+              "cwe-639"
+            ]
+          }
+        ],
+        "cwe-639": [
+          {
+            "name": "js/cors-misconfiguration-for-credentials",
+            "severity": "error",
+            "precision": "high",
+            "kind": "path-problem",
+            "shortDescription": "CORS misconfiguration for credentials transfer",
+            "description": "Misconfiguration of CORS HTTP headers allows for leaks of secret credentials.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-346",
+              "external/cwe/cwe-639"
+            ],
+            "cwe": [
+              "cwe-346",
+              "cwe-639"
+            ]
+          }
+        ],
+        "cwe-916": [
+          {
+            "name": "js/insufficient-password-hash",
+            "severity": "warning",
+            "precision": "high",
+            "kind": "path-problem",
+            "shortDescription": "Use of password hash with insufficient computational effort",
+            "description": "Creating a hash of a password with low computational effort makes the hash vulnerable to password cracking attacks.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-916"
+            ],
+            "cwe": [
+              "cwe-916"
+            ]
+          }
+        ],
+        "cwe-099": [
+          {
+            "name": "js/path-injection",
+            "severity": "error",
+            "precision": "high",
+            "kind": "path-problem",
+            "shortDescription": "Uncontrolled data used in path expression",
+            "description": "Accessing paths influenced by users can allow an attacker to access unexpected resources.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-022",
+              "external/cwe/cwe-023",
+              "external/cwe/cwe-036",
+              "external/cwe/cwe-073",
+              "external/cwe/cwe-099"
+            ],
+            "cwe": [
+              "cwe-022",
+              "cwe-023",
+              "cwe-036",
+              "cwe-073",
+              "cwe-099"
+            ]
+          }
+        ],
+        "cwe-834": [
+          {
+            "name": "js/loop-bound-injection",
+            "severity": "warning",
+            "precision": "high",
+            "kind": "path-problem",
+            "shortDescription": "Loop bound injection",
+            "description": "Iterating over an object with a user-controlled .length property can cause indefinite looping.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-834"
+            ],
+            "cwe": [
+              "cwe-834"
+            ]
+          }
+        ],
+        "cwe-020": [
+          {
+            "name": "js/incorrect-suffix-check",
+            "severity": "error",
+            "precision": "high",
+            "kind": "problem",
+            "shortDescription": "Incorrect suffix check",
+            "description": "Using indexOf to implement endsWith functionality is error-prone if the -1 case is not explicitly handled.",
+            "tags": [
+              "security",
+              "correctness",
+              "external/cwe/cwe-020"
+            ],
+            "cwe": [
+              "cwe-020"
+            ]
+          },
+          {
+            "name": "js/incomplete-url-scheme-check",
+            "severity": "warning",
+            "precision": "high",
+            "kind": "problem",
+            "shortDescription": "Incomplete URL scheme check",
+            "description": "Checking for the \"javascript:\" URL scheme without also checking for \"vbscript:\" and \"data:\" suggests a logic error or even a security vulnerability.",
+            "tags": [
+              "security",
+              "correctness",
+              "external/cwe/cwe-020"
+            ],
+            "cwe": [
+              "cwe-020"
+            ]
+          }
+        ],
+        "cwe-643": [
+          {
+            "name": "js/xpath-injection",
+            "severity": "error",
+            "precision": "high",
+            "kind": "path-problem",
+            "shortDescription": "XPath injection",
+            "description": "Building an XPath expression from user-controlled sources is vulnerable to insertion of malicious code by the user.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-643"
+            ],
+            "cwe": [
+              "cwe-643"
+            ]
+          }
+        ],
+        "cwe-312": [
+          {
+            "name": "js/clear-text-storage-of-sensitive-data",
+            "severity": "error",
+            "precision": "high",
+            "kind": "path-problem",
+            "shortDescription": "Clear text storage of sensitive information",
+            "description": "Sensitive information stored without encryption or hashing can expose it to an attacker.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-312",
+              "external/cwe/cwe-315",
+              "external/cwe/cwe-359"
+            ],
+            "cwe": [
+              "cwe-312",
+              "cwe-315",
+              "cwe-359"
+            ]
+          },
+          {
+            "name": "js/clear-text-logging",
+            "severity": "error",
+            "precision": "high",
+            "kind": "path-problem",
+            "shortDescription": "Clear-text logging of sensitive information",
+            "description": "Logging sensitive information without encryption or hashing can expose it to an attacker.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-312",
+              "external/cwe/cwe-315",
+              "external/cwe/cwe-359"
+            ],
+            "cwe": [
+              "cwe-312",
+              "cwe-315",
+              "cwe-359"
+            ]
+          },
+          {
+            "name": "js/build-artifact-leak",
+            "severity": "error",
+            "precision": "high",
+            "kind": "path-problem",
+            "shortDescription": "Storage of sensitive information in build artifact",
+            "description": "Including sensitive information in a build artifact can expose it to an attacker.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-312",
+              "external/cwe/cwe-315",
+              "external/cwe/cwe-359"
+            ],
+            "cwe": [
+              "cwe-312",
+              "cwe-315",
+              "cwe-359"
+            ]
+          }
+        ],
+        "cwe-827": [
+          {
+            "name": "js/xxe",
+            "severity": "error",
+            "precision": "high",
+            "kind": "path-problem",
+            "shortDescription": "XML external entity expansion",
+            "description": "Parsing user input as an XML document with external entity expansion is vulnerable to XXE attacks.",
+            "tags": [
+              "security",
+              "external/cwe/cwe-611",
+              "external/cwe/cwe-827"
+            ],
+            "cwe": [
+              "cwe-611",
+              "cwe-827"
+            ]
+          }
+        ],
+        "cwe-1022": [
+          {
+            "name": "js/unsafe-external-link",
+            "severity": "warning",
+            "precision": "very-high",
+            "kind": "problem",
+            "shortDescription": "Potentially unsafe external link",
+            "description": "External links that open in a new tab or window but do not specify link type 'noopener' or 'noreferrer' are a potential security risk.",
+            "tags": [
+              "maintainability",
+              "security",
+              "external/cwe/cwe-200",
+              "external/cwe/cwe-1022"
+            ],
+            "cwe": [
+              "cwe-1022",
+              "cwe-200"
+            ]
+          }
+        ]
+      },
+      "cwes": [
+        "cwe-113",
+        "cwe-614",
+        "cwe-290",
+        "cwe-807",
+        "cwe-089",
+        "cwe-197",
+        "cwe-681",
+        "cwe-300",
+        "cwe-319",
+        "cwe-494",
+        "cwe-829",
+        "cwe-732",
+        "cwe-352",
+        "cwe-078",
+        "cwe-088",
+        "cwe-209",
+        "cwe-497",
+        "cwe-022",
+        "cwe-023",
+        "cwe-036",
+        "cwe-073",
+        "cwe-601",
+        "cwe-090",
+        "cwe-134",
+        "cwe-315",
+        "cwe-502",
+        "cwe-079",
+        "cwe-611",
+        "cwe-190",
+        "cwe-192",
+        "cwe-183",
+        "cwe-625",
+        "cwe-400",
+        "cwe-471",
+        "cwe-250",
+        "cwe-338",
+        "cwe-754",
+        "cwe-116",
+        "cwe-20",
+        "cwe-640",
+        "cwe-259",
+        "cwe-321",
+        "cwe-798",
+        "cwe-843",
+        "cwe-200",
+        "cwe-307",
+        "cwe-770",
+        "cwe-730",
+        "cwe-327",
+        "cwe-776",
+        "cwe-094",
+        "cwe-201",
+        "cwe-359",
+        "cwe-346",
+        "cwe-639",
+        "cwe-916",
+        "cwe-099",
+        "cwe-834",
+        "cwe-020",
+        "cwe-643",
+        "cwe-312",
+        "cwe-827",
+        "cwe-1022"
+      ]
+    },
+    "results": {
+      "open": {
+        "total": 0,
+        "scans": {}
+      },
+      "closed": {
+        "total": 0,
+        "scans": {}
+      }
+    }
+  }
+}

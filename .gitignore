@@ -1,6 +1,12 @@
 node_modules
 *.tgz
 
-*.pdf
+.DS_Store
+
+# Intermeidate directory to TS to JS
+lib
 
 .idea
+
+# Output directory for tests generating reports or other temp data
+_tmp/

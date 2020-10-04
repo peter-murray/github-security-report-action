@@ -1,18 +1,24 @@
-const fs = require('fs')
-  , path = require('path')
-  , SarifReport = require('./SarifReport')
-  ;
+import * as path from 'path';
+import * as fs from 'fs';
+import SarifReport from './SarifReport';
 
-module.exports = class SarifReportFinder {
+export type SarifFile = {
+  file: string,
+  payload: SarifReport
+}
 
-  constructor(dir) {
-    this._dir = dir;
+export default class SarifReportFinder {
+
+  private readonly dir: string;
+
+  constructor(dir: string) {
+    this.dir = dir;
   }
 
-  getSarifFiles() {
-    const dir = this._dir
-      , promises = []
-      ;
+  getSarifFiles(): Promise<SarifFile[]> {
+    const dir = this.dir
+      , promises: Promise<SarifFile>[] = []
+    ;
 
     if (!fs.existsSync(dir)) {
       throw new Error(`Path does not exist: ${dir}`);
@@ -21,6 +27,7 @@ module.exports = class SarifReportFinder {
     console.log(`Processing: ${dir}`);
     if (fs.lstatSync(dir).isDirectory()) {
       console.log(`  is a directory`);
+
       const files = fs.readdirSync(dir) // TODO use promises here
         .filter(f => f.endsWith('.sarif'))
         .map(f => path.resolve(dir, f));
@@ -28,7 +35,7 @@ module.exports = class SarifReportFinder {
       console.log(`Matched Files: ${JSON.stringify(files)}`);
       if (files) {
         files.forEach(f => {
-          promises.push(loadFileContents(f).then(report => {return {file: f, payload: report}}));
+          promises.push(loadFileContents(f));
         });
       }
     }
@@ -41,8 +48,8 @@ module.exports = class SarifReportFinder {
   }
 }
 
-function loadFileContents(file) {
-  return fs.promises.open(file)
+function loadFileContents(file: string): Promise<SarifFile> {
+  return fs.promises.open(file, 'r')
     .then(fileHandle => {
       return fileHandle.readFile()
         .then(content => {
@@ -50,11 +57,14 @@ function loadFileContents(file) {
           try {
             return JSON.parse(content.toString('utf8'));
           } catch (err) {
-            throw new Error(`Failed ro parse JSON contents of SARIF file ${file}: ${err}`);
+            throw new Error(`Failed to parse JSON from SARIF file '${file}': ${err}`);
           }
         })
         .then(data => {
-          return new SarifReport(data);
+          return {
+            file: file,
+            payload: new SarifReport(data),
+          };
         })
     });
 }
