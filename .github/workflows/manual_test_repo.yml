@@ -11,13 +11,6 @@ jobs:
     
       - name: Checkout Sources
         uses: actions/checkout@v2
-        
-      - name: List files
-        run: |
-          ls -l
-          ls -l ./samples
-          ls -l ./samples/java
-          ls -l ./samples/java/basic
           
       - name: Invoke Action
         uses: ./
