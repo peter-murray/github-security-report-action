@@ -4,7 +4,7 @@ import { getTestDirectoryFilePath } from '../testUtils';
 
 describe('pdfWriter', function () {
 
-  this.timeout(10000);
+  this.timeout(30 * 1000);
 
   it('should generate a simple pdf', async () => {
     const html = '<html><body><h1>Hello World</h1></body>'
