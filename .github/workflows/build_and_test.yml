@@ -24,4 +24,6 @@ jobs:
         run: npm run build
 
       - name: Test
+        env:
+          GH_TOKEN: ${{ secrets.SECURITY_TOKEN }}
         run: npm test
