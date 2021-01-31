@@ -174,6 +174,8 @@
             <button type="button" class="btn btn-warning">
               Warning <span class="badge badge-light">{{ scanning.results.open.scans.warning | length }}</span>
             </button>
+            {% else %}
+            <button type="button" class="btn btn-secondary">No Results <span class="badge badge-light">0</span></button>
             {% endif %}
           </div>
         </div>
@@ -195,6 +197,8 @@
             <button type="button" class="btn btn-warning">
               Warning <span class="badge badge-light">{{ scanning.results.closed.scans.warning | length }}</span>
             </button>
+            {% else %}
+            <button type="button" class="btn btn-secondary">No Results <span class="badge badge-light">0</span></button>
             {% endif %}
           </div>
         </div>

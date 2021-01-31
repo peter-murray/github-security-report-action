@@ -1,0 +1,43 @@
+name: Build Bundle Executables
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        include:
+          - os: ubuntu-latest
+            type: linux-x64
+          - os: macos-latest
+            type: darwin
+          - os: windows-latest
+            type: windows-x64
+
+    runs-on: ${{ matrix.os }}
+    
+    steps:
+      - name: Checkout Sources
+        uses: actions/checkout@v2
+
+      - name: Install Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Build Executable
+        run: npm run build-exe-${{ matrix.type }}
+
+      - name: npm pack
+        run: npm pack
+
+      - name: Attach artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: github-security-report-bundle-${{ matrix.type }}
+          path: github-security-report.zip
+

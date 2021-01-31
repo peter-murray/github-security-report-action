@@ -1,22 +1,39 @@
 {
   "name": "github-security-report",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Generates a report from GitHub CodeQL and Dependency information",
-  "main": "index.js",
   "scripts": {
-    "build": "ncc build index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc",
+    "pre-build-exe": "npm run build && ncc build lib/executable.js -o runtime",
+    "build-exe-linux-x64": "npm run pre-build-exe && nexe -i runtime/index.js -t linux-x64 -o github-security-reportlinux-x64",
+    "build-exe-mac-x64": "npm run pre-build-exe && nexe -i runtime/index.js -t mac-x64 -o github-security-report-mac-x64",
+    "build-exe-windows-x64": "npm run pre-build-exe && nexe -i runtime/index.js -t windows-x64 -o github-security-report",
+    "package": "npm run build && ncc build --source-map",
+    "postpack": "tarball=$(npm list - depth 0 | sed 's/@/-/g; s/ .*/.tgz/g; 1q;'); tar -tf $tarball | sed 's/^package\\///' | zip -@r github-security-report-bundle",
+    "test": "mocha --recursive -r ts-node/register \"src/**/*.test.ts\""
   },
   "keywords": [],
   "author": "Peter Murray",
   "license": "MIT",
   "dependencies": {
-    "@actions/core": "^1.2.4",
-    "@actions/github": "^4.0.0",
+    "@actions/core": "^1.2.6",
+    "@actions/io": "^1.0.2",
+    "@octokit/rest": "^18.0.15",
+    "commander": "^7.0.0",
     "nunjucks": "^3.2.2",
-    "puppeteer-core": "^5.2.1"
+    "puppeteer-core": "^5.5.0"
   },
   "devDependencies": {
-    "@zeit/ncc": "^0.22.3"
+    "@octokit/types": "^5.5.0",
+    "@types/chai": "^4.2.14",
+    "@types/mocha": "^8.2.0",
+    "@types/node": "^12.19.15",
+    "@types/puppeteer-core": "^2.1.0",
+    "@vercel/ncc": "^0.27.0",
+    "chai": "^4.2.0",
+    "mocha": "^8.2.1",
+    "nexe": "^4.0.0-beta.17",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.1.3"
   }
 }
