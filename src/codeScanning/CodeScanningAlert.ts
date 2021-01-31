@@ -6,10 +6,22 @@ export type Rule = {
 
 export type CodeScanningData = {
   number: number;
+  /**
+   * The time that the alert was created in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.
+   */
   created_at: string;
+  /**
+   * The REST API URL of the alert resource.
+   */
   url: string;
+  /**
+   * The GitHub URL of the alert resource.
+   */
   html_url: string;
-  state: 'open' | 'dismissed' | 'fixed';
+  /**
+   * State of a code scanning alert.
+   */
+  state: "open" | "dismissed" | "fixed";
   dismissed_by: {
     login?: string;
     id?: number;
@@ -31,15 +43,36 @@ export type CodeScanningData = {
     site_admin?: boolean;
     [k: string]: unknown;
   } | null;
+  /**
+   * The time that the alert was dismissed in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.
+   */
   dismissed_at: string;
-  dismissed_reason: ('false positive' | 'won\'t fix' | 'used in tests') | null;
+  /**
+   * **Required when the state is dismissed.** The reason for dismissing or closing the alert. Can be one of: `false positive`, `won't fix`, and `used in tests`.
+   */
+  dismissed_reason: ("false positive" | "won't fix" | "used in tests") | null;
   rule: {
+    /**
+     * A unique identifier for the rule used to detect the alert.
+     */
     id: string;
-    severity: 'none' | 'note' | 'warning' | 'error';
+    /**
+     * The severity of the alert.
+     */
+    severity: "none" | "note" | "warning" | "error";
+    /**
+     * A short description of the rule used to detect the alert.
+     */
     description: string;
   };
   tool: {
+    /**
+     * The name of the tool used to generate the code scanning analysis alert.
+     */
     name: string;
+    /**
+     * The version of the tool used to detect the alert.
+     */
     version: string;
   };
 }

@@ -1,0 +1,15 @@
+.local-chromium
+.github/
+_tmp/
+lib/
+dist/
+samples/
+src/
+templates/
+package.json
+summary_report_example.png
+*.tgz
+*.zip
+tsconfig.json
+.idea
+action.yml

@@ -1,8 +1,10 @@
+import * as os from 'os';
+
 const puppeteer = require('puppeteer-core');
 
 export function createPDF(html: string, file: string): Promise<string> {
 
-  const fetcher = puppeteer.createBrowserFetcher();
+  const fetcher = puppeteer.createBrowserFetcher({path: os.tmpdir()});
 
   return fetcher.download('782078')//TODO need to store and inject this
     .then(revisionInfo => {

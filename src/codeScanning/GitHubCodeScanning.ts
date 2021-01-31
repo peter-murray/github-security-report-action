@@ -1,7 +1,7 @@
 import { Octokit } from '@octokit/rest';
 import { CodeScanningListAlertsForRepoResponseData, Endpoints } from '@octokit/types';
 
-import CodeScanningAlert from './CodeScanningAlert';
+import CodeScanningAlert, { CodeScanningData } from './CodeScanningAlert';
 import CodeScanningResults from './CodeScanningResults';
 
 type listCodeScanningAlertsParameters = Endpoints['GET /repos/:owner/:repo/code-scanning/alerts']['parameters'];
@@ -39,10 +39,11 @@ function getCodeScanning(octokit: Octokit,
   };
 
   return octokit.paginate('GET /repos/:owner/:repo/code-scanning/alerts', params)
+    //@ts-ignore
     .then((alerts: CodeScanningListAlertsForRepoResponseData) => {
       const results: CodeScanningResults = new CodeScanningResults();
 
-      alerts.forEach(alert => {
+      alerts.forEach((alert: CodeScanningData) => {
         results.addCodeScanningAlert(new CodeScanningAlert(alert));
       });
 

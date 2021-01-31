@@ -21,18 +21,18 @@ export default class SarifReportFinder {
     ;
 
     if (!fs.existsSync(dir)) {
-      throw new Error(`Path does not exist: ${dir}`);
+      throw new Error(`SARIF Finder, path "${dir}", does not exist.`);
     }
 
-    console.log(`Processing: ${dir}`);
+    console.log(`SARIF File Finder, processing: ${dir}`);
     if (fs.lstatSync(dir).isDirectory()) {
-      console.log(`  is a directory`);
+      console.log(`  is a directory, looking for files`);
 
       const files = fs.readdirSync(dir) // TODO use promises here
         .filter(f => f.endsWith('.sarif'))
         .map(f => path.resolve(dir, f));
 
-      console.log(`Matched Files: ${JSON.stringify(files)}`);
+      console.log(`  SARIF files detected: ${JSON.stringify(files)}`);
       if (files) {
         files.forEach(f => {
           promises.push(loadFileContents(f));
