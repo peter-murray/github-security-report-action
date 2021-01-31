@@ -39,7 +39,7 @@ a future release to provide customization of these templates, via an ability to 
 
 ```
 name: Generate Security Report
-uses: peter-murray/github-security-report-action@v1
+uses: peter-murray/github-security-report-action@v2
 with:
   token: ${{ secrets.SECURITY_TOKEN }}
 ```
