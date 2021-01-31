@@ -39,5 +39,5 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: github-security-report-bundle-${{ matrix.type }}
-          path: github-security-report.zip
+          path: github-security-report-bundle.zip
 
