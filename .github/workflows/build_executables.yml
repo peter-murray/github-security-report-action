@@ -11,7 +11,7 @@ jobs:
           - os: ubuntu-latest
             type: linux-x64
           - os: macos-latest
-            type: darwin
+            type: mac-x64
           - os: windows-latest
             type: windows-x64
 
