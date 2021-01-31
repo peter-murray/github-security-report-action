@@ -36,7 +36,7 @@ describe('GitHubDependencies', () => {
       ;
 
       expect(tools).to.have.length(1);
-      expect(tools[0]).to.equal('CodeQL command-line toolchain');
+      expect(tools[0]).to.equal('CodeQL');
     });
 
     it(`from ${JSON.stringify(ghasReportingRepo)}`, async () => {
@@ -45,13 +45,13 @@ describe('GitHubDependencies', () => {
       ;
 
       expect(tools).to.have.length(1);
-      expect(tools[0]).to.equal('CodeQL');
+      expect(tools[0]).to.equal('-CodeQL-');
     });
 
     it (`from ${JSON.stringify(pmAdvanceSecurityJava)}`, async () => {
       const results = await codeScanning.getOpenCodeScanningAlerts(pmAdvanceSecurityJava);
 
-      expect(results.getCodeQLScanningAlerts()).to.have.length(26);//TODO flaky test, sor this out
+      expect(results.getCodeQLScanningAlerts()).to.have.length(26);//TODO flaky test, sort this out
     });
   });
 
