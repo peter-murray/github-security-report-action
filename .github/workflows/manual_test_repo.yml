@@ -15,7 +15,7 @@ jobs:
       - name: Invoke Action
         uses: ./
         with:
-          token: ${{ secrets.SECURITY_TOKEN }}
+          token: ${{ secrets.TEST_TOKEN }}
           sarifReportDir: ./samples/sarif/java/detailed
           outputDir: .
           repository: octodemo/ghas-reporting
