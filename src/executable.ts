@@ -18,7 +18,7 @@ const opts = program.opts();
 
 const reportGenerateConfig: ReportGeneratorConfig = {
   repository: opts.repository,
-  octokit: new Octokit({auth: opts.token, baseUrl: opts.url}),
+  octokit: new Octokit({auth: opts.token, baseUrl: opts.githubApiUrl}),
   sarifReportDirectory: getPath(opts.sarifDirectory),
   outputDirectory: getPath(opts.outputDirectory),
   templating: {
