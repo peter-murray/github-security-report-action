@@ -9,7 +9,7 @@ async function run(): Promise<void> {
 
     const generator = new ReportGenerator({
       repository: getRequiredInputValue('repository'),
-      octokit: new Octokit({auth: token}),
+      octokit: new Octokit({auth: token, baseUrl: getApiBaseUrl()}),
 
       sarifReportDirectory: getRequiredInputValue('sarifReportDir'),
       outputDirectory: getRequiredInputValue('outputDir'),
@@ -30,4 +30,8 @@ run();
 
 function getRequiredInputValue(key: string): string {
   return core.getInput(key, {required: true});
+}
+
+function getApiBaseUrl(): string {
+  return process.env['GITHUB_API_URL'] || 'https://api.github.com'
 }
