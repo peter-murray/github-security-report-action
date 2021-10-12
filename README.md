@@ -57,7 +57,7 @@ For the v2 version, there are bundles that can be used to provide a command line
 * [Windows bundle](https://github.com/peter-murray/github-security-report-action/releases/download/v2/github-security-report-bundle-windows-x64.zip)
 
 ### Installation
-Just download and extact the zip bundle for your target platform. Inside there is a file starting with `github-security-report` with a target platform suffix or .exe extension in the case of Windows.
+Just download and extract the zip bundle for your target platform. Inside there is a file starting with `github-security-report` with a target platform suffix or .exe extension in the case of Windows.
 
 ### Running
 Just call the platform executable and pass in the arguments as required. The arguments are the same as that of the GitHub Action, and you can get the full details from invoking the `--help` option on the executable as it will output detailed help
