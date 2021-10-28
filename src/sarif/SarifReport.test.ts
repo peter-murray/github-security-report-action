@@ -33,4 +33,13 @@ describe('SarifReport', function () {
     expect(report.cweList).to.have.length(30);
     expect(report.cweList).to.contain.members(['cwe-022', 'cwe-829']);
   });
+
+  it(`should parse csharp file`, async () => {
+    const file = getSampleSarifDirectory('csharp', 'csharp.sarif');
+    const contents = JSON.parse(fs.readFileSync(file).toString());
+    const report: SarifReport = new SarifReport(contents);
+
+    expect(report.cweList).to.have.length(69);
+    expect(report.cweList).to.contain.members(['cwe-022', 'cwe-829']);
+  });
 });
