@@ -3,7 +3,9 @@ import { Octokit } from '@octokit/rest';
 import GitHubCodeScanning from './GitHubCodeScanning';
 import { getGitHubToken } from '../testUtils';
 
-describe('GitHubDependencies', () => {
+describe('GitHubCdeScanning', function () {
+
+  this.timeout(10 * 1000);
 
   const testRepo = {
     owner: 'octodemo',
@@ -45,7 +47,7 @@ describe('GitHubDependencies', () => {
       ;
 
       expect(tools).to.have.length(1);
-      expect(tools[0]).to.equal('-CodeQL-');
+      expect(tools[0]).to.equal('CodeQL');
     });
 
     it (`from ${JSON.stringify(pmAdvanceSecurityJava)}`, async () => {
