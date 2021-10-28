@@ -8,8 +8,23 @@ export type SarifRun = {
     driver: {
       name: string,
       rules: SarifRule[]
-    }
+    },
+    extensions?: SarifExtension[]
   }
+}
+
+export type SarifExtension = {
+  name: string,
+  semanticVersion: string,
+  locations: [{
+    uri: string,
+    description: {
+      text: string,
+    }
+  }],
+  notifications?: any[],
+  rules?: SarifRule[]
+
 }
 
 export type SarifRule = {
@@ -29,5 +44,11 @@ export type SarifRule = {
   },
   defaultConfiguration: {
     level: string,
-  }
+    enabled: boolean,
+  },
+  description: string,
+  kind: string,
+  precision: string,
+  'problem.severity': string,
+  'security-severity': string,
 }

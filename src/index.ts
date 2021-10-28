@@ -21,7 +21,7 @@ async function run(): Promise<void> {
 
     const file = await generator.run();
     console.log(file);
-  } catch (err) {
+  } catch (err: Error | any) {
     core.setFailed(err.message);
   }
 }
