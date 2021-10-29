@@ -2,6 +2,7 @@ import ReportGenerator, { ReportGeneratorConfig } from './ReportGenerator';
 import { Octokit } from '@octokit/rest';
 
 import path from 'path';
+import { Logger, LogLevel } from './Logger';
 
 const {program} = require('commander');
 program.name('github-security-report');
@@ -23,7 +24,8 @@ const reportGenerateConfig: ReportGeneratorConfig = {
   outputDirectory: getPath(opts.outputDirectory),
   templating: {
     name: 'summary'
-  }
+  },
+  logger: new Logger(LogLevel.WARN)
 }
 
 async function execute(reportGenerateConfig: ReportGeneratorConfig) {

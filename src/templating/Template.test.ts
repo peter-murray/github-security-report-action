@@ -2,6 +2,7 @@ import * as fs from 'fs';
 import { expect } from 'chai';
 import Template from './Template';
 import { getSampleReportJsonDirectory, getTestDirectoryFilePath } from '../testUtils';
+import { Logger, LogLevel } from '../Logger';
 
 
 const OCTODEMO_GHAS_REPORTING = {
@@ -15,7 +16,7 @@ describe('Template', () => {
   [OCTODEMO_GHAS_REPORTING].forEach(config => {
 
     it(`should render ${config.directory}`, () => {
-      const reporting = new Template()
+      const reporting = new Template(new Logger(LogLevel.INFO))
         , data = readSampleFileAsJson(config.directory, 'payload.json')
         , fileContent = reporting.render(data, 'summary')
       ;

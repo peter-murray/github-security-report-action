@@ -2,6 +2,7 @@ import ReportGenerator from './ReportGenerator';
 
 import * as core from '@actions/core';
 import { Octokit } from '@octokit/rest';
+import { Logger, LogLevel } from './Logger';
 
 async function run(): Promise<void> {
   try {
@@ -16,7 +17,9 @@ async function run(): Promise<void> {
 
       templating: {
         name: 'summary'
-      }
+      },
+
+      logger: new Logger(LogLevel.INFO),
     });
 
     const file = await generator.run();

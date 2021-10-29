@@ -5,6 +5,7 @@ import { createPDF } from './pdf/pdfWriter';
 import * as path from 'path';
 
 import { mkdirP } from '@actions/io';
+import { Logger } from './Logger';
 
 export type ReportGeneratorConfig = {
   repository: string,
@@ -16,7 +17,9 @@ export type ReportGeneratorConfig = {
   templating: {
     directory?: string,
     name: string,
-  }
+  },
+
+  logger: Logger,
 }
 
 export default class ReportGenerator {
@@ -33,7 +36,7 @@ export default class ReportGenerator {
 
     return collector.getPayload(config.sarifReportDirectory)
       .then(reportData => {
-        const reportTemplate = new Template(config.templating.directory);
+        const reportTemplate = new Template(this.logger, config.templating.directory);
         return reportTemplate.render(reportData.getJSONPayload(), config.templating.name);
       })
       .then(html => {
@@ -42,5 +45,9 @@ export default class ReportGenerator {
             return createPDF(html, path.join(config.outputDirectory, 'summary.pdf'));
           });
       });
+  }
+
+  get logger(): Logger {
+    return this.config.logger;
   }
 }

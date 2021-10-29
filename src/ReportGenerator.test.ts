@@ -1,5 +1,6 @@
 import { Octokit } from '@octokit/rest';
 import { expect } from 'chai';
+import { Logger, LogLevel } from './Logger';
 import ReportGenerator from './ReportGenerator';
 import { getGitHubToken, getSampleSarifDirectory, getTestDirectoryFilePath } from './testUtils';
 
@@ -30,7 +31,9 @@ describe('ReportGenerator', function () {
 
         templating: {
           name: 'summary'
-        }
+        },
+
+        logger: new Logger(LogLevel.INFO)
       }
 
       const generator = new ReportGenerator(generatorConfig);
