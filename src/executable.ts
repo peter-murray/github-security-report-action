@@ -23,7 +23,8 @@ const reportGenerateConfig: ReportGeneratorConfig = {
   sarifReportDirectory: getPath(opts.sarifDirectory),
   outputDirectory: getPath(opts.outputDirectory),
   templating: {
-    name: 'summary'
+    name: 'summary',
+    directory: path.join(__dirname, 'templates')
   },
   logger: new Logger(LogLevel.WARN)
 }

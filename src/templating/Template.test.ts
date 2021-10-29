@@ -1,4 +1,6 @@
 import * as fs from 'fs';
+import * as path from 'path';
+
 import { expect } from 'chai';
 import Template from './Template';
 import { getSampleReportJsonDirectory, getTestDirectoryFilePath } from '../testUtils';
@@ -11,12 +13,14 @@ const OCTODEMO_GHAS_REPORTING = {
   expectedSummary: 'summary.html'
 };
 
+const templatesDir = path.join(__dirname, '..', 'templates');
+
 describe('Template', () => {
 
   [OCTODEMO_GHAS_REPORTING].forEach(config => {
 
     it(`should render ${config.directory}`, () => {
-      const reporting = new Template(new Logger(LogLevel.INFO))
+      const reporting = new Template(new Logger(LogLevel.INFO), templatesDir)
         , data = readSampleFileAsJson(config.directory, 'payload.json')
         , fileContent = reporting.render(data, 'summary')
       ;

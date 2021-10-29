@@ -15,7 +15,7 @@ export type ReportGeneratorConfig = {
   outputDirectory: string,
 
   templating: {
-    directory?: string,
+    directory: string,
     name: string,
   },
 

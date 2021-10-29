@@ -1,12 +1,8 @@
 import * as fs from 'fs';
+import * as path from 'path';
 import { Logger } from '../Logger';
 
-const path = require('path')
-  , nunjucks = require('nunjucks')
-  ;
-
-// Default templates as part of the action
-const EMBEDDED_TEMPLATES = path.join(__dirname, '..', '..', 'templates');
+const nunjucks = require('nunjucks');
 
 export default class Template {
 
@@ -16,15 +12,9 @@ export default class Template {
 
   private readonly logger: Logger;
 
-  constructor(logger: Logger, templatesDir?: string) {
-    if (!templatesDir) {
-      this.templatesDir = EMBEDDED_TEMPLATES;
-    } else {
-      this.templatesDir = templatesDir;
-    }
-
+  constructor(logger: Logger, templatesDir: string) {
+    this.templatesDir = templatesDir;
     this.logger = logger;
-
     this.renderer = nunjucks.configure(this.templatesDir, { autoescape: true })
   }
 

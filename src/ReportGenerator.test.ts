@@ -1,3 +1,4 @@
+import * as path from 'path';
 import { Octokit } from '@octokit/rest';
 import { expect } from 'chai';
 import { Logger, LogLevel } from './Logger';
@@ -30,7 +31,8 @@ describe('ReportGenerator', function () {
         outputDirectory: getTestDirectoryFilePath(config.repository),
 
         templating: {
-          name: 'summary'
+          name: 'summary',
+          directory: path.join(__dirname, 'templates')
         },
 
         logger: new Logger(LogLevel.INFO)

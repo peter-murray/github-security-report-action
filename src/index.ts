@@ -3,6 +3,7 @@ import ReportGenerator from './ReportGenerator';
 import * as core from '@actions/core';
 import { Octokit } from '@octokit/rest';
 import { Logger, LogLevel } from './Logger';
+import * as path from 'path';
 
 async function run(): Promise<void> {
   try {
@@ -16,7 +17,8 @@ async function run(): Promise<void> {
       outputDirectory: getRequiredInputValue('outputDir'),
 
       templating: {
-        name: 'summary'
+        name: 'summary',
+        directory: path.join(__dirname, 'templates')
       },
 
       logger: new Logger(LogLevel.INFO),
