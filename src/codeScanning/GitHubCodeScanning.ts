@@ -1,10 +1,10 @@
 import { Octokit } from '@octokit/rest';
-import { CodeScanningListAlertsForRepoResponseData, Endpoints } from '@octokit/types';
+import { Endpoints } from '@octokit/types';
 
 import CodeScanningAlert, { CodeScanningData } from './CodeScanningAlert';
 import CodeScanningResults from './CodeScanningResults';
 
-type listCodeScanningAlertsParameters = Endpoints['GET /repos/:owner/:repo/code-scanning/alerts']['parameters'];
+type listCodeScanningAlertsParameters = Endpoints['GET /repos/{owner}/{repo}/code-scanning/alerts']['parameters'];
 
 type Repo = {
   owner: string,
