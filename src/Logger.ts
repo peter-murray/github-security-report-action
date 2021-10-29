@@ -1,4 +1,4 @@
-import { info } from '@actions/core';
+import { info, error } from '@actions/core';
 
 export enum LogLevel {
   DEBUG,
@@ -25,11 +25,15 @@ export class Logger {
   }
 
   warn(message: string) {
-    this.logMessage(LogLevel.WARN, message);
+    if (this.logLevel >= LogLevel.WARN) {
+      error(`[${LogLevel[LogLevel.WARN]}] ${message}`);
+    }
   }
 
   error(message: string) {
-    this.logMessage(LogLevel.ERROR, message);
+    if (this.logLevel >= LogLevel.ERROR) {
+      error(`[${LogLevel[LogLevel.ERROR]}] ${message}`);
+    }
   }
 
   private logMessage(level: LogLevel, message: string) {
