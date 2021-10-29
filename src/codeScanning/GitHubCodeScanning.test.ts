@@ -3,9 +3,9 @@ import { Octokit } from '@octokit/rest';
 import GitHubCodeScanning from './GitHubCodeScanning';
 import { getGitHubToken } from '../testUtils';
 
-describe('GitHubCdeScanning', function () {
+describe('GitHubCodeScanning', function () {
 
-  this.timeout(10 * 1000);
+  this.timeout(15 * 1000);
 
   const testRepo = {
     owner: 'octodemo',
@@ -53,7 +53,7 @@ describe('GitHubCdeScanning', function () {
     it (`from ${JSON.stringify(pmAdvanceSecurityJava)}`, async () => {
       const results = await codeScanning.getOpenCodeScanningAlerts(pmAdvanceSecurityJava);
 
-      expect(results.getCodeQLScanningAlerts()).to.have.length(26);//TODO flaky test, sort this out
+      expect(results.getCodeQLScanningAlerts()).to.have.length(33);//TODO flaky test, sort this out
     });
   });
 

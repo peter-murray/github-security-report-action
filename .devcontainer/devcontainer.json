@@ -1,6 +1,8 @@
 {
     "name": "Workspace",
-    "image": "ghcr.io/octodemo/container-nodejs-development:base-latest",
+    "build": {
+      "dockerfile": "Dockerfile.dev"
+    },
     "extensions": [
       "dbaeumer.vscode-eslint",
       "redhat.vscode-yaml",
