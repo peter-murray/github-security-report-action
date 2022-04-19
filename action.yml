@@ -21,6 +21,11 @@ inputs:
     description: Repository name with owner. For example, peter-murray/github-security-report
     required: true
     default: ${{ github.repository }}
+  
+  template:
+    description: Select the report template type you want to use. For example, `summary` or `report`.
+    required: false
+    default: summary
 
 runs:
   using: node12

@@ -15,7 +15,7 @@ async function run(): Promise<void> {
       outputDirectory: getRequiredInputValue('outputDir'),
 
       templating: {
-        name: 'summary'
+        name: getRequiredInputValue('template')
       }
     });
 

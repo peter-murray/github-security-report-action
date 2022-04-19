@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <mate charest="utf-8" />
+  <title>GitHub Advanced Security Report</title>
+
+  <style type="text/css">
+    .report {
+      margin: 30px;
+    }
+
+    .heading {
+      margin-bottom: 50px;
+    }
+
+    .section {
+      margin-bottom: 50px;
+    }
+
+    .section-header {
+      margin-bottom: 20px;
+    }
+
+    /*.row {*/
+    /*    margin-bottom: 10px;*/
+    /*}*/
+
+    /* Allows for PDF to use coloured components */
+    @media print {
+      * {
+        -webkit-print-color-adjust: exact;
+      }
+    }
+  </style>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+</head>
+
+<body>
+
+  <div class="report container-fluid">
+    <div class="row border-bottom heading">
+      <div class="col">
+        <img class="githubLogo float-left" width="130px"
+          src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png">
+        <h1 class="reportTitle display-4">GitHub Advanced Security<br>Full Report</h1>
+      </div>
+    </div>
+
+    <div class="row mt-4">
+      <dt class="col-sm-2">GitHub Repository:</dt>
+      <dd class="col-sm-9">{{ github.owner }}/{{ github.repo }}</dd>
+    
+      <dt class="col-sm-2">Generated:</dt>
+      <dd class="col-sm-9">{{ metadata.created }}</dd>
+      </dl>
+    </div>
+
+    {% if sca %}
+    {% include "components/sca/summary.html" %}
+    {% endif %}
+
+    {% if scanning %}
+    {% include "components/sast/summary.html" %}
+    {% endif %}
+
+    {% if secrets %}
+    {% include "components/secrets/summary.html" %}
+    {% endif %}
+
+    <div style="page-break-before:always">&nbsp;</div>
+
+    {% include "components/sca/manifests.html" %}
+
+    {% include "components/sca/security.html" %}
+
+    <div style="page-break-before:always">&nbsp;</div>
+
+    {% include "components/sast/coverage.html" %}
+    
+    {% if scanning %}
+    {% include "components/sast/alerts.html" %}
+    {% endif %}
+  </div>
+
+</body>
+
+</html>
