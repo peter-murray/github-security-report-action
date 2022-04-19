@@ -35,7 +35,7 @@ saving it in the specified directory.
 Currently there is partial support for templates that are included in the action. Extenders of the action are welcome to author
 additional templates by creating HTML templates using [Nunjucks](https://mozilla.github.io/nunjucks/templating.html) inside the `templates` folder.
 
-You can specify a template by using the `template` parameter. Currently the following templates are availale:
+You can specify a template by using the `template` parameter. Currently the following templates are available:
 * `summary`: The classic summary report from previous versions.
 * `report`: A more detailed report that includes a list of open alerts broken down by their severity.
 * `report_sca`: A report that includes Software Composition Analysis
