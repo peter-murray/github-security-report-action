@@ -8,9 +8,10 @@ program.name('github-security-report');
 program.version(require('../package.json').version);
 
 program.requiredOption('-t, --token <token>', 'github access token');
-program.requiredOption('-r --repository <repository>', 'github repository, owner/repo_name format');
-program.option('-s --sarif-directory <sarifReportDirectory>', 'the SARIF report directory to load reports from', '../results');
-program.option('-o --output-directory <outputDirectory>', 'output directory for summary report', '.');
+program.requiredOption('-r, --repository <repository>', 'github repository, owner/repo_name format');
+program.option('-s, --sarif-directory <sarifReportDirectory>', 'the SARIF report directory to load reports from', '../results');
+program.option('-o, --output-directory <outputDirectory>', 'output directory for the report', '.');
+program.option('--template <template>', 'report template type used to render the report', 'summary');
 program.option('--github-api-url <url>', 'GitHub API URL', 'https://api.github.com')
 
 program.parse(process.argv);
@@ -22,7 +23,7 @@ const reportGenerateConfig: ReportGeneratorConfig = {
   sarifReportDirectory: getPath(opts.sarifDirectory),
   outputDirectory: getPath(opts.outputDirectory),
   templating: {
-    name: 'summary'
+    name: opts.template
   }
 }
 

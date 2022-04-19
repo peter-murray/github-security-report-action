@@ -27,12 +27,18 @@ saving it in the specified directory.
 * `sarifReportDir`: The directory to look for SARIF reports (from the CodeQL analyze action this defaults to `../results`)
 * `outputDir`: The output directory for the PDF reports, defaults to `github.workspace`
 * `repository`: The repository in `<owner>/<repo_name>` form, defaults to `github.repository`
+* `template`: The report template type used to render the report, defaults to `summary`
 
 
 ## Templates
 
-Currently the templates are hard coded into the action. There are extension points built into the action that will allow
-a future release to provide customization of these templates, via an ability to specify your own.
+Currently there is partial support for templates that are included in the action. Extenders of the action are welcome to author
+additional templates by creating HTML templates using [Nunjucks](https://mozilla.github.io/nunjucks/templating.html) inside the `templates` folder.
+
+You can specify a template by using the `template` parameter. Currently the following templates are availale:
+* `summary`: The classic summary report from previous versions.
+* `report`: A more detailed report that includes a list of open alerts broken down by their severity.
+* `report_sca`: A report that includes Software Composition Analysis
 
 
 ## Examples
@@ -67,6 +73,7 @@ Options:
 * `-r`, `--repository`: The repository that contains the source code, in `<owner>/<repository_name>` form, e.g. `peter-murray/node-hue-api`
 * `-s`, `--sarif-directory`: The directory containing the SARIF report files
 * `-o`, `--output-directory`: The directory to output the PDF report to. This will be created if it does not exist.
+* `--template`: The report template type used to render the report. This defaults to `summary`.
 
 An example of running the MacOS command line executable from the un:
 ```
@@ -76,6 +83,6 @@ The above command would output a `summary.pdf` file in the current working direc
 
 ## Future improvements
 
-* Add support for selecting reporting templates to the parameters
+* Additional work on the currently available reports
 * Example of extending html templates and using them
  
