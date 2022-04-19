@@ -1,0 +1,39 @@
+{% if sca.dependencies.manifests.processed %}
+<div class="col mb-4">
+  <div class="row">
+    <div class="col">
+      <h2 class="section-header border-bottom">Software Composition Analysis - Manifests</h2>
+    </div>
+  </div>
+
+  <div class="col mb-4">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="float-left">Processed Manifest Files</h5>
+        <h5><span class="badge badge-light float-right">{{ sca.dependencies.manifests.processed | length }}</span></h5>
+      </div>
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for processed in sca.dependencies.manifests.processed %}
+          <li class="text-monospace badge badge-secondary m-1">{{ cwe }}</li>
+          <tr>
+            <td>
+              <a href="https://github.com{{ processed.path }}">
+                {{ processed.filename }}
+              </a>
+            </td>
+          </tr>
+          {% endfor %}
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endif %}
