@@ -1,9 +1,10 @@
-{% if scanning.results.open.scans.error %}
+{% macro sastAlerts(criticality, breakline = false) %}
+{% if scanning.results.open.scans[criticality] %}
   <div class="col mb-4">
     <div class="card">
       <div class="card-header">
-        <h5 class="float-left">Errors</h5>
-        <h5><span class="badge badge-light float-right">{{ scanning.results.open.scans.error | length }}</span></h5>
+        <h5 class="float-left">{{ criticality | title }}</h5>
+        <h5><span class="badge badge-light float-right">{{ scanning.results.open.scans[criticality] | length }}</span></h5>
       </div>
 	<table class="table">
 		<thead>
@@ -14,7 +15,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			{% for alert in scanning.results.open.scans.error %}
+			{% for alert in scanning.results.open.scans[criticality] %}
 			<tr>
 				<td><a href="{{ alert.url }}">{{ alert.name }}</a></td>
 				<td>{{ alert.created }}</td>
@@ -25,33 +26,17 @@
 	</table>
     </div>
   </div>
+{% if breakline %}
+<div style="page-break-before:always">&nbsp;</div>
 {% endif %}
 
-{% if scanning.results.open.scans.warning %}
-  <div class="col mb-4">
-    <div class="card">
-      <div class="card-header">
-        <h5 class="float-left">Warnings</h5>
-        <h5><span class="badge badge-light float-right">{{ scanning.results.open.scans.warning | length }}</span></h5>
-      </div>
-	<table class="table">
-		<thead>
-			<tr>
-				<th scope="col">Rule</th>
-				<th scope="col">Found on</th>
-				<th scope="col">Discovered by</th>
-			</tr>
-		</thead>
-		<tbody>
-			{% for alert in scanning.results.open.scans.warning %}
-			<tr>
-				<td><a href="{{ alert.url }}">{{ alert.name }}</a></td>
-				<td>{{ alert.created }}</td>
-				<td>{{ alert.tool }}</td>
-			</tr>
-			{% endfor %}
-		</tbody>
-	</table>
-    </div>
-  </div>
 {% endif %}
+{% endmacro %}
+
+{{ sastAlerts('critical', breakline=true) }}
+{{ sastAlerts('high', breakline=true) }}
+{{ sastAlerts('medium', breakline=true) }}
+{{ sastAlerts('low', breakline=true) }}
+{{ sastAlerts('error', breakline=true) }}
+{{ sastAlerts('warning', breakline=true) }}
+{{ sastAlerts('note') }}
