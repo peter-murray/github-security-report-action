@@ -1,0 +1,55 @@
+<div class="scanning section mt-4">
+  <div class="row mb-3">
+    <div class="col">
+      <h2 class="section-header border-bottom">Code Scanning Summary</h2>
+    </div>
+  </div>
+
+  <div class="row row-cols-1 row-cols-md-2 mb-3">
+    <div class="col mb-4">
+      {% if scanning.results.open %}
+      <div class="card">
+        <div class="card-header">
+          <h5 class="float-left">Open Findings</h5>
+          <h5><span class="badge badge-light float-right">{{ scanning.results.open.total }}</span></h5>
+        </div>
+        <div class="card-body">
+          {% if scanning.results.open.total > 0 %}
+          <button type="button" class="btn btn-danger">
+            Error <span class="badge badge-light">{{ scanning.results.open.scans.error | length }}</span>
+          </button>
+          <button type="button" class="btn btn-warning">
+            Warning <span class="badge badge-light">{{ scanning.results.open.scans.warning | length }}</span>
+          </button>
+          {% else %}
+          <button type="button" class="btn btn-secondary">No Results <span class="badge badge-light">0</span></button>
+          {% endif %}
+        </div>
+      </div>
+      {% endif %}
+    </div>
+
+    <div class="col mb-4">
+      {% if scanning.results.closed %}
+      <div class="card">
+        <div class="card-header">
+          <h5 class="float-left">Closed Findings</h5>
+          <h5><span class="badge badge-light float-right">{{ scanning.results.closed.total }}</span></h5>
+        </div>
+        <div class="card-body">
+          {% if scanning.results.closed.total > 0 %}
+          <button type="button" class="btn btn-danger">
+            Error <span class="badge badge-light">{{ scanning.results.closed.scans.error | length }}</span>
+          </button>
+          <button type="button" class="btn btn-warning">
+            Warning <span class="badge badge-light">{{ scanning.results.closed.scans.warning | length }}</span>
+          </button>
+          {% else %}
+          <button type="button" class="btn btn-secondary">No Results <span class="badge badge-light">0</span></button>
+          {% endif %}
+        </div>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
