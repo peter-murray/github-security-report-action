@@ -1,9 +1,8 @@
-import { Octokit } from '@octokit/rest';
 import { expect } from 'chai';
 import ReportGenerator from './ReportGenerator';
-import { getGitHubToken, getSampleSarifDirectory, getTestDirectoryFilePath } from './testUtils';
+import { getOctoKit, getSampleSarifDirectory, getTestDirectoryFilePath } from './testUtils';
 
-const TOKEN: string = getGitHubToken();
+const mockedOctoKit = getOctoKit();
 
 const SIMPLE_TEST_REPOSITORY = {
   repository: 'octodemo/ghas-reporting',
@@ -12,7 +11,7 @@ const SIMPLE_TEST_REPOSITORY = {
 
 const PM_AS_JAVA = {
   repository: 'peter-murray/advanced-security-java',
-  sarifReportDir: getSampleSarifDirectory('peter-murray', 'advanced-security-java')
+  sarifReportDir: getSampleSarifDirectory('peter-murray', 'advanced-security-java', 'with-extensions')
 }
 
 describe('ReportGenerator', function () {
@@ -22,7 +21,7 @@ describe('ReportGenerator', function () {
   [SIMPLE_TEST_REPOSITORY, PM_AS_JAVA].forEach(config => {
     it(`should generate a report for ${config.repository}`, async () => {
       const generatorConfig = {
-        octokit: new Octokit({auth: TOKEN}),
+        octokit: mockedOctoKit,
         repository: config.repository,
 
         sarifReportDirectory: config.sarifReportDir,

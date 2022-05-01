@@ -1,0 +1,34 @@
+{
+    "repository": {
+        "name": "",
+        "dependencyGraphManifests": {
+            "pageInfo": {
+                "hasNextPage": false,
+                "endCursor": "true"
+            },
+            "totalCount": 1,
+            "edges": [
+                {
+                    "node": {
+                        "filename": "",
+                        "dependenciesCount": 1,
+                        "blobPath": "",
+                        "exceedsMaxSize": false,
+                        "parseable": true,
+                        "dependencies": {
+                            "edges": [
+                                {
+                                    "node": {
+                                        "packageName": "",
+                                        "packageManager": "MAVEN",
+                                        "requirements": ""
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            ]
+        }
+    }
+}

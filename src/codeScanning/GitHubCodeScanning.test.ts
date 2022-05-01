@@ -1,7 +1,8 @@
 import { expect } from 'chai';
-import { Octokit } from '@octokit/rest';
 import GitHubCodeScanning from './GitHubCodeScanning';
-import { getGitHubToken } from '../testUtils';
+import { getOctoKit } from '../testUtils';
+
+const mockedOctoKit = getOctoKit();
 
 describe('GitHubDependencies', () => {
 
@@ -23,7 +24,7 @@ describe('GitHubDependencies', () => {
   let codeScanning: GitHubCodeScanning;
 
   before(() => {
-    const octokit = new Octokit({auth: getGitHubToken()});
+    const octokit = mockedOctoKit;
     codeScanning = new GitHubCodeScanning(octokit);
   });
 

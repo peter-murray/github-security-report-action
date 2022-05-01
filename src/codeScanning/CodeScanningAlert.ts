@@ -1,6 +1,7 @@
 export type Rule = {
   id: string,
   severity: string,
+  security_severity_level?: string
   description: string
 }
 
@@ -59,7 +60,7 @@ export type CodeScanningData = {
     /**
      * The severity of the alert.
      */
-    severity: "none" | "note" | "warning" | "error";
+    severity: "none" | "note" | "warning" | "error" | "low" | "medium" | "critical";
     /**
      * A short description of the rule used to detect the alert.
      */
@@ -133,7 +134,7 @@ export default class CodeScanningAlert {
 
   get severity(): string {
     // return this.rule ? this.rule.severity : null;
-    return this.rule.severity;
+    return this.rule.security_severity_level ??  this.rule.severity;
   }
 
   get state(): string {

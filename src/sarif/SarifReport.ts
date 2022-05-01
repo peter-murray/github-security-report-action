@@ -22,13 +22,23 @@ export default class SarifReport {
 
 
 function getRules(report: SarifReportData) {
-  let sarifRules: SarifRule[] | null = null;
+  let sarifRules: SarifRule[] = [];
 
   if (report.version === '2.1.0') {
     if (report.runs) {
       report.runs.forEach(run => {
         if (run.tool.driver.name === 'CodeQL') { //TODO could support other tools
-          sarifRules = run.tool.driver.rules;
+          if (run.tool.driver.rules && run.tool.driver.rules.length > 0) {
+            sarifRules = run.tool.driver.rules;
+            return;
+          }
+
+          // Fallback for when the rules are defined in the extensions:
+          if (run.tool.extensions) {
+            run.tool.extensions.forEach(extension => {
+              sarifRules.push(...extension.rules);
+            });
+          }
         }
       });
     }

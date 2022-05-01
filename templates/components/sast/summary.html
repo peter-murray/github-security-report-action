@@ -16,10 +16,28 @@
         <div class="card-body">
           {% if scanning.results.open.total > 0 %}
           <button type="button" class="btn btn-danger">
+            Critical <span class="badge badge-light">{{ scanning.results.open.scans.critical | length }}</span>
+          </button>
+          <button type="button" class="btn btn-danger">
+            High <span class="badge badge-light">{{ scanning.results.open.scans.high | length }}</span>
+          </button>
+          <button type="button" class="btn btn-warning">
+            Medium <span class="badge badge-light">{{ scanning.results.open.scans.medium | length }}</span>
+          </button>
+          <button type="button" class="btn btn-info">
+            Low <span class="badge badge-light">{{ scanning.results.open.scans.low | length }}</span>
+          </button>
+          
+          <div>&nbsp;</div>
+          
+          <button type="button" class="btn btn-danger">
             Error <span class="badge badge-light">{{ scanning.results.open.scans.error | length }}</span>
           </button>
           <button type="button" class="btn btn-warning">
             Warning <span class="badge badge-light">{{ scanning.results.open.scans.warning | length }}</span>
+          </button>
+          <button type="button" class="btn btn-info">
+            Note <span class="badge badge-light">{{ scanning.results.open.scans.note | length }}</span>
           </button>
           {% else %}
           <button type="button" class="btn btn-secondary">No Results <span class="badge badge-light">0</span></button>
@@ -39,10 +57,28 @@
         <div class="card-body">
           {% if scanning.results.closed.total > 0 %}
           <button type="button" class="btn btn-danger">
+            Critical <span class="badge badge-light">{{ scanning.results.closed.scans.critical | length }}</span>
+          </button>
+          <button type="button" class="btn btn-danger">
+            High <span class="badge badge-light">{{ scanning.results.closed.scans.high | length }}</span>
+          </button>
+          <button type="button" class="btn btn-warning">
+            Medium <span class="badge badge-light">{{ scanning.results.closed.scans.medium | length }}</span>
+          </button>
+          <button type="button" class="btn btn-info">
+            Low <span class="badge badge-light">{{ scanning.results.closed.scans.low | length }}</span>
+          </button>
+          
+          <div>&nbsp;</div>
+          
+          <button type="button" class="btn btn-danger">
             Error <span class="badge badge-light">{{ scanning.results.closed.scans.error | length }}</span>
           </button>
           <button type="button" class="btn btn-warning">
             Warning <span class="badge badge-light">{{ scanning.results.closed.scans.warning | length }}</span>
+          </button>
+          <button type="button" class="btn btn-info">
+            Note <span class="badge badge-light">{{ scanning.results.closed.scans.note | length }}</span>
           </button>
           {% else %}
           <button type="button" class="btn btn-secondary">No Results <span class="badge badge-light">0</span></button>

@@ -4,14 +4,14 @@ import { SarifFile } from '../sarif/SarifReportFinder';
 import CodeScanningResults from '../codeScanning/CodeScanningResults';
 import CodeScanningRule from '../sarif/CodeScanningRule';
 import {
-  AlertSummary,
+  AlertSummary, AggregatedAlertSummary,
   CodeScanningRules, CodeScanResults, CodeScanSummary,
   CollectedData,
   CWECoverage, Dependencies,
   DependencySummary,
   JsonPayload, Manifest,
   Repo,
-  RuleData, ServerityToVulnerabilities, SeverityToAlertSummary
+  RuleData, ServerityToVulnerabilities, SeverityToAlertSummary, SeverityToAggregatedAlertSummary
 } from './ReportTypes';
 
 export default class ReportData {
@@ -65,7 +65,7 @@ export default class ReportData {
       // Each report is an object of {file, payload} keys
       const rules = report.payload.rules;
 
-      if (rules) {
+      if (rules && rules.length > 0) {
         rules.forEach(rule => {
           result[rule.id] = rule;
         });
@@ -221,6 +221,42 @@ export default class ReportData {
   }
 }
 
+function generateAggregatedAlertSummary(severityToAlertSummary: SeverityToAlertSummary): SeverityToAggregatedAlertSummary {
+  const result: SeverityToAggregatedAlertSummary = {};
+  
+  Object.entries(severityToAlertSummary).forEach((entry) => {
+    const [severity, summaries] = entry;
+    if(!result[severity]) {
+      result[severity] = [];
+    }
+    
+    summaries.forEach((summary) => {
+      let existingSummary = result[severity].find((candidate) => {
+        return candidate.rule.id == summary.rule.id && candidate.state == summary.state;
+      });
+
+      if(!existingSummary) {
+        const newSummary: AggregatedAlertSummary = {
+          tool: summary.tool,
+          name: summary.name,
+          state: summary.state,
+          created: summary.created,
+          instances: [
+            summary
+          ],
+          rule: summary.rule
+        };
+
+        result[severity].push(newSummary);
+      } else {
+        existingSummary.instances.push(summary);
+      }
+    });
+  });
+  
+  return result;
+}
+
 function generateAlertSummary(open: CodeScanningResults, rules: CodeScanningRules): CodeScanResults {
   const result: SeverityToAlertSummary = {};
   let total = 0;
@@ -254,7 +290,8 @@ function generateAlertSummary(open: CodeScanningResults, rules: CodeScanningRule
 
   return {
     total: total,
-    scans: result
+    scans: result,
+    scansByRule: generateAggregatedAlertSummary(result)
   };
 }
 
