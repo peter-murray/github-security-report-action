@@ -157,8 +157,9 @@ class CodeScanningAlert {
         return result;
     }
     get severity() {
+        var _a;
         // return this.rule ? this.rule.severity : null;
-        return this.rule.severity;
+        return (_a = this.rule.security_severity_level) !== null && _a !== void 0 ? _a : this.rule.severity;
     }
     get state() {
         return this.data.state;
@@ -779,12 +780,21 @@ class SarifReport {
 }
 exports["default"] = SarifReport;
 function getRules(report) {
-    let sarifRules = null;
+    let sarifRules = [];
     if (report.version === '2.1.0') {
         if (report.runs) {
             report.runs.forEach(run => {
                 if (run.tool.driver.name === 'CodeQL') { //TODO could support other tools
-                    sarifRules = run.tool.driver.rules;
+                    if (run.tool.driver.rules && run.tool.driver.rules.length > 0) {
+                        sarifRules = run.tool.driver.rules;
+                        return;
+                    }
+                    // Fallback for when the rules are defined in the extensions:
+                    if (run.tool.extensions) {
+                        run.tool.extensions.forEach(extension => {
+                            sarifRules.push(...extension.rules);
+                        });
+                    }
                 }
             });
         }
@@ -941,7 +951,7 @@ class ReportData {
         this.sarifReports.forEach(report => {
             // Each report is an object of {file, payload} keys
             const rules = report.payload.rules;
-            if (rules) {
+            if (rules && rules.length > 0) {
                 rules.forEach(rule => {
                     result[rule.id] = rule;
                 });
@@ -1063,6 +1073,37 @@ class ReportData {
     }
 }
 exports["default"] = ReportData;
+function generateAggregatedAlertSummary(severityToAlertSummary) {
+    const result = {};
+    Object.entries(severityToAlertSummary).forEach((entry) => {
+        const [severity, summaries] = entry;
+        if (!result[severity]) {
+            result[severity] = [];
+        }
+        summaries.forEach((summary) => {
+            let existingSummary = result[severity].find((candidate) => {
+                return candidate.rule.id == summary.rule.id && candidate.state == summary.state;
+            });
+            if (!existingSummary) {
+                const newSummary = {
+                    tool: summary.tool,
+                    name: summary.name,
+                    state: summary.state,
+                    created: summary.created,
+                    instances: [
+                        summary
+                    ],
+                    rule: summary.rule
+                };
+                result[severity].push(newSummary);
+            }
+            else {
+                existingSummary.instances.push(summary);
+            }
+        });
+    });
+    return result;
+}
 function generateAlertSummary(open, rules) {
     const result = {};
     let total = 0;
@@ -1089,7 +1130,8 @@ function generateAlertSummary(open, rules) {
     });
     return {
         total: total,
-        scans: result
+        scans: result,
+        scansByRule: generateAggregatedAlertSummary(result)
     };
 }
 function getRuleData(rule) {
