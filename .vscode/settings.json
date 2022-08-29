@@ -15,7 +15,5 @@
   },
   "[html]": {
     "editor.tabSize": 2
-  },
-  // GitHub Codespace Theme
-  "workbench.colorTheme": "GitHub Dark Dimmed"
+  }
 }
