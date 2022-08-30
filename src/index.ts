@@ -7,6 +7,7 @@ async function run(): Promise<void> {
   try {
     const token = getRequiredInputValue('token');
 
+    const templateFile = core.getInput('templateFile');
     const generator = new ReportGenerator({
       repository: getRequiredInputValue('repository'),
       octokit: new Octokit({auth: token}),
@@ -15,7 +16,8 @@ async function run(): Promise<void> {
       outputDirectory: getRequiredInputValue('outputDir'),
 
       templating: {
-        name: 'summary'
+        name: templateFile || 'summary',
+        directory: templateFile ? '.' : undefined
       }
     });
 

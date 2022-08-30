@@ -7,13 +7,10 @@ jobs:
   build:
     strategy:
       matrix:
-        include:
-          - type: linux-x64
-          - type: mac-x64
-          - type: windows-x64
+        type: [linux-x64, mac-x64, windows-x64]
 
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout Sources
         uses: actions/checkout@v2

@@ -27,7 +27,7 @@ saving it in the specified directory.
 * `sarifReportDir`: The directory to look for SARIF reports (from the CodeQL analyze action this defaults to `../results`)
 * `outputDir`: The output directory for the PDF reports, defaults to `github.workspace`
 * `repository`: The repository in `<owner>/<repo_name>` form, defaults to `github.repository`
-
+* `templateFile`: The nunjucks template file to use for the report
 
 ## Templates
 
