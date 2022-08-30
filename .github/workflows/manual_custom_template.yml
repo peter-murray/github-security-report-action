@@ -1,4 +1,4 @@
-name: Manual Test
+name: Manual Test Custom Template
 
 on:
   workflow_dispatch:
