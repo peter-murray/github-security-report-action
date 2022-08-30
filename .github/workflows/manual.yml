@@ -15,6 +15,7 @@ jobs:
       - name: Invoke Action
         uses: ./
         with:
+          token: ${{ secrets.SECURITY_TOKEN }}
           sarifReportDir: ./samples/sarif/peter-murray/advanced-security-java
           outputDir: .
 
