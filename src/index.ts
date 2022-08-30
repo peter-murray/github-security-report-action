@@ -24,7 +24,11 @@ async function run(): Promise<void> {
     const file = await generator.run();
     console.log(file);
   } catch (err) {
-    core.setFailed(err.message);
+    if (err instanceof Error) {
+      core.setFailed(err.message);
+    } else {
+      core.setFailed(JSON.stringify(err));
+    }
   }
 }
 
