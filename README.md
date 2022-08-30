@@ -26,7 +26,7 @@ Various inputs are defined in [`action.yml`](action.yml):
 
 | Name | Description | Default |
 | --- | - | - |
-| *token* | Token to use to authorize. | ${{&nbsp;github.token&nbsp;}} |
+| **token** | Token to use to authorize. | ${{&nbsp;github.token&nbsp;}} |
 | sarifReportDir | The CodeQL output directory for SARIF report(s). | ../results |
 | outputDir | The output directory for the generated report(s). | ${{ github.workspace }} |
 | repository | Repository name with owner. For example, peter-murray/github-security-report | ${{ github.repository }} |
