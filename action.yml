@@ -4,8 +4,8 @@ author: Peter Murray
 
 inputs:
   token:
-    description: GitHub Access Token with permissions for Dependencies and Security API access on the repository.
-    default: ${{ secrets.GITHUB_TOKEN }}
+    description: The GitHub token used to create an authenticated client
+    default: ${{ github.token }}
     required: false
   sarifReportDir:
     description: The CodeQL output directory for SARIF report(s).
