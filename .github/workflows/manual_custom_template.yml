@@ -12,7 +12,7 @@ jobs:
       - uses: ./
         with:
           token: ${{ secrets.SECURITY_TOKEN }}
-          sarifReportDir: ./samples/sarif/peter-murray/advanced-security-java
+          sarifReportDir: .
           outputDir: .
           templateFile: template.html
       - uses: actions/upload-artifact@v2
