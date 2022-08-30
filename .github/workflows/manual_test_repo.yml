@@ -17,7 +17,6 @@ jobs:
         with:
           token: ${{ secrets.TEST_TOKEN }}
           sarifReportDir: ./samples/sarif/java/detailed
-          outputDir: .
           repository: octodemo/ghas-reporting
           
       - name: Upload Artifacts

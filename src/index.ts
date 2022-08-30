@@ -7,6 +7,7 @@ async function run(): Promise<void> {
   try {
     const token = getRequiredInputValue('token');
 
+    const templateFile = core.getInput('templateFile');
     const generator = new ReportGenerator({
       repository: getRequiredInputValue('repository'),
       octokit: new Octokit({auth: token}),
@@ -15,14 +16,19 @@ async function run(): Promise<void> {
       outputDirectory: getRequiredInputValue('outputDir'),
 
       templating: {
-        name: 'summary'
+        name: templateFile || 'summary',
+        directory: templateFile ? '.' : undefined
       }
     });
 
     const file = await generator.run();
     console.log(file);
   } catch (err) {
-    core.setFailed(err.message);
+    if (err instanceof Error) {
+      core.setFailed(err.message);
+    } else {
+      core.setFailed(JSON.stringify(err));
+    }
   }
 }
 

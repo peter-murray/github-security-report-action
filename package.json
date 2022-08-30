@@ -8,7 +8,7 @@
     "build-exe-linux-x64": "npm run pre-build-exe && nexe -i runtime/index.js -t linux-x64-12.16.2 -o github-security-report-linux-x64",
     "build-exe-mac-x64": "npm run pre-build-exe && nexe -i runtime/index.js -t mac-x64-12.16.2 -o github-security-report-mac-x64",
     "build-exe-windows-x64": "npm run pre-build-exe && nexe -i runtime/index.js -t windows-x64-12.16.2 -o github-security-report",
-    "package": "npm run build && ncc build --source-map",
+    "package": "npm run build && ncc build ./lib/index.js --source-map",
     "postpack": "tarball=$(npm list - depth 0 | sed 's/@/-/g; s/ .*/.tgz/g; 1q;'); tar -tf $tarball | sed 's/^package\\///' | zip -@r github-security-report-bundle",
     "test": "mocha --recursive -r ts-node/register \"src/**/*.test.ts\""
   },
@@ -29,7 +29,7 @@
     "@types/mocha": "^8.2.0",
     "@types/node": "^12.19.15",
     "@types/puppeteer-core": "^2.1.0",
-    "@vercel/ncc": "^0.27.0",
+    "@vercel/ncc": "^0.34.0",
     "chai": "^4.2.0",
     "mocha": "^8.2.1",
     "nexe": "^4.0.0-beta.17",

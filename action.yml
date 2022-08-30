@@ -4,23 +4,28 @@ author: Peter Murray
 
 inputs:
   token:
-    description: GitHub Access Token with permissions for Dependencies and Security API access on the repository.
-    required: true
+    description: The GitHub token used to create an authenticated client
+    default: ${{ github.token }}
+    required: false
 
   sarifReportDir:
     description: The CodeQL output directory for SARIF report(s).
-    required: true
+    required: false
     default: "../results"
 
   outputDir:
     description: The output directory for the generated report(s).
-    required: true
+    required: false
     default: ${{ github.workspace }}
 
   repository:
     description: Repository name with owner. For example, peter-murray/github-security-report
-    required: true
+    required: false
     default: ${{ github.repository }}
+
+  templateFile:
+    description: File to use as PDF template. For example, summary.pdf
+    required: false
 
 runs:
   using: node12
