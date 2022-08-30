@@ -12,8 +12,6 @@ jobs:
       - uses: ./
         with:
           token: ${{ secrets.SECURITY_TOKEN }}
-          sarifReportDir: .
-          outputDir: .
           templateFile: template.html
       - uses: actions/upload-artifact@v2
         with:
