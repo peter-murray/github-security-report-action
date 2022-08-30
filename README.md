@@ -43,7 +43,7 @@ with:
 ```
 
 Example summary report output:
-![Example summary report](summary_report_example.png)
+![Example summary report](https://user-images.githubusercontent.com/22425467/187445447-2290bfa4-b00a-4687-bb52-94a89cce1e97.png)
 
 ### Example Template
 You can specify your own template file to use for the PDF report via the `templateFile` parameter. See [templates](./templates/).
