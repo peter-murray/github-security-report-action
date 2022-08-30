@@ -21,8 +21,8 @@ inputs:
     default: ${{ github.repository }}
   templateFile:
     description: File to use as PDF template. For example, summary.pdf
-    required: true
-    default: ${{ github.repository }}
+    required: false
+    default: sample.html
 
 runs:
   using: node12
