@@ -3585,7 +3585,7 @@ const rest_1 = __nccwpck_require__(5375);
 function run() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const token = core.getInput('token');
+            const token = getRequiredInputValue('token');
             const templateFile = core.getInput('templateFile');
             const generator = new ReportGenerator_1.default({
                 repository: getRequiredInputValue('repository'),
@@ -3601,7 +3601,12 @@ function run() {
             console.log(file);
         }
         catch (err) {
-            core.setFailed(err.message);
+            if (err instanceof Error) {
+                core.setFailed(err.message);
+            }
+            else {
+                core.setFailed(JSON.stringify(err));
+            }
         }
     });
 }
