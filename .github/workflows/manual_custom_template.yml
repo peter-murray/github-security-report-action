@@ -1,0 +1,21 @@
+name: Manual Test
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ./
+        with:
+          token: ${{ secrets.SECURITY_TOKEN }}
+          sarifReportDir: ./samples/sarif/peter-murray/advanced-security-java
+          outputDir: .
+          templateFile: template.html
+      - uses: actions/upload-artifact@v2
+        with:
+          name: reports
+          path: ./*.pdf
