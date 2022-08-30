@@ -6,7 +6,7 @@ inputs:
   token:
     description: The GitHub token used to create an authenticated client
     default: ${{ github.token }}
-    required: false
+    required: true
   sarifReportDir:
     description: The CodeQL output directory for SARIF report(s).
     required: true

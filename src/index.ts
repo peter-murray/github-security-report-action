@@ -5,7 +5,7 @@ import { Octokit } from '@octokit/rest';
 
 async function run(): Promise<void> {
   try {
-    const token = core.getInput('token');
+    const token = getRequiredInputValue('token');
 
     const templateFile = core.getInput('templateFile');
     const generator = new ReportGenerator({
