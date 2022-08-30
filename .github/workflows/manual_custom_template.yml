@@ -1,4 +1,4 @@
-name: Manual Test
+name: Manual Test Custom Template
 
 on:
   workflow_dispatch:
@@ -8,19 +8,14 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-    
-      - name: Checkout Sources
-        uses: actions/checkout@v2
-          
-      - name: Invoke Action
-        uses: ./
+      - uses: actions/checkout@v2
+      - uses: ./
         with:
           token: ${{ secrets.SECURITY_TOKEN }}
           sarifReportDir: ./samples/sarif/peter-murray/advanced-security-java
           outputDir: .
-          
-      - name: Upload Artifacts
-        uses: actions/upload-artifact@v2
+          templateFile: template.html
+      - uses: actions/upload-artifact@v2
         with:
           name: reports
           path: ./*.pdf

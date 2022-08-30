@@ -36,9 +36,11 @@ async function execute(reportGenerateConfig: ReportGeneratorConfig) {
     console.log(`Summary Report generated: ${file}`);
 
   } catch (err) {
-    console.log(err.stack);
-    console.error(err.message);
-    console.error();
+    if (err instanceof Error) {
+      console.error(err.message, err.stack);
+    } else {
+      console.error(JSON.stringify(err));
+    }
     program.help({error: true});
   }
 }

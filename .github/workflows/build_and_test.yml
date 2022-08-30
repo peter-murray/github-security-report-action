@@ -7,7 +7,7 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-
+    
     steps:
       - name: Checkout Sources
         uses: actions/checkout@v2
@@ -25,5 +25,5 @@ jobs:
 
       - name: Test
         env:
-          GH_TOKEN: ${{ secrets.SECURITY_TOKEN || secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.SECURITY_TOKEN }}
         run: npm test

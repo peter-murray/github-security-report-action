@@ -7,18 +7,22 @@ inputs:
     description: The GitHub token used to create an authenticated client
     default: ${{ github.token }}
     required: true
+
   sarifReportDir:
     description: The CodeQL output directory for SARIF report(s).
     required: true
     default: "../results"
+
   outputDir:
     description: The output directory for the generated report(s).
     required: true
     default: ${{ github.workspace }}
+
   repository:
     description: Repository name with owner. For example, peter-murray/github-security-report
     required: true
     default: ${{ github.repository }}
+
   templateFile:
     description: File to use as PDF template. For example, summary.pdf
     required: false
