@@ -17,5 +17,6 @@
     "editor.tabSize": 2
   },
   // GitHub Codespace Theme
-  "workbench.colorTheme": "GitHub Dark Dimmed"
+  "workbench.colorTheme": "GitHub Dark Dimmed",
+  "jest.autoRun": "off"
 }

@@ -1,4 +1,4 @@
-import {Octokit} from "@octokit/rest";
+
 import GitHubCodeScanning from './codeScanning/GitHubCodeScanning';
 import GitHubDependencies from './dependencies/GitHubDependencies';
 import SarifReportFinder from './sarif/SarifReportFinder';

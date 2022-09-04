@@ -1,0 +1,71 @@
+[
+  {
+    "scope": "https://api.github.com:443",
+    "method": "POST",
+    "path": "/graphql",
+    "body": {
+      "variables": {
+        "organizationName": "octodemo",
+        "repositoryName": "pm-test-5006"
+      },
+      "query": "\nquery vulnerabilities($organizationName: String!, $repositoryName: String!, $cursor: String) {\n\n  repository(owner: $organizationName, name: $repositoryName) {\n    vulnerabilityAlerts(first: 100, after: $cursor) {\n      totalCount\n\n      pageInfo {\n        hasNextPage\n        endCursor\n      }\n\n      nodes {\n        id\n        createdAt\n\n        dismisser {\n          login\n          name\n        }\n        dismissedAt\n        dismissReason\n        vulnerableManifestFilename\n        vulnerableRequirements\n        vulnerableManifestPath\n\n        securityVulnerability{\n          package {\n            ecosystem\n            name\n          }\n          severity\n          vulnerableVersionRange\n        }\n\n        securityAdvisory {\n          databaseId\n          id\n          summary\n          severity\n          description\n          ghsaId\n          identifiers {\n            type\n            value\n          }\n          permalink\n          publishedAt\n        }\n      }\n    }\n  }\n}\n"
+    },
+    "status": 200,
+    "response": [
+      "1f8b08000000000000039d576973db3812fd2b28e6431297444ab4e44333de5dc571126576acc4f6c439941a432424620c021c02d49194fffbbe0645db723c5bbbe352b9440aece3f5ebd7cdef41ca1d0f06df835214c64a67ca355d2d2aa545c9a75249b71e2a513a4bb79d715c1d9b4abb60d06d0505",
+      "9f8b919e19fa29e3f654acdc3bdc0a0633aeac680542a7c755694d190c824fbb1fd6497cb81eeb4feb71f1663cea66977bef8f8e829b56a04d2a60ffcbf740a638faebcb516facdeaae4f5e137fef16c916875995eaeaacf1fdf669f726571affffe72a512fdbe3bbe18f5c71727fdd36fc951d00a92527027d221e20be24edc6d777aed78ffa27b30e8f5079dde671c49a5cda5b50241e94aa9bb1bfea9ad5b67825ba39b9b0d264afccab59c09eb5e492534cf917050983c5ce50af6ef8e9d893f2b598a5c68422f3862bdb0bbbb75a231f48ebb6ccb8815495502fa0ff7eb4030173cb9f6107f0f4462ecda3a911364c30f27a730bd89e68f4a4b37f0ff095f2b1682acd1c1f1cb93b3e1c5c956181f4469a5d1675c93e5e01f14e97e8bfdec030ebbb5893aa061ba9028a827095167caad18a168bbdddd5eab29df493c56a78a2a5e97ea2ce61f4fa98c6fce5f9dbef8f7c5281e5f262e79932e4fcf3bbdd3dd174b8463ab3ce76438b81079614a7c7f65542a4a66344326abb692d782d5295b961a6199368e29994bc77892086b99336c43013643712cd97d3479102e2965e190363c3e79f2846d413dd1137d9109f6f63740d8630ec56665a504fbf220b8afcf32e70a3b88228f7668ca79fdad17fdc1173c3549442046b7f7233263a30766c2cce5ea394b8c765c6acb385326e18a49745799730a9381b88932b62a05db6acf90823d59f1bc407c6676fb23ae1234d660a2afaeae2898892eaaa99209b30e161396280ec8de704bc16cb0fe3ed10c7fff3a4394f5d7cd330f8b32ab6b73c4b458b2073f3e7bfe13c5e40d5d00ba2d430b23530fe86f56eaf99deb67cf99cb4ab3b46c343e5925c2d7866de22153b5c7702edc99310e3e5814b177a5584853595f6e5688927a1b0fda01bb4acbe5aa6cd3e7ea27369c3950692657037fbfedffaeeac8c83af572c31dfa7ed4f8437e74fd6c12e46b7212ba959b04b5f74a2719354d1ac9b2144a2cb8763f44f2173e3c7e5b5efc1df8b1d5b4cef56fba012c610856505a37138d0f084005219a8f7248082a32d163cdc0ee151ae8aead5aa841d3634fd14e4d27827ca548683a306999cd78295236156e2984665c295641502d75aacbb8db3469c85e8884e31762a5cba46db16586f3be3319d7e9ad5549d7e0f5122ae570426a34323d71cf2f025bd3a1169bae592a66bc52aec5a0f7299fa274b86970a47c1809e4b909a76e6a18dd6a1fb6b3d368c9ce0ee562965b961089817c5268c2a3434d4a925e6725905e030ea5618864c82f6417143f3e053a5621744aeb7fece64b82896baed6dfd023deabf4756b90dc4ea1c590b8f0086e8e9ad21115ffacd067d40d248cdc5e430b26ba1bb29784ee46dd7c2f5a0f3d90121a4b805cc0df5dacad9a22c37723762dd63ec502cab134658a926e6a05d7b764a9d9fbcf9a816d369ab1b5c0495fd06decebac2c5b9b0a75ad909f0654120f980ab5b0885adb25aafa14169e52164d4a2cde30dcdbd7e651f3b74362831eace2a9f85100684c30b1c2e0050e92e067422f6469340d7062ee06def139c3b2d37044bbb2c2104e6bde85ac4efa775ffc9ca3ec45411969763c8a8e5fde37697dc29af45de1c8d2e8a70e3db549154c2139c3fe813190223865700993492635e8f5fb4374a99f3c6a1e3004f42364dd4741ba5783bf0d69ad2d5863924c582259d3f90956474c34f6f6e52fb530d6f39b814ce01c41ea2bced314116fce7569f9f064f1ffa0d9d446a928b04f5229aac2eb0cc660bdb76c1ad1fbf008c06a45c385d269b3b7187d0c36bde264727e2b12834719e91dd6c1d4ebcf96953d6f051ad128cd00faa10d1a02a953987026152952cbc792831c440d1f2f3ae69a97589f493b6123dcd96964f9f2f6270f1fb54c9389f6fa06ea7b1f2d",
+      "6a3fcad0ba2ab9c652a235490410d9e4b9d762b610899cad1be9f0c33f9426747901a9badae8e116bd17bc948d1fbea5ba9073a425568902a6a0217476a949fdd73ea7ba63c8158d00b694180654b11f9b1d38d634391333145e63619be836fb727c79d28e3b9d013b59e11584d61b8c8bf35b21a2178c66052215a3a9c52b9799527e4318439a4a775b58b21421f6c152f84d8c36d408b342623523198ce0a75eb5c8f32b8499989cd6c766899b4b9755d31077eb2daeed04df7ced45f5d968afdbe9f6fbd383248ebbbb07bbf1e1acb31fef0a81eb7edcdd8bf7d369d28f39d6279fee13768e0d55f1726bc3c4a8f0e47c6dcc1cd57d5d1149db8fc531f727a2399d88b0dc40d2a35ea7dbf58f0f3114508421bae2ee61bd48432dad0be7661191de020234a18a8e3f10d271a7dd3decf5ebde10ee45e937ce5f8c53a452262f30becaffcf5cff20ee35d57d057ee60655bc37416e099d718c16aed7f726138e13b07ea2f2a981247aeaf0cd8b468b61adc54b06c4d06bb2478094e28b5fb8ef17e88e05ffb58c3586cf43bc1bcc33cbe9ed2578fde67cd88ef70ee7ed6259f4db07fb45819f25c98d9c49c88c7f3b75eb82de8fe830bd3f715535970f9fbd69dd9e06e8f70edf95a01ff73bc1cd57bc456369e5c0fe1aa61fe1e1060810267a3c4abfa0dbeceead17f5c527bee8ee0f7677079dcee7e0e6e6eb0dfefe0342f3d99eee0f0000"
+    ],
+    "rawHeaders": [
+      "Server",
+      "GitHub.com",
+      "Date",
+      "Sun, 04 Sep 2022 14:18:45 GMT",
+      "Content-Type",
+      "application/json; charset=utf-8",
+      "Transfer-Encoding",
+      "chunked",
+      "X-OAuth-Scopes",
+      "admin:org, read:discussion, read:enterprise, read:packages, read:user, repo, user:email, workflow",
+      "X-Accepted-OAuth-Scopes",
+      "repo",
+      "X-GitHub-Media-Type",
+      "github.v3; format=json",
+      "X-RateLimit-Limit",
+      "5000",
+      "X-RateLimit-Remaining",
+      "4969",
+      "X-RateLimit-Reset",
+      "1662304104",
+      "X-RateLimit-Used",
+      "31",
+      "X-RateLimit-Resource",
+      "graphql",
+      "Access-Control-Expose-Headers",
+      "ETag, Link, Location, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Used, X-RateLimit-Resource, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval, X-GitHub-Media-Type, X-GitHub-SSO, X-GitHub-Request-Id, Deprecation, Sunset",
+      "Access-Control-Allow-Origin",
+      "*",
+      "Strict-Transport-Security",
+      "max-age=31536000; includeSubdomains; preload",
+      "X-Frame-Options",
+      "deny",
+      "X-Content-Type-Options",
+      "nosniff",
+      "X-XSS-Protection",
+      "0",
+      "Referrer-Policy",
+      "origin-when-cross-origin, strict-origin-when-cross-origin",
+      "Content-Security-Policy",
+      "default-src 'none'",
+      "Vary",
+      "Accept-Encoding, Accept, X-Requested-With",
+      "Content-Encoding",
+      "gzip",
+      "X-GitHub-Request-Id",
+      "0400:3DBB:A2B5B8:A6B18D:6314B3C5",
+      "connection",
+      "close"
+    ],
+    "responseIsBinary": false
+  }
+]

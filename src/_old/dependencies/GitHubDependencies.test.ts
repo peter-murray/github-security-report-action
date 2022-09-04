@@ -8,7 +8,7 @@ import { getGitHubToken } from '../testUtils';
 
 describe('GitHubDependencies', function ()  {
 
-  this.timeout(10 * 1000);
+  jest.setTimeout(10 * 1000);
 
   const testRepo = {
     owner: 'octodemo',
@@ -17,7 +17,7 @@ describe('GitHubDependencies', function ()  {
 
   let ghDeps: GitHubDependencies;
 
-  before(() => {
+  beforeAll(() => {
     const octokit = new Octokit({auth: getGitHubToken()});
     ghDeps = new GitHubDependencies(octokit);
   });

@@ -17,7 +17,7 @@ const PM_AS_JAVA = {
 
 describe('ReportGenerator', function () {
 
-  this.timeout(10 * 1000);
+  jest.setTimeout(10 * 1000);
 
   [SIMPLE_TEST_REPOSITORY, PM_AS_JAVA].forEach(config => {
     it(`should generate a report for ${config.repository}`, async () => {

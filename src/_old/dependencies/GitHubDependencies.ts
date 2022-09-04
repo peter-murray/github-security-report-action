@@ -11,11 +11,6 @@ import {
 import Vulnerability from './Vulnerability';
 import DependencySet from './DependencySet';
 
-type Repo = {
-  owner: string,
-  repo: string,
-}
-
 
 export default class GitHubDependencies {
 
@@ -60,60 +55,4 @@ export default class GitHubDependencies {
     });
   }
 
-  async getPaginatedQuery<T, Y>(query: string,
-                                parameters: Object,
-                                pageInfoPath: string,
-                                extractResultsFn: (val: T) => Y[],
-                                headers?): Promise<Y[]> {
-    const octokit = this.octokit
-      , results: Y[] = []
-      , queryParameters = Object.assign({cursor: null}, parameters)
-    ;
-
-    let hasNextPage = false;
-    do {
-      const graphqlParameters = buildGraphQLParameters(query, parameters, headers)
-        , queryResult = await octokit.graphql(graphqlParameters)
-      ;
-
-      // @ts-ignore
-      const extracted: Y = extractResultsFn(queryResult);
-      // @ts-ignore
-      results.push(...extracted);
-
-      const pageInfo = getObject(queryResult, ...pageInfoPath.split('.'));
-      hasNextPage = pageInfo ? pageInfo.hasNextPage : false;
-      if (hasNextPage) {
-        queryParameters.cursor = pageInfo.endCursor;
-      }
-    } while (hasNextPage);
-
-    return results;
-  }
-}
-
-function buildGraphQLParameters(query: string, parameters?: Object, headers?: RequestHeaders): RequestParameters {
-  const result: RequestParameters = {
-    ...(parameters || {}),
-    query: query,
-  };
-
-  if (headers) {
-    result.headers = headers;
-  }
-
-  return result;
-}
-
-function getObject(target, ...path) {
-  if (target !== null && target !== undefined) {
-    const value = target[path[0]];
-
-    if (path.length > 1) {
-      return getObject(value, ...path.slice(1));
-    } else {
-      return value;
-    }
-  }
-  return null;
 }

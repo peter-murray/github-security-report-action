@@ -1,4 +1,4 @@
-import ReportGenerator from './ReportGenerator';
+import ReportGenerator from '../src_v2/ReportGenerator';
 
 import * as core from '@actions/core';
 import { Octokit } from '@octokit/rest';

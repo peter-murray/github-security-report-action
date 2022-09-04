@@ -22,7 +22,7 @@ describe('GitHubDependencies', () => {
 
   let codeScanning: GitHubCodeScanning;
 
-  before(() => {
+  beforeAll(() => {
     const octokit = new Octokit({auth: getGitHubToken()});
     codeScanning = new GitHubCodeScanning(octokit);
   });

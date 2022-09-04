@@ -1,7 +1,7 @@
 import { Octokit } from '@octokit/rest';
-import DataCollector from './DataCollector';
-import Template from './templating/Template';
-import { createPDF } from './pdf/pdfWriter';
+// import DataCollector from '../src/DataCollector';
+// import Template from '../src/templating/Template';
+// import { createPDF } from '../src/pdf/pdfWriter';
 import * as path from 'path';
 
 import { mkdirP } from '@actions/io';
@@ -29,18 +29,20 @@ export default class ReportGenerator {
 
   run(): Promise<string> {
     const config = this.config;
-    const collector = new DataCollector(config.octokit, config.repository);
+    //TODO make this work again
+    // const collector = new DataCollector(config.octokit, config.repository);
 
-    return collector.getPayload(config.sarifReportDirectory)
-      .then(reportData => {
-        const reportTemplate = new Template(config.templating.directory);
-        return reportTemplate.render(reportData.getJSONPayload(), config.templating.name);
-      })
-      .then(html => {
-        return mkdirP(config.outputDirectory)
-          .then(() => {
-            return createPDF(html, path.join(config.outputDirectory, 'summary.pdf'));
-          });
-      });
+    // return collector.getPayload(config.sarifReportDirectory)
+    //   .then(reportData => {
+    //     const reportTemplate = new Template(config.templating.directory);
+    //     return reportTemplate.render(reportData.getJSONPayload(), config.templating.name);
+    //   })
+    //   .then(html => {
+    //     return mkdirP(config.outputDirectory)
+    //       .then(() => {
+    //         return createPDF(html, path.join(config.outputDirectory, 'summary.pdf'));
+    //       });
+    //   });
+    return new Promise(res => { res("done")});
   }
 }

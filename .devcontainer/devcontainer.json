@@ -1,0 +1,16 @@
+{
+  "name": "Workspace",
+  "image": "ghcr.io/octodemo/container-nodejs-development:base-latest",
+  "extensions": [
+    "dbaeumer.vscode-eslint",
+    "redhat.vscode-yaml",
+    "swellaby.node-pack",
+    "Orta.vscode-jest"
+  ],
+  "portsAttributes": {
+    "2222": {
+      "onAutoForward": "ignore",
+    }
+  },
+  "postCreateCommand": "npm install"
+}
