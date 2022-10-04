@@ -38,10 +38,20 @@ a future release to provide customization of these templates, via an ability to 
 ## Examples
 
 ```
-name: Generate Security Report
-uses: peter-murray/github-security-report-action@v2
-with:
-  token: ${{ secrets.SECURITY_TOKEN }}
+- name: Generate Security Report
+  uses: peter-murray/github-security-report-action@v2
+  with:
+    token: ${{ secrets.SECURITY_TOKEN }}
+```
+
+To upload the report as an artifact, use the `actions/upload-artifact` Action:
+
+```
+- name: Upload security report
+  uses: actions/upload-artifact@v2
+  with:
+    name: SecuritySummaryReport
+    path: ${{ github.workspace }}/summary.pdf
 ```
 
 Example summary report output:
