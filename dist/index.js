@@ -480,7 +480,7 @@ class GitHubDependencies {
             const octokit = this.octokit, results = [], queryParameters = Object.assign({ cursor: null }, parameters);
             let hasNextPage = false;
             do {
-                const graphqlParameters = buildGraphQLParameters(query, parameters, headers), queryResult = yield octokit.graphql(graphqlParameters);
+                const graphqlParameters = buildGraphQLParameters(query, queryParameters, headers), queryResult = yield octokit.graphql(graphqlParameters);
                 // @ts-ignore
                 const extracted = extractResultsFn(queryResult);
                 // @ts-ignore
