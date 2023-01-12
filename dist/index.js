@@ -674,7 +674,18 @@ function createPDF(html, file) {
     const fetcher = puppeteer.createBrowserFetcher({ path: os.tmpdir() });
     return fetcher.download('782078') //TODO need to store and inject this
         .then(revisionInfo => {
-        return puppeteer.launch({ executablePath: revisionInfo.executablePath })
+        return puppeteer.launch({
+            executablePath: revisionInfo.executablePath,
+            headless: true,
+            devtools: true,
+            args: [
+                '--ignore-certificate-errors',
+                '--no-sandbox',
+                '--disable-setuid-sandbox',
+                '--disable-accelerated-2d-canvas',
+                '--disable-gpu'
+            ]
+        })
             .then(browser => {
             return browser.newPage()
                 .then(page => {
