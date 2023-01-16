@@ -13,10 +13,10 @@ jobs:
           - type: windows-x64
 
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout Sources
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Install Node.js
         uses: actions/setup-node@v1
