@@ -39,7 +39,7 @@ export default class ReportGenerator {
       .then(html => {
         return mkdirP(config.outputDirectory)
           .then(() => {
-            return createPDF(html, path.join(config.outputDirectory, 'summary.pdf'));
+            return createPDF(html, path.join(config.outputDirectory, config.templating.name + '.pdf'));
           });
       });
   }

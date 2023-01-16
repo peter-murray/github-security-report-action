@@ -1,0 +1,55 @@
+<div class="sca section mt-4">
+  <div class="row">
+    <div class="col">
+      <h2 class="section-header border-bottom">Software Composition Analysis Summary</h2>
+    </div>
+  </div>
+
+  <div class="row row-cols-1 row-cols-md-2">
+    <div class="col mb-4">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="float-left">Dependencies</h5>
+          <h5><span class="badge badge-light float-right">{{ sca.dependencies.totalDependencies }}</span></h5>
+        </div>
+
+        <div class="card-body">
+          <button type="button" class="btn btn-danger">
+            Unprocessed manifests <span class="badge badge-light">{{ sca.dependencies.manifests.unprocessed | length
+              }}</span>
+          </button>
+          <button type="button" class="btn btn-success">
+            Processed manifests <span class="badge badge-light">{{ sca.dependencies.manifests.processed | length
+              }}</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    {% if sca.vulnerabilities %}
+    <div class="col mb-4">
+      <div class="card vulnerabilities">
+        <div class="card-header">
+          <h5 class="float-left">Dependency Vulnerabilities</h5>
+          <h5><span class="badge badge-light float-right">{{ sca.vulnerabilities.total }}</span></h5>
+        </div>
+
+        <div class="card-body">
+          <button type="button" class="btn btn-danger">
+            High <span class="badge badge-light">{{ sca.vulnerabilities.bySeverity.high | length }}</span>
+          </button>
+          <button type="button" class="btn btn-warning">
+            Warning <span class="badge badge-light">{{ sca.vulnerabilities.bySeverity.warning | length }}</span>
+          </button>
+          <button type="button" class="btn btn-info">
+            Moderate <span class="badge badge-light">{{ sca.vulnerabilities.bySeverity.moderate | length }}</span>
+          </button>
+          <button type="button" class="btn btn-secondary">
+            Low <span class="badge badge-light">{{ sca.vulnerabilities.bySeverity.low | length }}</span>
+          </button>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+</div>

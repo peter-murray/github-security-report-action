@@ -8,8 +8,14 @@ export type SarifRun = {
     driver: {
       name: string,
       rules: SarifRule[]
-    }
+    },
+    extensions?: ToolExtension[]
   }
+}
+
+export type ToolExtension = {
+  name: string,
+  rules: SarifRule[]
 }
 
 export type SarifRule = {

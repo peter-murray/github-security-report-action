@@ -1,0 +1,32 @@
+name: Build Distribution
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build-action-dist:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get the current branch name
+        shell: bash
+        run: echo "::set-output name=branch::${GITHUB_REF#refs/heads/}"
+        id: myref
+      - name: Checkout Sources
+        uses: actions/checkout@v3
+
+      - name: Install Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12
+
+      - name: Install Dependencies
+        run: npm ci && npm i -g @vercel/ncc
+
+      - name: Build Executable
+        run: npm run build && ncc build lib --source-map
+
+      - uses: EndBug/add-and-commit@v7
+        with:
+          add: 'dist'
+          message: 'dist release 📦 - created via Actions'
+

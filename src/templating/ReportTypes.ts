@@ -96,9 +96,26 @@ export type SeverityToAlertSummary = {
   [key: string]: AlertSummary[]
 }
 
+export type AggregatedAlertSummary = {
+  tool: string | null,
+  name: string,
+  state: string,
+  created: string,
+  instances: AlertSummary[],
+  rule: {
+    id: string
+    details?: CodeScanningRule
+  }
+}
+
+export type SeverityToAggregatedAlertSummary = {
+  [key: string]: AggregatedAlertSummary[]
+}
+
 export type CodeScanResults = {
   total: number,
-  scans: SeverityToAlertSummary
+  scans: SeverityToAlertSummary,
+  scansByRule: SeverityToAggregatedAlertSummary
 }
 
 export type CWECoverage = {

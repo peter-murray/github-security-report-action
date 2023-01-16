@@ -1,10 +1,11 @@
 import { expect } from 'chai';
 import GitHubDependencies from './GitHubDependencies';
 
-import { Octokit } from '@octokit/rest';
 import DependencySet from './DependencySet';
 import Dependency from './Dependency';
-import { getGitHubToken } from '../testUtils';
+import { getOctoKit } from '../testUtils';
+
+const mockedOctoKit = getOctoKit();
 
 describe('GitHubDependencies', function ()  {
 
@@ -18,7 +19,7 @@ describe('GitHubDependencies', function ()  {
   let ghDeps: GitHubDependencies;
 
   before(() => {
-    const octokit = new Octokit({auth: getGitHubToken()});
+    const octokit = mockedOctoKit;
     ghDeps = new GitHubDependencies(octokit);
   });
 
