@@ -72,7 +72,7 @@ export default class GitHubDependencies {
 
     let hasNextPage = false;
     do {
-      const graphqlParameters = buildGraphQLParameters(query, parameters, headers)
+      const graphqlParameters = buildGraphQLParameters(query, queryParameters, headers)
         , queryResult = await octokit.graphql(graphqlParameters)
       ;
 
