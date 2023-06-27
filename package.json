@@ -4,10 +4,7 @@
   "description": "Generates a report from GitHub CodeQL and Dependency information",
   "scripts": {
     "build": "tsc",
-    "pre-build-exe": "npm run build && ncc build lib/executable.js -o runtime",
-    "build-exe-linux-x64": "npm run pre-build-exe && nexe -i runtime/index.js -t linux-x64 -o github-security-reportlinux-x64",
-    "build-exe-mac-x64": "npm run pre-build-exe && nexe -i runtime/index.js -t mac-x64 -o github-security-report-mac-x64",
-    "build-exe-windows-x64": "npm run pre-build-exe && nexe -i runtime/index.js -t windows-x64 -o github-security-report",
+    "build-exe": "pkg package.json --compress Gzip",
     "package": "npm run build && ncc build --source-map",
     "postpack": "tarball=$(npm list - depth 0 | sed 's/@/-/g; s/ .*/.tgz/g; 1q;'); tar -tf $tarball | sed 's/^package\\///' | zip -@r github-security-report-bundle",
     "test": "mocha --recursive -r ts-node/register \"src/**/*.test.ts\""
@@ -16,11 +13,11 @@
   "author": "Peter Murray",
   "license": "MIT",
   "dependencies": {
-    "@actions/core": "^1.2.6",
-    "@actions/io": "^1.0.2",
+    "@actions/core": "^1.10.0",
+    "@actions/io": "^1.1.3",
     "@octokit/rest": "^18.0.15",
     "commander": "^7.0.0",
-    "nunjucks": "^3.2.2",
+    "nunjucks": "^3.2.4",
     "puppeteer-core": "^5.5.0"
   },
   "devDependencies": {
@@ -29,11 +26,26 @@
     "@types/mocha": "^8.2.0",
     "@types/node": "^12.19.15",
     "@types/puppeteer-core": "^2.1.0",
-    "@vercel/ncc": "^0.27.0",
-    "chai": "^4.2.0",
-    "mocha": "^8.2.1",
-    "nexe": "^4.0.0-beta.17",
+    "@vercel/ncc": "^0.36.1",
+    "chai": "^4.3.7",
+    "mocha": "^10.0.2",
+    "pkg": "^5.8.0",
     "ts-node": "^9.1.1",
     "typescript": "^4.1.3"
+  },
+  "bin": {
+    "cli": "lib/executable.js"
+  },
+  "pkg": {
+    "targets": [
+      "node16-linux-x64",
+      "node16-win-x64",
+      "node16-macos-x64"
+    ],
+    "assets": [
+      "package.json"
+    ],
+    "publicPackages": "*",
+    "outputPath": "cli"
   }
 }
