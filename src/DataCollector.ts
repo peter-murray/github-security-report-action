@@ -1,23 +1,22 @@
 import {Octokit} from "@octokit/rest";
 import GitHubCodeScanning from './codeScanning/GitHubCodeScanning';
 import GitHubDependencies from './dependencies/GitHubDependencies';
-import SarifReportFinder from './sarif/SarifReportFinder';
 import ReportData from './templating/ReportData';
 import { CollectedData } from './templating/ReportTypes';
+import { Repo } from "./github";
 
-
-type Repo = {
-  owner: string,
-  repo: string
-}
 
 export default class DataCollector {
 
-  private readonly repo: Repo
+  readonly repo: Repo;
 
-  private readonly octokit
+  readonly ref: string;
 
-  constructor(octokit: Octokit, repo: string) {
+  readonly sarifId?: string;
+
+  private readonly octokit;
+
+  constructor(octokit: Octokit, repo: string, ref: string, sarifId?: string) {
     if (!octokit) {
       throw new Error('A GitHub Octokit client needs to be provided');
     }
@@ -26,33 +25,51 @@ export default class DataCollector {
     if (!repo) {
       throw new Error('A GitHub repository must be provided');
     }
-
     const parts = repo.split('/')
     this.repo = {
       owner: parts[0],
       repo: parts[1]
     }
+
+    if (!ref) {
+      throw new Error(`A repository ref must be provided`);
+    }
+    this.ref = ref;
+
+    this.sarifId = sarifId;
   }
 
-  getPayload(sarifReportDir: string): Promise<ReportData> {
+  getPayload(): Promise<ReportData> {
     const ghDeps = new GitHubDependencies(this.octokit)
       , codeScanning = new GitHubCodeScanning(this.octokit)
-      , sarifFinder = new SarifReportFinder(sarifReportDir)
+      , sarifId = this.sarifId
+      , repo = this.repo
     ;
 
+    function resolveCodeScanningAnalysis() {
+      if (sarifId) {
+        return codeScanning.getCodeScanningAnalaysisForSarifId(repo, sarifId);
+      }
+      return codeScanning.getLatestCodeQLCodeScanningAnalysis(repo);
+    }
+
     return Promise.all([
-      sarifFinder.getSarifFiles(),
-      ghDeps.getAllDependencies(this.repo),
-      ghDeps.getAllVulnerabilities(this.repo),
-      codeScanning.getOpenCodeScanningAlerts(this.repo),
-      codeScanning.getClosedCodeScanningAlerts(this.repo),
+      ghDeps.getAllDependencies(repo),
+      ghDeps.getAllVulnerabilities(repo),
+      resolveCodeScanningAnalysis(),
+      codeScanning.getOpenCodeScanningAlerts(repo),
+      codeScanning.getClosedCodeScanningAlerts(repo),
     ]).then(results => {
+      const codeScanning = results[2];
+      if (!codeScanning) {
+        throw new Error('No code scanning analysis found!');
+      }
 
       const data: CollectedData = {
         github: this.repo,
-        sarifReports: results[0],
-        dependencies: results[1],
-        vulnerabilities: results[2],
+        dependencies: results[0],
+        vulnerabilities: results[1],
+        codeScanning: codeScanning,
         codeScanningOpen: results[3],
         codeScanningClosed: results[4],
       };

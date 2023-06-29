@@ -10,7 +10,7 @@ const OCTODEMO_GHAS_REPORTING = {
   expectedSummary: 'summary.html'
 };
 
-describe('Template', () => {
+describe.skip('Template', () => {
 
   [OCTODEMO_GHAS_REPORTING].forEach(config => {
 

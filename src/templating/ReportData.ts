@@ -1,8 +1,7 @@
 import Vulnerability from '../dependencies/Vulnerability';
 import DependencySet from '../dependencies/DependencySet';
-import { SarifFile } from '../sarif/SarifReportFinder';
 import CodeScanningResults from '../codeScanning/CodeScanningResults';
-import CodeScanningRule from '../sarif/CodeScanningRule';
+// import CodeScanningRule from '../sarif/GitHubSarifRule';
 import {
   AlertSummary,
   CodeScanningRules, CodeScanResults, CodeScanSummary,
@@ -10,16 +9,22 @@ import {
   CWECoverage, Dependencies,
   DependencySummary,
   JsonPayload, Manifest,
-  Repo,
-  RuleData, ServerityToVulnerabilities, SeverityToAlertSummary
+  ServerityToVulnerabilities, SeverityToAlertSummary
 } from './ReportTypes';
+import { Repo } from '../github';
+import { GitHubSarifReport } from '../sarif/GitHubSarifReport';
+import { LatestAnalysisScanResults } from '../codeScanning/GitHubCodeScanning';
+import { GitHubSarifRule, SarifRuleJson } from '../sarif/GitHubSarifRule';
 
 export default class ReportData {
 
   private readonly data: CollectedData;
 
+  private readonly sarifReport: GitHubSarifReport;
+
   constructor(data: CollectedData) {
     this.data = data || {};
+    this.sarifReport = new GitHubSarifReport(this.data?.codeScanning?.sarif || {});
   }
 
   get githubRepo(): Repo {
@@ -54,29 +59,25 @@ export default class ReportData {
     return this.data.codeScanningClosed || {};
   }
 
-  get sarifReports(): SarifFile[] {
-    return this.data.sarifReports || [];
+  get codeScanningReport(): GitHubSarifReport {
+    return this.sarifReport;
   }
 
-  get codeScanningRules(): CodeScanningRules {
-    const result = {};
+  // get codeScanningRules(): {[key: string]: GitHubSarifRule} {
+  //   const result = {};
 
-    this.sarifReports.forEach(report => {
-      // Each report is an object of {file, payload} keys
-      const rules = report.payload.rules;
+  //   this.codeScanningReport.rules.forEach(rule => {
+  //     result[rule.id] = rule;
+  //   });
 
-      if (rules) {
-        rules.forEach(rule => {
-          result[rule.id] = rule;
-        });
-      }
-    });
-
-    return result;
+  //   return result;
+  // }
+  get codeScanningRules(): GitHubSarifRule[] {
+    return this.codeScanningReport.rules;
   }
 
   getJSONPayload(): JsonPayload {
-    const data =  {
+    const data = {
       github: this.githubRepo,
       metadata: {
         created: new Date().toISOString(),
@@ -89,7 +90,7 @@ export default class ReportData {
         },
       },
       scanning: {
-        rules: this.getAppliedCodeScanningRules(),
+        rules: this.getCodeScanningRules() || [],
         cwe: this.getCWECoverage() || {},
         results: this.getCodeScanSummary(),
       }
@@ -97,21 +98,25 @@ export default class ReportData {
     return data;
   }
 
-  getCWECoverage(): CWECoverage | null {
-    const rules = this.getAppliedCodeScanningRules();
+  getCodeScanningRules(): SarifRuleJson[] {
+    return this.codeScanningRules.map(rule => {
+      return rule.toJSON();
+    });
+  }
+
+  getCWECoverage(): CWECoverage | undefined {
+    const rules = this.codeScanningRules;
 
     if (rules) {
-      const result: {[key: string]: RuleData[]} = {};
+      const result: { [key: string]: GitHubSarifRule[] } = {};
 
       rules.forEach(rule => {
-        const cwes = rule.cwe;
-
+        const cwes = rule.cwes;
         if (cwes) {
           cwes.forEach(cwe => {
             if (!result[cwe]) {
               result[cwe] = [];
             }
-
             result[cwe].push(rule);
           });
         }
@@ -123,7 +128,7 @@ export default class ReportData {
       };
     }
 
-    return null;
+    return undefined;
   }
 
 
@@ -131,7 +136,7 @@ export default class ReportData {
     const unprocessed: Manifest[] = []
       , processed: Manifest[] = []
       , dependencies: Dependencies = {}
-    ;
+      ;
 
     let totalDeps = 0;
 
@@ -194,23 +199,11 @@ export default class ReportData {
     return result;
   }
 
-  getAppliedCodeScanningRules(): RuleData[] {
-    const rules = this.codeScanningRules;
-
-    if (rules) {
-      return Object.values(rules).map(rule => {
-        return getRuleData(rule);
-      });
-    }
-
-    return [];
-  }
-
   getCodeScanSummary(): CodeScanSummary {
     const open = this.openCodeScanResults
       , closed = this.closedCodeScanResults
       , rules = this.codeScanningRules
-    ;
+      ;
 
     const data = {
       open: generateAlertSummary(open, rules),
@@ -221,14 +214,14 @@ export default class ReportData {
   }
 }
 
-function generateAlertSummary(open: CodeScanningResults, rules: CodeScanningRules): CodeScanResults {
+function generateAlertSummary(open: CodeScanningResults, rules: GitHubSarifRule[]): CodeScanResults {
   const result: SeverityToAlertSummary = {};
   let total = 0;
 
   open.getCodeQLScanningAlerts().forEach(codeScanAlert => {
     const severity = codeScanAlert.severity
       , matchedRule = rules ? rules[codeScanAlert.ruleId] : null
-    ;
+      ;
 
     const summary: AlertSummary = {
       tool: codeScanAlert.toolName,
@@ -258,19 +251,19 @@ function generateAlertSummary(open: CodeScanningResults, rules: CodeScanningRule
   };
 }
 
-function getRuleData(rule: CodeScanningRule): RuleData {
-  return {
-    name: rule.name,
-    //TODO maybe id?
-    severity: rule.severity,
-    precision: rule.precision,
-    kind: rule.kind,
-    shortDescription: rule.shortDescription,
-    description: rule.description,
-    tags: rule.tags,
-    cwe: rule.cwes,
-  };
-}
+// function getRuleData(rule: CodeScanningRule): RuleData {
+//   return {
+//     name: rule.name,
+//     //TODO maybe id?
+//     severity: rule.severity,
+//     precision: rule.precision,
+//     kind: rule.kind,
+//     shortDescription: rule.shortDescription,
+//     description: rule.description,
+//     tags: rule.tags,
+//     cwe: rule.cwes,
+//   };
+// }
 
 //TODO this was not used
 // function getVulnerability(vuln) {

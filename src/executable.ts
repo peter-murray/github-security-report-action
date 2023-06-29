@@ -9,7 +9,6 @@ program.version(require('../package.json').version);
 
 program.requiredOption('-t, --token <token>', 'github access token');
 program.requiredOption('-r --repository <repository>', 'github repository, owner/repo_name format');
-program.option('-s --sarif-directory <sarifReportDirectory>', 'the SARIF report directory to load reports from', '../results');
 program.option('-o --output-directory <outputDirectory>', 'output directory for summary report', '.');
 program.option('--github-api-url <url>', 'GitHub API URL', 'https://api.github.com')
 
@@ -18,8 +17,8 @@ const opts = program.opts();
 
 const reportGenerateConfig: ReportGeneratorConfig = {
   repository: opts.repository,
+  ref: 'main', //TODO need to turn in to parameter and add sarif id
   octokit: new Octokit({auth: opts.token, baseUrl: opts.url}),
-  sarifReportDirectory: getPath(opts.sarifDirectory),
   outputDirectory: getPath(opts.outputDirectory),
   templating: {
     name: 'summary'

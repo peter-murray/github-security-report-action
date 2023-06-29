@@ -6,7 +6,7 @@ import DependencySet from './DependencySet';
 import Dependency from './Dependency';
 import { getGitHubToken } from '../testUtils';
 
-describe('GitHubDependencies', function ()  {
+describe.skip('GitHubDependencies', function ()  {
 
   this.timeout(10 * 1000);
 

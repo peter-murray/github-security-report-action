@@ -9,11 +9,10 @@ async function run(): Promise<void> {
 
     const generator = new ReportGenerator({
       repository: getRequiredInputValue('repository'),
+      ref: getRequiredInputValue('ref'),
+      sarifId: core.getInput('sarif_report_id'),
       octokit: new Octokit({auth: token}),
-
-      sarifReportDirectory: getRequiredInputValue('sarifReportDir'),
       outputDirectory: getRequiredInputValue('outputDir'),
-
       templating: {
         name: 'summary'
       }

@@ -4,13 +4,8 @@ author: Peter Murray
 
 inputs:
   token:
-    description: GitHub Access Token with permissions for Dependencies and Security API access on the repository.
+    description: GitHub Access Token with permissions for securoty events access on the repository.
     required: true
-
-  sarifReportDir:
-    description: The CodeQL output directory for SARIF report(s).
-    required: true
-    default: "../results"
 
   outputDir:
     description: The output directory for the generated report(s).
@@ -22,8 +17,17 @@ inputs:
     required: true
     default: ${{ github.repository }}
 
+  sarif_report_id:
+    description: The latest SARIF report id to use for the analysis of the code scanning results, if not specified the latest report will be used for the target ref.
+    required: false
+
+  ref:
+    description: The ref for the target to get the code scanning findings for
+    required: true
+    default: ${{ github.ref }}
+
 runs:
-  using: node12
+  using: node16
   main: dist/index.js
 
 branding:

@@ -2,6 +2,7 @@ import { Octokit } from '@octokit/rest';
 import { expect } from 'chai';
 import ReportGenerator from './ReportGenerator';
 import { getGitHubToken, getSampleSarifDirectory, getTestDirectoryFilePath } from './testUtils';
+import * as fs from 'fs';
 
 const TOKEN: string = getGitHubToken();
 
@@ -10,24 +11,18 @@ const SIMPLE_TEST_REPOSITORY = {
   sarifReportDir: getSampleSarifDirectory('java', 'detailed')
 }
 
-const PM_AS_JAVA = {
-  repository: 'peter-murray/advanced-security-java',
-  sarifReportDir: getSampleSarifDirectory('peter-murray', 'advanced-security-java')
-}
 
 describe('ReportGenerator', function () {
 
   this.timeout(10 * 1000);
 
-  [SIMPLE_TEST_REPOSITORY, PM_AS_JAVA].forEach(config => {
-    it(`should generate a report for ${config.repository}`, async () => {
+  ['octodemo/forrester-webgoat',  'peter-murray/advanced-security-java'].forEach(repository => {
+    it(`should generate a report for ${repository}`, async () => {
       const generatorConfig = {
         octokit: new Octokit({auth: TOKEN}),
-        repository: config.repository,
-
-        sarifReportDirectory: config.sarifReportDir,
-        outputDirectory: getTestDirectoryFilePath(config.repository),
-
+        repository: repository,
+        ref: 'main',
+        outputDirectory: getTestDirectoryFilePath(repository),
         templating: {
           name: 'summary'
         }
@@ -36,7 +31,7 @@ describe('ReportGenerator', function () {
       const generator = new ReportGenerator(generatorConfig);
       const file = await generator.run();
       expect(file).to.contain(generatorConfig.outputDirectory);
-      //TODO need to store an expected result
+      console.log(`Report generated at ${file}`);
     });
   })
 

@@ -1,11 +1,11 @@
 {
   "name": "github-security-report",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "description": "Generates a report from GitHub CodeQL and Dependency information",
   "scripts": {
     "build": "tsc",
     "build-exe": "pkg package.json --compress Gzip",
-    "package": "npm run build && ncc build --source-map",
+    "package": "npm run build && ncc build lib/index.js -o dist --source-map",
     "postpack": "tarball=$(npm list - depth 0 | sed 's/@/-/g; s/ .*/.tgz/g; 1q;'); tar -tf $tarball | sed 's/^package\\///' | zip -@r github-security-report-bundle",
     "test": "mocha --recursive -r ts-node/register \"src/**/*.test.ts\""
   },
@@ -15,23 +15,23 @@
   "dependencies": {
     "@actions/core": "^1.10.0",
     "@actions/io": "^1.1.3",
-    "@octokit/rest": "^18.0.15",
+    "@octokit/rest": "^19.0.13",
+    "@puppeteer/browsers": "^1.4.2",
     "commander": "^7.0.0",
     "nunjucks": "^3.2.4",
-    "puppeteer-core": "^5.5.0"
+    "puppeteer-core": "^20.7.3"
   },
   "devDependencies": {
     "@octokit/types": "^5.5.0",
     "@types/chai": "^4.2.14",
-    "@types/mocha": "^8.2.0",
-    "@types/node": "^12.19.15",
-    "@types/puppeteer-core": "^2.1.0",
+    "@types/mocha": "^10.0.1",
+    "@types/node": "^20.3.2",
     "@vercel/ncc": "^0.36.1",
     "chai": "^4.3.7",
     "mocha": "^10.0.2",
     "pkg": "^5.8.0",
-    "ts-node": "^9.1.1",
-    "typescript": "^4.1.3"
+    "ts-node": "^10.9.1",
+    "typescript": "^5.1.3"
   },
   "bin": {
     "cli": "lib/executable.js"

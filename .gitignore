@@ -21,3 +21,6 @@ _tmp/
 
 # Any PDF files generated from testing
 *.pdf
+
+# Puppeteer cache
+.cache

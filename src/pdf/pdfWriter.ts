@@ -1,28 +1,52 @@
-import * as os from 'os';
+import * as path from 'path';
+import * as fs from 'fs';
 
-const puppeteer = require('puppeteer-core');
+import * as browsers from '@puppeteer/browsers';
+import * as puppeteerCore from 'puppeteer-core';
 
-export function createPDF(html: string, file: string): Promise<string> {
+export async function createPDF(html: string, file: string): Promise<string> {
+  const cacheDir = path.resolve(path.join('.cache', 'puppeteer'));
 
-  const fetcher = puppeteer.createBrowserFetcher({path: os.tmpdir()});
+  const installedBrowser = await browsers.install({
+    browser: browsers.Browser.CHROME,
+    // buildId: '117.0.5859.0',
+    buildId: '114.0.5735.133',
+    cacheDir,
+  });
 
-  return fetcher.download('782078')//TODO need to store and inject this
-    .then(revisionInfo => {
-      return puppeteer.launch({executablePath: revisionInfo.executablePath})
-        .then(browser => {
-          return browser.newPage()
-            .then(page => {
-              return page.setContent(html)
-                .then(() => {
-                  return page.pdf({path: file, format: 'A4'})
-                });
-            })
-            .then(() => {
-              return browser.close();
-            });
-        })
+  // console.log(JSON.stringify(installedBrowser, null, 2));
+
+  const executablePath = path.join(installedBrowser.path, getChromeLinux64Path());
+  const executableStats = fs.statSync(executablePath);
+  if (!executableStats.isFile()) {
+    throw new Error(`Could not find browser executable at ${executablePath}`);
+  }
+
+  const browser = await puppeteerCore.launch({
+    headless: true,
+    executablePath: executablePath,
+    ignoreDefaultArgs: ["--disable-extensions"],
+    args: [
+      '--no-sandbox',
+      '--disable-setuid-sandbox',
+    ]
+  });
+
+  return browser.newPage()
+    .then(page => {
+      return page.setContent(html)
         .then(() => {
-          return file;
+          return page.pdf({ path: file, format: 'A4' })
         });
+    })
+    .then(() => {
+      return browser.close();
+    })
+    .then(() => {
+      return file;
     });
-};
+}
+
+function getChromeLinux64Path() {
+  return path.join('chrome-linux64', 'chrome');
+}

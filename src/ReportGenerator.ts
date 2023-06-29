@@ -8,9 +8,12 @@ import { mkdirP } from '@actions/io';
 
 export type ReportGeneratorConfig = {
   repository: string,
+  ref: string,
+
+  sarifId?: string,
+
   octokit: Octokit,
 
-  sarifReportDirectory: string,
   outputDirectory: string,
 
   templating: {
@@ -29,9 +32,9 @@ export default class ReportGenerator {
 
   run(): Promise<string> {
     const config = this.config;
-    const collector = new DataCollector(config.octokit, config.repository);
+    const collector = new DataCollector(config.octokit, config.repository, config.ref, config.sarifId);
 
-    return collector.getPayload(config.sarifReportDirectory)
+    return collector.getPayload()
       .then(reportData => {
         const reportTemplate = new Template(config.templating.directory);
         return reportTemplate.render(reportData.getJSONPayload(), config.templating.name);

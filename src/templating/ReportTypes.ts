@@ -1,34 +1,22 @@
-import CodeScanningRule from '../sarif/CodeScanningRule';
+
 import Vulnerability from '../dependencies/Vulnerability';
 import DependencySet from '../dependencies/DependencySet';
-import { SarifFile } from '../sarif/SarifReportFinder';
 import CodeScanningResults from '../codeScanning/CodeScanningResults';
+import { Repo } from '../github';
+import { GitHubSarifRule, SarifRuleJson } from '../sarif/GitHubSarifRule';
+import { LatestAnalysisScanResults } from '../codeScanning/GitHubCodeScanning';
 
-export type RuleData = {
-  name: string,
-  severity: string,
-  precision: string,
-  kind: string,
-  shortDescription: string,
-  description: string,
-  tags: string[],
-  cwe: string[]
-}
 
-export type Repo = {
-  owner: string,
-  repo: string
-}
-
+//TODO might no be valid now
 export type CodeScanningRules = {
-  [key: string]: CodeScanningRule
+  [key: string]: GitHubSarifRule
 }
 
 export type CollectedData = {
   github: Repo
   vulnerabilities: Vulnerability[],
   dependencies: DependencySet[],
-  sarifReports: SarifFile[],
+  codeScanning: LatestAnalysisScanResults,
   codeScanningOpen: CodeScanningResults,
   codeScanningClosed: CodeScanningResults,
 }
@@ -46,7 +34,7 @@ export type JsonPayload = {
     }
   },
   scanning: {
-    rules: RuleData[],
+    rules: SarifRuleJson[],
     cwe: CWECoverage | {},
     results: CodeScanSummary
   }
@@ -88,7 +76,7 @@ export type AlertSummary = {
   url: string,
   rule: {
     id: string
-    details?: CodeScanningRule
+    details?: GitHubSarifRule
   }
 }
 
@@ -102,7 +90,7 @@ export type CodeScanResults = {
 }
 
 export type CWECoverage = {
-  cweToRules: {[key: string]: RuleData[]},
+  cweToRules: {[key: string]: GitHubSarifRule[]},
   cwes: string[]
 }
 

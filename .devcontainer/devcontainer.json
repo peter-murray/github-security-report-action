@@ -1,0 +1,18 @@
+{
+  "name": "Node.js 18",
+  "image": "ghcr.io/octodemo/development-containers/javascript:base-20230620",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "GitHub.copilot",
+        "cstechnologies.vscode-mocha-test-runner"
+      ]
+    }
+  },
+
+  "hostRequirements": {
+    "cpus": 4,
+    "memory": "8gb",
+    "storage": "32gb"
+ }
+}

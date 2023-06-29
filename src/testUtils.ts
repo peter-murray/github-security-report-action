@@ -21,10 +21,12 @@ export function getSampleReportJsonDirectory(...dir): string {
 }
 
 export function getGitHubToken(): string {
-  const token = process.env['GH_TOKEN'];
+  const tokenName = 'GH_TOKEN';
+
+  const token = process.env[tokenName];
 
   if (!token) {
-    throw new Error('GitHub Token was not set for environment variable "GH_TOKEN"');
+    throw new Error(`GitHub Token was not set for environment variable "${tokenName}"`);
   }
   return token;
 }
