@@ -5,7 +5,6 @@ author: Peter Murray
 inputs:
   token:
     description: GitHub Access Token with permissions for securoty events access on the repository.
-    required: true
     default: ${{ github.token }}
 
   outputDir:
