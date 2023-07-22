@@ -1,7 +1,6 @@
 import Vulnerability from '../dependencies/Vulnerability';
 import DependencySet from '../dependencies/DependencySet';
 import CodeScanningResults from '../codeScanning/CodeScanningResults';
-// import CodeScanningRule from '../sarif/GitHubSarifRule';
 import {
   AlertSummary,
   CodeScanningRules, CodeScanResults, CodeScanSummary,
@@ -12,9 +11,8 @@ import {
   ServerityToVulnerabilities, SeverityToAlertSummary
 } from './ReportTypes';
 import { Repo } from '../github';
-import { GitHubSarifReport } from '../sarif/GitHubSarifReport';
-import { LatestAnalysisScanResults } from '../codeScanning/GitHubCodeScanning';
-import { GitHubSarifRule, SarifRuleJson } from '../sarif/GitHubSarifRule';
+import { GitHubSarifReport } from '../codeScanning/GitHubSarifReport';
+import { GitHubSarifRule, SarifRuleJson } from '../codeScanning/GitHubSarifRule';
 
 export default class ReportData {
 

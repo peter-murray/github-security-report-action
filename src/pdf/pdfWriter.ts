@@ -29,6 +29,8 @@ export async function createPDF(html: string, file: string): Promise<string> {
     args: [
       '--no-sandbox',
       '--disable-setuid-sandbox',
+      '--disable-accelerated-2d-canvas',
+      '--disable-gpu'
     ]
   });
 

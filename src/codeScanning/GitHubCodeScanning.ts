@@ -4,7 +4,7 @@ import { CodeScanningListAlertsForRepoResponseData, Endpoints, CodeScanningListR
 import CodeScanningAlert, { CodeScanningData } from './CodeScanningAlert';
 import CodeScanningResults from './CodeScanningResults';
 import { Repo } from '../github';
-import { SarifData } from '../sarif/SarifData';
+import { SarifData } from './SarifData';
 
 type listCodeScanningAlertsParameters = Endpoints['GET /repos/:owner/:repo/code-scanning/alerts']['parameters'];
 

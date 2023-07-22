@@ -26,6 +26,11 @@ inputs:
     required: true
     default: ${{ github.ref }}
 
+  sha:
+    description: The SHA of the HEAD of the ref for the scanning results
+    required: true
+    default: ${{ github.sha }}
+
 runs:
   using: node16
   main: dist/index.js

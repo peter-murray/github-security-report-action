@@ -3,7 +3,7 @@ import Vulnerability from '../dependencies/Vulnerability';
 import DependencySet from '../dependencies/DependencySet';
 import CodeScanningResults from '../codeScanning/CodeScanningResults';
 import { Repo } from '../github';
-import { GitHubSarifRule, SarifRuleJson } from '../sarif/GitHubSarifRule';
+import { GitHubSarifRule, SarifRuleJson } from '../codeScanning/GitHubSarifRule';
 import { LatestAnalysisScanResults } from '../codeScanning/GitHubCodeScanning';
 
 
